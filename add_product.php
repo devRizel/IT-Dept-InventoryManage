@@ -18,7 +18,7 @@ $all_photo = find_all('media');
 $filtered_cat = array_filter($all_categories, function($cat) {
   return $cat['name'] == 'Computer';
 });
-// awd
+
 // Handling form submission
 if (isset($_POST['add_product'])) {
     // Required fields
@@ -255,7 +255,7 @@ if (isset($_POST['add_product'])) {
     </div>
   </div>
 </div>
-
+<!-- asdassdwawdwdw -->
 <?php include_once('layouts/footer.php'); ?>
 <script>
 $(document).ready(function() {
