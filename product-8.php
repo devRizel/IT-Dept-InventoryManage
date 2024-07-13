@@ -43,6 +43,7 @@ usort($other, function($a, $b) {
 
 include_once('layouts/header.php');
 ?>
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <style>
     .header-container {
         display: flex;

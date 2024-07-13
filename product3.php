@@ -15,6 +15,7 @@ foreach ($products as $product) {
 
 $filtered_products = array_reverse($filtered_products); // Reverse the array of filtered products
 ?>
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-12">

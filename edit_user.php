@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Manila');
     redirect('users.php');
   }
 ?>
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 //Update User basic info
   if(isset($_POST['update'])) {
