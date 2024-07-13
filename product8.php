@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 $page_title = 'All Product';
 require_once('includes/load.php');
@@ -43,7 +44,7 @@ usort($other, function($a, $b) {
 
 include_once('layouts/header.php');
 ?>
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+
 <style>
     .header-container {
         display: flex;
