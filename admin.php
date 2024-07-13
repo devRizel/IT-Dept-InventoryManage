@@ -208,3 +208,15 @@ $chartData = [
       }
   });
 </script>
+<script src="sweetalert.min.js"></script>
+<script>
+        // Check if success query parameter is present in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+        if (successParam === 'true') {
+            swal("", "Login Successfully!", "success")
+                .then((value) => {
+                    window.location.href = 'admin.php'; // Redirect to clear query parameter
+                });
+        }
+    </script>
