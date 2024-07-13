@@ -45,6 +45,7 @@ if(isset($_POST['update'])) {
     }
 }
 ?>
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="login-page">
     <div class="text-center">

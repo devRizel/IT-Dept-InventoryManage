@@ -36,7 +36,7 @@ if(isset($_POST['edit_cat'])){
   }
 }
 ?>
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
    <div class="col-md-5">

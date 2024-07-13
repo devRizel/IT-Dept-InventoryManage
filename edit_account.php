@@ -59,7 +59,7 @@ if(isset($_POST['update'])){
 }
 
 ?>
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="col-md-6">

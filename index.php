@@ -4,12 +4,12 @@ date_default_timezone_set('Asia/Manila');
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
-       <img src="uploads/users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+       <img src="uploads\users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
        <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>

@@ -41,7 +41,7 @@ if (isset($_POST['add_user'])) {
     }
 }
 ?>
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="row justify-content-center">
     <div class="col-md-6 col-md-offset-2">

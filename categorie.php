@@ -131,7 +131,7 @@ foreach (array_reverse($all_rooms) as $room):
 endforeach;
 
 ?>
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 
 

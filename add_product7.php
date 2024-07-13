@@ -77,7 +77,7 @@ if (isset($_POST['add_product'])) {
 }
 ?>
 
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 
 <div class="row">
