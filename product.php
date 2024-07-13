@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 $page_title = 'All Product';
 require_once('includes/load.php');
@@ -33,7 +34,7 @@ usort($products, function($a, $b) {
 
 include_once('layouts/header.php');
 ?>
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
