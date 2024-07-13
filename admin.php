@@ -169,7 +169,7 @@ $chartData = [
 </div>
 <div class="row">
   <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="col-md-12">
-    <canvas id="dashboardChart" width="800" height="200"></canvas>
+    <canvas id="dashboardChart" width="800" height="300"></canvas>
   </div>
 </div>
 <?php include_once('layouts/footer.php'); ?>
