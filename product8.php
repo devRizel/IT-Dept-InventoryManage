@@ -45,7 +45,6 @@ usort($other, function($a, $b) {
 include_once('layouts/header.php');
 ?>
 
-
 <style>
     .header-container {
         display: flex;
@@ -67,62 +66,50 @@ include_once('layouts/header.php');
     .report-section {
         display: none; /* Initially hide all report sections */
     }
-
     @media print {
-        body * {
-            visibility: hidden;
-        }
-        .report-image {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            max-width: 100%;
-            height: auto;
-            z-index: 1;
-        }
-        .table img {
-            display: block;
-            margin: 0 auto; /* Center align the images */
-            max-width: 100%; /* Ensure images do not exceed their container */
-            height: auto; /* Maintain aspect ratio */
-        }
-        #computer-report-table, #computer-report-table * {
-            visibility: visible;
-        }
-        #computer-report-table {
-            position: relative;
-            top: 150px; /* Adjust this value as needed */
-            width: 100%;
-        }
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 180px; /* Adjust based on header height */
-        }
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        .table th {
-            background-color: #f2f2f2;
-        }
-        .text-center {
-            text-align: center;
-        }
-        @page {
-            size: landscape;
-            margin: 100%; /* Adjust as necessary */
-        }
-        .page-header {
-            page-break-before: always;
-        }
+    body * {
+        visibility: hidden;
     }
-</style>
+    .header-container,
+    h1.text-center {
+        display: none !important;
+    }
+    .report-image {
+        display: block !important;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+    .table img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+    }
+    #computer-report-table, #other-device-table, #computer-report-table * {
+        visibility: visible !important;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    .table th {
+        background-color: #f2f2f2;
+    }
+    .text-center {
+        text-align: center;
+    }
+    @page {
+        size: landscape;
+    }
+}
 
+</style>
 
 <div class="header-container">
     <h2></h2>
@@ -151,7 +138,6 @@ include_once('layouts/header.php');
                 <div class="select-wrapper">
                     <select class="form-control" name="Room-Title">
                         <option value="Overall Computer">Overall Computer</option>
-                        <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
                         <option value="Com lab 1">IT Comlab 1</option>
                         <option value="Com lab 2">IT Comlab 2</option>
@@ -404,15 +390,15 @@ include_once('layouts/header.php');
     }
 });
 function printTable(tableId) {
-    var imgTag = document.querySelector('.report-image'); // Get the first image tag
-    var imgContents = imgTag ? '<div class="page-header text-center">' + imgTag.outerHTML + '</div>' : '';
-
-    var printContents = imgContents + document.getElementById(tableId).outerHTML;
+    var printContents = document.getElementById(tableId).outerHTML;
+    var imgTag = document.querySelector('.report-image');
+    if (imgTag) {
+        printContents = '<center>' + imgTag.outerHTML + '</center>' + printContents; 
+    }
     var originalContents = document.body.innerHTML;
-
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
-    location.reload();
+    location.reload(); 
 }
 </script>
