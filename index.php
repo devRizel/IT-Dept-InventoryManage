@@ -47,7 +47,7 @@ date_default_timezone_set('Asia/Manila');
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="#" class="logo d-flex align-items-center me-auto">
         <img src="assets/image/download.png" class="img-fluid animated"alt="">
         <h1 class="sitename">IT DEPARTMENT</h1>
       </a>
