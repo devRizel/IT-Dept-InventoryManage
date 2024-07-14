@@ -1,10 +1,12 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
 <?php
 date_default_timezone_set('Asia/Manila');
   ob_start();
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
+
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
@@ -21,7 +23,10 @@ date_default_timezone_set('Asia/Manila');
       </div>
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
-        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+        <div style="position: relative;">
+          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
+        </div>
       </div>
       <center><div class="form-group">
         <button  style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
@@ -114,4 +119,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+</script>
+
+<script>
+  document.getElementById('password').addEventListener('input', function() {
+    var togglePassword = document.getElementById('togglePassword');
+    togglePassword.style.display = this.value ? 'block' : 'none';
+  });
+
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('password');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
 </script>
