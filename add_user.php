@@ -76,11 +76,11 @@ function find_by_username($username) {
                 <form method="post" action="add_user.php">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="full-name" placeholder="Full Name">
+                        <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="full-name" placeholder="Full Name">
                     </div>
                     <div class="form-group">
                         <label for="username">Email</label>
-                        <input type="email" class="form-control" name="username" placeholder="Username">
+                        <input type="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="username" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -91,14 +91,14 @@ function find_by_username($username) {
                     </div>
                     <div class="form-group">
                         <label for="level">User Role</label>
-                        <select class="form-control" name="level">
+                        <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="level">
                             <?php foreach ($groups as $group ):?>
                             <option value="<?php echo $group['group_level'];?>"><?php echo ucwords($group['group_name']);?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
                     <div class="form-group clearfix">
-                        <button type="submit" name="add_user" class="btn btn-primary">Add User</button>
+                        <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_user" class="btn btn-primary">Add User</button>
                     </div>
                 </form>
             </div>
