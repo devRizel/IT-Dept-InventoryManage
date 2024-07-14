@@ -6,7 +6,7 @@ date_default_timezone_set('Asia/Manila');
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
