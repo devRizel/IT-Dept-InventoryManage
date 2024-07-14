@@ -177,7 +177,6 @@ include_once('layouts/header.php');
                                 <th class="text-center" style="width: 10%;">Monitor</th>
                                 <th class="text-center" style="width: 10%;">Keyboard</th>
                                 <th class="text-center" style="width: 10%;">Mouse</th>
-                                <th class="text-center" style="width: 10%;">System Unit Model</th>
                                 <th class="text-center" style="width: 10%;">Motherboard|Serial Num</th>
                             </tr>
                         </thead>
@@ -202,7 +201,6 @@ include_once('layouts/header.php');
                                     <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
                                     <td class="text-center"><?php echo remove_junk($product['keyboard']); ?></td>
                                     <td class="text-center"><?php echo remove_junk($product['mouse']); ?></td>
-                                    <td class="text-center"><?php echo remove_junk($product['system']); ?></td>
                                     <td class="text-center"><?php echo remove_junk($product['ram']); ?></td>
                                 </tr>
                                 <?php
