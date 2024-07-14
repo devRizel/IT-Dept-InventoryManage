@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
+
 <?php
 date_default_timezone_set('Asia/Manila');
   ob_start();
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-
+<link rel="icon" type="image/x-icon" href="assets/img/rizel1.jpg">
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
