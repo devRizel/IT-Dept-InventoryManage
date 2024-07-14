@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
 <?php
 $page_title = 'Add User';
 require_once('includes/load.php');
@@ -61,7 +63,7 @@ function find_by_username($username) {
 }
 ?>
 
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 
 <?php include_once('layouts/header.php'); ?>
 <div class="row justify-content-center">
@@ -82,7 +84,10 @@ function find_by_username($username) {
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <div style="position: relative;">
+                          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+                            <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
+                       </div>
                     </div>
                     <div class="form-group">
                         <label for="level">User Role</label>
@@ -134,3 +139,17 @@ function find_by_username($username) {
     }
 </script>
 
+<script>
+  document.getElementById('password').addEventListener('input', function() {
+    var togglePassword = document.getElementById('togglePassword');
+    togglePassword.style.display = this.value ? 'block' : 'none';
+  });
+
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('password');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>

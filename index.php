@@ -11,7 +11,7 @@ date_default_timezone_set('Asia/Manila');
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
-       <img src="uploads\users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+       <img src="uploads/users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
        <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
