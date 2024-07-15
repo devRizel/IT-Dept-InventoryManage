@@ -15,8 +15,7 @@ date_default_timezone_set('Asia/Manila');
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/image/images.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
