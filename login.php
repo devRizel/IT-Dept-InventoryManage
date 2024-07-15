@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'index.php';
+                window.location.href = 'login.php?access=allowed';
             });
     }
 
