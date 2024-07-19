@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2024 at 08:10 AM
+-- Generation Time: Jul 19, 2024 at 06:19 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -56,18 +56,6 @@ CREATE TABLE `media` (
   `file_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `media`
---
-
-INSERT INTO `media` (`id`, `file_name`, `file_type`) VALUES
-(33, 'sakura.jpg', 'image/jpeg'),
-(35, 'TSpeech.png', 'image/png'),
-(36, 'mcc.jpg', 'image/jpeg'),
-(37, 'icon_about.png', 'image/jpeg'),
-(38, 'rizel4.png', 'image/jpeg'),
-(39, 'rizel5.png', 'image/jpeg');
-
 -- --------------------------------------------------------
 
 --
@@ -114,24 +102,6 @@ CREATE TABLE `products` (
   `dreceived` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `categorie_id`, `media_id`, `date`, `monitor`, `Keyboard`, `mouse`, `v1`, `p1`, `p2`, `power1`, `system`, `mother`, `cpu`, `ram`, `power2`, `video`, `h`, `donate`, `dreceived`) VALUES
-(342, 'Faculty', 118, '38', '2024-07-04 14:09:50', 'wda', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', '2', '2024-07-02'),
-(349, 'Faculty', 118, '38', '2024-07-04 14:09:58', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-02'),
-(351, 'Com lab 4', 118, '33', '2024-07-04 14:07:29', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(352, 'Com lab 4', 118, '33', '2024-07-04 14:07:22', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(353, 'Server Room', 118, '39', '2024-07-04 14:09:42', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(354, 'Com lab 2', 118, '36', '2024-07-04 14:08:01', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(357, 'Server Room', 118, '39', '2024-07-04 14:09:33', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(358, 'Com lab 2', 118, '36', '2024-07-04 14:07:53', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-06-30'),
-(359, 'Com lab 1', 118, '36', '2024-07-04 14:08:17', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(367, 'Com lab 3', 118, '35', '2024-07-04 14:07:44', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(377, 'Com lab 3', 118, '35', '2024-07-04 14:07:37', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-01'),
-(378, 'Com lab 1', 118, '37', '2024-07-04 14:08:09', 'wdawadawd', 'awdawdawdawd', 'wdwd', 'awdawdawd', 'awdawdada', 'dadada', 'awdawd', 'awdawd', 'wadwad', 'wawdaw2', 'awdwad', 'wdwd', 'wdwad', 'adawdwadaw', 'awdawd', '2024-07-02');
-
 -- --------------------------------------------------------
 
 --
@@ -169,16 +139,16 @@ CREATE TABLE `users` (
   `user_level` int(11) NOT NULL,
   `image` varchar(255) DEFAULT 'no_image.jpg',
   `status` int(1) NOT NULL,
-  `last_login` datetime DEFAULT NULL
+  `last_login` datetime DEFAULT NULL,
+  `verification` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `password`, `user_level`, `image`, `status`, `last_login`) VALUES
-(1, 'Rizel Bracero', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '9v7xdeaw1.png', 1, '2024-07-04 11:40:27'),
-(45, 'Ramil bracero Bracero', 'admin2', '315f166c5aca63a157f7d41007675cb44a948b33', 1, 'no_image.jpg', 1, NULL);
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `user_level`, `image`, `status`, `last_login`, `verification`) VALUES
+(1, 'Rizel Bracero', 'rizbracero@gmail.com', '2266fbea6565d14614ba4c0305ffe1e7f2779a4f', 1, '9v7xdeaw1.png', 1, '2024-07-20 00:17:34', '669a915cc4ec6');
 
 -- --------------------------------------------------------
 
@@ -278,7 +248,7 @@ ALTER TABLE `other`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -290,7 +260,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `user_groups`
