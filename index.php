@@ -137,8 +137,9 @@ date_default_timezone_set('Asia/Manila');
   <footer id="footer" class="footer">
 
     <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">IT Team</strong></p>
+    <div class="copyright text-center ">
+        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
+        <span>All Rights Reserved</span></p>
       </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
