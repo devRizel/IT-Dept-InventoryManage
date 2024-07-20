@@ -86,7 +86,11 @@ date_default_timezone_set('Asia/Manila');
     <section id="about" class="about section">
       <div class="container section-title" data-aos="fade-up">
         <h2>About Us</h2>
-        <p>His needs result from something he wants to escape from</p>
+        <p>This system development is driven by the goal of enhancing the operational 
+          efficiency of the IT Department, ensuring that all inventory is accounted for 
+          and managed effectively. It will replace the time-consuming manual process with 
+          an automated, reliable, 
+          and scalable solution, leading to cost savings and improved resource management.</p>
       <!-- <div class="container">
         <div class="row gy-5">
           <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
