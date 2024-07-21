@@ -1,4 +1,4 @@
-
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include 'setting/system.php'; ?>
 <?php include 'theme/head.php'; ?>
 
