@@ -47,8 +47,8 @@
           $mail->isSMTP();
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
-          $mail->Username = 'sshin8859@gmail.com';
-          $mail->Password = 'trnzsprukfkfzkup';
+          $mail->Username = 'itinventorymanagement@gmail.com';
+          $mail->Password = 'okfkncvsjvmysglc';
           $mail->Port = 587;
 
           $mail->SMTPOptions = array(
@@ -59,7 +59,7 @@
               )
           );
 
-          $mail->setFrom('jsvpiggery@gmail.com', 'IT-InventoryManagement');
+          $mail->setFrom('itinventorymanagement@gmail.com', 'InventoryManagement');
 
           $mail->addAddress($username);
           $mail->Subject = "Reset Password Verification Code";
