@@ -147,7 +147,7 @@ $chartData = [
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php echo $c_other['total']; ?> </h2>
           <p class="text-muted">Others Devices</p>
-          <p class="text-muted">TV|PRINTER ETC.</p>
+          <p class="text-muted">TV|PRINTER| ETC.</p>
         </div>
       </div>
     </div>
