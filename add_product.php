@@ -216,7 +216,7 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard Model">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard|Serial Num">
                  </div>
                  <div class="col-md-6">
                      <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="cpu" placeholder="CPU|Processesor">
