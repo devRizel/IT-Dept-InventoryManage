@@ -38,7 +38,6 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 10%;">Donated By</th>
                 <th class="text-center" style="width: 10%;">Date Received</th>
-                <th class="text-center" style="width: 10%;">Monitor</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
               </tr>
@@ -64,7 +63,6 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
                 <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['donate']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['dreceived']); ?></td>
-                <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
                 <td class="text-center">
                   <div class="btn-group">
