@@ -72,7 +72,7 @@ if (isset($_POST['add_user'])) {
                         </select>
                     </div>
                     <div class="form-group clearfix">
-                        <button type="submit" name="add_user" class="btn btn-primary">Add User</button>
+                        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" name="add_user" class="btn btn-primary">Add User</button>
                     </div>
                 </form>
             </div>

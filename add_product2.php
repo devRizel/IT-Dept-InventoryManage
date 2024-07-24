@@ -253,8 +253,8 @@ if (isset($_POST['add_product'])) {
             </div>
 
             <center><div class="form-group ">
-              <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product"  class="btn btn-primary">Add Computer</button>
-              <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product2.php" class="btn btn-danger" class="">Cancel</a>
+              <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product"  class="btn btn-primary">Add Computer</button>
+              <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product2.php" class="btn btn-danger" class="">Cancel</a>
             </div></center>
           </form>
         </div>

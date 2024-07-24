@@ -284,8 +284,8 @@ include_once('layouts/header.php');
             
 
           <center><div class="form-group">
-            <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
-            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product1.php" class="btn btn-danger">Cancel</a>
+            <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
+            <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product1.php" class="btn btn-danger">Cancel</a>
           </div></center>
         </form>
       </div>
