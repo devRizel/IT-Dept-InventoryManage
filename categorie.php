@@ -146,7 +146,7 @@ endforeach;
          <div class="form-group">
              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" placeholder="Category Name">
          </div>
-         <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_cat" class="btn btn-primary">Add Category</button>
+         <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_cat" class="btn btn-primary">Add Category</button>
      </form>
      </div>
    </div>
@@ -206,7 +206,7 @@ endforeach;
          <div class="form-group">
              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="room-name" placeholder="Room Name">
          </div>
-         <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_room" class="btn btn-primary">Add Room</button>
+         <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_room" class="btn btn-primary">Add Room</button>
      </form>
      </div>
    </div>
