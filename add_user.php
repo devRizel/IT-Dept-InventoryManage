@@ -70,7 +70,7 @@ function find_by_username($username) {
     <div class="col-md-6 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Add New User</strong>
+                <strong  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New User</strong>
             </div>
             <div class="panel-body">
                 <form method="post" action="add_user.php">
