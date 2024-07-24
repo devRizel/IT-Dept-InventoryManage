@@ -126,7 +126,7 @@ include_once('layouts/header.php');
 <div class="header-container">
     <h2></h2>
     <div class="select-wrapper">
-        <select class="form-control" name="Option" id="reportSelector">
+        <select class="form-control" name="Option" id="reportSelector"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
             <option value="">Select Option Report</option>
             <option value="computer">Computer Report</option>
             <option value="other_device">Other Device Report</option>
@@ -148,7 +148,7 @@ include_once('layouts/header.php');
             <div class="panel-heading clearfix">
                 <h1 class="text-center">Computer Report</h1>
                 <div class="select-wrapper">
-                    <select class="form-control" name="Room-Title">
+                    <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Computer">Overall Computer</option>
                         <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
@@ -159,7 +159,8 @@ include_once('layouts/header.php');
                     </select>
                 </div>
                 <div class="btn-group" style="float: right;">
-                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')">Print</button>
+                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')"
+                      style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -223,7 +224,7 @@ include_once('layouts/header.php');
             <div class="panel-heading clearfix">
                 <h1 class="text-center">Other Devices</h1>
                 <div class="select-wrapper">
-                    <select class="form-control" name="Room-Title">
+                    <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Devices">Overall Devices</option>
                         <option value="Server Room">Server Room</option>
                         <option value="Com lab 1">IT Comlab 1</option>
@@ -233,7 +234,7 @@ include_once('layouts/header.php');
                     </select>
                 </div>
                 <div class="btn-group" style="float: right;">
-                    <button class="btn btn-danger" onclick="printTable('other-device-table')">Print</button>
+                    <button class="btn btn-danger" onclick="printTable('other-device-table')"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
                 </div>
             </div>
             <div class="panel-body">
