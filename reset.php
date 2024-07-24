@@ -20,7 +20,7 @@
                 <input type="password" name="confirm" class="form-control input-sm" placeholder="Confirm Password" required>
             </div>
             <div style="text-align: right;">
-                 <button name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
+                 <button style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
              </div>
              <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
                  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>

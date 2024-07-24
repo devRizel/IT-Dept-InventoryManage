@@ -13,7 +13,7 @@
         <input type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
       </div>
       <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center;">
-        <button name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
+        <button style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
       </div>
       <div style="text-align: right;">
          <a href="reset.php?access=allowed" style="font-size: 14px; text-decoration: 

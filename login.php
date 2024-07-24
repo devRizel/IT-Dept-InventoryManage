@@ -38,7 +38,7 @@ date_default_timezone_set('Asia/Manila');
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
      </div>
       <center><div class="form-group">
-        <button  style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
       <a href="index.php" style="font-size: 14px; text-decoration: none;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
