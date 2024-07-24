@@ -52,8 +52,8 @@ if(isset($_POST['edit_cat'])){
            <div class="form-group">
                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" value="<?php echo remove_junk(ucfirst($categorie['name']));?>">
            </div>
-           <center><button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="edit_cat" class="btn btn-primary">Update Room</button>
-           <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="categorie.php" class="btn btn-danger" class="">Cancel</a></center>
+           <center><button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="edit_cat" class="btn btn-primary">Update Room</button>
+           <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="categorie.php" class="btn btn-danger" class="">Cancel</a></center>
        </form>
        </div>
      </div>
