@@ -22,9 +22,9 @@ date_default_timezone_set('Asia/Manila');
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-heading clearfix">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Users</span>
+          <span style="text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Users</span>
        </strong>
-         <a href="add_user.php" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="btn btn-info pull-right">Add New User</a>
+         <a href="add_user.php"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="btn btn-info pull-right">Add New User</a>
       </div>
      <div class="panel-body">
       <table style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="table table-bordered table-striped">
