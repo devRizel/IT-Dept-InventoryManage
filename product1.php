@@ -23,7 +23,7 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
       <div class="panel-heading clearfix">
         <h1 class="text-center">Faculty</h1>
         <div class="pull-right">
-          <a href="add_product11.php" class="btn btn-primary">Add New</a>
+          <a href="add_product11.php" class="btn btn-primary"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
         </div>
       </div>
       <div class="panel-body">

@@ -81,6 +81,7 @@ $chartData = [
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
 }
 
 .panel-value {
@@ -95,7 +96,8 @@ $chartData = [
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 70px; /* Adjust as needed */
+  width: 70px; 
+  border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
 }
 
 .margin-top {
