@@ -58,7 +58,7 @@ date_default_timezone_set('Asia/Manila');
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="login.php?access=allowed" style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;>Login</a>
+      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
 
     </div>
   </header>
