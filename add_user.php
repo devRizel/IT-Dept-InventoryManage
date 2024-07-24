@@ -70,7 +70,7 @@ function find_by_username($username) {
     <div class="col-md-6 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New User</strong>
+                <strong>Add New User</strong>
             </div>
             <div class="panel-body">
                 <form method="post" action="add_user.php">
@@ -98,7 +98,7 @@ function find_by_username($username) {
                         </select>
                     </div>
                     <div class="form-group clearfix">
-                        <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_user" class="btn btn-primary">Add User</button>
+                        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_user" class="btn btn-primary">Add User</button>
                     </div>
                 </form>
             </div>
