@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
-            body {
+            /* body {
             font-family: Arial, sans-serif;
         }
 
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 right: 10px;
                 width: calc(100% - 20px);
             }
-        }
+        } */
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 20px; /* Adjust font size for smaller screens */
@@ -287,7 +287,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/js/main.js"></script>
-  <button class="chat-button" onclick="toggleChatWindow()">
+
+  <!-- <button class="chat-button" onclick="toggleChatWindow()">
         <span class="chat-icon">Message with us!</span>💬
     </button>
 
@@ -307,9 +308,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="chat-submit">Submit</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
-    <script>
+    <!-- <script>
         function toggleChatWindow() {
             var chatWindow = document.getElementById('chatWindow');
             var chatForm = document.getElementById('chatForm');
@@ -332,7 +333,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     window.location.href = window.location.pathname;
                 });
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
