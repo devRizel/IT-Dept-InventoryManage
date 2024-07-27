@@ -48,6 +48,9 @@ date_default_timezone_set('Asia/Manila');
 <?php include_once('layouts/footer.php'); ?>
 
 <style>
+  body{
+    background-color: whitesmoke;
+  }
   .login-page-wrapper {
     display: flex;
     justify-content: center;
