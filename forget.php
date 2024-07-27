@@ -10,7 +10,7 @@
       <h5 class="text-center">Forgot Password</h5>
       <div class="form-group">
         <label class="control-label">Email Account</label>
-        <input type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
+        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
       </div>
       <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center;">
         <button style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
