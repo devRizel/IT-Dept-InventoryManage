@@ -106,7 +106,7 @@
     box-sizing: border-box;
   }
 
-  .animated-form {
+  /* .animated-form {
     padding: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
@@ -119,7 +119,7 @@
     33% { box-shadow: 0 0 30px red; }
     66% { box-shadow: 0 0 30px green; }
     100% { box-shadow: 0 0 30px pink; }
-  }
+  } */
 </style>
 <?php
 if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
