@@ -68,7 +68,7 @@
           $mail->send();
         }
       }else{
-        $error = 'incorrect login details';
+        $error = 'Incorrect Email Details';
       }
     }
 
