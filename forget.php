@@ -84,9 +84,9 @@
 </div>
 
 <style>
-    body{
-        background-color: #fff;
-    }
+  body{
+    background-color: whitesmoke;
+  }
   .forgot-password-wrapper {
     display: flex;
     justify-content: center;
