@@ -80,12 +80,12 @@ date_default_timezone_set('Asia/Manila');
     }
   }
 
-  @keyframes borderAnimation {
+  /* @keyframes borderAnimation {
     0% { box-shadow: 0 0 30px blue; }
     33% { box-shadow: 0 0 30px red; }
     66% { box-shadow: 0 0 30px green; }
     100% { box-shadow: 0 0 30px pink; }
-  }
+  } */
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
