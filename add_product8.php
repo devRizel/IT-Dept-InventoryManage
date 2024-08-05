@@ -14,6 +14,14 @@ $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
 
+$form_data = array(
+  'Room-Title' => isset($_POST['Room-Title']) ? $_POST['Room-Title'] : '',
+  'Device-Category' => isset($_POST['Device-Category']) ? $_POST['Device-Category'] : '',
+  'Device-Photo' => isset($_POST['Device-Photo']) ? $_POST['Device-Photo'] : '',
+  'donate' => isset($_POST['donate']) ? $_POST['donate'] : '',
+  'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : ''
+);
+
 // Handling form submission
 if (isset($_POST['add_product'])) {
   // Required fields
@@ -91,16 +99,16 @@ if (isset($_POST['add_product'])) {
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-          <form method="post" action="add_product8.php" class="clearfix">
+        <form method="post" action="add_product8.php" class="clearfix">
             <div class="form-group col-md-8 col-md-offset-2">
-              <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
-                <option value="">Select Room Title</option>
-                <?php foreach ($all_room as $room): ?>
-                  <option value="<?php echo remove_junk($room['name']); ?>">
+            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
+            <option value="">Select Room Title</option>
+            <?php foreach ($all_room as $room): ?>
+                <option value="<?php echo remove_junk($room['name']); ?>" <?php echo ($form_data['Room-Title'] === remove_junk($room['name'])) ? 'selected' : ''; ?>>
                     <?php echo remove_junk($room['name']); ?>
-                  </option>
-                <?php endforeach; ?>
-              </select>
+                </option>
+            <?php endforeach; ?>
+        </select>
             </div>
 
             <div class="form-group">
@@ -110,7 +118,7 @@ if (isset($_POST['add_product'])) {
                     <option value="">Select Device Category</option>
                     <?php foreach ($all_categories as $cat): ?>
                       <?php if ($cat['name'] != 'Computer'): ?>
-                        <option value="<?php echo (int)$cat['id'] ?>">
+                        <option value="<?php echo (int)$cat['id']; ?>" <?php echo ($form_data['Device-Category'] == (int)$cat['id']) ? 'selected' : ''; ?>>
                           <?php echo htmlspecialchars($cat['name']) ?></option>
                       <?php endif; ?>
                     <?php endforeach; ?>
@@ -121,10 +129,11 @@ if (isset($_POST['add_product'])) {
                   <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
                     <option value="">Select Device Photo</option>
                     <?php foreach ($all_photo as $photo): ?>
-                      <option value="<?php echo (int)$photo['id'] ?>">
-                        <?php echo $photo['file_name'] ?></option>
+                        <option value="<?php echo (int)$photo['id']; ?>" <?php echo ($form_data['Device-Photo'] == (int)$photo['id']) ? 'selected' : ''; ?>>
+                            <?php echo $photo['file_name']; ?>
+                        </option>
                     <?php endforeach; ?>
-                  </select>
+                </select>
                 </div>
               </div>
             </div>
@@ -132,10 +141,10 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By" value="<?php echo htmlspecialchars($form_data['donate']); ?>">
                  </div>
                  <div class="col-md-6">
-                    <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly>
+                    <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
                  </div>
                </div>
             </div>

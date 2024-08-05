@@ -147,7 +147,7 @@ if (isset($_POST['add_product'])) {
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-        <form method="post" action="add_product.php" class="clearfix">
+        <form method="post" action="add_product11.php" class="clearfix">
     <div class="form-group col-md-8 col-md-offset-2">
         <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
             <option value="">Select Room Title</option>
