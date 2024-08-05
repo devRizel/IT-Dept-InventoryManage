@@ -25,13 +25,13 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
         <div class="search-container" style="display: inline-block; margin-left: 10px;">
       <input type="text" id="search-bar" class="form-control" placeholder="Search...">
     </div>
-        <div class="pull-right">
-          <a href="add_product5.php" class="btn btn-primary"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
-        </div>
+  <div class="pull-right">
+    <a href="add_product5.php" class="btn btn-primary" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
+  </div>
       </div>
       <div class="panel-body">
         <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="product-table">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
