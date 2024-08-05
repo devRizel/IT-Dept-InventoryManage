@@ -38,10 +38,10 @@ include_once('layouts/header.php');
     <div class="panel panel-default">
     <div class="panel-heading clearfix">
   <h1 class="text-center">Overall Computer</h1>
+  <div class="pull-right">
   <div class="search-container" style="display: inline-block; margin-left: 10px;">
       <input type="text" id="search-bar" class="form-control" placeholder="Search...">
     </div>
-  <div class="pull-right">
     <a href="add_product1.php" class="btn btn-primary" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
   </div>
 </div>
