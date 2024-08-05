@@ -22,6 +22,9 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         <h1 class="text-center">IT Comlab 1</h1>
+        <div class="search-container" style="display: inline-block; margin-left: 10px;">
+      <input type="text" id="search-bar" class="form-control" placeholder="Search...">
+    </div>
         <div class="pull-right">
           <a href="add_product3.php" class="btn btn-primary"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
         </div>
@@ -146,3 +149,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchBar = document.getElementById('search-bar');
+    const table = document.getElementById('product-table');
+    const rows = table.querySelectorAll('tbody > tr:not(.dropdown-row)'); // Exclude dropdown rows
+    const dropdownRows = table.querySelectorAll('tbody > .dropdown-row'); // Dropdown rows
+
+    searchBar.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        rows.forEach(row => {
+            const motherCell = row.querySelector('td:nth-child(9)'); // Assuming 'Motherboard|Serial Num' is the 9th column
+            const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
+
+            if (mother.includes(searchTerm)) {
+                row.style.display = '';
+                // Also show the related dropdown row
+                const rowId = row.querySelector('.product-checkbox').getAttribute('data-row');
+                const dropdownRow = document.getElementById('dropdown-row-' + rowId);
+                if (dropdownRow) {
+                    dropdownRow.style.display = 'table-row';
+                }
+            } else {
+                row.style.display = 'none';
+                // Hide the related dropdown row if the main row is hidden
+                const rowId = row.querySelector('.product-checkbox').getAttribute('data-row');
+                const dropdownRow = document.getElementById('dropdown-row-' + rowId);
+                if (dropdownRow) {
+                    dropdownRow.style.display = 'none';
+                }
+            }
+        });
+
+        // Hide all dropdown rows for hidden rows
+        dropdownRows.forEach(dropdownRow => {
+            if (dropdownRow.style.display !== 'none') {
+                dropdownRow.style.display = 'none';
+            }
+        });
+    });
+
+    // Initial setup to ensure dropdown rows are in sync with visible rows
+    document.querySelectorAll('.product-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const rowId = this.getAttribute('data-row');
+            const dropdownRow = document.getElementById('dropdown-row-' + rowId);
+            if (this.checked) {
+                dropdownRow.style.display = 'table-row';
+            } else {
+                dropdownRow.style.display = 'none';
+            }
+        });
+    });
+});
+
+</script>
+<style>
+.search-container {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#search-bar {
+  width: 200px;
+  display: inline-block;
+}
+</style>
