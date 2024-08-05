@@ -42,7 +42,7 @@ include_once('layouts/header.php');
       <div class="panel-heading clearfix">
         <h1 class="text-center">Other Devices</h1>
         <div class="select-wrapper">
-          <select id="category-select" style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
+          <select id="category-select" style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" class="form-control" name="Device-Category">
             <option value="">Overall Other Devices</option>
             <?php foreach ($all_categories as $cat): ?>
               <?php if ($cat['name'] != 'Computer'): ?>
@@ -57,7 +57,7 @@ include_once('layouts/header.php');
         <div class="search-container" style="display: inline-block; margin-left: 10px;">
       <input type="text" id="search-bar" class="form-control" placeholder="Search...">
     </div>
-          <a href="add_product8.php" class="btn btn-primary">Add New</a>
+          <a href="add_product8.php" class="btn btn-primary" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
         </div>
       </div>
       <div class="panel-body">
