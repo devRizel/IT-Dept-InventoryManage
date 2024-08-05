@@ -15,7 +15,6 @@ foreach ($products as $product) {
 
 $filtered_products = array_reverse($filtered_products); // Reverse the array of filtered products
 ?>
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-12">
@@ -41,6 +40,7 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 10%;">Donated By</th>
                 <th class="text-center" style="width: 10%;">Date Received</th>
+                <th class="text-center" style="width: 10%;">Monitor</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
               </tr>
@@ -66,6 +66,7 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
                 <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['donate']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['dreceived']); ?></td>
+                <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
                 <td class="text-center">
                   <div class="btn-group">
@@ -79,28 +80,28 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
                 </td>
               </tr>
               <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
-              <td colspan="10">
+                <td colspan="10">
                   <strong>Additional Information:</strong>
                   <br><br><br>
-                  <p><strong>•Title Room:</strong> <?php echo remove_junk($product['name']); ?></p>
-                  <p><strong>•Device Categories:</strong> <?php echo remove_junk($product['categorie']); ?></p>
-                  <p><strong>•Donated By:</strong> <?php echo remove_junk($product['donate']); ?></p>
-                  <p><strong>•Date Received:</strong> <?php echo remove_junk($product['dreceived']); ?></p>
-                  <p><strong>•Monitor:</strong> <?php echo remove_junk($product['monitor']); ?></p>
-                  <p><strong>•Keyboard:</strong> <?php echo remove_junk($product['keyboard']); ?></p>
-                  <p><strong>•Mouse:</strong> <?php echo remove_junk($product['mouse']); ?></p>
-                  <p><strong>•VGA|HDMI:</strong> <?php echo remove_junk($product['v1']); ?></p>
-                  <p><strong>•Power Chord 1:</strong> <?php echo remove_junk($product['p1']); ?></p>
-                  <p><strong>•Power Chord 2:</strong> <?php echo remove_junk($product['p2']); ?></p>
-                  <p><strong>•Power Supply|AVR:</strong> <?php echo remove_junk($product['power1']); ?></p>
-                  <p><strong>•System Unit Model:</strong> <?php echo remove_junk($product['system']); ?></p>
-                  <p><strong>•Motherboard|Serial Num:</strong> <?php echo remove_junk($product['mother']); ?></p>
-                  <p><strong>•CPU|Processor:</strong> <?php echo remove_junk($product['cpu']); ?></p>
-                  <p><strong>•RAM Quantity|Model:</strong> <?php echo remove_junk($product['ram']); ?></p>
-                  <p><strong>•Power Supply 2:</strong> <?php echo remove_junk($product['power2']); ?></p>
-                  <p><strong>•Video Card|GPU:</strong> <?php echo remove_junk($product['video']); ?></p>
-                  <p><strong>•HDD|SSD|GB:</strong> <?php echo remove_junk($product['h']); ?></p>
-                  <p><strong>•Date:</strong> <?php echo remove_junk($product['date']); ?></p>
+                  <p>Title Room: <?php echo remove_junk($product['name']); ?></p>
+                  <p>Device Categories: <?php echo remove_junk($product['categorie']); ?></p>
+                  <p>Donated By: <?php echo remove_junk($product['donate']); ?></p>
+                  <p>Date Received: <?php echo remove_junk($product['dreceived']); ?></p>
+                  <p>Monitor: <?php echo remove_junk($product['monitor']); ?></p>
+                  <p>Keyboard: <?php echo remove_junk($product['keyboard']); ?></p>
+                  <p>Mouse: <?php echo remove_junk($product['mouse']); ?></p>
+                  <p>VGA|HDMI: <?php echo remove_junk($product['v1']); ?></p>
+                  <p>Power Chord 1: <?php echo remove_junk($product['p1']); ?></p>
+                  <p>Power Chord 2: <?php echo remove_junk($product['p2']); ?></p>
+                  <p>Power Supply|AVR: <?php echo remove_junk($product['power1']); ?></p>
+                  <p>System Unit Model: <?php echo remove_junk($product['system']); ?></p>
+                  <p>Motherboard|Serial Num: <?php echo remove_junk($product['mother']); ?></p>
+                  <p>CPU|Processor: <?php echo remove_junk($product['cpu']); ?></p>
+                  <p>RAM Quantity|Model: <?php echo remove_junk($product['ram']); ?></p>
+                  <p>Power Supply 2: <?php echo remove_junk($product['power2']); ?></p>
+                  <p>Video Card|GPU: <?php echo remove_junk($product['video']); ?></p>
+                  <p>HDD|SSD|GB: <?php echo remove_junk($product['h']); ?></p>
+                  <p>Date: <?php echo remove_junk($product['date']); ?></p>
                 </td>
               </tr>
               <?php
