@@ -12,6 +12,17 @@ foreach ($products as $product) {
         $filtered_products[] = $product;
     }
 }
+function custom_sort($product) {
+  global $desired_order;
+  $name = $product['name'];
+  $position = array_search($name, $desired_order);
+  return ($position === false) ? count($desired_order) : $position;
+}
+
+// Sort products based on custom sort function
+usort($products, function($a, $b) {
+  return custom_sort($a) - custom_sort($b);
+});
 
 $filtered_products = array_reverse($filtered_products); // Reverse the array of filtered products
 ?>
