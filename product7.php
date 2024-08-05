@@ -184,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .select-wrapper .form-control {
     width: 200px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     text-align: left;
 }
 
