@@ -59,7 +59,6 @@ include_once('layouts/header.php');
 
     .select-wrapper .form-control {
         width: 250px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
         text-align: left;
     }
 
