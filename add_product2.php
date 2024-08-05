@@ -23,7 +23,27 @@ $filtered_rooms = array_filter($all_room, function($room) {
 $filtered_cat = array_filter($all_categories, function($cat) {
   return $cat['name'] == 'Computer';
 });
-
+$form_data = array(
+   'Room-Title' => isset($_POST['Room-Title']) ? $_POST['Room-Title'] : '',
+   'Device-Category' => isset($_POST['Device-Category']) ? $_POST['Device-Category'] : '',
+   'Device-Photo' => isset($_POST['Device-Photo']) ? $_POST['Device-Photo'] : '',
+   'donate' => isset($_POST['donate']) ? $_POST['donate'] : '',
+   'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : '',
+   'monitor' => isset($_POST['monitor']) ? $_POST['monitor'] : '',
+   'keyboard' => isset($_POST['keyboard']) ? $_POST['keyboard'] : '',
+   'mouse' => isset($_POST['mouse']) ? $_POST['mouse'] : '',
+   'v1' => isset($_POST['v1']) ? $_POST['v1'] : '',
+   'p1' => isset($_POST['p1']) ? $_POST['p1'] : '',
+   'p2' => isset($_POST['p2']) ? $_POST['p2'] : '',
+   'power1' => isset($_POST['power1']) ? $_POST['power1'] : '',
+   'system' => isset($_POST['system']) ? $_POST['system'] : '',
+   'mother' => isset($_POST['mother']) ? $_POST['mother'] : '',
+   'cpu' => isset($_POST['cpu']) ? $_POST['cpu'] : '',
+   'ram' => isset($_POST['ram']) ? $_POST['ram'] : '',
+   'power2' => isset($_POST['power2']) ? $_POST['power2'] : '',
+   'video' => isset($_POST['video']) ? $_POST['video'] : '',
+   'h' => isset($_POST['h']) ? $_POST['h'] : ''
+ );
 
 // Handling form submission
 if (isset($_POST['add_product'])) {
@@ -129,59 +149,68 @@ if (isset($_POST['add_product'])) {
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-          <form method="post" action="add_product2.php" class="clearfix">
-            <div class="form-group col-md-8 col-md-offset-2">
-            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
-                <option value="">Select Room Title</option>
-                  <?php foreach ($filtered_rooms as $room): ?>
-                <option value="<?php echo remove_junk($room['name']); ?>">
-                  <?php echo remove_junk($room['name']); ?>
-              </option>
-               <?php endforeach; ?>
-            </select>
-            </div>
-            <div class="form-group">
-              <div class="row">
-              <div class="col-md-6">
-                  <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
+        <form method="post" action="add_product2.php" class="clearfix">
+    <div class="form-group col-md-8 col-md-offset-2">
+        <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
+            <option value="">Select Room Title</option>
+            <?php foreach ($all_room as $room): ?>
+                <option value="<?php echo remove_junk($room['name']); ?>" <?php echo ($form_data['Room-Title'] === remove_junk($room['name'])) ? 'selected' : ''; ?>>
+                    <?php echo remove_junk($room['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
                      <option value="">Select Device Category</option>
                      <?php foreach ($filtered_cat as $cat): ?>
                      <option value="<?php echo (int)$cat['id'] ?>" <?php echo ($cat['name'] == 'Computer') ? 'selected' : ''; ?>>
                      <?php echo htmlspecialchars($cat['name']) ?></option>
                      <?php endforeach; ?>
                   </select>
-                </div>
-                <div class="col-md-6">
-                  <!-- Assuming this is for Device Photo -->
-                  <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
+            </div>
+            <div class="col-md-6">
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
                     <option value="">Select Device Photo</option>
                     <?php foreach ($all_photo as $photo): ?>
-                      <option value="<?php echo (int)$photo['id'] ?>">
-                        <?php echo $photo['file_name'] ?></option>
+                        <option value="<?php echo (int)$photo['id']; ?>" <?php echo ($form_data['Device-Photo'] == (int)$photo['id']) ? 'selected' : ''; ?>>
+                            <?php echo $photo['file_name']; ?>
+                        </option>
                     <?php endforeach; ?>
-                  </select>
-                </div>
-              </div>
+                </select>
             </div>
-
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By" value="<?php echo htmlspecialchars($form_data['donate']); ?>">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="monitor" placeholder="Monitor" value="<?php echo htmlspecialchars($form_data['monitor']); ?>">
+            </div>
+            <div class="col-md-6">
+                <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="keyboard" placeholder="Keyboard" value="<?php echo htmlspecialchars($form_data['keyboard']); ?>">
+            </div>
+        </div>
+    </div>
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mouse" placeholder="Mouse" value="<?php echo htmlspecialchars($form_data['mouse']); ?>">
                  </div>
                  <div class="col-md-6">
-                    <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly>
-                 </div>
-               </div>
-            </div>
-
-            <div class="form-group">
-               <div class="row">
-                 <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="monitor" placeholder="Monitor">
-                 </div>
-                 <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="keyboard" placeholder="Keyboard">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="v1" placeholder="VGA|HDMI" value="<?php echo htmlspecialchars($form_data['v1']); ?>">
                   </div>
                </div>
             </div>
@@ -189,10 +218,10 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mouse" placeholder="Mouse">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="p1" placeholder="Power Chord 1" value="<?php echo htmlspecialchars($form_data['p1']); ?>">
                  </div>
                  <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="v1" placeholder="VGA|HDMI">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="p2" placeholder="Power Chord 2" value="<?php echo htmlspecialchars($form_data['p2']); ?>">
                   </div>
                </div>
             </div>
@@ -200,10 +229,10 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="p1" placeholder="Power Chord 1">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="power1" placeholder="Power Supply|AVR" value="<?php echo htmlspecialchars($form_data['power1']); ?>">
                  </div>
                  <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="p2" placeholder="Power Chord 2">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="system" placeholder="System Unit Model" value="<?php echo htmlspecialchars($form_data['system']); ?>">
                   </div>
                </div>
             </div>
@@ -211,10 +240,10 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="power1" placeholder="Power Supply|AVR">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard Model" value="<?php echo htmlspecialchars($form_data['mother']); ?>">
                  </div>
                  <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="system" placeholder="System Unit Model">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="cpu" placeholder="CPU|Processesor" value="<?php echo htmlspecialchars($form_data['cpu']); ?>">
                   </div>
                </div>
             </div>
@@ -222,10 +251,10 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard|Serial Num">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="ram" placeholder="RAM Quannty|Model" value="<?php echo htmlspecialchars($form_data['ram']); ?>">
                  </div>
                  <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="cpu" placeholder="CPU|Processesor">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="power2" placeholder="Power Supply 2" value="<?php echo htmlspecialchars($form_data['power2']); ?>">
                   </div>
                </div>
             </div>
@@ -233,28 +262,16 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="ram" placeholder="RAM Quannty|Model">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="video" placeholder="Video Card|GPU" value="<?php echo htmlspecialchars($form_data['video']); ?>">
                  </div>
                  <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="power2" placeholder="Power Supply 2">
-                  </div>
-               </div>
-            </div>
-
-            <div class="form-group">
-               <div class="row">
-                 <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="video" placeholder="Video Card|GPU">
-                 </div>
-                 <div class="col-md-6">
-                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="h" placeholder="HDD|SSD|GB">
+                     <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="h" placeholder="HDD|SSD|GB" value="<?php echo htmlspecialchars($form_data['h']); ?>">
                   </div>
                </div>
             </div>
 
             <center><div class="form-group ">
-              <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product"  class="btn btn-primary">Add Computer</button>
-              <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product2.php" class="btn btn-danger" class="">Cancel</a>
+              <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Add Computer</button>
             </div></center>
           </form>
         </div>
