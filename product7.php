@@ -1,4 +1,3 @@
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 $page_title = 'All Product';
 require_once('includes/load.php');
@@ -6,8 +5,10 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
-// Fetch products from database
+// Fetch products from the database
 $products = join_other_table();
+
+$all_categories = find_all('categories');
 
 // Define an array with desired order of names
 $desired_order = array(
@@ -32,21 +33,33 @@ usort($products, function($a, $b) {
   return custom_sort($a) - custom_sort($b);
 });
 
-
 include_once('layouts/header.php');
 ?>
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         <h1 class="text-center">Other Devices</h1>
+        <div class="select-wrapper">
+          <select id="category-select" style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
+            <option value="">Overall Other Devices</option>
+            <?php foreach ($all_categories as $cat): ?>
+              <?php if ($cat['name'] != 'Computer'): ?>
+                <option value="<?php echo htmlspecialchars($cat['name']); ?>">
+                  <?php echo htmlspecialchars($cat['name']); ?>
+                </option>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </div>
         <div class="pull-right">
-          <a href="add_product8.php" class="btn btn-primary"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
+          <a href="add_product8.php" class="btn btn-primary">Add New</a>
         </div>
       </div>
       <div class="panel-body">
         <div class="table-responsive">
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="product-table">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -102,6 +115,7 @@ include_once('layouts/header.php');
     </div>
   </div>
 </div>
+
 <?php include_once('layouts/footer.php'); ?>
 <script src="sweetalert.min.js"></script>
 <script>
@@ -113,8 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (successParam === 'true') {
         if (urlParams.get('delete_photo')) {
             successMessage = "Other Device Deleted Successfully.";
-        }   else if (urlParams.get('update_success')) {
-          successMessage = "Other Device updated successfully.";
+        } else if (urlParams.get('update_success')) {
+            successMessage = "Other Device updated successfully.";
         }
 
         swal("", successMessage, "success")
@@ -122,5 +136,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = 'product7.php';
             });
     }
+
+    // Select box filter functionality
+    const categorySelect = document.getElementById('category-select');
+    const searchBar = document.getElementById('search-bar');
+    const table = document.getElementById('product-table');
+    const rows = table.querySelectorAll('tbody > tr');
+
+    categorySelect.addEventListener('change', function() {
+        const selectedCategory = this.value.toLowerCase();
+
+        rows.forEach(row => {
+            const categoryCell = row.querySelector('td:nth-child(4)');
+            const category = categoryCell ? categoryCell.textContent.toLowerCase() : '';
+
+            if (selectedCategory === '' || category.includes(selectedCategory)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+    searchBar.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        rows.forEach(row => {
+            const titleRoomCell = row.querySelector('td:nth-child(3)');
+            const titleRoom = titleRoomCell ? titleRoomCell.textContent.toLowerCase() : '';
+
+            if (titleRoom.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
 });
 </script>
+<style>
+.select-wrapper {
+    margin-right: 20px;
+}
+
+.select-wrapper .form-control {
+    width: 200px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: left;
+}
+
+.search-container {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#search-bar {
+    width: 180px;
+    display: inline-block;
+}
+</style>
