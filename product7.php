@@ -54,6 +54,9 @@ include_once('layouts/header.php');
           </select>
         </div>
         <div class="pull-right">
+        <div class="search-container" style="display: inline-block; margin-left: 10px;">
+      <input type="text" id="search-bar" class="form-control" placeholder="Search...">
+    </div>
           <a href="add_product8.php" class="btn btn-primary">Add New</a>
         </div>
       </div>
