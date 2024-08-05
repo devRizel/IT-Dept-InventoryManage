@@ -31,7 +31,7 @@ $filtered_products = array_reverse($filtered_products); // Reverse the array of 
       </div>
       <div class="panel-body">
         <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="product-table">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
