@@ -45,6 +45,14 @@ $form_data = array(
    'h' => isset($_POST['h']) ? $_POST['h'] : ''
  );
 
+ function motherboard_exists($motherboard_model) {
+    global $db;
+    $motherboard_model = $db->escape($motherboard_model);
+    $query = "SELECT id FROM products WHERE mother = '{$motherboard_model}' LIMIT 1";
+    $result = $db->query($query);
+    return $db->num_rows($result) > 0;
+}
+
 // Handling form submission
 if (isset($_POST['add_product'])) {
    // Required fields
@@ -77,6 +85,10 @@ if (isset($_POST['add_product'])) {
            $errors[$field] = "{$placeholder} can't be blank.";
        }
      }
+         // Check if motherboard model already exists
+    if (motherboard_exists($_POST['mother'])) {
+        $errors['mother'] = "Motherboard Serial Num. '{$_POST['mother']}' already exists.";
+    }
          // Validate date received
      if (empty($_POST['dreceived'])) {
           $errors['dreceived'] = "Date Received can't be blank.";
@@ -240,7 +252,7 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard Model" value="<?php echo htmlspecialchars($form_data['mother']); ?>">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard|Serial Num" value="<?php echo htmlspecialchars($form_data['mother']); ?>">
                  </div>
                  <div class="col-md-6">
                      <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="cpu" placeholder="CPU|Processesor" value="<?php echo htmlspecialchars($form_data['cpu']); ?>">

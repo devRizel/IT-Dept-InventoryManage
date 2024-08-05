@@ -41,54 +41,65 @@ $form_data = array(
   'h' => isset($_POST['h']) ? $_POST['h'] : ''
 );
 
+function motherboard_exists($motherboard_model) {
+    global $db;
+    $motherboard_model = $db->escape($motherboard_model);
+    $query = "SELECT id FROM products WHERE mother = '{$motherboard_model}' LIMIT 1";
+    $result = $db->query($query);
+    return $db->num_rows($result) > 0;
+}
 
 // Handling form submission
 if (isset($_POST['add_product'])) {
+    $errors = array();
     // Required fields
     $req_fields = array(
         'h' => 'HDD|SSD|GB',
         'video' => 'Video Card|GPU',
         'power2' => 'Power Supply 2',
-        'ram' => 'RAM Quannty|Model',
-        'cpu' => 'CPU|Processesor',
+        'ram' => 'RAM Quantity|Model',
+        'cpu' => 'CPU|Processor',
         'mother' => 'Motherboard Model',
         'system' => 'System Unit Model',
         'power1' => 'Power Supply|AVR',
-        'p2' => 'Power Chord 2',
-        'p1' => 'Power Chord 1',
+        'p2' => 'Power Cord 2',
+        'p1' => 'Power Cord 1',
         'v1' => 'VGA|HDMI',
         'mouse' => 'Mouse',
         'keyboard' => 'Keyboard',
         'monitor' => 'Monitor',
-        'dreceived' => '',
+        'dreceived' => 'Date Received',
         'donate' => 'Donated By',
         'Device-Photo' => 'Device Photo',
         'Device-Category' => 'Device Category',
         'Room-Title' => 'Room Title'
-        
     );
 
-    $errors = array();
     foreach ($req_fields as $field => $placeholder) {
         if (isset($_POST[$field]) && $_POST[$field] === '') {
             $errors[$field] = "{$placeholder} can't be blank.";
         }
-      }
-          // Validate date received
-      if (empty($_POST['dreceived'])) {
-           $errors['dreceived'] = "Date Received can't be blank.";
-      } else {
-           $date_received = $_POST['dreceived'];
-           $today = new DateTime();  // Current date and time
-           $selected_date = new DateTime($date_received);  // Date received from the form input
+    }
 
-             if ($selected_date > $today) {
-               $errors['dreceived'] = "Date Received cannot be a future date.";
+    // Check if motherboard model already exists
+    if (motherboard_exists($_POST['mother'])) {
+        $errors['mother'] = "Motherboard Serial Num. '{$_POST['mother']}' already exists.";
+    }
+
+    // Validate date received
+    if (empty($_POST['dreceived'])) {
+        $errors['dreceived'] = "Date Received can't be blank.";
+    } else {
+        $date_received = $_POST['dreceived'];
+        $today = new DateTime();  // Current date and time
+        $selected_date = new DateTime($date_received);  // Date received from the form input
+
+        if ($selected_date > $today) {
+            $errors['dreceived'] = "Date Received cannot be a future date.";
         }
-      }
+    }
 
-
-      if (empty($errors)) {
+    if (empty($errors)) {
         $p_name = remove_junk($db->escape($_POST['Room-Title']));
         $p_cat = (int)$db->escape($_POST['Device-Category']);
         $p_donate = remove_junk($db->escape($_POST['donate']));
@@ -106,14 +117,13 @@ if (isset($_POST['add_product'])) {
         $p_power2 = remove_junk($db->escape($_POST['power2']));
         $p_video = remove_junk($db->escape($_POST['video']));
         $p_h = remove_junk($db->escape($_POST['h']));
-        
+
         $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
         $date = date('Y-m-d H:i:s');  // Current date and time
 
         // Include 'dreceived' in the INSERT query
         $query = "INSERT INTO products (name, categorie_id, donate, monitor, keyboard, mouse, v1, p1, p2, power1, system, mother, cpu, ram, power2, video, h, media_id, date, dreceived) VALUES ";
         $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}', '{$p_monitor}', '{$p_keyboard}', '{$p_mouse}', '{$p_v1}', '{$p_p1}', '{$p_p2}', '{$p_power1}', '{$p_system}', '{$p_mother}', '{$p_cpu}', '{$p_ram}', '{$p_power2}', '{$p_video}', '{$p_h}', '{$media_id}', '{$date}', '{$date_received}')";
-
 
         if ($db->query($query)) {
             // Computer added successfully
@@ -236,7 +246,7 @@ if (isset($_POST['add_product'])) {
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard Model" value="<?php echo htmlspecialchars($form_data['mother']); ?>">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="mother" placeholder="Motherboard|Serial Num" value="<?php echo htmlspecialchars($form_data['mother']); ?>">
                  </div>
                  <div class="col-md-6">
                      <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="cpu" placeholder="CPU|Processesor" value="<?php echo htmlspecialchars($form_data['cpu']); ?>">
@@ -277,55 +287,44 @@ if (isset($_POST['add_product'])) {
 </div>
 
 <?php include_once('layouts/footer.php'); ?>
+
+
+<script src="sweetalert.min.js"></script>
 <script>
 $(document).ready(function() {
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',  // Format date as needed
+        format: 'yyyy-mm-dd',
         autoclose: true,
-        endDate: new Date(),  // Disable dates after today
+        endDate: new Date(),
         todayHighlight: true,
         keyboardNavigation: false,
         forceParse: false,
         startDate: '-Infinity'
     });
 
-    // Disable manual input
-    $('.datepicker').keydown(function(e){
+    $('.datepicker').keydown(function(e) {
         e.preventDefault();
         return false;
     });
 });
-</script>
-<script src="sweetalert.min.js"></script>
-<script>
+
 const urlParams = new URLSearchParams(window.location.search);
 const successParam = urlParams.get('success');
 if (successParam === 'true') {
     swal("", "Computer added successfully", "success")
         .then((value) => {
-            // Redirect to clear query parameter
             window.location.href = 'add_product.php';
         });
 }
-</script>
 
-
-
-<script src="sweetalert.min.js"></script>
-<?php if (isset($js_error_msgs)): ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var errorMessages = <?php echo $js_error_msgs; ?>;
-        Object.keys(errorMessages).forEach(function(key) {
-            swal({
-                title: "",
-                text: errorMessages[key],
-                icon: "warning",
-                dangerMode: true
-            });
-        });
-    });
-</script>
+<?php if (!empty($js_error_msgs)): ?>
+    const errors = <?php echo $js_error_msgs; ?>;
+    for (let field in errors) {
+        if (errors.hasOwnProperty(field)) {
+            swal("", errors[field], "error");
+        }
+    }
 <?php endif; ?>
+</script>
 
 
