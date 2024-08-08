@@ -25,6 +25,7 @@ $form_data = array(
   'Device-Photo' => isset($_POST['Device-Photo']) ? $_POST['Device-Photo'] : '',
   'donate' => isset($_POST['donate']) ? $_POST['donate'] : '',
   'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : '',
+  'recievedby' => isset($_POST['recievedby']) ? $_POST['recievedby'] : '',
   'monitor' => isset($_POST['monitor']) ? $_POST['monitor'] : '',
   'keyboard' => isset($_POST['keyboard']) ? $_POST['keyboard'] : '',
   'mouse' => isset($_POST['mouse']) ? $_POST['mouse'] : '',
@@ -68,6 +69,7 @@ if (isset($_POST['add_product'])) {
         'mouse' => 'Mouse',
         'keyboard' => 'Keyboard',
         'monitor' => 'Monitor',
+        'recievedby' => 'Recieved By',
         'dreceived' => 'Date Received',
         'donate' => 'Donated By',
         'Device-Photo' => 'Device Photo',
@@ -103,6 +105,7 @@ if (isset($_POST['add_product'])) {
         $p_name = remove_junk($db->escape($_POST['Room-Title']));
         $p_cat = (int)$db->escape($_POST['Device-Category']);
         $p_donate = remove_junk($db->escape($_POST['donate']));
+        $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
         $p_monitor = remove_junk($db->escape($_POST['monitor']));
         $p_keyboard = remove_junk($db->escape($_POST['keyboard']));
         $p_mouse = remove_junk($db->escape($_POST['mouse']));
@@ -121,9 +124,10 @@ if (isset($_POST['add_product'])) {
         $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
         $date = date('Y-m-d H:i:s');  // Current date and time
 
-        // Include 'dreceived' in the INSERT query
-        $query = "INSERT INTO products (name, categorie_id, donate, monitor, keyboard, mouse, v1, p1, p2, power1, system, mother, cpu, ram, power2, video, h, media_id, date, dreceived) VALUES ";
-        $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}', '{$p_monitor}', '{$p_keyboard}', '{$p_mouse}', '{$p_v1}', '{$p_p1}', '{$p_p2}', '{$p_power1}', '{$p_system}', '{$p_mother}', '{$p_cpu}', '{$p_ram}', '{$p_power2}', '{$p_video}', '{$p_h}', '{$media_id}', '{$date}', '{$date_received}')";
+ // Include 'dreceived' in the INSERT query
+ $query = "INSERT INTO products (name, categorie_id, donate,recievedby, monitor, keyboard, mouse, v1, p1, p2, power1, system, mother, cpu, ram, power2, video, h, media_id, date, dreceived) VALUES ";
+ $query .= "('{$p_name}', '{$p_cat}', '{$p_recievedby}','{$p_donate}' ,'{$p_monitor}', '{$p_keyboard}', '{$p_mouse}', '{$p_v1}', '{$p_p1}', '{$p_p2}', '{$p_power1}', '{$p_system}', '{$p_mother}', '{$p_cpu}', '{$p_ram}', '{$p_power2}', '{$p_video}', '{$p_h}', '{$media_id}', '{$date}', '{$date_received}')";
+
 
         if ($db->query($query)) {
             // Computer added successfully
@@ -203,7 +207,7 @@ if (isset($_POST['add_product'])) {
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="monitor" placeholder="Monitor" value="<?php echo htmlspecialchars($form_data['monitor']); ?>">
+                <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="recievedby" placeholder="Recieved By" value="<?php echo htmlspecialchars($form_data['recievedby']); ?>">
             </div>
             <div class="col-md-6">
                 <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="keyboard" placeholder="Keyboard" value="<?php echo htmlspecialchars($form_data['keyboard']); ?>">
@@ -274,6 +278,14 @@ if (isset($_POST['add_product'])) {
                      <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="h" placeholder="HDD|SSD|GB" value="<?php echo htmlspecialchars($form_data['h']); ?>">
                   </div>
                </div>
+            </div>
+
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="monitor" placeholder="Monitor" value="<?php echo htmlspecialchars($form_data['monitor']); ?>">
+                  </div>
+                </div>
             </div>
 
             <center><div class="form-group ">

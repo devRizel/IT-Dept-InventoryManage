@@ -19,13 +19,23 @@ $form_data = array(
   'Device-Category' => isset($_POST['Device-Category']) ? $_POST['Device-Category'] : '',
   'Device-Photo' => isset($_POST['Device-Photo']) ? $_POST['Device-Photo'] : '',
   'donate' => isset($_POST['donate']) ? $_POST['donate'] : '',
-  'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : ''
+  'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : '',
+  'recievedby' => isset($_POST['recievedby']) ? $_POST['recievedby'] : '',
+  'serial' => isset($_POST['serial']) ? $_POST['serial'] : ''
 );
-
+function motherboard_exists($motherboard_model) {
+  global $db;
+  $motherboard_model = $db->escape($motherboard_model);
+  $query = "SELECT id FROM other WHERE serial = '{$motherboard_model}' LIMIT 1";
+  $result = $db->query($query);
+  return $db->num_rows($result) > 0;
+}
 // Handling form submission
 if (isset($_POST['add_product'])) {
   // Required fields
   $req_fields = array(
+    'serial' => 'serial',
+    'recievedby' => 'recievedby',
       'dreceived' => '',
       'donate' => 'Donated By',
       'Device-Photo' => 'Device Photo',
@@ -40,6 +50,10 @@ if (isset($_POST['add_product'])) {
           $errors[$field] = "{$placeholder} can't be blank.";
       }
     }
+    // Check if motherboard model already exists
+    if (motherboard_exists($_POST['serial'])) {
+        $errors['serial'] = "Serial Num. '{$_POST['serial']}' already exists.";
+    }  
         // Validate date received
     if (empty($_POST['dreceived'])) {
          $errors['dreceived'] = "Date Received can't be blank.";
@@ -58,6 +72,8 @@ if (isset($_POST['add_product'])) {
       $p_name = remove_junk($db->escape($_POST['Room-Title']));
       $p_cat = (int)$db->escape($_POST['Device-Category']);
       $p_donate = remove_junk($db->escape($_POST['donate']));
+      $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
+      $p_serial = remove_junk($db->escape($_POST['serial']));
      
 
       $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
@@ -65,8 +81,8 @@ if (isset($_POST['add_product'])) {
 
       // Include 'dreceived' in the INSERT query
      
-      $query = "INSERT INTO other (name, categorie_id, donate, media_id, date, dreceived) VALUES ";
-      $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}', '{$media_id}', '{$date}', '{$date_received}')";
+      $query = "INSERT INTO other (name, categorie_id,recievedby,serial, donate, media_id, date, dreceived) VALUES ";
+      $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}','{$p_serial}', '{$p_recievedby}','{$media_id}', '{$date}', '{$date_received}')";
 
       if ($db->query($query)) {
         // Computer added successfully
@@ -149,6 +165,17 @@ if (isset($_POST['add_product'])) {
                </div>
             </div>
 
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="recievedby" placeholder="Recieved By" value="<?php echo htmlspecialchars($form_data['recievedby']); ?>">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="serial" placeholder="Serial Number" value="<?php echo htmlspecialchars($form_data['serial']); ?>">
+                  </div>
+                </div>
+            </div>
+
             <center><div class="form-group ">
               <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product"  
               class="btn btn-primary">Add Other Devices</button></center>
@@ -179,13 +206,12 @@ $(document).ready(function() {
     });
 });
 </script>
-
 <script src="sweetalert.min.js"></script>
 <script>
 const urlParams = new URLSearchParams(window.location.search);
 const successParam = urlParams.get('success');
 if (successParam === 'true') {
-    swal("", "Other Device added successfully", "success")
+    swal("", "Computer added successfully", "success")
         .then((value) => {
             // Redirect to clear query parameter
             window.location.href = 'add_product7.php';
