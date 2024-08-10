@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 // Start of PHP code
 
