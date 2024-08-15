@@ -27,6 +27,66 @@
       </a>
     </li>
     <li>
+        <a href="#" class="submenu-toggle" id="manage-barcode">
+            <i class="glyphicon glyphicon-picture"></i>
+            <span>Add Barcode</span>
+        </a>
+        <ul class="nav submenu">
+            <li>
+                <a href="#" class="submenu-toggle">
+                    Add Computer Barcode
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="bar1.php" id="AddComputer">Add Computer</a></li>
+                    <li><a href="bar2.php" id="AddMonitor">Add Monitor</a></li>
+                    <li><a href="bar3.php" id="AddKeyboard">Add Keyboard</a></li>
+                    <li><a href="bar4.php" id="AddMouse">Add Mouse</a></li>
+                    <li><a href="bar5.php" id="AddSystem">Add System Unit</a></li>
+                    <li><a href="bar6.php" id="AddVGA|HDMI">Add VGA|HDMI</a></li>
+                    <li><a href="bar7.php" id="Addpower1">Add Power Supply1</a></li>
+                    <li><a href="bar8.php" id="Addpower2">Add Power Supply2</a></li>
+                    <li><a href="bar9.php" id="AddPower1">Add POWER CHORD1</a></li>
+                    <li><a href="bar10.php" id="AddPower2">Add POWER CHORD2</a></li>
+                    <li><a href="bar11.php" id="AddMotherboard">Add Motherboard Serial Num.</a></li>
+                    <li><a href="bar12.php" id="AddCPU">Add CPU</a></li>
+                    <li><a href="bar13.php" id="AddRAM">Add RAM</a></li>
+                    <li><a href="bar14.php" id="AddVideoCard">Add Video Card</a></li>
+                    <li><a href="bar15.php" id="AddHDD|SSD|GB">Add HDD|SSD|GB</a></li>
+                </ul>
+            </li>
+            <li>
+            <a href="#" class="submenu-toggle">
+                    Add Other Devices Barcode
+                </a>
+                <ul class="nav submenu">
+                    <li><a href="bar16.php" id="AddTV">Add TV</a></li>
+                    <li><a href="bar17.php" id="AddPRINTER">Add PRINTER</a></li>
+                    <li><a href="bar18.php" id="AddCctv">Add Cctv</a></li>
+                    <li><a href="bar19.php" id="AddElectricFan">Add ElectricFan</a></li>
+                    <li><a href="bar20.php" id="AddCable">Add Cable</a></li>
+                    <li><a href="bar21.php" id="AddSwitchHub">Add Switch Hub</a></li>
+                    <li><a href="bar22.php" id="AddExtension">Add Extension</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+      <a href="#" class="submenu-toggle" id="add-new">
+        <i class="glyphicon glyphicon-th-large"></i>
+        <span>Add New</span>
+      </a>
+      <ul class="nav submenu">
+        <li><a href="add1.php" id="add-product">Add New Computer</a></li>
+        <li><a href="add2.php" id="add-other-devices">Add New Other Devices</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="addproducts.php" id="media-files">
+        <i class="glyphicon glyphicon-th-large"></i>
+        <span>Sample</span>
+      </a>
+    </li>
+    <li>
       <a href="#" class="submenu-toggle" id="add-new">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Add New</span>
@@ -76,6 +136,28 @@
         'users.php': 'manage-users',
         'categorie.php': 'categories',
         'media.php': 'media-files',
+        'bar1.php': 'AddComputer',
+        'bar2.php': 'AddMonitor',
+        'bar3.php': 'AddKeyboard',
+        'bar4.php': 'AddMouse',
+        'bar5.php': 'AddSystem',
+        'bar6.php': 'AddVGA|HDMI',
+        'bar7.php': 'Addpower1',
+        'bar8.php': 'Addpower2',
+        'bar9.php': 'AddPower1',
+        'bar10.php': 'AddPower2',
+        'bar11.php': 'AddMotherboard',
+        'bar12.php': 'AddCPU',
+        'bar13.php': 'AddRAM',
+        'bar14.php': 'AddVideoCard',
+        'bar15.php': 'AddHDD|SSD|GB',
+        'bar16.php': 'AddTV',
+        'bar17.php': 'AddPRINTER',
+        'bar18.php': 'AddCctv',
+        'bar19.php': 'AddElectricFan',
+        'bar20.php': 'AddCable',
+        'bar21.php': 'AddSwitchHub',
+        'bar22.php': 'AddExtension',
         'add_product.php': 'add-product',
         'add_product7.php': 'add-other-devices',
         'product.php': 'overall-computer',
