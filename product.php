@@ -46,20 +46,19 @@ include_once('layouts/header.php');
     <a href="add_product1.php" class="btn btn-primary" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
   </div>
 </div>
-      <div class="panel-body">
+<div class="panel-body">
         <div class="table-responsive">
         <table class="table table-bordered" id="product-table">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
-                <th style="width: 50px;">Select</th>
-                <th style="width: 90px;">Photo</th>
-                <th>Title Room</th>
+                <th class="text-center" style="width: 50px;">Select</th>
+                <th class="text-center" style="width: 150px;">Photo</th>
+                <th class="text-center" style="width: 10%;">Title Room</th>
                 <th class="text-center" style="width: 10%;">Device Categories</th>
-                <th class="text-center" style="width: 10%;">Donated By</th>
-                <th class="text-center" style="width: 10%;">Date Received</th>
-                <th class="text-center" style="width: 10%;">Monitor</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
               </tr>
             </thead>
@@ -73,19 +72,32 @@ include_once('layouts/header.php');
     <td class="text-center">
       <input type="checkbox" name="select_product[]" value="<?php echo $product['id']; ?>" class="product-checkbox" data-row="<?php echo $counter; ?>">
     </td>
-    <td>
-      <?php if ($product['media_id'] === '0'): ?>
-        <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
-      <?php else: ?>
-        <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="">
-      <?php endif; ?>
-    </td>
+    <td class="text-center">
+                  <?php if ($product['media_id'] === '0'): ?>
+                      <img class="img-thumbnail" src="uploads/products/no_image.png" alt="">
+                  <?php else: ?>
+                      <img class="img-thumbnail" src="uploads/products/<?php echo $product['image']; ?>" alt="">
+                  <?php endif; ?>
+                </td>
     <td><?php echo remove_junk($product['name']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
-    <td class="text-center"><?php echo remove_junk($product['donate']); ?></td>
-    <td class="text-center"><?php echo remove_junk($product['dreceived']); ?></td>
-    <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
+    <td class="text-center">
+    <form action="edit_product.php" method="get" style="display:inline;">
+        <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
+        <button type="submit" data-toggle="tooltip">
+            <span class="glyphicon"></span> Status
+        </button>
+    </form>
+    </td>
+    <td class="text-center">
+    <form action="edit_product.php" method="get" style="display:inline;">
+        <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
+        <button type="submit" data-toggle="tooltip">
+            <span class="glyphicon"></span> View
+        </button>
+    </form>
+    </td>
     <td class="text-center">
       <div class="btn-group">
         <a href="edit_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Edit" data-toggle="tooltip">
@@ -180,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const motherCell = row.querySelector('td:nth-child(9)'); // Assuming 'Motherboard|Serial Num' is the 9th column
+            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 9th column
             const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
 
             if (mother.includes(searchTerm)) {
