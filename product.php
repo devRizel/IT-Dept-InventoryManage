@@ -6,8 +6,6 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
-// Fetch products from database
-$products = join_product_table();
 
 // Define an array with desired order of names
 $desired_order = array(
@@ -18,6 +16,39 @@ $desired_order = array(
   "Com lab 3",
   "Com lab 4"
 );
+
+function fetch_products() {
+  global $db; // Use global variable inside the function
+
+  // Modify SQL query to include a WHERE clause that filters out products with media_id = 0 or NULL
+  $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+  $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+  $sql .= "p.media_id, p.date, ";
+  $sql .= "c.name AS categorie, ";
+  $sql .= "m.file_name AS image, ";
+  $sql .= "p.computer_images, p.monitor_images, p.mouse_images, p.system_images, p.vgahdmi_images, ";
+  $sql .= "p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, p.mother_images, ";
+  $sql .= "p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
+  $sql .= "FROM products p ";
+  $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+  $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
+  $sql .= "WHERE p.media_id IS NOT NULL AND p.media_id != '0' ";
+  $sql .= "AND (p.computer_images NOT LIKE '%Maintenance%' AND p.monitor_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.mouse_images NOT LIKE '%Maintenance%' AND p.system_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.vgahdmi_images NOT LIKE '%Maintenance%' AND p.power1_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.power2_images NOT LIKE '%Maintenance%' AND p.chord1_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.chord2_images NOT LIKE '%Maintenance%' AND p.mother_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.cpu_images NOT LIKE '%Maintenance%' AND p.ram_images NOT LIKE '%Maintenance%' AND ";
+  $sql .= "p.video_images NOT LIKE '%Maintenance%' AND p.hddssdgb_images NOT LIKE '%Maintenance%') ";
+  $sql .= "ORDER BY p.id ASC";
+  
+  $result = $db->query($sql);
+  return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
+}
+
+
+// Fetch products from the database
+$products = fetch_products();
 
 // Function to determine position in desired order array
 function custom_sort($product) {
@@ -43,7 +74,6 @@ include_once('layouts/header.php');
   <div class="search-container" style="display: inline-block; margin-left: 10px;">
       <input type="text" id="search-bar" class="form-control" placeholder="Search...">
     </div>
-    <a href="add_product1.php" class="btn btn-primary" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Add New</a>
   </div>
 </div>
 <div class="panel-body">
@@ -83,20 +113,20 @@ include_once('layouts/header.php');
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
     <td class="text-center">
-    <form action="edit_product.php" method="get" style="display:inline;">
-        <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
-        <button type="submit" data-toggle="tooltip">
-            <span class="glyphicon"></span> Status
-        </button>
-    </form>
+    <form action="overallmain.php" method="get" style="display:inline;">
+    <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
+    <button style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" class="btn-light-green" data-toggle="tooltip">
+        <span class="glyphicon"></span> Status
+    </button>
+</form>
     </td>
     <td class="text-center">
-    <form action="edit_product.php" method="get" style="display:inline;">
-        <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
-        <button type="submit" data-toggle="tooltip">
-            <span class="glyphicon"></span> View
-        </button>
-    </form>
+    <form action="overallview.php" method="get" style="display:inline;">
+  <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
+  <button type="submit" class="btn-custom" data-toggle="tooltip">
+      <span class="glyphicon"></span> View
+  </button>
+</form>
     </td>
     <td class="text-center">
       <div class="btn-group">
@@ -247,4 +277,66 @@ document.addEventListener('DOMContentLoaded', function() {
   width: 200px;
   display: inline-block;
 }
+/* Add this to your existing CSS file or within a <style> tag in your HTML */
+.btn-light-green {
+  background-color: green;
+  border: none;
+  color: #fff; /* White text */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px #999; /* Shadow effect */
+}
+
+.btn-light-green:hover {
+  background-color: #76c7c0; /* Slightly darker green on hover */
+}
+
+.btn-light-green:active {
+  background-color: green; /* Even darker green when clicked */
+  box-shadow: 0 2px #666;
+  transform: translateY(2px);
+}
+/* Style for buttons similar to the "Add New" button */
+.btn-custom {
+  background-color: #007bff; /* Primary blue color */
+  border: none;
+  color: #fff; /* White text */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; /* Same border-radius as "Add New" button */
+  box-shadow: 0 4px #999; /* Shadow effect */
+}
+
+.btn-custom:hover {
+  background-color: #0056b3; /* Slightly darker blue on hover */
+}
+
+.btn-custom:active {
+  background-color: #004080; /* Even darker blue when clicked */
+  box-shadow: 0 2px #666;
+  transform: translateY(2px);
+}
+/* Ensure buttons in the btn-group have a width of 30px */
+.btn-group a.btn {
+  width: 30px;
+  padding: 5px; /* Adjust padding to fit the smaller width */
+  text-align: center;
+  font-size: 14px; /* Adjust font size if needed */
+}
+
+.btn-group a.btn .glyphicon {
+  font-size: 16px; /* Adjust glyphicon size if needed */
+}
+
 </style>
