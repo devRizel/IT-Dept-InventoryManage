@@ -11,6 +11,15 @@ $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
 
+function find_by_serial_number($serial_number) {
+    global $db;
+    $serial_number = $db->escape($serial_number);
+    $query = "SELECT * FROM products WHERE mother = '{$serial_number}' LIMIT 1";
+    $result = $db->query($query);
+    return $db->fetch_assoc($result);
+}
+
+
 $form_data = array(
   'Room-Title' => isset($_POST['Room-Title']) ? $_POST['Room-Title'] : '',
   'Device-Category' => isset($_POST['Device-Category']) ? $_POST['Device-Category'] : '',
@@ -71,86 +80,95 @@ if (isset($_POST['add_product'])) {
     $req_fields = array('Room-Title', 'Device-Category', 'Device-Photo', 'recievedby','donate', 'dreceived', 'monitor', 'Keyboard', 'mouse', 
         'v1', 'p1', 'p2', 'power1', 'system', 'mother', 'cpu', 'ram', 'power2', 'video', 'h');
 
-    $js_error_msgs = array();
+        $js_error_msgs = array();
 
-    foreach ($req_fields as $field) {
-        if (empty($_POST[$field])) {
-            $errors[$field] = isset($field_messages[$field]) ? $field_messages[$field] . " can't be blank." : ucfirst(str_replace('-', ' ', $field)) . " is required.";
-            // Add error message to the JavaScript array
-            $js_error_msgs[$field] = $errors[$field];
+        foreach ($req_fields as $field) {
+            if (empty($_POST[$field])) {
+                $errors[$field] = isset($field_messages[$field]) ? $field_messages[$field] . " can't be blank." : ucfirst(str_replace('-', ' ', $field)) . " is required.";
+                $js_error_msgs[$field] = $errors[$field];
+            }
+        }
+        
+        if (empty($_POST['recievedby'])) {
+            $errors['recievedby'] = "Received By can't be blank.";
+            $js_error_msgs['recievedby'] = $errors['recievedby'];
+        }
+    
+        // Validate Date Received not being a future date
+        $date_received = isset($_POST['dreceived']) ? (string)$_POST['dreceived'] : '';
+        $today = new DateTime();
+        $selected_date = DateTime::createFromFormat('Y-m-d', $date_received);
+        if ($selected_date > $today) {
+            $errors[] = "Date Received cannot be a future date.";
+            $js_error_msgs['dreceived'] = "Date Received cannot be a future date.";
+        }
+    
+        if (empty($errors)) {
+            $existing_serial = find_by_serial_number($_POST['mother']);
+            if ($existing_serial) {
+                $errors[] = "Motherboard Serial Number '{$_POST['mother']}' Already Exists.";
+                $js_error_msgs['mother'] = $errors[count($errors) - 1];
+            }
+        }
+        
+        
+        if (empty($errors)) {
+            // Proceed with updating the product
+            $p_name = remove_junk($db->escape($_POST['Room-Title']));
+            $p_cat = (int)$db->escape($_POST['Device-Category']);
+            $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
+            $p_donate = remove_junk($db->escape($_POST['donate']));
+            $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
+            $p_monitor = remove_junk($db->escape($_POST['monitor']));
+            $p_keyboard = remove_junk($db->escape($_POST['Keyboard']));
+            $p_mouse = remove_junk($db->escape($_POST['mouse']));
+            $p_v1 = remove_junk($db->escape($_POST['v1']));
+            $p_p1 = remove_junk($db->escape($_POST['p1']));
+            $p_p2 = remove_junk($db->escape($_POST['p2']));
+            $p_power1 = remove_junk($db->escape($_POST['power1']));
+            $p_system = remove_junk($db->escape($_POST['system']));
+            $p_mother = remove_junk($db->escape($_POST['mother']));
+            $p_cpu = remove_junk($db->escape($_POST['cpu']));
+            $p_ram = remove_junk($db->escape($_POST['ram']));
+            $p_power2 = remove_junk($db->escape($_POST['power2']));
+            $p_video = remove_junk($db->escape($_POST['video']));
+            $p_h = remove_junk($db->escape($_POST['h']));
+            $date = make_date();
+    
+            $query = "UPDATE products SET ";
+            $query .= "name = '{$p_name}', ";
+            $query .= "categorie_id = '{$p_cat}', ";
+            $query .= "media_id = '{$media_id}', ";
+            $query .= "donate = '{$p_donate}', ";
+            $query .= "recievedby = '{$p_recievedby}', ";
+            $query .= "dreceived = '{$date_received}', ";
+            $query .= "monitor = '{$p_monitor}', ";
+            $query .= "Keyboard = '{$p_keyboard}', ";
+            $query .= "mouse = '{$p_mouse}', ";
+            $query .= "v1 = '{$p_v1}', ";
+            $query .= "p1 = '{$p_p1}', ";
+            $query .= "p2 = '{$p_p2}', ";
+            $query .= "power1 = '{$p_power1}', ";
+            $query .= "system = '{$p_system}', ";
+            $query .= "mother = '{$p_mother}', ";
+            $query .= "cpu = '{$p_cpu}', ";
+            $query .= "ram = '{$p_ram}', ";
+            $query .= "power2 = '{$p_power2}', ";
+            $query .= "video = '{$p_video}', ";
+            $query .= "date = '{$date}', ";
+            $query .= "h = '{$p_h}' ";
+            $query .= "WHERE id = '{$product['id']}'"; 
+    
+            $result = $db->query($query);
+    
+            if ($result && $db->affected_rows() === 1) {
+                redirect('addproducts.php?success=true&update_success=true', false);
+            } else {
+                $session->msg('d', 'Failed to update Computer.');
+                redirect('editaddproduct.php?id=' . (int)$product['id'], false);
+            }
         }
     }
-    if (empty($_POST['recievedby'])) {
-      $errors['recievedby'] = "Received By can't be blank.";
-  }
-  
-
-// Validate Date Received not being a future date
-$date_received = isset($_POST['dreceived']) ? (string)$_POST['dreceived'] : '';
-$today = new DateTime();
-$selected_date = DateTime::createFromFormat('Y-m-d', $date_received);
-if ($selected_date > $today) {
-    $errors[] = "Date Received cannot be a future date.";
-}
-
-
-    if (empty($errors)) {
-        // If no errors, proceed with updating the product
-        $p_name = remove_junk($db->escape($_POST['Room-Title']));
-        $p_cat = (int)$db->escape($_POST['Device-Category']);
-        $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
-        $p_donate = remove_junk($db->escape($_POST['donate']));
-        $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
-        $p_monitor = remove_junk($db->escape($_POST['monitor']));
-        $p_keyboard = remove_junk($db->escape($_POST['Keyboard']));
-        $p_mouse = remove_junk($db->escape($_POST['mouse']));
-        $p_v1 = remove_junk($db->escape($_POST['v1']));
-        $p_p1 = remove_junk($db->escape($_POST['p1']));
-        $p_p2 = remove_junk($db->escape($_POST['p2']));
-        $p_power1 = remove_junk($db->escape($_POST['power1']));
-        $p_system = remove_junk($db->escape($_POST['system']));
-        $p_mother = remove_junk($db->escape($_POST['mother']));
-        $p_cpu = remove_junk($db->escape($_POST['cpu']));
-        $p_ram = remove_junk($db->escape($_POST['ram']));
-        $p_power2 = remove_junk($db->escape($_POST['power2']));
-        $p_video = remove_junk($db->escape($_POST['video']));
-        $p_h = remove_junk($db->escape($_POST['h']));
-        $date = make_date();
-
-        $query = "UPDATE products SET ";
-        $query .= "name = '{$p_name}', ";
-        $query .= "categorie_id = '{$p_cat}', ";
-        $query .= "media_id = '{$media_id}', ";
-        $query .= "donate = '{$p_donate}', ";
-        $query .= "recievedby = '{$p_recievedby}', ";
-        $query .= "dreceived = '{$date_received}', ";
-        $query .= "monitor = '{$p_monitor}', ";
-        $query .= "Keyboard = '{$p_keyboard}', ";
-        $query .= "mouse = '{$p_mouse}', ";
-        $query .= "v1 = '{$p_v1}', ";
-        $query .= "p1 = '{$p_p1}', ";
-        $query .= "p2 = '{$p_p2}', ";
-        $query .= "power1 = '{$p_power1}', ";
-        $query .= "system = '{$p_system}', ";
-        $query .= "mother = '{$p_mother}', ";
-        $query .= "cpu = '{$p_cpu}', ";
-        $query .= "ram = '{$p_ram}', ";
-        $query .= "power2 = '{$p_power2}', ";
-        $query .= "video = '{$p_video}', ";
-        $query .= "date = '{$date}', ";
-        $query .= "h = '{$p_h}' ";
-        $query .= "WHERE id = '{$product['id']}'"; 
-
-        $result = $db->query($query);
-
-        if ($result && $db->affected_rows() === 1) {
-            redirect('addproducts.php?success=true&update_success=true', false);
-        } else {
-            $session->msg('d', 'Failed to update Computer.');
-            redirect('editaddproduct.php.php?id=' . (int)$product['id'], false);
-        }
-    }
-}
 
 
 include_once('layouts/header.php');
@@ -351,15 +369,20 @@ $(document).ready(function() {
     });
 </script>
 <?php endif; ?>
-<?php if (!empty($errors)): ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            swal({
-                title: "",
-                text: "<?php echo $errors[0]; ?>",
-                icon: "warning",
-                dangerMode: true
-            });
-        });
-    </script>
-<?php endif; ?>
+<script src="sweetalert.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    <?php if (!empty($js_error_msgs)): ?>
+    // Combine all error messages into a single string
+    const errorMessages = <?php echo json_encode(implode('\n', array_values($js_error_msgs))); ?>;
+    
+    // Display SweetAlert with all error messages
+    swal({
+        title: "",
+        text: errorMessages,
+        icon: "error",
+        dangerMode: true
+    });
+    <?php endif; ?>
+});
+</script>

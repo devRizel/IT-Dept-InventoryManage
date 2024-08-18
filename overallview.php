@@ -4,6 +4,16 @@ $page_title = 'Edit Computer';
 require_once('includes/load.php');
 page_require_level(2);
 
+$all_categories = find_all('categories');
+$all_room = find_all('room');
+$all_photo = find_all('media');
+
+
+// Filter categories to include only "Computer"
+$filtered_cat = array_filter($all_categories, function($cat) {
+  return $cat['name'] == 'Computer';
+});
+
 $product = find_by_id('products', (int)$_GET['id']);
 $all_computer = find_all('computer');
 $all_monitor = find_all('monitor');
@@ -333,7 +343,7 @@ $saved_images = [
 </div>
 
 <div class="col-md-2 col-6 mb-3">
-    <label for="cpu_images" class="d-block">Motherboard Barcode</label>
+    <label for="cpu_images" class="d-block">CPU|Processor Barcode</label>
     <div class="img-container">
         <?php
         if (isset($saved_images['cpu_images'])) {
@@ -356,7 +366,7 @@ $saved_images = [
 </div>
 
 <div class="col-md-2 col-6 mb-3">
-    <label for="ram_images" class="d-block">Motherboard Barcode</label>
+    <label for="ram_images" class="d-block">RAM Quantity|Model Barcode</label>
     <div class="img-container">
         <?php
         if (isset($saved_images['ram_images'])) {
@@ -379,7 +389,7 @@ $saved_images = [
 </div>
 
 <div class="col-md-2 col-6 mb-3">
-    <label for="video_images" class="d-block">Motherboard Barcode</label>
+    <label for="video_images" class="d-block">Video Card|GPU Barcode</label>
     <div class="img-container">
         <?php
         if (isset($saved_images['video_images'])) {
@@ -402,7 +412,7 @@ $saved_images = [
 </div>
 
 <div class="col-md-2 col-6 mb-3">
-    <label for="hddssdgb_images" class="d-block">Motherboard Barcode</label>
+    <label for="hddssdgb_images" class="d-block">HDD|SSD|GB Barcode</label>
     <div class="img-container">
         <?php
         if (isset($saved_images['hddssdgb_images'])) {
@@ -428,7 +438,135 @@ $saved_images = [
         </div>
     </form>
 </div>
+<div class="panel-body">
+        <form method="post" action="edit_product.php?id=<?php echo (int)$product['id'] ?>">
+          <div class="form-group">
+            <div class="row">
+            <div class="form-group col-md-3">
+            <label for="Room-Title">Room Title</label>
+            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
+              <option value="">Select a Room</option>
+              <?php foreach ($all_room as $room): ?>
+                <option value="<?php echo htmlspecialchars(remove_junk($room['name'])); ?>" <?php if (remove_junk($room['name']) === remove_junk($product['name'])) echo 'selected="selected"'; ?>>
+                  <?php echo htmlspecialchars(remove_junk($room['name'])); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+              <div class="col-md-3">
+                <label for="Device-Category">Product Category</label>
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
+                  <option value="">Select a Category</option>
+                  <?php foreach ($filtered_cat as $cat): ?>
+                    <option value="<?php echo (int)$cat['id']; ?>" <?php if($product['categorie_id'] == $cat['id']) echo "selected"; ?>>
+                    <?php echo htmlspecialchars($cat['name']) ?>
+                  </option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="Device-Photo">Product Photo</label>
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
+                  <option value="">No image</option>
+                  <?php foreach ($all_photo as $photo): ?>
+                    <option value="<?php echo (int)$photo['id']; ?>" <?php if($product['media_id'] == $photo['id']) echo "selected"; ?>>
+                      <?php echo $photo['file_name']; ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="col-md-3">
+                     <label for="Device-Photo">Donated By</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']);?>">
+                 </div>
+            </div>
+          </div>
 
+          <div class="form-group">
+               <div class="row">
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Monitor</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="monitor" value="<?php echo remove_junk($product['monitor']);?>">
+                 </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Keyboard</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="Keyboard" value="<?php echo remove_junk($product['Keyboard']);?>">
+                  </div>
+                  <div class="col-md-3">
+                     <label for="Device-Photo">Date Received</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control datepicker" name="dreceived" required readonly value="<?php echo remove_junk($product['dreceived']);?>">
+                  </div>
+                  <div class="col-md-3">
+                     <label for="Device-Photo">Mouse</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mouse" value="<?php echo remove_junk($product['mouse']);?>">
+                 </div>
+               </div>
+          </div>
+
+          <div class="form-group">
+               <div class="row">
+               <div class="col-md-3">
+                     <label for="Device-Photo">VGA|HDMI</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="v1" value="<?php echo remove_junk($product['v1']);?>">
+                  </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Power Chord 1</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p1" value="<?php echo remove_junk($product['p1']);?>">
+                 </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Power Chord 2</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p2" value="<?php echo remove_junk($product['p2']);?>">
+                  </div>
+                  <div class="col-md-3">
+                     <label for="Device-Photo">Power Supply|AVR</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power1" value="<?php echo remove_junk($product['power1']);?>">
+                 </div>
+               </div>
+          </div>
+
+          <div class="form-group">
+               <div class="row">
+               <div class="col-md-3">
+                     <label for="Device-Photo">System Unit Model</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="system" value="<?php echo remove_junk($product['system']);?>">
+                  </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Motherboard Model</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mother" value="<?php echo remove_junk($product['mother']);?>">
+                 </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">CPU|Processesor</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="cpu" value="<?php echo remove_junk($product['cpu']);?>">
+                  </div>
+                  <div class="col-md-3">
+                     <label for="Device-Photo">RAM Quannty|Model</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="ram" value="<?php echo remove_junk($product['ram']);?>">
+                 </div>
+               </div>
+          </div>
+
+          <div class="form-group">
+               <div class="row">
+               <div class="col-md-3 col-md-offset-2">
+                     <label for="Device-Photo">Power Supply 2</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power2" value="<?php echo remove_junk($product['power2']);?>">
+                  </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">Video Card|GPU</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="video" value="<?php echo remove_junk($product['video']);?>">
+                 </div>
+                 <div class="col-md-3">
+                     <label for="Device-Photo">HDD|SSD|GB</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']);?>">
+                  </div>
+               </div>
+          </div>
+            
+          <center><div class="form-group">
+            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product.php" class="btn btn-danger">Back</a>
+          </div></center>
+        </form>
+      </div>
 <?php include_once('layouts/footer.php'); ?>
 <style>
   .img-container {

@@ -1,4 +1,3 @@
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 date_default_timezone_set('Asia/Manila');
 $page_title = 'Edit Computer';
@@ -126,7 +125,6 @@ if ($selected_date > $today) {
 
 include_once('layouts/header.php');
 ?>
-
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
     <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-default">
@@ -284,8 +282,8 @@ include_once('layouts/header.php');
             
 
           <center><div class="form-group">
-            <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
-            <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product.php" class="btn btn-danger">Cancel</a>
+            <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
+            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product.php" class="btn btn-danger">Cancel</a>
           </div></center>
         </form>
       </div>
