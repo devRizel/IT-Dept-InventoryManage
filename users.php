@@ -54,7 +54,7 @@ date_default_timezone_set('Asia/Manila');
           <?php endif;?>
            </td> -->
            <td><?php echo read_date($a_user['last_login'])?></td>
-           <td class="text-center">
+           <!-- <td class="text-center">
              <div class="btn-group">
                 <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                   <i class="glyphicon glyphicon-pencil"></i>
@@ -63,7 +63,7 @@ date_default_timezone_set('Asia/Manila');
                   <i class="glyphicon glyphicon-remove"></i>
                 </a>
                 </div>
-           </td>
+           </td> -->
           </tr>
         <?php endforeach;?>
        </tbody>
