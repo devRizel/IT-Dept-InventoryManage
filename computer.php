@@ -18,33 +18,39 @@ $desired_order = array(
 );
 
 function fetch_products() {
-  global $db; // Use global variable inside the function
+    global $db; // Use global variable inside the function
 
-  // Modify SQL query to include a WHERE clause that filters out products with media_id = 0 or NULL
-  $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
-  $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
-  $sql .= "p.media_id, p.date, ";
-  $sql .= "c.name AS categorie, ";
-  $sql .= "m.file_name AS image, ";
-  $sql .= "p.computer_images, p.monitor_images, p.mouse_images, p.system_images, p.vgahdmi_images, ";
-  $sql .= "p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, p.mother_images, ";
-  $sql .= "p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
-  $sql .= "FROM products p ";
-  $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
-  $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
-  $sql .= "WHERE p.media_id IS NOT NULL AND p.media_id != '0' ";
-  $sql .= "AND (p.computer_images NOT LIKE '%Maintenance%' AND p.monitor_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.mouse_images NOT LIKE '%Maintenance%' AND p.system_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.vgahdmi_images NOT LIKE '%Maintenance%' AND p.power1_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.power2_images NOT LIKE '%Maintenance%' AND p.chord1_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.chord2_images NOT LIKE '%Maintenance%' AND p.mother_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.cpu_images NOT LIKE '%Maintenance%' AND p.ram_images NOT LIKE '%Maintenance%' AND ";
-  $sql .= "p.video_images NOT LIKE '%Maintenance%' AND p.hddssdgb_images NOT LIKE '%Maintenance%') ";
-  $sql .= "ORDER BY p.id ASC";
-  
-  $result = $db->query($sql);
-  return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
+    $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+    $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+    $sql .= "p.media_id, p.date, ";
+    $sql .= "c.name AS categorie, m.file_name AS image, ";
+    $sql .= "p.computer_images, p.monitor_images, p.keyboard_images, p.mouse_images, p.system_images, ";
+    $sql .= "p.vgahdmi_images, p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, ";
+    $sql .= "p.mother_images, p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
+    $sql .= "FROM products p ";
+    $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+    $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
+    $sql .= "WHERE p.computer_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.monitor_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.keyboard_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.mouse_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.system_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.vgahdmi_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.power1_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.power2_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.chord1_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.chord2_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.mother_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.cpu_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.ram_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.video_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.hddssdgb_images LIKE '%Maintenance%'";
+
+    $result = $db->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
 }
+
+
 
 
 // Fetch products from the database
@@ -69,7 +75,7 @@ include_once('layouts/header.php');
   <div class="col-md-12">
     <div class="panel panel-default">
     <div class="panel-heading clearfix">
-  <h1 class="text-center">Overall Computer</h1>
+  <h1 class="text-center">Overall Computer Maintenance</h1>
   <div class="pull-right">
   <div class="search-container" style="display: inline-block; margin-left: 10px;">
       <input type="text" id="search-bar" class="form-control" placeholder="Search...">
@@ -113,7 +119,7 @@ include_once('layouts/header.php');
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
     <td class="text-center">
-    <form action="overallmain.php" method="get" style="display:inline;">
+    <form action="overallmaincomputer.php" method="get" style="display:inline;">
     <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
     <button style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" class="btn-light-green" data-toggle="tooltip">
         <span class="glyphicon"></span> Status
@@ -121,7 +127,7 @@ include_once('layouts/header.php');
 </form>
     </td>
     <td class="text-center">
-    <form action="overallview.php" method="get" style="display:inline;">
+    <form action="overallviewcomputer.php" method="get" style="display:inline;">
   <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
   <button type="submit" class="btn-custom" data-toggle="tooltip">
       <span class="glyphicon"></span> View
@@ -130,10 +136,10 @@ include_once('layouts/header.php');
     </td>
     <td class="text-center">
       <div class="btn-group">
-        <a href="edit_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Edit" data-toggle="tooltip">
+        <a href="edit_computer.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Edit" data-toggle="tooltip">
           <span class="glyphicon glyphicon-edit"></span>
         </a>
-        <a href="delete_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+        <a href="delete_computer.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
       </div>
@@ -194,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'product.php';
+                window.location.href = 'computer.php';
             });
 
 
@@ -281,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 /* Add this to your existing CSS file or within a <style> tag in your HTML */
 .btn-light-green {
-  background-color: green;
+  background-color: red;
   border: none;
   color: #fff; /* White text */
   padding: 10px 20px;
@@ -300,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .btn-light-green:active {
-  background-color: green; /* Even darker green when clicked */
+  background-color: red; /* Even darker green when clicked */
   box-shadow: 0 2px #666;
   transform: translateY(2px);
 }
