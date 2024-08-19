@@ -99,7 +99,7 @@
     <li>
       <a href="#" class="submenu-toggle" id="manage">
         <i class="glyphicon glyphicon-th-large"></i>
-        <span>Manage</span>
+        <span>Manage Room</span>
       </a>
       <ul class="nav submenu">
         <li><a href="product.php" id="overall-computer">Overall Computer</a></li>
@@ -110,6 +110,16 @@
         <li><a href="product5.php" id="it-comlab3">IT Comlab 3</a></li>
         <li><a href="product6.php" id="it-comlab4">IT Comlab 4</a></li>
         <li><a href="product7.php" id="other-devices">Other Devices</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="submenu-toggle" id="manage">
+        <i class="glyphicon glyphicon-th-large"></i>
+        <span>Maintenance</span>
+      </a>
+      <ul class="nav submenu">
+        <li><a href="computer.php" id="overall-computer">Computer</a></li>
+        <li><a href="otherdevices.php" id="faculty">Other Devices</a></li>
       </ul>
     </li>
     <li>
