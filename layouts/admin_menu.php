@@ -123,6 +123,32 @@
       </ul>
     </li>
     <li>
+        <a href="#" class="submenu-toggle" id="manage-barcode">
+            <i class="glyphicon glyphicon-th-large"></i>
+            <span>Barrow</span>
+        </a>
+        <ul class="nav submenu">
+            <li>
+                <a href="#" class="submenu-toggle">
+                    Barrow Computer
+                </a>
+                <ul class="nav submenu">
+   		     <li><a href="barrowcomputer.php" id="overall-computer">Computer List</a></li>
+     		     <li><a href="barrowedcomputer.php" id="overall-computer">Computer Barrowed</a></li>
+       		     <li><a href="barrowedcomputerreturn.php" id="overall-computer">Computer Return</a></li>
+                </ul>
+            </li>
+            <li>
+            <a href="#" class="submenu-toggle">
+                    Barrow Other Devices
+                </a>
+                <ul class="nav submenu">
+                     <li><a href="barrowother.php" id="faculty">Other Devices</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
       <a href="product8.php" id="print-report">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Print Report</span>
