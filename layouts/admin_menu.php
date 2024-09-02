@@ -86,7 +86,7 @@
         <span>Sample</span>
       </a>
     </li>
-    <li>
+    <!-- <li>
       <a href="#" class="submenu-toggle" id="add-new">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Add New</span>
@@ -95,7 +95,7 @@
         <li><a href="add_product.php" id="add-product">Add New Computer</a></li>
         <li><a href="add_product7.php" id="add-other-devices">Add New Other Devices</a></li>
       </ul>
-    </li>
+    </li> -->
     <li>
       <a href="#" class="submenu-toggle" id="manage">
         <i class="glyphicon glyphicon-th-large"></i>
