@@ -21,8 +21,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 
-<FilesMatch "\.(gif|jpg|jpeg|png)$">
-    Order Allow,Deny
-    Allow from all
-</FilesMatch>
 
