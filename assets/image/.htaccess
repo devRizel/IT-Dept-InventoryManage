@@ -1,13 +1,7 @@
-<FilesMatch "(fontsize\.jpg|download\.png)$">
+<FilesMatch "\.(gif|jpg|jpeg|png)$">
     Order Allow,Deny
     Allow from all
 </FilesMatch>
-
-<FilesMatch "\.(gif|jpg|jpeg|png)$">
-    Order Deny,Allow
-    Deny from all
-</FilesMatch>
-
 
 <FilesMatch ".*">
     Order Deny,Allow
