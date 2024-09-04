@@ -55,18 +55,7 @@
                 </ul>
             </li>
             <li>
-            <a href="#" class="submenu-toggle">
-                    Add Other Devices Barcode
-                </a>
-                <ul class="nav submenu">
-                    <li><a href="bar16.php" id="AddTV">Add TV</a></li>
-                    <li><a href="bar17.php" id="AddPRINTER">Add PRINTER</a></li>
-                    <li><a href="bar18.php" id="AddCctv">Add Cctv</a></li>
-                    <li><a href="bar19.php" id="AddElectricFan">Add ElectricFan</a></li>
-                    <li><a href="bar20.php" id="AddCable">Add Cable</a></li>
-                    <li><a href="bar21.php" id="AddSwitchHub">Add Switch Hub</a></li>
-                    <li><a href="bar22.php" id="AddExtension">Add Extension</a></li>
-                </ul>
+            <a href="bar16.php" class="nav submenu" id="Addprinter">Add Other Devices Barcode</a>
             </li>
         </ul>
     </li>
@@ -81,12 +70,16 @@
       </ul>
     </li>
     <li>
-      <a href="addproducts.php" id="media-files">
+      <a href="#" class="submenu-toggle" id="add-new">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Sample</span>
       </a>
+      <ul class="nav submenu">
+        <li><a href="addproducts.php" id="add-product">ComputerSample</a></li>
+        <li><a href="addproductsother.php" id="add-other-devices">OtherDevicesSample</a></li>
+      </ul>
     </li>
-    <!-- <li>
+    <li>
       <a href="#" class="submenu-toggle" id="add-new">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Add New</span>
@@ -95,7 +88,7 @@
         <li><a href="add_product.php" id="add-product">Add New Computer</a></li>
         <li><a href="add_product7.php" id="add-other-devices">Add New Other Devices</a></li>
       </ul>
-    </li> -->
+    </li>
     <li>
       <a href="#" class="submenu-toggle" id="manage">
         <i class="glyphicon glyphicon-th-large"></i>
@@ -187,7 +180,7 @@
         'bar13.php': 'AddRAM',
         'bar14.php': 'AddVideoCard',
         'bar15.php': 'AddHDD|SSD|GB',
-        'bar16.php': 'AddTV',
+        'bar16.php': 'Addprinter',
         'bar17.php': 'AddPRINTER',
         'bar18.php': 'AddCctv',
         'bar19.php': 'AddElectricFan',
