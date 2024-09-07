@@ -34,10 +34,10 @@ date_default_timezone_set('Asia/Manila');
           <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
         </div>
       </div>
-      <div style="text-align: right;">
+      <!-- <div style="text-align: right;">
          <a href="forget.php?access=allowed" style="font-size: 14px; text-decoration: 
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
-     </div>
+     </div> -->
       <center><div class="form-group">
         <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
