@@ -164,7 +164,7 @@ date_default_timezone_set('Asia/Manila');
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/js/main.js"></script>
-  <!-- <script>
+  <script>
       // Disable right-click
 document.addEventListener('contextmenu', event => event.preventDefault());
 
@@ -177,7 +177,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-    </script> -->
+    </script>
 </body>
 
 </html>
