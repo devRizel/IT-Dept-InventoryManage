@@ -25,7 +25,7 @@ date_default_timezone_set('Asia/Manila');
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
-        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"  pattern="[a-zA-Z0-9\s]*" type="name" class="form-control" name="username" placeholder="Email">
+        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
       </div>
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
