@@ -69,12 +69,12 @@
         <li><a href="add2.php" id="addother">Add New Other Devices</a></li>
       </ul>
     </li>
-    <!-- <li>
+    <li>
       <a href="addproducts.php" id="sample">
         <i class="glyphicon glyphicon-th-large" ></i>
         <span>Sample</span>
       </a>
-    </li> -->
+    </li>
     <li>
       <a href="#" class="submenu-toggle" id="manage">
         <i class="glyphicon glyphicon-th-large"></i>
