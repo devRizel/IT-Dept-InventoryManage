@@ -65,29 +65,15 @@
         <span>Add New</span>
       </a>
       <ul class="nav submenu">
-        <li><a href="add1.php" id="add-product">Add New Computer</a></li>
-        <li><a href="add2.php" id="add-other-devices">Add New Other Devices</a></li>
+        <li><a href="add1.php" id="add">Add New Computer</a></li>
+        <li><a href="add2.php" id="addother">Add New Other Devices</a></li>
       </ul>
     </li>
     <li>
-      <a href="#" class="submenu-toggle" id="add-new">
-        <i class="glyphicon glyphicon-th-large"></i>
+      <a href="addproducts.php" id="sample">
+        <i class="glyphicon glyphicon-th-large" ></i>
         <span>Sample</span>
       </a>
-      <ul class="nav submenu">
-        <li><a href="addproducts.php" id="add-product">ComputerSample</a></li>
-        <li><a href="addproductsother.php" id="add-other-devices">OtherDevicesSample</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#" class="submenu-toggle" id="add-new">
-        <i class="glyphicon glyphicon-th-large"></i>
-        <span>Add New</span>
-      </a>
-      <ul class="nav submenu">
-        <li><a href="add_product.php" id="add-product">Add New Computer</a></li>
-        <li><a href="add_product7.php" id="add-other-devices">Add New Other Devices</a></li>
-      </ul>
     </li>
     <li>
       <a href="#" class="submenu-toggle" id="manage">
@@ -187,7 +173,9 @@
         'bar20.php': 'AddCable',
         'bar21.php': 'AddSwitchHub',
         'bar22.php': 'AddExtension',
-        'add_product.php': 'add-product',
+        'addproducts.php': 'sample',
+        'add1.php': 'add',
+        'add2.php': 'addother',
         'add_product7.php': 'add-other-devices',
         'product.php': 'overall-computer',
         'product1.php': 'faculty',
