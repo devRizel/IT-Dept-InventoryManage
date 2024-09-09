@@ -41,10 +41,11 @@ if (isset($_POST['add_product'])) {
         'ram' => 'RAM Quantity|Model',
         'power2' => 'Power Supply 2',
         'video' => 'Video Card|GPU',
+        'recievedby' => 'Recieved By',
         'h' => 'HDD|SSD|GB'
     );
 
-    $req_fields = array('Room-Title', 'Device-Category', 'Device-Photo', 'donate', 'dreceived', 'monitor', 'Keyboard', 'mouse', 
+    $req_fields = array('Room-Title', 'Device-Category', 'Device-Photo', 'recievedby', 'donate', 'dreceived', 'monitor', 'Keyboard', 'mouse', 
     'v1', 'p1', 'p2', 'power1', 'system', 'mother', 'cpu', 'ram', 'power2', 'video', 'h');
 
     $js_error_msgs = array();
@@ -72,6 +73,7 @@ if ($selected_date > $today) {
         $p_cat = (int)$db->escape($_POST['Device-Category']);
         $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
         $p_donate = remove_junk($db->escape($_POST['donate']));
+        $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
         $p_monitor = remove_junk($db->escape($_POST['monitor']));
         $p_keyboard = remove_junk($db->escape($_POST['Keyboard']));
         $p_mouse = remove_junk($db->escape($_POST['mouse']));
@@ -91,6 +93,7 @@ if ($selected_date > $today) {
         $query = "UPDATE products SET ";
         $query .= "name = '{$p_name}', ";
         $query .= "categorie_id = '{$p_cat}', ";
+        $query .= "recievedby = '{$p_recievedby}', ";
         $query .= "media_id = '{$media_id}', ";
         $query .= "donate = '{$p_donate}', ";
         $query .= "dreceived = '{$date_received}', ";
@@ -274,9 +277,19 @@ include_once('layouts/header.php');
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="video" value="<?php echo remove_junk($product['video']);?>">
                  </div>
                  <div class="col-md-6">
-                     <label for="Device-Photo">HDD|SSD|GSB</label>
+                     <label for="Device-Photo">HDD|SSD|GB</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']);?>">
                   </div>
+               </div>
+          </div>
+
+          <div class="form-group">
+               <div class="row">
+               <div class="col-md-8 col-md-offset-2">
+                     <label for="Device-Photo">Received By</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>">
+                 </div>
+            </div>
                </div>
           </div>
             
