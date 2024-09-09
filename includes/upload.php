@@ -3744,7 +3744,7 @@ class  tv {
 
 <?php
 
-class  printer {
+class other_images {
 
   public $imageInfo;
   public $fileName;
@@ -3818,9 +3818,9 @@ class  printer {
     endif;
  }
  /*--------------------------------------------------------------*/
- /* Function for Process printer file
+ /* Function for Process other_images file
  /*--------------------------------------------------------------*/
-  public function process_printer(){
+  public function process_other_images(){
     if(!empty($this->errors)){
         return false;
       }
@@ -3842,7 +3842,7 @@ class  printer {
     if(move_uploaded_file($this->fileTempPath,$this->productPath.'/'.$this->fileName))
     {
 
-      if($this->insert_printer()){
+      if($this->insert_other_images()){
         unset($this->fileTempPath);
         return true;
       }
@@ -3920,12 +3920,12 @@ class  printer {
 
    }
 /*--------------------------------------------------------------*/
-/* Function for insert printer image
+/* Function for insert other_images image
 /*--------------------------------------------------------------*/
-  private function insert_printer(){
+  private function insert_other_images(){
 
          global $db;
-         $sql  = "INSERT INTO printer ( file_name,file_type )";
+         $sql  = "INSERT INTO other_images ( file_name,file_type )";
          $sql .=" VALUES ";
          $sql .="(
                   '{$db->escape($this->fileName)}',
@@ -3935,9 +3935,9 @@ class  printer {
 
   }
 /*--------------------------------------------------------------*/
-/* Function for Delete printer by id
+/* Function for Delete other_images by id
 /*--------------------------------------------------------------*/
-   public function printer_destroy($id,$file_name){
+   public function other_images_destroy($id,$file_name){
      $this->fileName = $file_name;
      if(empty($this->fileName)){
          $this->errors[] = "The Photo file Name missing.";
@@ -3947,7 +3947,7 @@ class  printer {
        $this->errors[] = "Missing Photo id.";
        return false;
      }
-     if(delete_by_id('printer',$id)){
+     if(delete_by_id('other_images',$id)){
          unlink($this->productPath.'/'.$this->fileName);
          return true;
      } else {
