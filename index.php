@@ -133,7 +133,7 @@ date_default_timezone_set('Asia/Manila');
 
       </div>
 
-    </section><!-- /About Section -->
+    </section>
 
 
   </main>
