@@ -55,28 +55,7 @@ if (isset($_POST['add_product'])) {
     }
 }
 
-// Get already used image IDs
-$saved_image_ids = [];
-$query = "SELECT DISTINCT other_images FROM other";
-$result = $db->query($query);
-while ($row = $result->fetch_assoc()) {
-    foreach ($row as $image_id) {
-        if ($image_id != 0) {
-            $saved_image_ids[] = $image_id;
-        }
-    }
-}
-$saved_image_ids = array_unique($saved_image_ids); // Remove duplicates
 
-function get_filtered_options($all_options, $saved_image_ids) {
-    $filtered_options = [];
-    foreach ($all_options as $option) {
-        if (!in_array($option['id'], $saved_image_ids)) {
-            $filtered_options[] = $option;
-        }
-    }
-    return $filtered_options;
-}
 
 include_once('layouts/header.php');
 ?>
@@ -101,7 +80,7 @@ include_once('layouts/header.php');
         <div class="form-group col-md-8 col-md-offset-2">
     <label for="Room-Title">Other Device Barcode</label>
     <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="other_images">
-        <?php foreach (get_filtered_options($all_other_images, $saved_image_ids) as $photo): ?>
+    <?php foreach ($all_other_images as $photo): ?>
         <option value="<?php echo (int)$photo['id']; ?>" <?php echo (!empty($form_data['other_images']) && (int)$form_data['other_images'] === (int)$photo['id']) ? 'selected' : ''; ?>>
             <?php echo htmlspecialchars($photo['file_name'], ENT_QUOTES, 'UTF-8'); ?>
         </option>
