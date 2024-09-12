@@ -6,33 +6,70 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
-// Fetch products from the database
-$products = join_other_table();
+$filtered_other = [];
 
-$all_categories = find_all('categories');
+function fetch_other() {
+  global $db;
 
-// Define an array with desired order of names
-$desired_order = array(
-  "Faculty",
-  "Server Room",
-  "Com lab 1",
-  "Com lab 2",
-  "Com lab 3",
-  "Com lab 4"
-);
+  $sql = "SELECT 
+            p.id, 
+            p.name, 
+            p.categorie_id, 
+            p.donate, 
+            p.dreceived, 
+            p.media_id, 
+            p.date,
+            p.serial, 
+            c.name AS categorie, 
+            m.file_name AS image,
+            p.other_images
+          FROM 
+            other p 
+          LEFT JOIN 
+            categories c ON c.id = p.categorie_id 
+          LEFT JOIN 
+            media m ON m.id = p.media_id 
+          WHERE 
+            p.other_images NOT LIKE '%Maintenance%' 
+          ORDER BY 
+            p.id ASC";
 
-// Function to determine position in desired order array
-function custom_sort($product) {
-  global $desired_order;
-  $name = $product['name'];
-  $position = array_search($name, $desired_order);
-  return ($position === false) ? count($desired_order) : $position;
+  return find_by_sql($sql);
 }
 
-// Sort products based on custom sort function
-usort($products, function($a, $b) {
-  return custom_sort($a) - custom_sort($b);
-});
+
+// Fetch the products and assign them to $products
+$products = fetch_other();
+
+// Ensure $products is an array before sorting
+if (is_array($products)) {
+    // Define an array with desired order of names
+    $desired_order = array(
+        "Faculty",
+        "Server Room",
+        "Com lab 1",
+        "Com lab 2",
+        "Com lab 3",
+        "Com lab 4"
+    );
+
+    // Function to determine position in desired order array
+    function custom_sort($product) {
+        global $desired_order;
+        $name = $product['name'];
+        $position = array_search($name, $desired_order);
+        return ($position === false) ? count($desired_order) : $position;
+    }
+
+    // Sort products based on custom sort function
+    usort($products, function($a, $b) {
+        return custom_sort($a) - custom_sort($b);
+    });
+}
+
+// Fetch categories
+$all_categories = find_all('categories');
+
 
 include_once('layouts/header.php');
 ?>

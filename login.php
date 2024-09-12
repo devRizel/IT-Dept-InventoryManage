@@ -35,7 +35,7 @@ date_default_timezone_set('Asia/Manila');
         </div>
       </div>
       <!-- <div style="text-align: right;">
-         <a href="forget.php?access=allowed" style="font-size: 14px; text-decoration: 
+         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: 
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
      </div> -->
       <center><div class="form-group">

@@ -37,11 +37,11 @@ function motherboard_exists($motherboard_model) {
 if (isset($_POST['add_product'])) {
   // Required fields
   $req_fields = array(
-    'serial' => 'serial',
-    'recievedby' => 'recievedby',
+    'serial' => 'Serial',
+    'recievedby' => 'Recieved By',
       'dreceived' => '',
       'donate' => 'Donated By',
-      'other_images' => 'other_images',
+      'other_images' => 'Other Device images',
       'Device-Photo' => 'Device Photo',
       'Device-Category' => 'Device Category',
       'Room-Title' => 'Room Title'

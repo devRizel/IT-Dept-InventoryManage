@@ -10,7 +10,7 @@ $all_other_images = find_all('other_images');
 
 if (!$product) {
     $session->msg("d", "Missing product id.");
-    redirect('product7.php');
+    redirect('otherdevices.php');
 }
 
 $errors = array();
@@ -50,10 +50,10 @@ if (isset($_POST['add_product'])) {
         $result = $db->query($query);
 
         if ($result && $db->affected_rows() === 1) {
-            redirect('product7.php?success=true&update_success=true', false);
+            redirect('otherdevices.php?success=true&update_success=true', false);
         } else {
             $session->msg('d', 'Failed to update Computer.');
-            redirect('product7main.php?id=' . (int)$product['id'], false);
+            redirect('otherdevicesmain.php?id=' . (int)$product['id'], false);
         }
     }
 }
@@ -70,7 +70,7 @@ include_once('layouts/header.php');
         </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="product7main.php?id=<?php echo (int)$product['id'] ?>">
+        <form method="post" action="otherdevicesmain.php?id=<?php echo (int)$product['id'] ?>">
           <div class="form-group col-md-8 col-md-offset-2">
             <center><label for="Room-Title">Other Device Barcode Photo</label></center>
             <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="other_images">
@@ -85,7 +85,7 @@ include_once('layouts/header.php');
 
           <center><div class="form-group">
             <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
-            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product7.php" class="btn btn-danger">Cancel</a>
+            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="otherdevices.php" class="btn btn-danger">Cancel</a>
           </div></center>
         </form>
       </div>

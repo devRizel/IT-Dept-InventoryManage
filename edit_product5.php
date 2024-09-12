@@ -1,4 +1,5 @@
-<?php
+
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png"><?php
 date_default_timezone_set('Asia/Manila');
 $page_title = 'Edit Computer';
 require_once('includes/load.php');
@@ -9,6 +10,15 @@ $product = find_by_id('products', (int)$_GET['id']);
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
+
+
+function find_by_serial_number($serial_number) {
+  global $db;
+  $serial_number = $db->escape($serial_number);
+  $query = "SELECT * FROM products WHERE mother = '{$serial_number}' LIMIT 1";
+  $result = $db->query($query);
+  return $db->fetch_assoc($result);
+}
 
 
 // Filter categories to include only "Computer"
@@ -57,6 +67,13 @@ if (isset($_POST['add_product'])) {
             $js_error_msgs[$field] = $errors[$field];
         }
     }
+    if (empty($errors)) {
+      $existing_serial = find_by_serial_number($_POST['mother']);
+      if ($existing_serial) {
+          $errors[] = "Motherboard Serial Number '{$_POST['mother']}' Already Exists.";
+          $js_error_msgs['mother'] = $errors[count($errors) - 1];
+      }
+  }
 
 // Validate Date Received not being a future date
 $date_received = isset($_POST['dreceived']) ? (string)$_POST['dreceived'] : '';

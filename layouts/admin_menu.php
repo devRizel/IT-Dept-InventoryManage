@@ -61,7 +61,7 @@
     </li>
     <li>
       <a href="#" class="submenu-toggle" id="add-new">
-        <i class="glyphicon glyphicon-th-large"></i>
+        <i class="glyphicon glyphicon-indent-left"></i>
         <span>Add New</span>
       </a>
       <ul class="nav submenu">
@@ -71,7 +71,7 @@
     </li>
     <li>
       <a href="addproducts.php" id="sample">
-        <i class="glyphicon glyphicon-th-large" ></i>
+        <i class="glyphicon glyphicon-indent-left" ></i>
         <span>Sample</span>
       </a>
     </li>
@@ -122,7 +122,9 @@
                     Barrow Other Devices
                 </a>
                 <ul class="nav submenu">
-                     <li><a href="barrowother.php" id="faculty">Other Devices</a></li>
+                     <li><a href="barrowother.php" id="faculty">Other Devices List</a></li>
+                     <li><a href="barrowedother.php" id="faculty">Other Devices Barrowed</a></li>
+                     <li><a href="barrowedotherreturn.php" id="faculty">Other Devices Return</a></li>
                 </ul>
             </li>
         </ul>

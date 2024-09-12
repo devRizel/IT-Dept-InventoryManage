@@ -128,7 +128,7 @@ include_once('layouts/header.php');
     <form action="barrowedcomputer2.php" method="get" style="display:inline;">
     <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
     <button style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" class="btn-light-green" data-toggle="tooltip">
-        <span class="glyphicon"></span> Return Barrow
+        <span class="glyphicon"></span>Return Barrow
     </button>
 </form>
     </td>s
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 9th column
+            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 6th column
             const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
 
             if (mother.includes(searchTerm)) {
