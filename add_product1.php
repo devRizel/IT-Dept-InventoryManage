@@ -10,6 +10,9 @@ require_once('includes/load.php');
 // Checking user permission to view page
 page_require_level(2);
 
+
+
+
 // Fetch categories, rooms, & photos
 $all_categories = find_all('categories');
 $all_room = find_all('room');

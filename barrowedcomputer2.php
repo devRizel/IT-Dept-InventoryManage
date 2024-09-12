@@ -66,7 +66,7 @@ include_once('layouts/header.php');
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Barrow</span>
+          <span>Edit Computer</span>
         </strong>
       </div>
       <div class="panel-body">

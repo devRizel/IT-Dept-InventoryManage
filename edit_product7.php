@@ -11,14 +11,6 @@ $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
 
-function find_by_serial_number($serial_number) {
-  global $db;
-  $serial_number = $db->escape($serial_number);
-  $query = "SELECT * FROM other WHERE serial = '{$serial_number}' LIMIT 1";
-  $result = $db->query($query);
-  return $db->fetch_assoc($result);
-}
-
 $errors = array();
 if (isset($_POST['add_product'])) {
     $field_messages = array(
@@ -26,12 +18,10 @@ if (isset($_POST['add_product'])) {
         'Device-Category' => 'Device Category',
         'Device-Photo' => 'Device Photo',
         'donate' => 'Donated By',
-        'dreceived' => 'Date Received',
-        'serial' => 'Serial',
-        'recievedby' => 'Recieved By'
+        'dreceived' => 'Date Received'
     );
 
-    $req_fields = array('Room-Title', 'Device-Category', 'Device-Photo', 'donate', 'dreceived','serial','recievedby');
+    $req_fields = array('Room-Title', 'Device-Category', 'Device-Photo', 'donate', 'dreceived');
 
     $js_error_msgs = array();
 
@@ -42,13 +32,6 @@ if (isset($_POST['add_product'])) {
             $js_error_msgs[$field] = $errors[$field];
         }
     }
-    if (empty($errors)) {
-      $existing_serial = find_by_serial_number($_POST['serial']);
-      if ($existing_serial) {
-          $errors[] = "Serial Number '{$_POST['serial']}' Already Exists.";
-          $js_error_msgs['serial'] = $errors[count($errors) - 1];
-      }
-  }
 
 // Validate Date Received not being a future date
 $date_received = isset($_POST['dreceived']) ? (string)$_POST['dreceived'] : '';
@@ -63,8 +46,6 @@ if ($selected_date > $today) {
     $p_cat = (int)$db->escape($_POST['Device-Category']);
     $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
     $p_donate = remove_junk($db->escape($_POST['donate']));
-    $p_serial = remove_junk($db->escape($_POST['serial']));
-    $p_recievedby = remove_junk($db->escape($_POST['recievedby']));
     $date = make_date();
 
 
@@ -74,8 +55,6 @@ if ($selected_date > $today) {
     $query .= "media_id = '{$media_id}', ";
     $query .= "donate = '{$p_donate}', ";
     $query .= "dreceived = '{$date_received}', ";
-    $query .= "serial = '{$p_serial}', ";
-    $query .= "recievedby = '{$p_recievedby}', ";
     $query .= "date = '{$date}' ";
     $query .= "WHERE id = '{$product['id']}'";
     
@@ -164,19 +143,6 @@ include_once('layouts/header.php');
                      <label for="Device-Photo">Date Received</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control datepicker" name="dreceived" required readonly value="<?php echo remove_junk($product['dreceived']);?>">
                   </div>
-               </div>
-          </div>
-
-          <div class="form-group">
-               <div class="row">
-                 <div class="col-md-6">
-                     <label for="Device-Photo">Serial Num.</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" value="<?php echo remove_junk($product['serial']);?>">
-                 </div>
-                 <div class="col-md-6">
-                     <label for="Device-Photo">Recieved By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>">
-                 </div>
                </div>
           </div>
 

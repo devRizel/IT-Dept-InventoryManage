@@ -88,7 +88,7 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 50px;">#</th>
                 <th class="text-center" style="width: 50px;">Select</th>
                 <th class="text-center" style="width: 150px;">Photo</th>
-                <th class="text-center" style="width: 10%;">Status</th>
+                <th class="text-center" style="width: 10%;">Title Room</th>
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
@@ -112,7 +112,7 @@ include_once('layouts/header.php');
                       <img class="img-thumbnail" src="uploads/products/<?php echo $product['image']; ?>" alt="">
                   <?php endif; ?>
                 </td>
-    <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
+    <td><?php echo remove_junk($product['name']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
     <td class="text-center">
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 6th column
+            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 9th column
             const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
 
             if (mother.includes(searchTerm)) {

@@ -5,13 +5,13 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
   page_require_level(2);
 ?>
-<?php $other_images_files = find_all('other_images');?>
+<?php $printer_files = find_all('printer');?>
 <?php
 if (isset($_POST['submit'])) {
-  $photo = new other_images();
+  $photo = new printer();
   $photo->upload($_FILES['file_upload']);
   
-  if ($photo->process_other_images()) {
+  if ($photo->process_printer()) {
       $session->msg('s', 'Photo has been uploaded.');
       redirect('bar16.php?success=true'); // Redirect with success parameter
   } else {
@@ -55,20 +55,20 @@ if (isset($_POST['submit'])) {
                 </tr>
               </thead>
                 <tbody>
-                <?php foreach ($other_images_files as $other_images_file): ?>
+                <?php foreach ($printer_files as $printer_file): ?>
                 <tr class="list-inline">
                  <td class="text-center"><?php echo count_id();?></td>
                   <td class="text-center">
-                      <img src="uploads/products/<?php echo $other_images_file['file_name'];?>" class="img-thumbnail" />
+                      <img src="uploads/products/<?php echo $printer_file['file_name'];?>" class="img-thumbnail" />
                   </td>
                 <td class="text-center">
-                  <?php echo $other_images_file['file_name'];?>
+                  <?php echo $printer_file['file_name'];?>
                 </td>
                 <td class="text-center">
-                  <?php echo $other_images_file['file_type'];?>
+                  <?php echo $printer_file['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="delete_bar16.php?id=<?php echo (int) $other_images_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
+                  <a href="delete_bar16.php?id=<?php echo (int) $printer_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>
