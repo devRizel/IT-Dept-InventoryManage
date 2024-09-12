@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 date_default_timezone_set('Asia/Manila');
   $page_title = 'All User';
@@ -9,7 +10,7 @@ date_default_timezone_set('Asia/Manila');
 //pull out all user form database
  $all_users = find_all_user();
 ?>
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
    <div class="col-md-12">
