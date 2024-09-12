@@ -10,14 +10,12 @@ $product = find_by_id('other', (int)$_GET['id']);
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
+$all_other_images = find_all('other_images');
+// Get IDs of images already saved in the database for this product
+$saved_images = [
+    'other_images' => $product['other_images'],
+];
 
-function find_by_serial_number($serial_number) {
-  global $db;
-  $serial_number = $db->escape($serial_number);
-  $query = "SELECT * FROM other WHERE serial = '{$serial_number}' LIMIT 1";
-  $result = $db->query($query);
-  return $db->fetch_assoc($result);
-}
 
 $errors = array();
 if (isset($_POST['add_product'])) {
@@ -42,13 +40,7 @@ if (isset($_POST['add_product'])) {
             $js_error_msgs[$field] = $errors[$field];
         }
     }
-    if (empty($errors)) {
-      $existing_serial = find_by_serial_number($_POST['serial']);
-      if ($existing_serial) {
-          $errors[] = "Serial Number '{$_POST['serial']}' Already Exists.";
-          $js_error_msgs['serial'] = $errors[count($errors) - 1];
-      }
-  }
+
 
 // Validate Date Received not being a future date
 $date_received = isset($_POST['dreceived']) ? (string)$_POST['dreceived'] : '';
@@ -83,10 +75,10 @@ if ($selected_date > $today) {
     $result = $db->query($query);
 
     if ($result && $db->affected_rows() === 1) {
-        redirect('product7.php?success=true&update_success=true', false);
+        redirect('product7view.php?success=true&update_success=true', false);
     } else {
         $session->msg('d', 'Failed to update Other Device.');
-        redirect('edit_product7.php?id=' . (int)$product['id'], false);
+        redirect('product7view.php?id=' . (int)$product['id'], false);
     }
 }
 }
@@ -95,26 +87,43 @@ if ($selected_date > $today) {
 
 include_once('layouts/header.php');
 ?>
-<div class="row">
-  <div class="col-md-12">
-    <?php echo display_msg($msg); ?>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-default">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-heading">
-        <strong>
-          <span class="glyphicon glyphicon-th"></span>
-          <span>Edit Computer</span>
-        </strong>
-      </div>
-      <div class="panel-body">
-        <form method="post" action="edit_product7.php?id=<?php echo (int)$product['id'] ?>">
+<center><h1>Overall Views</h1></center>
+<br><br><br>
+<form method="post" action="product7view.php?id=<?php echo (int)$product['id']; ?>">
+    <div class="container col-md-offset-5">
+        <div class="row custom-gutter">
+            <div class="col-md-2 col-6 mb-3">
+                <center><label for="other_images" class="d-block">Other Image</label></center>
+                <div class="img-container">
+                    <?php
+                    // Check if other_images is set and not empty
+                    if (!empty($saved_images['other_images']) && $saved_images['other_images'] != '0') {
+                        $saved_image_id = $saved_images['other_images'];
+                        echo "<!-- Saved Image ID for Other Image: $saved_image_id -->"; // Debugging info
+                        foreach ($all_other_images as $photo) {
+                            echo "<!-- Photo ID: {$photo['id']} File Name: {$photo['file_name']} -->"; // Debugging info
+                            if ($photo['id'] == $saved_image_id) {
+                                echo '<img class="img-thumbnail selected" 
+                                      src="uploads/products/' . $photo['file_name'] . '" 
+                                      alt="' . $photo['file_name'] . '" 
+                                      onclick="selectImage(\'' . $photo['id'] . '\', \'other_images\')">';
+                            }
+                        }
+                    } else {
+                        echo '<img class="img-thumbnail" src="uploads/products/no_image.png" alt="No Image Available">';
+                    }
+                    ?>
+                </div>
+                <input type="hidden" id="other_images" name="other_images" value="<?php echo (int)$saved_images['other_images']; ?>">
+            </div>
+        </div>
+    </div>
+</form>
+</form>
+        <form method="post" action="product7view.php?id=<?php echo (int)$product['id'] ?>">
           <div class="form-group col-md-8 col-md-offset-2">
             <label for="Room-Title">Room Title</label>
-            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
+            <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title" disabled>
               <option value="">Select a Room</option>
               <?php foreach ($all_room as $room): ?>
                 <option value="<?php echo htmlspecialchars(remove_junk($room['name'])); ?>" <?php if (remove_junk($room['name']) === remove_junk($product['name'])) echo 'selected="selected"'; ?>>
@@ -128,7 +137,7 @@ include_once('layouts/header.php');
             <div class="row">
               <div class="col-md-6">
                 <label for="Device-Category">Product Category</label>
-                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category" disabled>
                   <option value="">Select a Category</option>
                   <?php foreach ($all_categories as $cat): ?>
                     <?php if ($cat['name'] != 'Computer'): ?>
@@ -142,7 +151,7 @@ include_once('layouts/header.php');
               </div>
               <div class="col-md-6">
                 <label for="Device-Photo">Product Photo</label>
-                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo" disabled>
                   <option value="">No image</option>
                   <?php foreach ($all_photo as $photo): ?>
                     <option value="<?php echo (int)$photo['id']; ?>" <?php if($product['media_id'] == $photo['id']) echo "selected"; ?>>
@@ -158,12 +167,12 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-6">
                      <label for="Device-Photo">Donated By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']);?>">
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" disabled value="<?php echo remove_junk($product['donate']);?>">
                  </div>
                  <div class="col-md-6">
-                     <label for="Device-Photo">Date Received</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control datepicker" name="dreceived" required readonly value="<?php echo remove_junk($product['dreceived']);?>">
-                  </div>
+    <label for="Device-Photo">Date Received</label>
+    <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); pointer-events: none;" type="text" class="form-control datepicker" name="dreceived" required readonly value="<?php echo remove_junk($product['dreceived']);?>">
+</div>
                </div>
           </div>
 
@@ -171,71 +180,24 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-6">
                      <label for="Device-Photo">Serial Num.</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" value="<?php echo remove_junk($product['serial']);?>">
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" readonly value="<?php echo remove_junk($product['serial']);?>">
                  </div>
                  <div class="col-md-6">
                      <label for="Device-Photo">Recieved By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>">
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" readonly value="<?php echo remove_junk($product['recievedby']);?>">
                  </div>
                </div>
+               
           </div>
-
-
+          <br><br>     
           <center><div class="form-group">
-            <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
-            <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product7.php" class="btn btn-danger">Cancel</a>
+            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product7.php" class="btn btn-danger">Back</a>
           </div></center>
+
         </form>
-      </div>
-    </div>
-  </div>
-</div>
+
+        
+
+
 
 <?php include_once('layouts/footer.php'); ?>
-<script>
-$(document).ready(function() {
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',  // Format date as needed
-        autoclose: true,
-        endDate: new Date(),  // Disable dates after today
-        todayHighlight: true,
-        keyboardNavigation: false,
-        forceParse: false,
-        startDate: '-Infinity'
-    });
-
-    // Disable manual input
-    $('.datepicker').keydown(function(e){
-        e.preventDefault();
-        return false;
-    });
-});
-</script>
-
-<script src="sweetalert.min.js"></script>
-<?php if (!empty($js_error_msgs)): ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Retrieve the first error message from the array
-        var errorMessages = <?php echo json_encode(array_values($js_error_msgs)[0]); ?>;
-        swal({
-            title: "",
-            text: errorMessages,
-            icon: "warning",
-            dangerMode: true
-        });
-    });
-</script>
-<?php endif; ?>
-<?php if (!empty($errors)): ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            swal({
-                title: "",
-                text: "<?php echo $errors[0]; ?>",
-                icon: "warning",
-                dangerMode: true
-            });
-        });
-    </script>
-<?php endif; ?>
