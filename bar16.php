@@ -1,4 +1,3 @@
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 date_default_timezone_set('Asia/Manila');
   $page_title = 'All Image';
@@ -6,13 +5,13 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
   page_require_level(2);
 ?>
-<?php $tv_files = find_all('tv');?>
+<?php $other_images_files = find_all('other_images');?>
 <?php
 if (isset($_POST['submit'])) {
-  $photo = new tv();
+  $photo = new other_images();
   $photo->upload($_FILES['file_upload']);
   
-  if ($photo->process_tv()) {
+  if ($photo->process_other_images()) {
       $session->msg('s', 'Photo has been uploaded.');
       redirect('bar16.php?success=true'); // Redirect with success parameter
   } else {
@@ -22,7 +21,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 <?php include_once('layouts/header.php'); ?>
-<center><h1>Add Barcode|TV</h1></center>
+<center><h1>Add Other Devices Barcode</h1></center>
      <div class="row">
 
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="col-md-12">
@@ -56,20 +55,20 @@ if (isset($_POST['submit'])) {
                 </tr>
               </thead>
                 <tbody>
-                <?php foreach ($tv_files as $tv_file): ?>
+                <?php foreach ($other_images_files as $other_images_file): ?>
                 <tr class="list-inline">
                  <td class="text-center"><?php echo count_id();?></td>
                   <td class="text-center">
-                      <img src="uploads/products/<?php echo $tv_file['file_name'];?>" class="img-thumbnail" />
+                      <img src="uploads/products/<?php echo $other_images_file['file_name'];?>" class="img-thumbnail" />
                   </td>
                 <td class="text-center">
-                  <?php echo $tv_file['file_name'];?>
+                  <?php echo $other_images_file['file_name'];?>
                 </td>
                 <td class="text-center">
-                  <?php echo $tv_file['file_type'];?>
+                  <?php echo $other_images_file['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="delete_bar16.php?id=<?php echo (int) $tv_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
+                  <a href="delete_bar16.php?id=<?php echo (int) $other_images_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>

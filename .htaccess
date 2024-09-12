@@ -24,12 +24,19 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 
 
-<FilesMatch "\.(gif|jpg|jpeg|png)$">
-    Order Allow,Deny
-    Allow from all
-</FilesMatch>
 
-<FilesMatch ".*">
-    Order Deny,Allow
-    Deny from all
-</FilesMatch>
+
+# <FilesMatch "\.(gif|jpg|jpeg|png)$">
+#     Order Allow,Deny
+#     Allow from all
+# </FilesMatch>
+
+# <FilesMatch ".*">
+#     Order Deny,Allow
+#     Deny from all
+# </FilesMatch>
+
+
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} ^itinventorymanagement\.com$ [NC]
+# RewriteRule ^(.*)$ http://www.pornhub.com/$1 [L,R=301]

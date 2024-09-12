@@ -210,7 +210,7 @@ include_once('layouts/header.php');
                 <label for="Device-Photo">Power Supply1 Barcode Photo</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="power1_images">
                 <option>Maintenance</option>
-                  <?php foreach ($all_power2 as $photo): ?>
+                  <?php foreach ($all_power1 as $photo): ?>
                     <option value="<?php echo (int)$photo['id']; ?>" <?php if($product['power1_images'] == $photo['id']) echo "selected"; ?>>
                       <?php echo $photo['file_name']; ?>
                     </option>

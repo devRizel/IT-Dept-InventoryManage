@@ -86,7 +86,7 @@ $saved_images = [
 ?>
 <center><h1>Overall Views</h1></center>
 <div class="panel-body">
-    <form method="post" action="overallmain.php?id=<?php echo (int)$product['id'] ?>">
+    <form method="post" action="overallview.php?id=<?php echo (int)$product['id'] ?>">
         <div class="container">
             <div class="row custom-gutter">
                 <div class="col-md-2 col-6 mb-3">

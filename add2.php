@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 // Start of PHP code
 
@@ -13,11 +14,13 @@ page_require_level(2);
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
+$all_other_images = find_all('other_images');
 
 $form_data = array(
   'Room-Title' => isset($_POST['Room-Title']) ? $_POST['Room-Title'] : '',
   'Device-Category' => isset($_POST['Device-Category']) ? $_POST['Device-Category'] : '',
   'Device-Photo' => isset($_POST['Device-Photo']) ? $_POST['Device-Photo'] : '',
+  'other_images' => isset($_POST['other_images']) ? $_POST['other_images'] : '',
   'donate' => isset($_POST['donate']) ? $_POST['donate'] : '',
   'dreceived' => isset($_POST['dreceived']) ? $_POST['dreceived'] : '',
   'recievedby' => isset($_POST['recievedby']) ? $_POST['recievedby'] : '',
@@ -38,6 +41,7 @@ if (isset($_POST['add_product'])) {
     'recievedby' => 'recievedby',
       'dreceived' => '',
       'donate' => 'Donated By',
+      'other_images' => 'other_images',
       'Device-Photo' => 'Device Photo',
       'Device-Category' => 'Device Category',
       'Room-Title' => 'Room Title'
@@ -77,21 +81,22 @@ if (isset($_POST['add_product'])) {
      
 
       $media_id = is_null($_POST['Device-Photo']) || $_POST['Device-Photo'] === "" ? '0' : (int)$db->escape($_POST['Device-Photo']);
+      $other_images = is_null($_POST['other_images']) || $_POST['other_images'] === "" ? '0' : (int)$db->escape($_POST['other_images']);
       $date = date('Y-m-d H:i:s');  // Current date and time
 
       // Include 'dreceived' in the INSERT query
      
-      $query = "INSERT INTO other (name, categorie_id,recievedby,serial, donate, media_id, date, dreceived) VALUES ";
-      $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}','{$p_serial}', '{$p_recievedby}','{$media_id}', '{$date}', '{$date_received}')";
+      $query = "INSERT INTO other (name, categorie_id,recievedby,serial, donate, media_id, date, dreceived,other_images) VALUES ";
+      $query .= "('{$p_name}', '{$p_cat}', '{$p_donate}','{$p_serial}', '{$p_recievedby}','{$media_id}', '{$date}', '{$date_received}', '{$other_images}')";
 
       if ($db->query($query)) {
         // Computer added successfully
-        header("Location: add_product7.php?success=true");
+        header("Location: add2.php?success=true");
         exit();
     } else {
         // Failed to add computer
         $session->msg('d', 'Failed to add computer!');
-        header("Location: add_product7.php");
+        header("Location: add2.php");
         exit();
     }
 } else {
@@ -99,6 +104,28 @@ if (isset($_POST['add_product'])) {
     $js_error_msgs = json_encode($errors);
 }
 }
+// Get already used image IDs
+$saved_image_ids = [];
+$query = "SELECT DISTINCT other_images FROM other";
+$result = $db->query($query);
+while ($row = $result->fetch_assoc()) {
+    foreach ($row as $image_id) {
+        if ($image_id != 0) {
+            $saved_image_ids[] = $image_id;
+        }
+    }
+}
+
+// Function to filter options
+function filter_options($options, $saved_image_ids) {
+    return array_filter($options, function($option) use ($saved_image_ids) {
+        return !in_array($option['id'], $saved_image_ids);
+    });
+}
+
+$all_other_images = filter_options($all_other_images, $saved_image_ids);
+
+
 ?>
 
 
@@ -115,7 +142,7 @@ if (isset($_POST['add_product'])) {
       </div>
       <div class="panel-body">
         <div class="col-md-12">
-          <form method="post" action="add_product7.php" class="clearfix">
+          <form method="post" action="add2.php" class="clearfix">
             <div class="form-group col-md-8 col-md-offset-2">
             <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title">
             <option value="">Select Room Title</option>
@@ -176,6 +203,21 @@ if (isset($_POST['add_product'])) {
                 </div>
             </div>
 
+            <div class="form-group">
+                  <div class="col-md-8 col-md-offset-2">
+                  <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="other_images">
+                    <option value="">Select Other Device Barcode Photo</option>
+                    <?php foreach ($all_other_images as $photo): ?>
+                    <option value="<?php echo (int)$photo['id']; ?>" <?php echo ($form_data['other_images'] == (int)$photo['id']) ? 'selected' : ''; ?>>
+                        <?php echo $photo['file_name']; ?>
+                    </option>
+                    <?php endforeach; ?>
+                  </select>
+                 </div>
+                </div>
+             </div>
+             </div>
+
             <center><div class="form-group ">
               <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product"  
               class="btn btn-primary">Add Other Devices</button></center>
@@ -214,7 +256,7 @@ if (successParam === 'true') {
     swal("", "Computer added successfully", "success")
         .then((value) => {
             // Redirect to clear query parameter
-            window.location.href = 'add_product7.php';
+            window.location.href = 'add2.php';
         });
 }
 </script>
