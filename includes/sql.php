@@ -240,7 +240,8 @@ function join_other_table() {
             p.donate, 
             p.dreceived, 
             p.media_id, 
-            p.date, 
+            p.date,
+            p.serial, 
             c.name AS categorie, 
             m.file_name AS image 
           FROM 
