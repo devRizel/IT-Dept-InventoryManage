@@ -1,3 +1,4 @@
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
   $page_title = 'Edit sale';
   require_once('includes/load.php');
