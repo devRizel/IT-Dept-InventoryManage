@@ -3,10 +3,10 @@ require_once('includes/load.php');
 // Check What level user has permission to view this page
 page_require_level(2);
 
-$find_other_images = find_by_id('other_images', (int)$_GET['id']);
-$photo = new other_images();
+$find_tv = find_by_id('tv', (int)$_GET['id']);
+$photo = new tv();
 
-if ($photo->other_images_destroy($find_other_images['id'], $find_other_images['file_name'])) {
+if ($photo->tv_destroy($find_tv['id'], $find_tv['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar16.php?success=true&delete_photo=true'); // Add success parameter
 } else {

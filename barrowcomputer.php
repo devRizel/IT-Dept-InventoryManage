@@ -128,7 +128,7 @@ include_once('layouts/header.php');
         <span class="glyphicon"></span> Barrow
     </button>
 </form>
-    </td>
+    </td>s
   </tr>
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
     <td colspan="10">
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 6th column
+            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 9th column
             const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
 
             if (mother.includes(searchTerm)) {
