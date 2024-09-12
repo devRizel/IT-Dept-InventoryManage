@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCategory = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const categoryCell = row.querySelector('td:nth-child(4)');
+            const categoryCell = row.querySelector('td:nth-child(5)');
             const category = categoryCell ? categoryCell.textContent.toLowerCase() : '';
 
             if (selectedCategory === '' || category === selectedCategory) {
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const titleRoomCell = row.querySelector('td:nth-child(3)');
+            const titleRoomCell = row.querySelector('td:nth-child(5)');
             const titleRoom = titleRoomCell ? titleRoomCell.textContent.toLowerCase() : '';
 
             if (titleRoom.includes(searchTerm)) {
