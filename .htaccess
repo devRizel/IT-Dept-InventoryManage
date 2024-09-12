@@ -25,23 +25,16 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 
 
-# <FilesMatch "\.(gif|jpg|jpeg|png)$">
-#     Order Allow,Deny
-#     Allow from all
-# </FilesMatch>
+# # <FilesMatch "\.(gif|jpg|jpeg|png)$">
+# #     Order Allow,Deny
+# #     Allow from all
+# # </FilesMatch>
 
-<<<<<<< HEAD
-# <FilesMatch "\.(gif|jpg|jpeg|png)$">
-#     Order Allow,Deny
-#     Allow from all
-# </FilesMatch>
-
-=======
->>>>>>> 5f4250bebf8902806509c1cc0da827082a5a341a
-# <FilesMatch ".*">
-#     Order Deny,Allow
-#     Deny from all
-# </FilesMatch>
+# <<<<<<< HEAD
+# # <FilesMatch "\.(gif|jpg|jpeg|png)$">
+# #     Order Allow,Deny
+# #     Allow from all
+# # </FilesMatch>
 
 
 # RewriteEngine On

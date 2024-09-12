@@ -95,7 +95,6 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
-                <th class="text-center" style="width: 100px;">Actions</th>
               </tr>
             </thead>
             <tbody id="product-table-body">
@@ -133,16 +132,6 @@ include_once('layouts/header.php');
       <span class="glyphicon"></span> View
   </button>
 </form>
-    </td>
-    <td class="text-center">
-      <div class="btn-group">
-        <a href="edit_computer.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Edit" data-toggle="tooltip">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <a href="delete_computer.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
-      </div>
     </td>
   </tr>
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">

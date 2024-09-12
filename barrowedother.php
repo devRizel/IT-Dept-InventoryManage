@@ -8,6 +8,7 @@ page_require_level(2);
 
 $filtered_other = [];
 
+
 function fetch_other() {
     global $db;
   
@@ -31,12 +32,14 @@ function fetch_other() {
               media m ON m.id = p.media_id 
             WHERE 
               p.other_images NOT LIKE '%Maintenance%' 
-              AND (p.barrow IS NULL OR p.barrow = '') 
+              AND p.barrow NOT LIKE '%Return%' 
             ORDER BY 
               p.id ASC";
   
     return find_by_sql($sql);
 }
+
+
   
 
 // Fetch the products and assign them to $products
@@ -79,7 +82,7 @@ include_once('layouts/header.php');
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h1 class="text-center">Other Devices To Barrowed</h1>
+        <h1 class="text-center">Other Devices Barrowed</h1>
         <div class="select-wrapper">
           <select id="category-select"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;"  class="form-control" name="Device-Category">
             <option value="">Overall Other Devices</option>
@@ -130,7 +133,7 @@ include_once('layouts/header.php');
                 <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['serial']); ?></td>
     <td class="text-center">
-    <form action="barrowotherview.php" method="get" style="display:inline;">
+    <form action="barrowedother1.php" method="get" style="display:inline;">
   <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
   <button type="submit" class="btn-custom" data-toggle="tooltip">
       <span class="glyphicon"></span> View
@@ -138,10 +141,10 @@ include_once('layouts/header.php');
 </form>
     </td>
     <td class="text-center">
-    <form action="barrowotherbarrowedit.php" method="get" style="display:inline;">
+    <form action="barrowedother2.php" method="get" style="display:inline;">
     <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
     <button style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" class="btn-light-green" data-toggle="tooltip">
-        <span class="glyphicon"></span> Status
+        <span class="glyphicon"></span>Return Barrow
     </button>
 </form>
     </td>
@@ -174,13 +177,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         swal("", successMessage, "success")
-            .then(() => {
-                window.location.href = 'otherdevices.php';
+            .then((value) => {
+                window.location.href = 'barrowedother.php';
             });
     }
 
-    // Select box filter functionality
-    const categorySelect = document.getElementById('category-select');
+       // Select box filter functionality
+       const categorySelect = document.getElementById('category-select');
     const searchBar = document.getElementById('search-bar');
     const table = document.getElementById('product-table');
     const rows = table.querySelectorAll('tbody > tr');
@@ -211,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
     categorySelect.addEventListener('change', filterTable);
     searchBar.addEventListener('input', filterTable);
 });
-
 </script>
 <style>
 .select-wrapper {

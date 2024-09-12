@@ -5,7 +5,7 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
-$product = find_by_id('products', (int)$_GET['id']);
+$product = find_by_id('other', (int)$_GET['id']);
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
@@ -13,7 +13,7 @@ $all_photo = find_all('media');
 
 if (!$product) {
     $session->msg("d", "Missing product id.");
-    redirect('barrowedcomputer.php');
+    redirect('barrowedother.php');
 }
 
 $errors = array();
@@ -41,17 +41,17 @@ if (isset($_POST['add_product'])) {
         $p_barrow = remove_junk($db->escape($_POST['barrow']));
         $date = make_date();
     
-        $query = "UPDATE products SET ";
+        $query = "UPDATE other SET ";
         $query .= "barrow = '{$p_barrow}' "; // Removed the extra comma here
         $query .= "WHERE id = '{$product['id']}'"; 
     
         $result = $db->query($query);
     
         if ($result && $db->affected_rows() === 1) {
-            redirect('barrowedcomputer.php?success=true&update_success=true', false);
+            redirect('barrowedother.php?success=true&update_success=true', false);
         } else {
             $session->msg('d', 'Failed to update Computer.');
-            redirect('barrowedcomputer2.php?id=' . (int)$product['id'], false);
+            redirect('barrowedother2.php?id=' . (int)$product['id'], false);
         }
     }
     
@@ -70,7 +70,7 @@ include_once('layouts/header.php');
         </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="barrowedcomputer2.php?id=<?php echo (int)$product['id'] ?>">
+        <form method="post" action="barrowedother2.php?id=<?php echo (int)$product['id'] ?>">
         <div class="form-group col-md-8 col-md-offset-2">
             <center><label>Barrow By</label></center>
             <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="barrow">
@@ -80,7 +80,7 @@ include_once('layouts/header.php');
 
           <center><div class="form-group">
             <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
-            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="barrowedcomputer.php" class="btn btn-danger">Cancel</a>
+            <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="barrowedother.php" class="btn btn-danger">Cancel</a>
           </div></center>
         </form>
       </div>
