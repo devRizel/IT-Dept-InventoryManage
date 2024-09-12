@@ -68,7 +68,7 @@ date_default_timezone_set('Asia/Manila');
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <center><h1>INVENTORY MANAGEMENT</h1></center>
+            <center><h1>INVENTORY MANAGEMENTsssw</h1></center>
             <center><h1>SYSTEM</h1></center>
             <!-- <p>Please Select Portal to proceed.</p>
             <div class="d-flex">
