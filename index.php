@@ -10,7 +10,7 @@ date_default_timezone_set('Asia/Manila');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management Systems</title>
+  <title>Inventory Management System</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -48,7 +48,7 @@ date_default_timezone_set('Asia/Manila');
 
       <a href="#" class="logo d-flex align-items-center me-auto">
         <img src="assets/image/download.png" class="img-fluid animated"alt="">
-        <h1 class="sitename">IT DEPARTMENT</h1>
+        <h1 class="sitename">IT ssDEPARTMENT</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
