@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCategory = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const categoryCell = row.querySelector('td:nth-child(5)');
+            const categoryCell = row.querySelector('td:nth-child(4)');
             const category = categoryCell ? categoryCell.textContent.toLowerCase() : '';
 
             if (selectedCategory === '' || category === selectedCategory) {
