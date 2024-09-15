@@ -92,6 +92,7 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
                
               </tr>
             </thead>
@@ -122,6 +123,13 @@ include_once('layouts/header.php');
       <span class="glyphicon"></span> View
   </button>
 </form>
+<td class="text-center">
+                    <a href="barrowedcomputerreturndelete.php?id=<?php echo (int)$product['id'];?>" 
+                    class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+                </td>
   </tr>
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
     <td colspan="10">
