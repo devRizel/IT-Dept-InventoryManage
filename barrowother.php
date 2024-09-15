@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then(() => {
-                window.location.href = 'otherdevices.php';
+                window.location.href = 'barrowother.php';
             });
     }
 
