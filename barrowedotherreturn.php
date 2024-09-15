@@ -9,35 +9,37 @@ page_require_level(2);
 $filtered_other = [];
 
 function fetch_other() {
-    global $db;
-  
-    $sql = "SELECT 
-              p.id, 
-              p.name, 
-              p.categorie_id, 
-              p.donate, 
-              p.dreceived, 
-              p.media_id, 
-              p.date,
-              p.serial, 
-              p.barrow,
-              c.name AS categorie, 
-              m.file_name AS image,
-              p.other_images
-            FROM 
-              other p 
-            LEFT JOIN 
-              categories c ON c.id = p.categorie_id 
-            LEFT JOIN 
-              media m ON m.id = p.media_id 
-            WHERE 
-              p.other_images NOT LIKE '%Maintenance%' 
-            ORDER BY 
-              p.id ASC";
-  
-    return find_by_sql($sql);
-  }
-  
+  global $db;
+
+  $sql = "SELECT 
+            p.id, 
+            p.name, 
+            p.categorie_id, 
+            p.donate, 
+            p.dreceived, 
+            p.media_id, 
+            p.date,
+            p.serial, 
+            p.barrow,
+            c.name AS categorie, 
+            m.file_name AS image,
+            p.other_images
+          FROM 
+            other p 
+          LEFT JOIN 
+            categories c ON c.id = p.categorie_id 
+          LEFT JOIN 
+            media m ON m.id = p.media_id 
+          WHERE 
+            p.other_images NOT LIKE '%Maintenance%' 
+          AND 
+            p.barrow LIKE '%Return%' 
+          ORDER BY 
+            p.id ASC";
+
+  return find_by_sql($sql);
+}
+
 
 // Fetch the products and assign them to $products
 $products = fetch_other();
