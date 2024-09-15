@@ -111,6 +111,7 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 10%;">Serial Num.</th>
                 <th class="text-center" style="width: 100px;">Action</th>
+                <th class="text-center" style="width: 100px;">Action</th>
                 
               </tr>
             </thead>
@@ -138,6 +139,13 @@ include_once('layouts/header.php');
       <span class="glyphicon"></span> View
   </button>
 </form>
+<td class="text-center">
+                    <a href="barrowedotherreturndelete.php?id=<?php echo (int)$product['id'];?>" 
+                    class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+                </td>
               </tr>
               <?php
               $counter++; // Increment counter for next row
