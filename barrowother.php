@@ -141,7 +141,7 @@ include_once('layouts/header.php');
     <form action="barrowotherbarrowedit.php" method="get" style="display:inline;">
     <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
     <button style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" type="submit" class="btn-light-green" data-toggle="tooltip">
-        <span class="glyphicon"></span> Status
+        <span class="glyphicon"></span> Barrow
     </button>
 </form>
     </td>
