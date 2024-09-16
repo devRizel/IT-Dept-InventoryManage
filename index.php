@@ -38,6 +38,23 @@ date_default_timezone_set('Asia/Manila');
         font-size: 20px; /* Adjust font size for smaller screens */
       }
     }
+    .marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
   </style>
 </head>
 
@@ -139,21 +156,20 @@ date_default_timezone_set('Asia/Manila');
   </main>
 
   <footer id="footer" class="footer">
-
     <div class="container">
-    <div class="copyright text-center ">
-        <p><span>All Right Reserved</span> © 
-        <span>Copyright 2024</span> 
-        <strong class="px-1 sitename">IT Team</strong> 
-        </p>
-      </div>
+        <div class="copyright text-center">
+            <p class="marquee-text">
+                <span>All Right Reserved</span> © 
+                <span>Copyright 2024</span> 
+                <strong class="px-1 sitename">IT Team</strong>
+            </p>
+        </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
-
-  </footer>
+</footer>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
