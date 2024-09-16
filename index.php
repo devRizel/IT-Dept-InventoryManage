@@ -142,7 +142,7 @@ date_default_timezone_set('Asia/Manila');
 
     <div class="container">
     <div class="copyright text-center ">
-        <p><span>All Right Reserved</span>© 
+        <p><span>All Right Reserved</span> © 
         <span>Copyright 2024</span> 
         <strong class="px-1 sitename">IT Team</strong> 
         </p>
