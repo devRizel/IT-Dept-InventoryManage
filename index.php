@@ -142,8 +142,9 @@ date_default_timezone_set('Asia/Manila');
 
     <div class="container">
     <div class="copyright text-center ">
-        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
         <span>All Right Reserved</span></p>
+        <p>© <span>Copyright 2024</span> 
+        <strong class="px-1 sitename">IT TEAM</strong> 
       </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
