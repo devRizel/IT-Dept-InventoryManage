@@ -175,15 +175,17 @@ endforeach;
                  <td class="text-center"><?php echo $count;?></td>
                  <td><?php echo remove_junk(ucfirst($cat['name'])); ?></td>
                  <td class="text-center">
-                   <div class="btn-group">
-                     <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
-                       <span class="glyphicon glyphicon-edit"></span>
-                     </a>
-                     <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                       <span class="glyphicon glyphicon-trash"></span>
-                     </a>
-                   </div>
-                 </td>
+  <div class="btn-group">
+    <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
+      <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+        <span class="glyphicon glyphicon-edit"></span>
+      </a>
+      <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+    <?php endif; ?>
+  </div>
+</td>
              </tr>
              <?php
              $count++; // Increment counter
