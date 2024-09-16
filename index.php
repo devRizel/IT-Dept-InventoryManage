@@ -38,18 +38,12 @@ date_default_timezone_set('Asia/Manila');
         font-size: 20px; /* Adjust font size for smaller screens */
       }
     }
-    /* Default style for all devices (marquee disabled on mobile) */
-.marquee-text {
+    .marquee-text {
+    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-}
-
-/* Apply marquee effect only for desktop screens */
-@media (min-width: 768px) {
-    .marquee-text {
-        display: inline-block;
-        animation: marquee 10s linear infinite;
-    }
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
 }
 
 @keyframes marquee {
