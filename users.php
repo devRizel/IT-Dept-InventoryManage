@@ -61,7 +61,7 @@ date_default_timezone_set('Asia/Manila');
       <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
         <i class="glyphicon glyphicon-pencil"></i>
       </a>
-      <a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Cannot remove this user" disabled>
+      <a href="delete_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
         <i class="glyphicon glyphicon-remove"></i>
       </a>
     <?php endif; ?>
