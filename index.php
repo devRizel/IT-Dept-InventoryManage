@@ -38,12 +38,18 @@ date_default_timezone_set('Asia/Manila');
         font-size: 20px; /* Adjust font size for smaller screens */
       }
     }
-    .marquee-text {
-    display: inline-block;
+    /* Default style for all devices (marquee disabled on mobile) */
+.marquee-text {
     white-space: nowrap;
     overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
+}
+
+/* Apply marquee effect only for desktop screens */
+@media (min-width: 768px) {
+    .marquee-text {
+        display: inline-block;
+        animation: marquee 10s linear infinite;
+    }
 }
 
 @keyframes marquee {
@@ -169,7 +175,10 @@ date_default_timezone_set('Asia/Manila');
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
+    </div>
 </footer>
+
+
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
