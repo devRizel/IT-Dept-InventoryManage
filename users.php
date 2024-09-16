@@ -57,7 +57,7 @@ date_default_timezone_set('Asia/Manila');
            <td><?php echo read_date($a_user['last_login'])?></td>
            <td class="text-center">
   <div class="btn-group">
-    <?php if (remove_junk(ucwords($a_user['name'])) === 'Rizel Bracero'): ?>
+    <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
       <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
         <i class="glyphicon glyphicon-pencil"></i>
       </a>
@@ -67,6 +67,7 @@ date_default_timezone_set('Asia/Manila');
     <?php endif; ?>
   </div>
 </td>
+
           </tr>
         <?php endforeach;?>
        </tbody>
