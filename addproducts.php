@@ -69,7 +69,7 @@ include_once('layouts/header.php');
                 </td>
                 <td class="text-center">
                   <div class="btn-group">
-                    <a href="editaddproduct.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Edit" data-toggle="tooltip">
+                    <a href="editaddproduct.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs" title="Add" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-edit"></span>
                     </a>
                   </div>
