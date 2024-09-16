@@ -238,12 +238,14 @@ endforeach;
                  <td><?php echo remove_junk(ucfirst($room['name'])); ?></td>
                  <td class="text-center">
                    <div class="btn-group">
+                   <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
                      <a href="edit_categorie2.php?id=<?php echo (int)$room['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
                      <a href="delete_categorie2.php?id=<?php echo (int)$room['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                        <span class="glyphicon glyphicon-trash"></span>
                      </a>
+                     <?php endif; ?>
                    </div>
                  </td>
              </tr>
