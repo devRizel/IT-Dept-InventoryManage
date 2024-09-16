@@ -175,9 +175,7 @@ date_default_timezone_set('Asia/Manila');
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
-    </div>
 </footer>
-
 
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
