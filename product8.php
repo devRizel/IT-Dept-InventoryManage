@@ -225,6 +225,7 @@ include_once('layouts/header.php');
                 <div class="select-wrapper">
                     <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Devices">Overall Devices</option>
+                        <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
                         <option value="Com lab 1">IT Comlab 1</option>
                         <option value="Com lab 2">IT Comlab 2</option>
