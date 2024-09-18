@@ -104,6 +104,16 @@ $message_count = $count_row['total'];
         font-size: 12px;
         transform: translate(50%, 50%); /* Adjusts position slightly */
     }
+    .delete-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    margin-left: auto;
+}
+
     </style>
     <script>
     function toggleDropdown(id) {
@@ -194,30 +204,52 @@ $message_count = $count_row['total'];
                         <center><h4 class="modal-title"><strong>System Message</strong></h4></center>
                     </div>
                     <div class="modal-body">
-                    <?php
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $created_at = date("F j, Y, g:i a", strtotime($row["created_at"]));
-        echo "<div>";
-        echo "<p class='name' onclick='toggleDropdown(" . $row["id"] . ")'>";
-        echo "<span>" . strtoupper($row["name"]) . "</span>";
-        echo "<span class='timestamp'>" . $created_at . "</span>";
-        echo "</p>";
-        echo "<div id='content-" . $row["id"] . "' class='dropdown-content'>";
-        echo "<p><strong>Email:</strong> " . $row["email"] . "</p>";
-        echo "<p><strong>Message:</strong> " . $row["message"] . "</p>";
-        echo "</div>";
-        echo "</div>";
+    <?php
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $created_at = date("F j, Y, g:i a", strtotime($row["created_at"]));
+            echo "<div>";
+            echo "<p class='name' onclick='toggleDropdown(" . $row["id"] . ")'>";
+            echo "<span>" . strtoupper($row["name"]) . "</span>";
+            echo "<span class='timestamp'>" . $created_at . "</span>";
+            echo "</p>";
+            echo "<div id='content-" . $row["id"] . "' class='dropdown-content'>";
+            echo "<div class='delete-btn-container'>";
+            echo "<p><strong>Email:</strong> " . $row["email"] . "</p>";
+            // SweetAlert delete button
+            echo "<a href='#' class='btn btn-danger btn-xs delete-btn' title='Delete' onclick='confirmDelete(" . $row["id"] . ")'>";
+            echo "<span class='glyphicon glyphicon-trash'></span> Delete</a>";
+            echo "</div>"; // Close the delete-btn-container div
+            echo "<p><strong>Message:</strong> " . $row["message"] . "</p>";
+            echo "</div>";
+            echo "</div>";
+        }
+    } else {
+        echo "<p>No results found.</p>";
     }
-} else {
-    echo "<p>No results found.</p>";
-}
-?>
+    ?>
+</div>
 
-                    </div>
                 </div>
 
             </div>
         </div>
     </div>
   </div>
+  <script>
+function confirmDelete(id) {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this message!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            // If confirmed, redirect to the delete_message.php page
+            window.location.href = "delete_message.php?id=" + id;
+        }
+    });
+}
+</script>
