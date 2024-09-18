@@ -4,41 +4,6 @@ date_default_timezone_set('Asia/Manila');
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database configuration
-    $servername = "127.0.0.1";
-    $username = "u510162695_inventory";
-    $password = "1Inventory_system";
-    $dbname = "u510162695_inventory";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Sanitize input data
-    $name = $conn->real_escape_string($_POST['name']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $message = $conn->real_escape_string($_POST['message']);
-
-    // SQL query to insert data into the chat table
-    $sql = "INSERT INTO chat (name, email, message) VALUES ('$name', '$email', '$message')";
-
-    if ($conn->query($sql) === TRUE) {
-        // Redirect with a success parameter
-        header("Location: ".$_SERVER['PHP_SELF']."?success=true");
-        exit;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close connection
-    $conn->close();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,107 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-size: 20px; /* Adjust font size for smaller screens */
       }
     }
-    .marquee-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-.chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 30px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .chat-button:hover {
-          background-color: var(--accent-color);
-        }
-
-        .chat-icon {
-            margin-right: 8px;
-        }
-
-        .chat-window {
-            display: none;
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 300px;
-            max-width: 100%;
-            border: 1px solid #ccc;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            background-color: white;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .chat-header {
-          background-color: var(--accent-color);
-            color: white;
-            padding: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            box-sizing: border-box;
-        }
-
-        .chat-content {
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .chat-submit {
-          background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 600px) {
-            .chat-button {
-                bottom: 10px;
-                right: 10px;
-                padding: 10px 15px;
-                border-radius: 20px;
-            }
-
-            .chat-window {
-                bottom: 60px;
-                right: 10px;
-                width: calc(100% - 20px);
-            }
-        }
-
   </style>
 </head>
 
@@ -226,51 +90,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           efficiency of the IT Department, ensuring that all inventory is accounted for 
           and managed effectively. It will replace the time-consuming manual process with 
           an automated, reliable, 
-          and scalable solution, leading to cost savings and improved resource management.
-        </p>
+          and scalable solution, leading to cost savings and improved resource management.</p>
+      <!-- <div class="container">
+        <div class="row gy-5">
+          <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
+            <h3>They provide the most valuable pleasure as it were</h3>
+            <p>
+              It is important to take care of the patient, to be followed by the patient, but it will happen at such a time that there is a lot of work and pain. Duis or Irure pain in the rebuke </p>
+            <a href="#" class="about-btn align-self-center align-self-xl-start"><span>About us</span> <i class="bi bi-chevron-right"></i></a>
+          </div>
+          <div class="col-xl-7" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4"> -->
+
+              <!-- <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-briefcase"></i>
+                <h4><a href="" class="stretched-link">Let it be the pleasures of the body</a></h4>
+                <p>They are the result, or as it were, of something that is equal to these labors, except that some</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-gem"></i>
+                <h4><a href="" class="stretched-link">Except for any work</a></h4>
+                <p>Unless they are blinded by lust, they do not come forth; they are in fault who abandon their duties</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-broadcast"></i>
+                <h4><a href="" class="stretched-link">Hard work will result</a></h4>
+                <p>Either he takes it with no one, or everyone. All the pains that the elders do</p>
+              </div>
+
+              <div class="col-md-6 icon-box position-relative">
+                <i class="bi bi-easel"></i>
+                <h4><a href="" class="stretched-link">Of the blessed truth</a></h4>
+                <p>The expedients of the truth are of no consequence at the time of the praises of the covenants of life</p>
+              </div> -->
+
+            <!-- </div>
+          </div>
+
+        </div> -->
+
       </div>
 
     </section>
+
+
   </main>
 
-
   <footer id="footer" class="footer">
+
     <div class="container">
-        <div class="copyright text-center">
-            <p class="marquee-text">
-                <span>All Right Reserved</span> © 
-                <span>Copyright 2024</span> 
-                <strong class="px-1 sitename">IT Team</strong>
-            </p>
-        </div>
+    <div class="copyright text-center ">
+        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
+        <span>All Right Reserved</span></p>
+      </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
-</footer>
-<button class="chat-button" onclick="toggleChatWindow()">
-        <span class="chat-icon">Message with us!</span>💬
-    </button>
 
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            Message with us!
-            <button onclick="toggleChatWindow()" style="float:right; background: none; border: none; color: white;">&times;</button>
-        </div>
-        <div class="chat-content">
-        <form id="chatForm" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
-                <label for="message">Message</label>
-                <textarea id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
-                <button type="submit" class="chat-submit">Submit</button>
-            </form>
-        </div>
-    </div>
-
+  </footer>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
@@ -297,29 +178,6 @@ document.addEventListener('keydown', function(event) {
 });
 
     </script>
-        <script>
-        function toggleChatWindow() {
-            var chatWindow = document.getElementById('chatWindow');
-            var chatForm = document.getElementById('chatForm');
-            if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
-                chatWindow.style.display = 'block';
-            } else {
-                chatWindow.style.display = 'none';
-                chatForm.reset(); // Clear the form fields
-            }
-        }
-    </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const successParam = urlParams.get('success');
-        if (successParam === 'true') {
-            swal("Success", "Your message was successfully sent!", "success")
-                .then((value) => {
-                    // Redirect to clear query parameter
-                    window.location.href = window.location.pathname;
-                });
-        }
-    </script>
 </body>
+
 </html>
