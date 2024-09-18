@@ -4,6 +4,41 @@ date_default_timezone_set('Asia/Manila');
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Database configuration
+    $servername = "127.0.0.1";
+    $username = "u510162695_inventory";
+    $password = "1Inventory_system";
+    $dbname = "u510162695_inventory";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    // Sanitize input data
+    $name = $conn->real_escape_string($_POST['name']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $message = $conn->real_escape_string($_POST['message']);
+
+    // SQL query to insert data into the chat table
+    $sql = "INSERT INTO chat (name, email, message) VALUES ('$name', '$email', '$message')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirect with a success parameter
+        header("Location: ".$_SERVER['PHP_SELF']."?success=true");
+        exit;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close connection
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -154,6 +189,27 @@ date_default_timezone_set('Asia/Manila');
 
 
   </main>
+  <button class="chat-button" onclick="toggleChatWindow()">
+        <span class="chat-icon">Message with us!</span>💬
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            Message with us!
+            <button onclick="toggleChatWindow()" style="float:right; background: none; border: none; color: white;">&times;</button>
+        </div>
+        <div class="chat-content">
+        <form id="chatForm" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
+                <button type="submit" class="chat-submit">Submit</button>
+            </form>
+        </div>
+    </div>
 
   <footer id="footer" class="footer">
     <div class="container">
