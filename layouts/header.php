@@ -128,7 +128,7 @@ $message_count = $count_row['total'];
                 <ul class="info-menu list-inline list-unstyled">
                     <li class="notification-container">
                     <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
-                        <img src="uploads/users/chat.jfif" alt="IT Department Logo"
+                        <img src="uploads/users/icon.png" alt="IT Department Logo"
                              style="width: 50px; height: auto; margin-bottom: 0px;" data-toggle="modal" data-target="#myModal">
                         <?php if ($message_count > 0): ?>
                             <span class="badge"><?php echo $message_count; ?></span>
