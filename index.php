@@ -296,6 +296,29 @@ document.addEventListener('keydown', function(event) {
 });
 
     </script>
+        <script>
+        function toggleChatWindow() {
+            var chatWindow = document.getElementById('chatWindow');
+            var chatForm = document.getElementById('chatForm');
+            if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+                chatWindow.style.display = 'block';
+            } else {
+                chatWindow.style.display = 'none';
+                chatForm.reset(); // Clear the form fields
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+        if (successParam === 'true') {
+            swal("Success", "Your message was successfully sent!", "success")
+                .then((value) => {
+                    // Redirect to clear query parameter
+                    window.location.href = window.location.pathname;
+                });
+        }
+    </script>
 </body>
-
 </html>
