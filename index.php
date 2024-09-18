@@ -313,6 +313,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
         }
     </script>
+    <script>
+      // Disable right-click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable F12, Ctrl+Shift+I, and other shortcuts
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 123 || // F12
+        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
+        event.preventDefault();
+    }
+});
+
+    </script>
 </body>
 
 </html>
