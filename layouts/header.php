@@ -82,7 +82,7 @@ $message_count = $count_row['total'];
         border-color: var(--accent-color);
     }
     .modal-content {
-        border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
+        /* border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; */
     }
     .notification-container {
         position: relative;
