@@ -232,7 +232,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </section>
   </main>
-  <button class="chat-button" onclick="toggleChatWindow()">
+
+
+  <footer id="footer" class="footer">
+    <div class="container">
+        <div class="copyright text-center">
+            <p class="marquee-text">
+                <span>All Right Reserved</span> © 
+                <span>Copyright 2024</span> 
+                <strong class="px-1 sitename">IT Team</strong>
+            </p>
+        </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+</footer>
+<button class="chat-button" onclick="toggleChatWindow()">
         <span class="chat-icon">Message with us!</span>💬
     </button>
 
@@ -253,22 +270,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </div>
-
-  <footer id="footer" class="footer">
-    <div class="container">
-        <div class="copyright text-center">
-            <p class="marquee-text">
-                <span>All Right Reserved</span> © 
-                <span>Copyright 2024</span> 
-                <strong class="px-1 sitename">IT Team</strong>
-            </p>
-        </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-      </div>
-    </div>
-</footer>
 
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
