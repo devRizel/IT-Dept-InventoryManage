@@ -207,7 +207,7 @@ $message_count = $count_row['total'];
     <?php
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $created_at = date("F j, Y, g:i a", strtotime($row["created_at"]));
+            $created_at = date("F j, Y", strtotime($row["created_at"]));
             echo "<div>";
             echo "<p class='name' onclick='toggleDropdown(" . $row["id"] . ")'>";
             echo "<span>" . strtoupper($row["name"]) . "</span>";
