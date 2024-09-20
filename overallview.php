@@ -440,7 +440,7 @@ $saved_images = [
     </form>
 </div>
 <div class="panel-body">
-        <form method="post" action="edit_product.php?id=<?php echo (int)$product['id'] ?>">
+        <form method="post" action="overallview.php?id=<?php echo (int)$product['id'] ?>">
           <div class="form-group">
             <div class="row">
             <div class="form-group col-md-3">
@@ -455,7 +455,7 @@ $saved_images = [
             </select>
           </div>
               <div class="col-md-3">
-                <label for="Device-Category">Product Category</label>
+                <label for="Device-Category">Device Category</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category" disabled>
                   <option value="">Select a Category</option>
                   <?php foreach ($filtered_cat as $cat): ?>
@@ -466,7 +466,7 @@ $saved_images = [
                 </select>
               </div>
               <div class="col-md-3">
-                <label for="Device-Photo">Product Photo</label>
+                <label for="Device-Photo">Device Photo</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo" disabled>
                   <option value="">No image</option>
                   <?php foreach ($all_photo as $photo): ?>
@@ -559,6 +559,15 @@ $saved_images = [
                  <div class="col-md-3">
                      <label for="Device-Photo">HDD|SSD|GB</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']);?>" readonly>
+                  </div>
+               </div>
+          </div>
+
+          <div class="form-group">
+               <div class="row">
+               <div class="col-md-3 col-md-offset-2">
+                     <label for="Device-Photo">Received By</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>" readonly>
                   </div>
                </div>
           </div>

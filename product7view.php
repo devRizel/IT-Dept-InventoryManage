@@ -136,7 +136,7 @@ include_once('layouts/header.php');
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <label for="Device-Category">Product Category</label>
+                <label for="Device-Category">Device Category</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category" disabled>
                   <option value="">Select a Category</option>
                   <?php foreach ($all_categories as $cat): ?>
@@ -150,7 +150,7 @@ include_once('layouts/header.php');
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="Device-Photo">Product Photo</label>
+                <label for="Device-Photo">Device Photo</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo" disabled>
                   <option value="">No image</option>
                   <?php foreach ($all_photo as $photo): ?>
