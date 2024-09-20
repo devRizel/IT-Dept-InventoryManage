@@ -6,58 +6,66 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
+$form_data = array(
+  'barrow' => isset($_POST['barrow']) ? $_POST['barrow'] : '',
+  'datebarrowed' => isset($_POST['datebarrowed']) ? $_POST['datebarrowed'] : '',
+  'datereturn' => isset($_POST['datereturn']) ? $_POST['datereturn'] : ''
+);
 $product = find_by_id('other', (int)$_GET['id']);
-$all_categories = find_all('categories');
-$all_room = find_all('room');
-$all_photo = find_all('media');
-
-
 if (!$product) {
     $session->msg("d", "Missing product id.");
     redirect('barrowother.php');
 }
 
 $errors = array();
+$js_error_msgs = array();
 if (isset($_POST['add_product'])) {
     $field_messages = array(
-        'barrow' => 'Barrow By'
+        'barrow' => 'Barrow By',
+        'datebarrowed' => 'Date Barrowed',
+        'datereturn' => 'Date Return'
     );
 
-    $req_fields = array('barrow');
-
-    $js_error_msgs = array();
+    $req_fields = array('barrow', 'datebarrowed', 'datereturn');
 
     foreach ($req_fields as $field) {
         if (empty($_POST[$field])) {
             $errors[$field] = isset($field_messages[$field]) ? $field_messages[$field] . " can't be blank." : ucfirst(str_replace('-', ' ', $field)) . " is required.";
-            // Add error message to the JavaScript array
             $js_error_msgs[$field] = $errors[$field];
         }
     }
+// Validate date received
+if (empty($_POST['datebarrowed'])) {
+  $errors['dreceived'] = "Date Barrowed can't be blank.";
+  $js_error_msgs['datebarrowed'] = $errors['dreceived'];
+} else {
+  $p_datebarrowed = $_POST['datebarrowed'];
+  $today = new DateTime();  // Current date and time
+  $selected_date = new DateTime($p_datebarrowed);  
 
+  if ($selected_date > $today) {
+      $errors['datebarrowed'] = "Date Barrowed cannot be a future date.";
+      $js_error_msgs['datebarrowed'] = $errors['datebarrowed'];
+  }
+}
 
 
     if (empty($errors)) {
-        // If no errors, proceed with updating the product
-        $p_barrow = remove_junk($db->escape($_POST['barrow']));
-        $date = make_date();
-    
-        $query = "UPDATE other SET ";
-        $query .= "barrow = '{$p_barrow}' "; // Removed the extra comma here
-        $query .= "WHERE id = '{$product['id']}'"; 
-    
-        $result = $db->query($query);
-    
+      $p_barrow = remove_junk($db->escape($_POST['barrow']));
+      $p_datebarrowed = make_date(); 
+      $p_datereturn = make_date(); 
+
+      $query = "UPDATE other SET barrow = '{$p_barrow}', datebarrowed = '{$p_datebarrowed}',datereturn = '{$p_datereturn}' WHERE id = '{$product['id']}'";
+      $result = $db->query($query);
+
         if ($result && $db->affected_rows() === 1) {
             redirect('barrowother.php?success=true&update_success=true', false);
         } else {
             $session->msg('d', 'Failed to update Computer.');
-            redirect('barrowother.php.php?id=' . (int)$product['id'], false);
+            redirect('barrowotherbarrowedit.php?id=' . (int)$product['id'], false);
         }
     }
-    
 }
-
 
 include_once('layouts/header.php');
 ?>
@@ -71,10 +79,27 @@ include_once('layouts/header.php');
         </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="barrowotherbarrowedit.php?id=<?php echo (int)$product['id'] ?>">
-          <div class="form-group col-md-8 col-md-offset-2">
+        <form method="post" class="clearfix" action="barrowotherbarrowedit.php?id=<?php echo (int)$product['id'] ?>" >
+          <div class="form-group col-md-12 col-md-offset-2">
+            <div class="row">
+              <div class="col-md-8">
                 <center><label>Barrow By</label></center>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="barrow" value="<?php echo remove_junk($product['barrow']);?>">
+                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="barrow"  value="<?php echo htmlspecialchars($form_data['barrow']); ?>">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-offset-2">
+               <div class="row">
+               <div class="col-md-5">
+                <center><label>Date Barrowed</label></center>
+                <input type="text" class="form-control datepicker" name="datebarrowed" placeholder="Date Barrowed" required readonly value="<?php echo htmlspecialchars($form_data['datebarrowed']); ?>">
+              </div>
+              <div class="col-md-5">
+                <center><label>Date Return</label></center>
+                <input type="text" class="form-control datepicker" name="datereturn" placeholder="Date Return" required readonly value="<?php echo htmlspecialchars($form_data['datereturn']); ?>">
+              </div>
+               </div>
           </div>
 
           <center><div class="form-group">
@@ -108,12 +133,12 @@ $(document).ready(function() {
 });
 </script>
 
+
 <script src="sweetalert.min.js"></script>
 <?php if (!empty($js_error_msgs)): ?>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Retrieve the first error message from the array
-        var errorMessages = <?php echo json_encode(array_values($js_error_msgs)[0]); ?>;
+        var errorMessages = Object.values(<?php echo json_encode($js_error_msgs); ?>).join('\n');
         swal({
             title: "",
             text: errorMessages,
@@ -123,6 +148,7 @@ $(document).ready(function() {
     });
 </script>
 <?php endif; ?>
+
 <?php if (!empty($errors)): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

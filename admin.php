@@ -35,6 +35,36 @@ if (!empty($products)) {
         return $product['name'] === 'Server Room';
     });
     $count_server_room = count($filtered_server_room);
+    
+    
+    $filtered_barrow1 = array_filter($products, function($product) {
+      return $product['barrow'] === 'Return';
+    });
+    $count_it_barrow1 = count($filtered_barrow1);
+
+    $filtered_maintenance1 = array_filter($products, function($product) {
+      return $product['computer_images'] === 'Maintenance' ||
+             $product['monitor_images'] === 'Maintenance' ||
+             $product['keyboard_images'] === 'Maintenance' ||
+             $product['mouse_images'] === 'Maintenance' ||
+             $product['system_images'] === 'Maintenance' ||
+             $product['vgahdmi_images'] === 'Maintenance' ||
+             $product['power1_images'] === 'Maintenance' ||
+             $product['power2_images'] === 'Maintenance' ||
+             $product['chord1_images'] === 'Maintenance' ||
+             $product['chord2_images'] === 'Maintenance' ||
+             $product['mother_images'] === 'Maintenance' ||
+             $product['cpu_images'] === 'Maintenance' ||
+             $product['ram_images'] === 'Maintenance' ||
+             $product['video_images'] === 'Maintenance' ||
+             $product['hddssdgb_images'] === 'Maintenance';
+  });
+  
+    $count_it_maintenance1 = count($filtered_maintenance1);
+
+
+
+
 } else {
     $count_faculty = 0;
     $count_it_comlab4 = 0;
@@ -42,6 +72,8 @@ if (!empty($products)) {
     $count_it_comlab2 = 0;
     $count_it_comlab1 = 0;
     $count_server_room = 0; 
+    $count_it_maintenance1 = 0; 
+    $count_it_barrow1 = 0; 
 }
 
 function fetch_products_from_database() {
@@ -54,6 +86,40 @@ function fetch_products_from_database() {
     }
     return $products;
 }
+
+
+// Fetch $other data from the database
+$other = fetch_other_from_database(); 
+
+if (!empty($other)) {
+  $filtered_maintenance2 = array_filter($other, function($item) {
+      return $item['other_images'] === 'Maintenance';
+  });
+  $count_it_maintenance2 = count($filtered_maintenance2);
+
+  $filtered_barrow2 = array_filter($other, function($item) {
+      return $item['barrow'] === 'Return';
+  });
+  $count_it_barrow2 = count($filtered_barrow2);
+
+} else {
+  $count_it_barrow2 = 0; 
+  $count_it_maintenance2 = 0;
+}
+
+// Function to fetch other data from the database
+function fetch_other_from_database() {
+  global $db;
+  $query = "SELECT * FROM other";
+  $result = $db->query($query);
+  $other = [];
+  while ($row = $db->fetch_assoc($result)) {
+      $other[] = $row;
+  }
+  return $other;
+}
+
+
 // Fetch counts
 $c_categorie = count_by_id('categories');
 $c_room = count_by_id('room');
@@ -105,13 +171,6 @@ $chartData = [
 }
 </style>
 <div class="row">
-   <div class="col-md-6">
-     <?php echo display_msg($msg); ?>
-   </div>
-</div>
-
-<br><br><br>
-<div class="row">
   <a href="users.php" style="color:black;" >
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
@@ -158,12 +217,64 @@ $chartData = [
   <a href="product.php" style="color:black;">
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
-        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-green">
+        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
         <div class="panel-value pull-right">
         <h2 class="margin-top"> <?php echo $c_product['total']; ?> </h2>
           <p class="text-muted">Overal Computer</p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="product.php" style="color:black;">
+    <div class="col-md-3">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
+          <i class="glyphicon glyphicon-th-large"></i>
+        </div>
+        <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $count_it_maintenance1;['total']; ?> </h2>
+          <p class="text-muted">Maintenance Computer</p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="product.php" style="color:black;">
+    <div class="col-md-3">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-red">
+          <i class="glyphicon glyphicon-th-large"></i>
+        </div>
+        <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $count_it_maintenance2;['total']; ?> </h2>
+          <p class="text-muted">Maintenance Other Devices</p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="product.php" style="color:black;">
+    <div class="col-md-3">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-blue">
+          <i class="glyphicon glyphicon-th-large"></i>
+        </div>
+        <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $count_it_barrow1;['total']; ?> </h2>
+          <p class="text-muted">Barrowed Computer</p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a href="product.php" style="color:black;">
+    <div class="col-md-3">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+        <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
+          <i class="glyphicon glyphicon-th-large"></i>
+        </div>
+        <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $count_it_barrow2;['total']; ?> </h2>
+          <p class="text-muted">Barrowed Other Devices</p>
         </div>
       </div>
     </div>
