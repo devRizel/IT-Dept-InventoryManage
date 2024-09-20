@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         rows.forEach(row => {
             const categoryCell = row.querySelector('td:nth-child(4)');
-            const serialCell = row.querySelector('td:nth-child(5)');
+            const serialCell = row.querySelector('td:nth-child(6)');
             const titleCell = row.querySelector('td:nth-child(3)');
             const category = categoryCell ? categoryCell.textContent.toLowerCase() : '';
             const serialNum = serialCell ? serialCell.textContent.toLowerCase() : '';

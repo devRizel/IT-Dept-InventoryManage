@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchTerm = this.value.toLowerCase();
 
         rows.forEach(row => {
-            const motherCell = row.querySelector('td:nth-child(6)'); // Assuming 'Motherboard|Serial Num' is the 6th column
+            const motherCell = row.querySelector('td:nth-child(7)'); // Assuming 'Motherboard|Serial Num' is the 7th column
             const mother = motherCell ? motherCell.textContent.toLowerCase() : '';
 
             if (mother.includes(searchTerm)) {
