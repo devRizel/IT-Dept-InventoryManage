@@ -76,6 +76,9 @@ include_once('layouts/header.php');
                 <center><label>Barrow By</label></center>
                 <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="barrow" value="<?php echo remove_junk($product['barrow']);?>">
           </div>
+          <div class="form-group col-md-8 col-md-offset-2">
+                <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
+          </div>
 
           <center><div class="form-group">
             <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>
