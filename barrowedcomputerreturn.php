@@ -114,10 +114,10 @@ include_once('layouts/header.php');
                       <img class="img-thumbnail" src="uploads/products/<?php echo $product['image']; ?>" alt="">
                   <?php endif; ?>
                 </td>
-    <td class="text-center"><?php echo remove_junk($product['date']); ?></td>
+    <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
-    <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
+    <td class="text-center"><?php echo remove_junk($product['date']); ?></td>
     <td class="text-center">
     <form action="barrowedcomputerreturn1.php" method="get" style="display:inline;">
   <input type="hidden" name="id" value="<?php echo (int)$product['id']; ?>">
