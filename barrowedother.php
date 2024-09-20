@@ -20,6 +20,7 @@ function fetch_other() {
             p.dreceived, 
             p.media_id, 
             p.date,
+            p.barrow,
             p.serial, 
             c.name AS categorie, 
             m.file_name AS image,
