@@ -125,15 +125,12 @@ include_once('layouts/header.php');
   </button>
 </form>
 <td class="text-center">
-  <div class="btn-group">
-    <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
-      <a href="barrowedcomputerreturndelete.php?id=<?php echo (int)$product['id'];?>" 
-class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
-<span class="glyphicon glyphicon-trash"></span>
-</a>
-    <?php endif; ?>
-  </div>
-</td>
+                    <a href="barrowedcomputerreturndelete.php?id=<?php echo (int)$product['id'];?>" 
+                    class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+                </td>
   </tr>
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
     <td colspan="10">
