@@ -80,7 +80,7 @@ include_once('layouts/header.php');
                  </div>
                  <div class="col-md-6">
                  <center><label>Date Barrowed</label></center>
-                 <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
+                 <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Barrowed" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
                  </div>
                </div>
             </div>
