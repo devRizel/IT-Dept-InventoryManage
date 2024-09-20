@@ -113,7 +113,7 @@ include_once('layouts/header.php');
                       <img class="img-thumbnail" src="uploads/products/<?php echo $product['image']; ?>" alt="">
                   <?php endif; ?>
                 </td>
-    <td><?php echo remove_junk($product['barrow']); ?></td>
+    <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
     <td class="text-center">
