@@ -108,6 +108,7 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 50px;">#</th>
                 <th class="text-center" style="width: 150px;">Photo</th>
                 <th class="text-center" style="width: 10%;">Status</th>
+                <th class="text-center" style="width: 100px;">Return Date</th>
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 10%;">Serial Num.</th>
                 <th class="text-center" style="width: 100px;">Action</th>
