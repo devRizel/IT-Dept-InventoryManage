@@ -560,18 +560,13 @@ $saved_images = [
                      <label for="Device-Photo">HDD|SSD|GB</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']);?>" readonly>
                   </div>
-               </div>
-          </div>
-
-          <div class="form-group">
-               <div class="row">
-               <div class="col-md-3 col-md-offset-2">
+                  <div class="col-md-3 col-md-offset-2">
                      <label for="Device-Photo">Received By</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>" readonly>
                   </div>
                </div>
           </div>
-            
+
           <center><div class="form-group">
             <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product.php" class="btn btn-danger">Back</a>
           </div></center>
