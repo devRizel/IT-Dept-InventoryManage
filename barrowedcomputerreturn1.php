@@ -548,7 +548,7 @@ $saved_images = [
 
           <div class="form-group">
                <div class="row">
-               <div class="col-md-3 col-md-offset-2">
+               <div class="col-md-3 ">
                      <label for="Device-Photo">Power Supply 2</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power2" value="<?php echo remove_junk($product['power2']);?>" readonly>
                   </div>
@@ -559,6 +559,10 @@ $saved_images = [
                  <div class="col-md-3">
                      <label for="Device-Photo">HDD|SSD|GB</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']);?>" readonly>
+                  </div>
+                  <div class="col-md-3">
+                     <label for="Device-Photo">Received By</label>
+                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>" readonly>
                   </div>
                </div>
           </div>
