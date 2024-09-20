@@ -72,7 +72,7 @@ include_once('layouts/header.php');
       </div>
       <div class="panel-body">
         <form method="post" action="barrowcomputerbarrowedit.php?id=<?php echo (int)$product['id'] ?>">
-          <div class="form-group col-md-12 col-md-offset-2">
+          <div class="form-group col-md-8 col-md-offset-2">
                <div class="row">
                  <div class="col-md-6">
                  <center><label>Barrow By</label></center>
