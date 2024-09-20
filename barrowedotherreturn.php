@@ -131,6 +131,7 @@ include_once('layouts/header.php');
                   <?php endif; ?>
                 </td>
                 <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
+                <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['serial']); ?></td>
     <td class="text-center">
