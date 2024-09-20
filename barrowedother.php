@@ -111,7 +111,7 @@ include_once('layouts/header.php');
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
                 <th class="text-center" style="width: 150px;">Photo</th>
-                <th class="text-center" style="width: 10%;">Title Room</th>
+                <th class="text-center" style="width: 10%;">Barrow By</th>
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 10%;">Serial Num.</th>
                 <th class="text-center" style="width: 100px;">Action</th>
@@ -132,7 +132,7 @@ include_once('layouts/header.php');
                       <img class="img-thumbnail" src="uploads/products/<?php echo $product['image']; ?>" alt="">
                   <?php endif; ?>
                 </td>
-                <td><?php echo remove_junk($product['name']); ?></td>
+                <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"><?php echo remove_junk($product['serial']); ?></td>
     <td class="text-center">
