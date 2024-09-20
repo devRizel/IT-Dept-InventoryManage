@@ -93,7 +93,6 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Return Date</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
-                <th class="text-center" style="width: 100px;">Actions</th>
                
               </tr>
             </thead>
