@@ -89,6 +89,7 @@ include_once('layouts/header.php');
                 <th class="text-center" style="width: 50px;">Select</th>
                 <th class="text-center" style="width: 150px;">Photo</th>
                 <th class="text-center" style="width: 10%;">Status</th>
+                <th class="text-center" style="width: 100px;">Return Date</th>
                 <th class="text-center" style="width: 10%;">Device Categories</th>
                 <th class="text-center" style="width: 20%;">Motherboard|Serial Num</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
@@ -114,6 +115,7 @@ include_once('layouts/header.php');
                   <?php endif; ?>
                 </td>
     <td class="text-center"><?php echo remove_junk($product['barrow']); ?></td>
+    <td class="text-center"><?php echo remove_junk($product['date']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
     <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
     <td class="text-center">
