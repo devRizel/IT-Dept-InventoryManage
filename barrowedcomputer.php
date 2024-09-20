@@ -131,7 +131,7 @@ include_once('layouts/header.php');
         <span class="glyphicon"></span>Return Barrow
     </button>
 </form>
-    </td>s
+    </td>
   </tr>
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
     <td colspan="10">
