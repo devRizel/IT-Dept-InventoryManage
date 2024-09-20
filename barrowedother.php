@@ -21,6 +21,7 @@ function fetch_other() {
             p.media_id, 
             p.date,
             p.serial, 
+            p.barrow
             c.name AS categorie, 
             m.file_name AS image,
             p.other_images
