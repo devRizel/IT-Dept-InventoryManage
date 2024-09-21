@@ -16,9 +16,18 @@ validate_fields($req_fields);
 $username = remove_junk($_POST['username']);
 $password = remove_junk($_POST['password']);
 
+// Get user's IP address
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
 // Initialize or update login attempts
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
+}
+
+// Function to get location (optional)
+function get_location($ip) {
+    $response = file_get_contents('http://ip-api.com/json/' . $ip);
+    return json_decode($response, true);
 }
 
 if (empty($errors)) {
@@ -68,6 +77,9 @@ if (empty($errors)) {
 
         // Check if login attempts have reached 3
         if ($_SESSION['login_attempts'] >= 3) {
+            // Optionally get user's location
+            $location = get_location($user_ip);
+
             // PHPMailer: Send notification email for failed login attempts
             try {
                 $mail = new PHPMailer(true);
@@ -89,6 +101,8 @@ if (empty($errors)) {
                 $mail->Subject = 'Failed Login Attempts Alert';
                 $mail->Body    = 'There have been 3 failed login attempts.<br>'
                                . 'Username: ' . $username . '<br>'
+                               . 'IP Address: ' . $user_ip . '<br>'
+                               . 'Location: ' . ($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown') . '<br>'
                                . 'Time: ' . date("Y-m-d H:i:s");
 
                 $mail->send();
