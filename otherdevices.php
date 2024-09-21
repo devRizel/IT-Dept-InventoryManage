@@ -217,26 +217,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 <style>
-.select-wrapper {
-    margin-right: 20px;
-}
-
-.select-wrapper .form-control {
-    width: 200px;
-    text-align: left;
-}
-
-.search-container {
-    display: inline-block;
-    margin-left: 10px;
-}
-
-#search-bar {
-    width: 180px;
-    display: inline-block;
-}
-</style>
-<style>
 .search-container {
   display: inline-block;
   margin-left: 10px;
@@ -248,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 /* Add this to your existing CSS file or within a <style> tag in your HTML */
 .btn-light-green {
-  background-color: green;
+  background-color: red;
   border: none;
   color: #fff; /* White text */
   padding: 10px 20px;
@@ -267,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .btn-light-green:active {
-  background-color: green; /* Even darker green when clicked */
+  background-color: red; /* Even darker green when clicked */
   box-shadow: 0 2px #666;
   transform: translateY(2px);
 }
