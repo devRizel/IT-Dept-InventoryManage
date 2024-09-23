@@ -225,11 +225,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
-            <!-- <p>Please Select Portal to proceed.</p>
+            <p>Please Select Portal to proceed.</p>
             <div class="d-flex">
-              <a href="portal.php" class="btn-get-started">Portal</a>
-              <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"></a>
-            </div> -->
+              <a href="generate.php?access=allowed" class="btn-get-started">Portal</a>
+            </div>
+          </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
             <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
