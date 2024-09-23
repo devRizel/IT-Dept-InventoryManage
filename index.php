@@ -230,7 +230,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <a href="generate.php?access=allowed" class="btn-get-started">Portal</a>
             </div>
           </div>
-          </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
             <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
           </div>
