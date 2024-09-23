@@ -259,8 +259,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="copyright text-center">
             <p class="marquee-text">
-                <span>All Right Reserved</span> © 
-                <span>Copyright 2024</span> 
+                <span>All Right Reserved</span>  
+                <span>© 2024</span> 
                 <strong class="px-1 sitename">IT Team</strong>
             </p>
         </div>
