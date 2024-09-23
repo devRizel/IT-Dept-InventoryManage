@@ -177,6 +177,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         transform: translateX(-100%);
     }
 }
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
   </style>
 </head>
 
@@ -240,21 +256,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </main>
 
   <footer id="footer" class="footer">
-
     <div class="container">
-    <div class="copyright text-center ">
-        <p>
-        <span>All Right Reserved</span> © <span>Copyright 2024</span> 
-        <strong class="px-1 sitename">IT Team</strong> 
-        </p>
-      </div>
+        <div class="copyright text-center">
+            <p class="marquee-text">
+                <span>All Right Reserved</span> © 
+                <span>Copyright 2024</span> 
+                <strong class="px-1 sitename">IT Team</strong>
+            </p>
+        </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
-
-  </footer>
+</footer>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
