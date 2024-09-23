@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "inventory_system";
+$servername = "127.0.0.1";
+$username = "u510162695_inventory";
+$password = "1Inventory_system";
+$dbname = "u510162695_inventory";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
