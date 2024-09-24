@@ -1,7 +1,6 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
-    // Redirect to index.php if the access parameter is not set correctly
     header("Location: index.php");
     exit();
 }
@@ -9,43 +8,43 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
 
 <?php
 date_default_timezone_set('Asia/Manila');
-  ob_start();
-  require_once('includes/load.php');
-  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
+ob_start();
+require_once('includes/load.php');
+if ($session->isUserLoggedIn(true)) { redirect('home.php', false); }
 ?>
 <?php include_once('layouts/header.php'); ?>
+
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
-       <img src="uploads\users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+       <img src="uploads/users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
        <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
     <?php echo display_msg($msg); ?>
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
-        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
-        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
+        <label for="username" class="control-label">Email</label>
+        <input type="email" class="form-control" name="username" placeholder="Email" required>
       </div>
       <div class="form-group">
-        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
+        <label for="Password" class="control-label">Password</label>
         <div style="position: relative;">
-          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
-          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
+          <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
       </div>
       <div style="text-align: right;">
-         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: 
-         none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
-     </div>
+         <a href="forgot.php?access=allowed">Forgot Password</a>
+      </div>
       <center><div class="form-group">
-        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        <button type="submit" class="btn btn-danger">Login</button>
       </div></center>
-      <a href="index.php" style="font-size: 14px; text-decoration: none;
-      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
+      <a href="index.php">Back to home</a>
     </form>
   </div>
 </div>
+
 <?php include_once('layouts/footer.php'); ?>
 
 <style>
