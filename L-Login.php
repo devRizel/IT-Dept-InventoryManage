@@ -75,6 +75,7 @@ date_default_timezone_set('Asia/Manila');
     margin-bottom: 20px;
   }
 
+  
   @media (max-width: 600px) {
     .login-page {
       padding: 15px;
