@@ -1,19 +1,24 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
 if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
+    // Redirect to index.php if the access parameter is not set correctly
     header("Location: index.php");
     exit();
 }
-?>
 
-<?php
 date_default_timezone_set('Asia/Manila');
 ob_start();
 require_once('includes/load.php');
 if ($session->isUserLoggedIn(true)) { redirect('home.php', false); }
-?>
-<?php include_once('layouts/header.php'); ?>
 
+// Sanitize input if needed later
+function sanitizeInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+?>
+
+<?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
@@ -24,27 +29,26 @@ if ($session->isUserLoggedIn(true)) { redirect('home.php', false); }
     <?php echo display_msg($msg); ?>
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
-        <label for="username" class="control-label">Email</label>
-        <input type="email" class="form-control" name="username" placeholder="Email" required>
+        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
+        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
       </div>
       <div class="form-group">
-        <label for="Password" class="control-label">Password</label>
+        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
         <div style="position: relative;">
-          <input id="password" type="password" name="password" class="form-control" placeholder="Password">
-          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
         </div>
       </div>
       <div style="text-align: right;">
-         <a href="forgot.php?access=allowed">Forgot Password</a>
-      </div>
+         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
+     </div>
       <center><div class="form-group">
-        <button type="submit" class="btn btn-danger">Login</button>
+        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
-      <a href="index.php">Back to home</a>
+      <a href="index.php" style="font-size: 14px; text-decoration: none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
     </form>
   </div>
 </div>
-
 <?php include_once('layouts/footer.php'); ?>
 
 <style>
@@ -82,13 +86,6 @@ if ($session->isUserLoggedIn(true)) { redirect('home.php', false); }
       font-size: 18px;
     }
   }
-
-  /* @keyframes borderAnimation {
-    0% { box-shadow: 0 0 30px blue; }
-    33% { box-shadow: 0 0 30px red; }
-    66% { box-shadow: 0 0 30px green; }
-    100% { box-shadow: 0 0 30px pink; }
-  } */
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
@@ -108,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Function to check if fields are empty before form submission
     const loginForm = document.querySelector('form');
     loginForm.addEventListener('submit', function(event) {
         const username = loginForm.elements['username'].value.trim();
@@ -116,44 +112,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (username === '') {
             event.preventDefault(); // Prevent form submission
-
-            swal({
-                title: "Username can't be blank!",
-                icon: "error",
-                button: "OK"
-            });
+            swal({ title: "Username can't be blank!", icon: "error", button: "OK" });
         } else if (password === '') {
             event.preventDefault(); // Prevent form submission
+            swal({ title: "Password can't be blank!", icon: "error", button: "OK" });
+        }
+    });
 
-            swal({
-                title: "Password can't be blank!",
-                icon: "error",
-                button: "OK"
-            });
+    // Automatically cancel suspicious scripts
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "script") {
+            event.preventDefault();
         }
     });
 });
-</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<script>
-  document.getElementById('password').addEventListener('input', function() {
-    var togglePassword = document.getElementById('togglePassword');
-    togglePassword.style.display = this.value ? 'block' : 'none';
-  });
 
-  document.getElementById('togglePassword').addEventListener('click', function() {
-    var passwordInput = document.getElementById('password');
-    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    this.classList.toggle('fa-eye');
-    this.classList.toggle('fa-eye-slash');
-  });
-</script>
-<script>
-      // Disable right-click
+// Disable right-click and F12, Ctrl+Shift+I, and other shortcuts
 document.addEventListener('contextmenu', event => event.preventDefault());
-
-// Disable F12, Ctrl+Shift+I, and other shortcuts
 document.addEventListener('keydown', function(event) {
     if (event.keyCode === 123 || // F12
         (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
@@ -161,5 +136,19 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
     }
 });
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script>
+document.getElementById('password').addEventListener('input', function() {
+    var togglePassword = document.getElementById('togglePassword');
+    togglePassword.style.display = this.value ? 'block' : 'none';
+});
 
-    </script>
+document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('password');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
