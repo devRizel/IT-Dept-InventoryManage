@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = "1Inventory_system";
     $dbname = "u510162695_inventory";
 
-    
+
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
+      <a class="btn-getstarted" href="login.php?log=allowed">Login</a>
 
     </div>
   </header>

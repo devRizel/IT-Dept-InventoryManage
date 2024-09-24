@@ -1,6 +1,6 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
-if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
+if (!isset($_GET['log']) || $_GET['log'] !== 'allowed') {
     // Redirect to index.php if the access parameter is not set correctly
     header("Location: index.php");
     exit();
@@ -90,7 +90,7 @@ date_default_timezone_set('Asia/Manila');
     66% { box-shadow: 0 0 30px green; }
     100% { box-shadow: 0 0 30px pink; }
   } */
-   
+
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
