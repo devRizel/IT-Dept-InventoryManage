@@ -7,11 +7,10 @@ date_default_timezone_set('Asia/Manila');
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database configuration
-    $servername = "127.0.0.1";
-    $username = "u510162695_inventory";
-    $password = "1Inventory_system";
-    $dbname = "u510162695_inventory";
-
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "inventory_system";
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
