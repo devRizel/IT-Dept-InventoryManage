@@ -160,6 +160,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       .hero h1 {
         font-size: 20px; /* Adjust font size for smaller screens */
       }
+      .marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
     }
   </style>
 </head>
@@ -205,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
 
-    </section><!-- /Hero Section -->
+    </section>
     <section id="about" class="about section">
       <div class="container section-title" data-aos="fade-up">
         <h2>About Us</h2>
@@ -214,49 +246,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           and managed effectively. It will replace the time-consuming manual process with 
           an automated, reliable, 
           and scalable solution, leading to cost savings and improved resource management.</p>
-      <!-- <div class="container">
-        <div class="row gy-5">
-          <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
-            <h3>They provide the most valuable pleasure as it were</h3>
-            <p>
-              It is important to take care of the patient, to be followed by the patient, but it will happen at such a time that there is a lot of work and pain. Duis or Irure pain in the rebuke </p>
-            <a href="#" class="about-btn align-self-center align-self-xl-start"><span>About us</span> <i class="bi bi-chevron-right"></i></a>
-          </div>
-          <div class="col-xl-7" data-aos="fade-up" data-aos-delay="200">
-            <div class="row gy-4"> -->
-
-              <!-- <div class="col-md-6 icon-box position-relative">
-                <i class="bi bi-briefcase"></i>
-                <h4><a href="" class="stretched-link">Let it be the pleasures of the body</a></h4>
-                <p>They are the result, or as it were, of something that is equal to these labors, except that some</p>
-              </div>
-
-              <div class="col-md-6 icon-box position-relative">
-                <i class="bi bi-gem"></i>
-                <h4><a href="" class="stretched-link">Except for any work</a></h4>
-                <p>Unless they are blinded by lust, they do not come forth; they are in fault who abandon their duties</p>
-              </div>
-
-              <div class="col-md-6 icon-box position-relative">
-                <i class="bi bi-broadcast"></i>
-                <h4><a href="" class="stretched-link">Hard work will result</a></h4>
-                <p>Either he takes it with no one, or everyone. All the pains that the elders do</p>
-              </div>
-
-              <div class="col-md-6 icon-box position-relative">
-                <i class="bi bi-easel"></i>
-                <h4><a href="" class="stretched-link">Of the blessed truth</a></h4>
-                <p>The expedients of the truth are of no consequence at the time of the praises of the covenants of life</p>
-              </div> -->
-
-            <!-- </div>
-          </div>
-
-        </div> -->
-
       </div>
-
-    </section><!-- /About Section -->
+    </section>
 
 
   </main>
@@ -347,7 +338,46 @@ document.addEventListener('keydown', function(event) {
 });
 
     </script>
-    
+    <script type="text/javascript">
+var rev = "silent";
+function titlebar(val)
+{
+    var msg  = "Inventory Management System";
+    var res = " ";
+    var speed = 70
+    var pos = val;
+
+    msg = ""+msg+"";
+    var le = msg.length;
+    if(rev == "silent"){
+        if(pos < le){
+        pos = pos+1;
+        scroll = msg.substr(0,pos);
+        document.title = scroll;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+        else{
+        rev = "silents";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+    }
+    else{
+        if(pos > 0){
+        pos = pos-1;
+        var ale = le-pos;
+        scrol = msg.substr(ale,le);
+        document.title = scrol;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+        else{
+        rev = "silent";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }   
+    }
+}
+
+titlebar(0);
+</script>
 </body>
 
 </html>
