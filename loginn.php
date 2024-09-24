@@ -5,24 +5,19 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
     header("Location: index.php");
     exit();
 }
-
-date_default_timezone_set('Asia/Manila');
-ob_start();
-require_once('includes/load.php');
-if ($session->isUserLoggedIn(true)) { redirect('home.php', false); }
-
-// Sanitize input if needed later
-function sanitizeInput($data) {
-    return htmlspecialchars(stripslashes(trim($data)));
-}
-
 ?>
 
+<?php
+date_default_timezone_set('Asia/Manila');
+  ob_start();
+  require_once('includes/load.php');
+  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
+?>
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
-       <img src="uploads/users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+       <img src="uploads\users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
        <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
@@ -40,12 +35,14 @@ function sanitizeInput($data) {
         </div>
       </div>
       <div style="text-align: right;">
-         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
+         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: 
+         none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
      </div>
       <center><div class="form-group">
         <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
-      <a href="index.php" style="font-size: 14px; text-decoration: none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
+      <a href="index.php" style="font-size: 14px; text-decoration: none;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
     </form>
   </div>
 </div>
@@ -86,6 +83,13 @@ function sanitizeInput($data) {
       font-size: 18px;
     }
   }
+
+  /* @keyframes borderAnimation {
+    0% { box-shadow: 0 0 30px blue; }
+    33% { box-shadow: 0 0 30px red; }
+    66% { box-shadow: 0 0 30px green; }
+    100% { box-shadow: 0 0 30px pink; }
+  } */
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
@@ -105,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Function to check if fields are empty before form submission
     const loginForm = document.querySelector('form');
     loginForm.addEventListener('submit', function(event) {
         const username = loginForm.elements['username'].value.trim();
@@ -112,23 +117,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (username === '') {
             event.preventDefault(); // Prevent form submission
-            swal({ title: "Username can't be blank!", icon: "error", button: "OK" });
+
+            swal({
+                title: "Username can't be blank!",
+                icon: "error",
+                button: "OK"
+            });
         } else if (password === '') {
             event.preventDefault(); // Prevent form submission
-            swal({ title: "Password can't be blank!", icon: "error", button: "OK" });
-        }
-    });
 
-    // Automatically cancel suspicious scripts
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "script") {
-            event.preventDefault();
+            swal({
+                title: "Password can't be blank!",
+                icon: "error",
+                button: "OK"
+            });
         }
     });
 });
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script>
+  document.getElementById('password').addEventListener('input', function() {
+    var togglePassword = document.getElementById('togglePassword');
+    togglePassword.style.display = this.value ? 'block' : 'none';
+  });
 
-// Disable right-click and F12, Ctrl+Shift+I, and other shortcuts
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('password');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+<script>
+      // Disable right-click
 document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable F12, Ctrl+Shift+I, and other shortcuts
 document.addEventListener('keydown', function(event) {
     if (event.keyCode === 123 || // F12
         (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
@@ -136,19 +162,5 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
     }
 });
-</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<script>
-document.getElementById('password').addEventListener('input', function() {
-    var togglePassword = document.getElementById('togglePassword');
-    togglePassword.style.display = this.value ? 'block' : 'none';
-});
 
-document.getElementById('togglePassword').addEventListener('click', function() {
-    var passwordInput = document.getElementById('password');
-    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    this.classList.toggle('fa-eye');
-    this.classList.toggle('fa-eye-slash');
-});
-</script>
+    </script>
