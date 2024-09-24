@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Manila');
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-
+<?php include_once('layouts/head.php'); ?>
 <div class="login-page-wrapper">
   <div class="login-page">
     <div class="text-center">
