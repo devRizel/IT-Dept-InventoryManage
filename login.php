@@ -1,10 +1,17 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
-
+<?php
+if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
+    // Redirect to index.php if the access parameter is not set correctly
+    header("Location: index.php");
+    exit();
+}
+?>
 
 <?php
-
+date_default_timezone_set('Asia/Manila');
+  ob_start();
   require_once('includes/load.php');
- 
+  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page-wrapper">
@@ -15,7 +22,7 @@
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
     <?php echo display_msg($msg); ?>
-    <form method="post" action="" class="clearfix">
+    <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
         <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
