@@ -1,33 +1,41 @@
+<?php include_once('includes/load.php'); ?>
 <?php
-include_once('includes/load.php');
-
+$req_fields = array('username','password' );
 date_default_timezone_set('Asia/Manila');
-
-$req_fields = array('username', 'password');
 validate_fields($req_fields);
-
 $username = remove_junk($_POST['username']);
 $password = remove_junk($_POST['password']);
 
-if (empty($errors)) {
-    $user_id = authenticate($username, $password);
-    if ($user_id) {
-        //create session with id
-        $session->login($user_id);
-        //Update Sign in time
-        updateLastLogIn($user_id);
-        $session->msg("s", "Welcome to IT Department Inventory Management System");
+  if(empty($errors)){
 
-        // Redirect to admin.php with success parameter
-        redirect('admin.php?success=true', false);
+    $user = authenticate_v2($username, $password);
 
-    } else {
-        $session->msg("d", "Sorry Username/Password incorrect.");
-        redirect('login.php?access=allowed', false);
-    }
+        if($user):
+           //create session with id
+           $session->login($user['id']);
+           //Update Sign in time
+           updateLastLogIn($user['id']);
+           // redirect user to group home page by user level
+           if($user['user_level'] === '1'):
+             $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
+             redirect('admin.php',false);
+           elseif ($user['user_level'] === '2'):
+              $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
+             redirect('special.php',false);
+           else:
+              $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
+             redirect('home.php',false);
+           endif;
 
-} else {
-    $session->msg("d", $errors);
-    redirect('login.php?access=allowed', false);
-}
+        else:
+          $session->msg("d", "Sorry Username/Password incorrect.");
+          redirect('index.php',false);
+        endif;
+
+  } else {
+
+     $session->msg("d", $errors);
+     redirect('login_v2.php',false);
+  }
+
 ?>
