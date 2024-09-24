@@ -68,11 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
-        @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 20px; /* Adjust font size for smaller screens */
-      }
-    }
             body {
             font-family: Arial, sans-serif;
         }
