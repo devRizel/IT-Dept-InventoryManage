@@ -68,8 +68,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
-            body {
+        body {
             font-family: Arial, sans-serif;
+        }
+
+        :root {
+            --accent-color: #4CAF50; /* Define the accent color */
         }
 
         .chat-button {
@@ -87,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .chat-button:hover {
-          background-color: var(--accent-color);
+            background-color: var(--accent-color);
         }
 
         .chat-icon {
@@ -110,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .chat-header {
-          background-color: var(--accent-color);
+            background-color: var(--accent-color);
             color: white;
             padding: 10px;
             border-top-left-radius: 10px;
@@ -133,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .chat-submit {
-          background-color: var(--accent-color);
+            background-color: var(--accent-color);
             color: white;
             border: none;
             padding: 10px;
@@ -156,44 +160,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 width: calc(100% - 20px);
             }
         }
+
         @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 20px; /* Adjust font size for smaller screens */
-      }
-    }
-    .marquee-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
-}
+            .hero h1 {
+                font-size: 20px; /* Adjust font size for smaller screens */
+            }
+        }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-.marquee-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
-}
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            animation: marquee 10s linear infinite;
+        }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-  </style>
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 
 <body class="index-page">
