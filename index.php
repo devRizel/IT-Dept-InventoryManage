@@ -227,8 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <center><h1>SYSTEM</h1></center>
             <!-- <p>Please Select Portal to proceed.</p>
             <div class="d-flex">
-              <a href="portal.php" class="btn-get-started">Portal</a>
-              <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"></a>
+              <a href="generate.php?access=allowed" class="btn-get-started">Portal</a>
             </div> -->
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -290,12 +289,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="chat-content">
         <form id="chatForm" method="POST">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
+                <input type="text" id="name" name="name" disabled class="chat-input" placeholder="Your name" required>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
+                <input type="email" id="email" name="email" disabled class="chat-input" placeholder="Your email" required>
                 <label for="message">Message</label>
-                <textarea id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
-                <button type="submit" class="chat-submit">Submit</button>
+                <textarea id="message" name="message" disabled class="chat-input" placeholder="Your message" required></textarea>
+                <button type="submit" class="chat-submit" disabled>Submit</button>
             </form>
         </div>
     </div>
