@@ -26,8 +26,34 @@ if (!isset($_SESSION['login_attempts'])) {
 
 // Function to get location (optional)
 function get_location($ip) {
-    $response = file_get_contents('http://ip-api.com/json/' . $ip);
-    return json_decode($response, true);
+    // Sanitize the IP address to avoid RFI/LFI attacks
+    $ip = filter_var($ip, FILTER_VALIDATE_IP);
+    if ($ip) {
+        $response = @file_get_contents('http://ip-api.com/json/' . $ip);
+        return json_decode($response, true);
+    }
+    return null;
+}
+
+// Password hash verification function
+function authenticate($username, $password) {
+    global $db;
+    $username = $db->escape($username);
+
+    // Use a prepared statement to prevent SQL injection
+    $sql = "SELECT id, password FROM users WHERE username = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        // Verify password with hash
+        if (password_verify($password, $user['password'])) {
+            return $user['id'];
+        }
+    }
+    return false;
 }
 
 if (empty($errors)) {
@@ -35,6 +61,9 @@ if (empty($errors)) {
     if ($user_id) {
         // Reset login attempts after successful login
         $_SESSION['login_attempts'] = 0;
+
+        // Regenerate session ID to prevent session fixation attacks
+        session_regenerate_id(true);
 
         // Create session with id
         $session->login($user_id);
@@ -61,7 +90,7 @@ if (empty($errors)) {
             // Content
             $mail->isHTML(true);
             $mail->Subject = 'User Login Notification';
-            $mail->Body    = 'A user has successfully logged in.<br>Email: ' . $username . '<br>Login Time: ' . date("Y-m-d H:i:s");
+            $mail->Body    = 'A user has successfully logged in.<br>Email: ' . htmlspecialchars($username) . '<br>Login Time: ' . date("Y-m-d H:i:s");
 
             $mail->send();
         } catch (Exception $e) {
@@ -100,8 +129,8 @@ if (empty($errors)) {
                 $mail->isHTML(true);
                 $mail->Subject = 'Failed Login Attempts Alert';
                 $mail->Body    = 'There have been 3 failed login attempts.<br>'
-                               . 'Username: ' . $username . '<br>'
-                               . 'IP Address: ' . $user_ip . '<br>'
+                               . 'Username: ' . htmlspecialchars($username) . '<br>'
+                               . 'IP Address: ' . htmlspecialchars($user_ip) . '<br>'
                                . 'Location: ' . ($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown') . '<br>'
                                . 'Time: ' . date("Y-m-d H:i:s");
 
@@ -114,7 +143,7 @@ if (empty($errors)) {
             $_SESSION['login_attempts'] = 0;
         }
 
-        $session->msg("d", "Sorry Username/Password incorrect.");
+        $session->msg("d", "Sorry, Username/Password incorrect.");
         redirect('login.php?access=allowed', false);
     }
 
