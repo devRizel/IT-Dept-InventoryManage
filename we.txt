@@ -19,6 +19,7 @@ $desired_order = array(
     "Com lab 4"
 );
 
+
 // Function to determine position in desired order array
 function custom_sort_by_name($item) {
     global $desired_order;

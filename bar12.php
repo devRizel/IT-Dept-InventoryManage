@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) {
   } else {
       $js_error_msgs[] = "" . join($photo->errors);
   }
+  
 }
 
 ?>

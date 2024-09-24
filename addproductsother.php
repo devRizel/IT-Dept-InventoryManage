@@ -8,6 +8,7 @@ page_require_level(2);
 // Fetch products from the database
 $products = join_other_table();
 
+
 $all_categories = find_all('categories');
 
 // Define an array with desired order of names

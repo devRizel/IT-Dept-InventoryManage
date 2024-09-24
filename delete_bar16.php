@@ -10,6 +10,7 @@ if ($photo->other_images_destroy($find_other_images['id'], $find_other_images['f
     $session->msg("s", "Photo has been deleted.");
     redirect('bar16.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar16.php');
 }

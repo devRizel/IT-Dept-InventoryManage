@@ -5,6 +5,7 @@ require_once('includes/load.php');
 page_require_level(1);
 $products = fetch_products_from_database(); 
 
+
 if (!empty($products)) {
     $filtered_faculty = array_filter($products, function($product) {
         return $product['name'] === 'Faculty';

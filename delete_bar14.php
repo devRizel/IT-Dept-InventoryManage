@@ -10,6 +10,7 @@ if ($photo->video_destroy($find_video['id'], $find_video['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar14.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar14.php');
 }

@@ -12,6 +12,7 @@
       $session->msg("s","Computer Deleted Successfully.");
       redirect('computer.php?success=true&delete_photo=true'); // Add success parameter
   } else {
+    
       $session->msg("d","Computer deletion failed.");
       redirect('computer.php');
   }

@@ -3,6 +3,7 @@
   if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
 ?>
 
+
 <?php
  // Auto suggetion
     $html = '';

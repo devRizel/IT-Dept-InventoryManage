@@ -13,6 +13,7 @@ if ($delete_id) {
     $session->msg("s", "Category Deleted Successfully.");
     redirect('categorie.php?success=true&delete_cat=true');
 } else {
+    
     $session->msg("d", "Category deletion failed.");
     redirect('categorie.php');
 }

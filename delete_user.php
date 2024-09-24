@@ -10,6 +10,7 @@ date_default_timezone_set('Asia/Manila');
       $session->msg("s","User deleted.");
       redirect('users.php');
   } else {
+    
       $session->msg("d","User deletion failed Or Missing Prm.");
       redirect('users.php');
   }

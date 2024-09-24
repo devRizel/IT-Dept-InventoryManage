@@ -4,6 +4,7 @@
   // Checkin What level user has permission to view this page
    page_require_level(3);
 ?>
+
 <?php
  $year = date('Y');
  $sales = monthlySales($year);

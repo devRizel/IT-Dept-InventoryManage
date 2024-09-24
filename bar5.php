@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
   }
 }
 
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <center><h1>Add Barcode|System Unit</h1></center>

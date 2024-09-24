@@ -15,6 +15,7 @@ if(!$sale){
 <?php $product = find_by_id('products',$sale['product_id']); ?>
 <?php
 
+
   if(isset($_POST['update_sale'])){
     $req_fields = array('title','quantity','price','total', 'date' );
     validate_fields($req_fields);

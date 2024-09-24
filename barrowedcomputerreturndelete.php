@@ -7,6 +7,7 @@
     $session->msg("d","Missing Computer id.");
     redirect('barrowedcomputerreturn.php');
   }
+  
   $delete_id = delete_by_id('other',(int)$product['id']);
   if($delete_id){
       $session->msg("s","Other Device Deleted Successfully.");

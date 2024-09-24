@@ -393,6 +393,7 @@ include_once('layouts/header.php');
                         var counterCell = row.querySelector('td:first-child');
                         counterCell.textContent = counter++;
                     }
+                    
                 });
             } else {
                 // If "Overall Devices" is selected, reset all counters

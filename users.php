@@ -41,6 +41,7 @@ date_default_timezone_set('Asia/Manila');
           </tr>
         </thead>
         <tbody>
+          
         <?php foreach($all_users as $a_user): ?>
           <tr>
            <td class="text-center"><?php echo count_id();?></td>

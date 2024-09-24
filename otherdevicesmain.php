@@ -13,6 +13,7 @@ if (!$product) {
     redirect('otherdevices.php');
 }
 
+
 $errors = array();
 $js_error_msgs = array();
 

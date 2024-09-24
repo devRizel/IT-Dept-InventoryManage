@@ -8,6 +8,7 @@ page_require_level(2);
 $product = find_by_id('other', (int)$_GET['id']);
 $all_other_images = find_all('other_images');
 
+
 if (!$product) {
     $session->msg("d", "Missing product id.");
     redirect('product7.php');

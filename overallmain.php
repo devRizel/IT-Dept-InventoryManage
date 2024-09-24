@@ -5,6 +5,7 @@ $page_title = 'Edit Computer';
 require_once('includes/load.php');
 page_require_level(2);
 
+
 $product = find_by_id('products', (int)$_GET['id']);
 $all_computer = find_all('computer');
 $all_monitor = find_all('monitor');

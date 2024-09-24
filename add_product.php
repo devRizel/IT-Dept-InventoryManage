@@ -2,6 +2,7 @@
 <?php
 // Start of PHP code
 
+
 // PHP date_default_timezone_set Function & Examples
 date_default_timezone_set('Asia/Manila');
 $page_title = 'Add Product';

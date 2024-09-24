@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
   page_require_level(2);
 ?>
+
 <?php $media_files = find_all('media');?>
 <?php
 if (isset($_POST['submit'])) {

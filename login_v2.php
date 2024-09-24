@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Manila');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
 
+
 <div class="login-page">
     <div class="text-center">
        <h1>Welcome</h1>

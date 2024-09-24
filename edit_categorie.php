@@ -15,6 +15,7 @@ date_default_timezone_set('Asia/Manila');
   }
 ?>
 
+
 <?php
 if(isset($_POST['edit_cat'])){
   $req_field = array('categorie-name');

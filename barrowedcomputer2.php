@@ -17,6 +17,7 @@ if (!$product) {
     redirect('barrowedcomputer.php');
 }
 
+
 $errors = array();
 if (isset($_POST['add_product'])) {
     $field_messages = array(

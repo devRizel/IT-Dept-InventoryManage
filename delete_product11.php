@@ -7,6 +7,7 @@
     $session->msg("d","Missing Computer id.");
     redirect('product1.php');
   }
+  
   $delete_id = delete_by_id('products',(int)$product['id']);
   if($delete_id){
       $session->msg("s","Computer Deleted Successfully.");

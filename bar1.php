@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
   page_require_level(2);
 ?>
+
 <?php $computer_files = find_all('computer');?>
 <?php
 if (isset($_POST['submit'])) {

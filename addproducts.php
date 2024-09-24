@@ -6,6 +6,7 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
+
 function fetch_products() {
   global $db; // Use global variable inside the function
 

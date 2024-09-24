@@ -139,6 +139,7 @@ include_once('layouts/header.php');
       </div>
     </td>
   </tr>
+  
   <tr class="dropdown-row" id="dropdown-row-<?php echo $counter; ?>" style="display:none;">
     <td colspan="10">
       <strong>Additional Information:</strong>

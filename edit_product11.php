@@ -11,6 +11,7 @@ $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
 
+
 function find_by_serial_number($serial_number) {
   global $db;
   $serial_number = $db->escape($serial_number);

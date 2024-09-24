@@ -5,6 +5,7 @@ $page_title = 'Edit Computer';
 require_once('includes/load.php');
 page_require_level(2);
 
+
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');

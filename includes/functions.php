@@ -1,6 +1,7 @@
 <?php
  $errors = array();
 
+ 
  /*--------------------------------------------------------------*/
  /* Function for Remove escapes special
  /* characters in a string for use in an SQL statement

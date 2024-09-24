@@ -12,6 +12,7 @@ date_default_timezone_set('Asia/Manila');
     $session->msg("d","Missing Group id.");
     redirect('group.php');
   }
+  
 ?>
 <?php
   if(isset($_POST['update'])){

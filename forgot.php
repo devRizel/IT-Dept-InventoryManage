@@ -3,6 +3,7 @@
 <?php include 'setting/system.php'; ?>
 <?php include 'theme/head.php'; ?>
 
+
 <div class="forgot-password-wrapper">
   <div class="forgot-password">
     <form method="post" autocomplete="off" class="animated-form">

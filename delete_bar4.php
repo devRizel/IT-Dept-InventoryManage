@@ -10,6 +10,7 @@ if ($photo->mouse_destroy($find_mouse['id'], $find_mouse['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar4.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar4.php');
 }

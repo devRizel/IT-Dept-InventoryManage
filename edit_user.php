@@ -1,5 +1,6 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
+
 date_default_timezone_set('Asia/Manila');
   $page_title = 'Edit User';
   require_once('includes/load.php');

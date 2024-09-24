@@ -12,6 +12,7 @@ date_default_timezone_set('Asia/Manila');
      <?php echo display_msg($msg); ?>
    </div>
 </div>
+
 <div class="row">
   <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="col-md-12">
     <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-default">

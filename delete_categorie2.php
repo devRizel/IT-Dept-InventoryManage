@@ -13,6 +13,7 @@ if ($delete_id) {
     $session->msg("s", "Room Deleted Successfully.");
     redirect('categorie.php?success=true&delete_room=true'); 
 } else {
+    
     $session->msg("d", "Room Deletion Failed.");
     redirect('categorie.php');
 }

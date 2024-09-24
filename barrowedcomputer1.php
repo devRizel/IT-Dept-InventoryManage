@@ -15,6 +15,7 @@ $filtered_cat = array_filter($all_categories, function($cat) {
   return $cat['name'] == 'Computer';
 });
 
+
 $product = find_by_id('products', (int)$_GET['id']);
 $all_computer = find_all('computer');
 $all_monitor = find_all('monitor');

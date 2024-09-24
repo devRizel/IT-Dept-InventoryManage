@@ -10,6 +10,7 @@ if ($photo->chord2_destroy($find_chord2['id'], $find_chord2['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar10.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar10.php');
 }

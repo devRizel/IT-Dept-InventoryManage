@@ -10,6 +10,7 @@ date_default_timezone_set('Asia/Manila');
     $session->msg("d","Missing sale id.");
     redirect('sales.php');
   }
+  
 ?>
 <?php
   $delete_id = delete_by_id('sales',(int)$d_sale['id']);

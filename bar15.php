@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
   }
 }
 
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <center><h1>Add Barcode|HDD|SSD|GB</h1></center>

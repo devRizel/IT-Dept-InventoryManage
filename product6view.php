@@ -535,6 +535,7 @@ $saved_images = [
                      <label for="Device-Photo">Motherboard Model</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mother" value="<?php echo remove_junk($product['mother']);?>" readonly>
                  </div>
+                 
                  <div class="col-md-3">
                      <label for="Device-Photo">CPU|Processesor</label>
                      <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="cpu" value="<?php echo remove_junk($product['cpu']);?>" readonly>

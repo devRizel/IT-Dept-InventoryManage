@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+
 <?php include_once('layouts/header.php'); ?>
 <center><h1>Add Barcode|Keyboard</h1></center>
      <div class="row">

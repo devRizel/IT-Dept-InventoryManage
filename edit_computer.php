@@ -11,6 +11,7 @@ $all_room = find_all('room');
 $all_photo = find_all('media');
 
 
+
 // Filter categories to include only "Computer"
 $filtered_cat = array_filter($all_categories, function($cat) {
   return $cat['name'] == 'Computer';

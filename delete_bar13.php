@@ -10,6 +10,7 @@ if ($photo->ram_destroy($find_ram['id'], $find_ram['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar13.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar13.php');
 }

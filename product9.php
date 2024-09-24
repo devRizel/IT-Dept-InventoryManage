@@ -145,6 +145,7 @@ include_once('layouts/header.php');
                         <option value="Com lab 4">IT Comlab 4</option>
                     </select>
                 </div>
+                
                 <div class="btn-group" style="float: right;">
                     <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')">Print</button>
                 </div>

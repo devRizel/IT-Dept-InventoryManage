@@ -1,6 +1,7 @@
 <?php
 require_once(LIB_PATH_INC.DS."config.php");
 
+
 class MySqli_DB {
 
     private $con;

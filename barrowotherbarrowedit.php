@@ -6,6 +6,8 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
+
+
 $form_data = array(
   'barrow' => isset($_POST['barrow']) ? $_POST['barrow'] : '',
   'datebarrowed' => isset($_POST['datebarrowed']) ? $_POST['datebarrowed'] : '',

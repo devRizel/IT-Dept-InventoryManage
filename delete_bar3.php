@@ -10,6 +10,7 @@ if ($photo->keyboard_destroy($find_keyboard['id'], $find_keyboard['file_name']))
     $session->msg("s", "Photo has been deleted.");
     redirect('bar3.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar3.php');
 }

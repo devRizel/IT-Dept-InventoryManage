@@ -10,6 +10,7 @@ if ($photo->cpu_destroy($find_cpu['id'], $find_cpu['file_name'])) {
     $session->msg("s", "Photo has been deleted.");
     redirect('bar12.php?success=true&delete_photo=true'); // Add success parameter
 } else {
+    
     $session->msg("d", "Photo deletion failed Or Missing Prm.");
     redirect('bar12.php');
 }
