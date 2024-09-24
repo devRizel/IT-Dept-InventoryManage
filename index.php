@@ -7,10 +7,11 @@ date_default_timezone_set('Asia/Manila');
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database configuration
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "inventory_system";
+    $servername = "127.0.0.1";
+    $username = "u510162695_inventory";
+    $password = "1Inventory_system";
+    $dbname = "u510162695_inventory";
+
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -67,6 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
+        @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 20px; /* Adjust font size for smaller screens */
+      }
+    }
             body {
             font-family: Arial, sans-serif;
         }
