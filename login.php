@@ -22,7 +22,7 @@ date_default_timezone_set('Asia/Manila');
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
     <?php echo display_msg($msg); ?>
-    <form method="post" action="auth.php" class="clearfix">
+    <form method="post" action="" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
         <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
