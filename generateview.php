@@ -116,7 +116,7 @@ include('admin/db_connect.php');
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
+                    <a class="nav-link js-scroll-trigger" href="L-Login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
                 </li>
             </ul>
         </div>
@@ -124,7 +124,7 @@ include('admin/db_connect.php');
 </nav>
 <br><br><br><br>
 <div class="panel-body">
-<form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
+<form method="post" action="generateview.php?id=<?php echo (int)$product['id'] ?>">
     <div class="container">
     <div class="row custom-gutter justify-content-center">
     <div class="col-md-3 col-6 mb-3 text-center">
