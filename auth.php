@@ -51,7 +51,7 @@ if (preg_match($xss_pattern, $username) || preg_match($xss_pattern, $password)) 
             icon: 'warning',
             button: 'OK'
         }).then((value) => {
-            window.location.href = 'login.php?access=allowed';
+            window.location.href = 'L-Login.php?access=allowed';
         });
     </script>";
     
@@ -129,11 +129,11 @@ if (empty($errors)) {
         }
 
         $session->msg("d", "Sorry Username/Password incorrect.");
-        redirect('login.php?access=allowed', false);
+        redirect('L-Login.php?access=allowed', false);
     }
 } else {
     $session->msg("d", $errors);
-    redirect('login.php?access=allowed', false);
+    redirect('L-Login.php?access=allowed', false);
 }
 ?>
 <script src="sweetalert.min.js"></script>
