@@ -20,7 +20,7 @@
          <a href="reset.php?access=allowed" style="font-size: 14px; text-decoration: 
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Reset Password</a>
      </div>
-      <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
+      <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
     </form>
 
