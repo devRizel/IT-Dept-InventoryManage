@@ -294,7 +294,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="email" id="email" name="email" disabled class="chat-input" placeholder="Your email" required>
                 <label for="message">Message</label>
                 <textarea id="message" name="message" disabled class="chat-input" placeholder="Your message" required></textarea>
-                <button type="submit" class="chat-submit" disabled>Submit</button>
+                <button type="submit" class="chat-submit" disabled >Submit</button>
             </form>
         </div>
     </div>

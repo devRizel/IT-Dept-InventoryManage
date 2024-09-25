@@ -25,12 +25,12 @@ date_default_timezone_set('Asia/Manila');
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
-        <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
+        <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
       </div>
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
         <div style="position: relative;">
-          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+          <input disabled id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
           <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
         </div>
       </div>
@@ -39,7 +39,7 @@ date_default_timezone_set('Asia/Manila');
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
      </div>
       <center><div class="form-group">
-        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        <button disabled  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
       <a href="index.php" style="font-size: 14px; text-decoration: none;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
