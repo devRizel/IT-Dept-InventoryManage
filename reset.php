@@ -10,18 +10,18 @@
             <h5 class="text-center">Forgot Password</h5>
             <div class="form-group">
                 <label class="control-label">Verification</label>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="text" name="verification" class="form-control input-sm" placeholder="verification" required>
+                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="text" name="verification" class="form-control input-sm" placeholder="verification" required>
             </div>
             <div class="form-group">
                 <label class="control-label">New Password</label>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="new" class="form-control input-sm" placeholder="New Password" required>
+                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="new" class="form-control input-sm" placeholder="New Password" required>
             </div>
             <div class="form-group">
                 <label class="control-label">Confirm Password</label>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="confirm" class="form-control input-sm" placeholder="Confirm Password" required>
+                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="confirm" class="form-control input-sm" placeholder="Confirm Password" required>
             </div>
             <div style="text-align: right;">
-                 <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
+                 <button disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
              </div>
              <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
                  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
