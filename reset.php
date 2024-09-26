@@ -2,7 +2,6 @@
 <?php include 'setting/system.php'; ?>
 <?php include 'theme/head.php'; ?>
 
- 
 <div class="forgot-password-wrapper">
     <div class="forgot-password">
         <form method="post" autocomplete="off" class="animated-form">
@@ -10,20 +9,20 @@
             <h5 class="text-center">Forgot Password</h5>
             <div class="form-group">
                 <label class="control-label">Verification</label>
-                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="text" name="verification" class="form-control input-sm" placeholder="verification" required>
+                <input id="verification" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="text" name="verification" class="form-control input-sm" placeholder="verification" required>
             </div>
             <div class="form-group">
                 <label class="control-label">New Password</label>
-                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="new" class="form-control input-sm" placeholder="New Password" required>
+                <input id="NewPassword" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="new" class="form-control input-sm" placeholder="New Password" required>
             </div>
             <div class="form-group">
                 <label class="control-label">Confirm Password</label>
-                <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="confirm" class="form-control input-sm" placeholder="Confirm Password" required>
+                <input id="ConfirmPassword" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="confirm" class="form-control input-sm" placeholder="Confirm Password" required>
             </div>
             <div style="text-align: right;">
-                 <button disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
+                 <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
              </div>
-             <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
+             <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
                  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
         </form>
 
@@ -150,5 +149,39 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
     }
 });
-
     </script>
+    <script src="sweetalert.min.js"></script>
+    <script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("Fuk u", `Lubton nuon tika`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const verificationInput = document.getElementById('verification');
+    const NewPasswordInput = document.getElementById('NewPassword');
+    const ConfirmPasswordInput = document.getElementById('ConfirmPassword');
+    detectXSS(verificationInput, 'Verification');
+    detectXSS(NewPasswordInput, 'New Password');
+    detectXSS(ConfirmPasswordInput, 'Confirm Password');
+</script>
+    <!-- <script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const verificationInput = document.getElementById('verification');
+    const NewPasswordInput = document.getElementById('NewPassword');
+    const ConfirmPasswordInput = document.getElementById('ConfirmPassword');
+    detectXSS(verificationInput, 'Verification');
+    detectXSS(NewPasswordInput, 'New Password');
+    detectXSS(ConfirmPasswordInput, 'Confirm Password');
+</script> -->

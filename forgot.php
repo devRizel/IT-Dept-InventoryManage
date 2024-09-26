@@ -3,7 +3,6 @@
 <?php include 'setting/system.php'; ?>
 <?php include 'theme/head.php'; ?>
 
-
 <div class="forgot-password-wrapper">
   <div class="forgot-password">
     <form method="post" autocomplete="off" class="animated-form">
@@ -11,16 +10,16 @@
       <h5 class="text-center">Forgot Password</h5>
       <div class="form-group">
         <label class="control-label">Email Account</label>
-        <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
+        <input id="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
       </div>
       <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center;">
-        <button disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
+        <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
       </div>
       <div style="text-align: right;">
          <a href="reset.php?access=allowed" style="font-size: 14px; text-decoration: 
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Reset Password</a>
      </div>
-      <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
+      <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
     </form>
 
@@ -143,3 +142,36 @@ document.addEventListener('keydown', function(event) {
 });
 
     </script>
+    <script src="sweetalert.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  swal("Fuk u", `Lubton nuon tika`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const emailInput = document.getElementById('email');
+        detectXSS(emailInput, 'Email');
+    });
+</script>
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                    swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const emailInput = document.getElementById('email');
+        detectXSS(emailInput, 'Email');
+    });
+</script> -->

@@ -25,12 +25,12 @@ date_default_timezone_set('Asia/Manila');
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
-        <input disabled style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
+        <input id="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
       </div>
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
         <div style="position: relative;">
-          <input disabled id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
           <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
         </div>
       </div>
@@ -39,7 +39,7 @@ date_default_timezone_set('Asia/Manila');
          none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
      </div>
       <center><div class="form-group">
-        <button disabled  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
       </div></center>
       <a href="index.php" style="font-size: 14px; text-decoration: none;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
@@ -75,7 +75,6 @@ date_default_timezone_set('Asia/Manila');
     margin-bottom: 20px;
   }
 
-  
   @media (max-width: 600px) {
     .login-page {
       padding: 15px;
@@ -91,7 +90,6 @@ date_default_timezone_set('Asia/Manila');
     66% { box-shadow: 0 0 30px green; }
     100% { box-shadow: 0 0 30px pink; }
   } */
-   
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
@@ -107,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'L-Login.php?access=allowed';
+                window.location.href = 'login.php?access=allowed';
             });
     }
 
@@ -137,6 +135,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+              swal("Fuk u", `Lubton nuon tika`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    detectXSS(emailInput, 'Email');
+    detectXSS(passwordInput, 'Password');
+</script>
+<!-- <script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    detectXSS(emailInput, 'Email');
+    detectXSS(passwordInput, 'Password');
+</script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <script>
   document.getElementById('password').addEventListener('input', function() {

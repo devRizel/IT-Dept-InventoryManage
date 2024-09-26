@@ -7,12 +7,11 @@ date_default_timezone_set('Asia/Manila');
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database configuration
-    $servername = "127.0.0.1";
-    $username = "u510162695_inventory";
-    $password = "1Inventory_system";
-    $dbname = "u510162695_inventory";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "inventory_system";
 
-    
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -214,7 +213,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <!-- <a class="btn-getstarted" href="L-Login.php?access=allowed">Login</a> -->
+      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
+
     </div>
   </header>
 
@@ -288,16 +288,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="chat-content">
         <form id="chatForm" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" disabled class="chat-input" placeholder="Your name" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" disabled class="chat-input" placeholder="Your email" required>
-                <label for="message">Message</label>
-                <textarea id="message" name="message" disabled class="chat-input" placeholder="Your message" required></textarea>
-                <button type="submit" class="chat-submit" disabled >Submit</button>
-            </form>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
+    <button type="submit" class="chat-submit">Submit</button>
+</form>
         </div>
     </div>
+
+    <script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("Fuk u", `Lubton nuon tika`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const textarea = document.getElementById('message');
+    detectXSS(nameInput, 'name');
+    detectXSS(emailInput, 'Email');
+    detectXSS(textarea, 'Message');
+</script>
+<!-- <script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const textarea = document.getElementById('message');
+    detectXSS(nameInput, 'name');
+    detectXSS(emailInput, 'Email');
+    detectXSS(textarea, 'Message');
+</script> -->
+
 
     <script>
         function toggleChatWindow() {
