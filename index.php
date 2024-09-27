@@ -1,11 +1,26 @@
 <?php
 date_default_timezone_set('Asia/Manila');
-  ob_start();
-  require_once('includes/load.php');
-  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
-?>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ob_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require_once('includes/load.php');
+require './phpmailer/src/Exception.php';
+require './phpmailer/src/PHPMailer.php';
+require './phpmailer/src/SMTP.php';
+
+// Redirect if the user is logged in
+if ($session->isUserLoggedIn(true)) {
+    redirect('home.php', false);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fieldName = $_POST['fieldName'] ?? 'Successfully Sent!';
+    $inputValue = $_POST['inputValue'] ?? 'Successfully Sent!';
+    $ipAddress = $_SERVER['REMOTE_ADDR'];
+
     // Database configuration
     $servername = "localhost";
     $username = "root";
@@ -14,31 +29,95 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        logError("Connection failed: " . $conn->connect_error);
     }
-    // Sanitize input data
+
+    // Sanitize and validate input
     $name = $conn->real_escape_string($_POST['name']);
     $email = $conn->real_escape_string($_POST['email']);
     $message = $conn->real_escape_string($_POST['message']);
 
-    // SQL query to insert data into the chat table
-    $sql = "INSERT INTO chat (name, email, message) VALUES ('$name', '$email', '$message')";
+    $location = get_location($ipAddress);
 
-    if ($conn->query($sql) === TRUE) {
-        // Redirect with a success parameter
-        header("Location: ".$_SERVER['PHP_SELF']."?success=true");
+    // Check for XSS attempt
+    if (containsXSS($name) || containsXSS($email) || containsXSS($message)) {
+        sendEmailNotification('XSS Attempt', 'Detected in form submission', $ipAddress);
+        logError("XSS attempt detected from IP: $ipAddress");
+        header("Location: ".$_SERVER['PHP_SELF']."?success=false");
         exit;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
+    // SQL query using prepared statement
+    $stmt = $conn->prepare("INSERT INTO chat (name, email, message) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $email, $message);
+
+    if ($stmt->execute()) {
+      // Proceed to send email
+      sendEmailNotification($fieldName, $inputValue, $ipAddress, $location);
+      header("Location: ".$_SERVER['PHP_SELF']."?success=true");
+      exit;
+  } else {
+      logError("Error: " . $stmt->error);
+  }
+
+
     // Close connection
+    $stmt->close();
     $conn->close();
 }
+
+function get_location($ip) {
+  $response = file_get_contents('http://ip-api.com/json/' . $ip);
+  return json_decode($response, true);
+}
+function containsXSS($input) {
+    $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
+    return preg_match($xssPattern, $input);
+}
+
+function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
+        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('itinventorymanagement@gmail.com');
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'XSS Attempt Detected';
+        $mail->Body = "An XSS attempt was detected.<br>"
+                     . "<strong>Field:</strong> {$fieldName}<br>"
+                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
+                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
+                     . "<strong>Location:</strong> " . 
+                     ($location['city'] ?? 'Unknown') . ', ' . 
+                     ($location['country'] ?? 'Unknown') . '<br>'
+                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
+
+
+        // Send the email
+        $mail->send();
+    } catch (Exception $e) {
+        logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+    }
+}
+
+function logError($message) {
+    // Implement your logging mechanism
+    error_log($message); // Log to the server's error log
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="L-Login.php?access=allowed">Login</a>
+      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
 
     </div>
   </header>
@@ -225,10 +304,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
-            <!-- <p>Please Select Portal to proceed.</p>
+            <p>Please Select Portal to proceed.</p>
             <div class="d-flex">
               <a href="generate.php?access=allowed" class="btn-get-started">Portal</a>
-            </div> -->
+            </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
             <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
@@ -298,41 +377,110 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </form>
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('success');
 
-    <script>
+    // Display success message if applicable
+    if (successParam === 'true') {
+        swal("Success", "Your message was successfully sent!", "success")
+            .then(() => {
+                // Redirect to clear query parameter
+                window.location.href = window.location.pathname;
+            });
+    } else if (successParam === 'false') {
+        swal("Error", "XSS attempt detected! Your input has been cleared.", "error");
+    }
+
+    // Function to detect XSS in user input
     function detectXSS(inputField, fieldName) {
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
+                // Send AJAX request to PHP mailer script
+                sendXSSAlert(fieldName, this.value);
                 swal("Fuk u", `Lubton nuon tika`, "error");
-                this.value = "";
+                this.value = ""; // Clear the input field
             }
         });
     }
+
+    // Function to send XSS alert to the server
+    function sendXSSAlert(fieldName, inputValue) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "index.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log(xhr.responseText); // Optional: log the response from the server
+            }
+        };
+        xhr.send("fieldName=" + encodeURIComponent(fieldName) + "&inputValue=" + encodeURIComponent(inputValue));
+    }
+
+    // Initialize XSS detection on the input fields
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const textarea = document.getElementById('message');
-    detectXSS(nameInput, 'name');
+    
+    detectXSS(nameInput, 'Name');
     detectXSS(emailInput, 'Email');
     detectXSS(textarea, 'Message');
 </script>
+
+
 <!-- <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('success');
+
+    // Display success message if applicable
+    if (successParam === 'true') {
+        swal("Success", "Your message was successfully sent!", "success")
+            .then(() => {
+                // Redirect to clear query parameter
+                window.location.href = window.location.pathname;
+            });
+    } else if (successParam === 'false') {
+        swal("Error", "XSS attempt detected! Your input has been cleared.", "error");
+    }
+
+    // Function to detect XSS in user input
     function detectXSS(inputField, fieldName) {
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
-                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
-                this.value = "";
+                // Send AJAX request to PHP mailer script
+                sendXSSAlert(fieldName, this.value);
+                swal("XSS Detected", "Please avoid using script tags in your input.", "error");
+                this.value = ""; // Clear the input field
             }
         });
     }
+
+    // Function to send XSS alert to the server
+    function sendXSSAlert(fieldName, inputValue) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "index.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log(xhr.responseText); // Optional: log the response from the server
+            }
+        };
+        xhr.send("fieldName=" + encodeURIComponent(fieldName) + "&inputValue=" + encodeURIComponent(inputValue));
+    }
+
+    // Initialize XSS detection on the input fields
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const textarea = document.getElementById('message');
-    detectXSS(nameInput, 'name');
+    
+    detectXSS(nameInput, 'Name');
     detectXSS(emailInput, 'Email');
     detectXSS(textarea, 'Message');
 </script> -->
+
 
 
     <script>
@@ -345,18 +493,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 chatWindow.style.display = 'none';
                 chatForm.reset(); // Clear the form fields
             }
-        }
-    </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const successParam = urlParams.get('success');
-        if (successParam === 'true') {
-            swal("Success", "Your message was successfully sent!", "success")
-                .then((value) => {
-                    // Redirect to clear query parameter
-                    window.location.href = window.location.pathname;
-                });
         }
     </script>
     <script>

