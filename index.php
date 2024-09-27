@@ -66,11 +66,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
-
 function get_location($ip) {
   $response = file_get_contents('http://ip-api.com/json/' . $ip);
-  return json_decode($response, true);
+  $data = json_decode($response, true);
+
+  if (isset($data['status']) && $data['status'] === 'fail') {
+      logError("Failed to get location: " . $data['message']);
+      return []; // Return an empty array or handle the error accordingly
+  }
+
+  return $data;
 }
+
 function containsXSS($input) {
     $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
     return preg_match($xssPattern, $input);
