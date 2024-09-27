@@ -98,8 +98,11 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
         $mail->Body = "An XSS attempt was detected.<br>"
                      . "<strong>Field:</strong> {$fieldName}<br>"
                       . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
-                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
-                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
+                      . "<strong>IP Address:</strong> {$ipAddress}<br>"
+                      . "<strong>Location:</strong> " . 
+                      ($location['city'] ?? 'Unknown') . ', ' . 
+                      ($location['country'] ?? 'Unknown') . '<br>'
+                      . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
 
 
         // Send the email
