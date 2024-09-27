@@ -76,41 +76,38 @@ function containsXSS($input) {
     return preg_match($xssPattern, $input);
 }
 
-function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location = null) {
-  $mail = new PHPMailer(true);
-  try {
-      // Server settings
-      $mail->isSMTP();
-      $mail->Host = 'smtp.gmail.com';
-      $mail->SMTPAuth = true;
-      $mail->Username = getenv('itinventorymanagement@gmail.com'); // Use environment variable
-      $mail->Password = getenv('okfkncvsjvmysglc'); // Use environment variable
-      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-      $mail->Port = 587;
+function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
+        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-      // Recipients
-      $mail->setFrom(getenv('itinventorymanagement@gmail.com'), 'IT Inventory Management');
-      $mail->addAddress(getenv('itinventorymanagement@gmail.com'));
+        // Recipients
+        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('itinventorymanagement@gmail.com');
 
-      // Content
-      $mail->isHTML(true);
-      $mail->Subject = 'XSS Attempt Detected';
-      $mail->Body = "An XSS attempt was detected.<br>"
-                   . "<strong>Field:</strong> {$fieldName}<br>"
-                    . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
-                   . "<strong>IP Address:</strong> {$ipAddress}<br>"
-                   . "<strong>Location:</strong> " . 
-                   (($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown')) . "<br>"
-                   . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'XSS Attempt Detected';
+        $mail->Body = "An XSS attempt was detected.<br>"
+                     . "<strong>Field:</strong> {$fieldName}<br>"
+                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
+                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
+                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
 
-      // Send the email
-      $mail->send();
-  } catch (Exception $e) {
-      logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
-      // Consider sending a notification to admins if needed
-  }
+
+        // Send the email
+        $mail->send();
+    } catch (Exception $e) {
+        logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+    }
 }
-
 
 function logError($message) {
     // Implement your logging mechanism
