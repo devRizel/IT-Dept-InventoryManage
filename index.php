@@ -116,6 +116,11 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location) {
     }
 }
 
+
+function logError($message) {
+    // Implement your logging mechanism
+    error_log($message); // Log to the server's error log
+}
 ?>
 
 <!DOCTYPE html>
