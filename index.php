@@ -11,8 +11,7 @@ require './phpmailer/src/Exception.php';
 require './phpmailer/src/PHPMailer.php';
 require './phpmailer/src/SMTP.php';
 
-// Get user's IP address
-$user_ip = $_SERVER['REMOTE_ADDR'];
+
 
 // Redirect if the user is logged in
 if ($session->isUserLoggedIn(true)) {
@@ -69,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
+// Get user's IP address
+$user_ip = $_SERVER['REMOTE_ADDR'];
 
 function get_location($ip) {
   $response = file_get_contents('http://ip-api.com/json/' . $ip);
