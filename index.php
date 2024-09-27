@@ -80,16 +80,15 @@ function containsXSS($input) {
     return preg_match($xssPattern, $input);
 }
 $location = get_location($user_ip);
-function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
+function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location) {
     $mail = new PHPMailer(true);
     try {
-        
         // Server settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
-        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
+        $mail->Username = getenv('SMTP_USER'); // Use environment variable
+        $mail->Password = getenv('SMTP_PASS'); // Use environment variable
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
@@ -102,25 +101,21 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
         $mail->Subject = 'XSS Attempt Detected';
         $mail->Body = "An XSS attempt was detected.<br>"
                      . "<strong>Field:</strong> {$fieldName}<br>"
-                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
-                      . "<strong>IP Address:</strong> {$ipAddress}<br>"
-                      . "<strong>Location:</strong> " . 
-                      ($location['city'] ?? 'Unknown') . ', ' . 
-                      ($location['country'] ?? 'Unknown') . '<br>'
-                      . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
-
+                     . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
+                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
+                     . "<strong>Location:</strong> " . 
+                     ($location['city'] ?? 'Unknown') . ', ' . 
+                     ($location['country'] ?? 'Unknown') . '<br>'
+                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
 
         // Send the email
         $mail->send();
     } catch (Exception $e) {
         logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        // Optionally notify user of failure
     }
 }
 
-function logError($message) {
-    // Implement your logging mechanism
-    error_log($message); // Log to the server's error log
-}
 ?>
 
 <!DOCTYPE html>
