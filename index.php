@@ -66,58 +66,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
+
 function get_location($ip) {
   $response = file_get_contents('http://ip-api.com/json/' . $ip);
-  $data = json_decode($response, true);
-
-  if (isset($data['status']) && $data['status'] === 'fail') {
-      logError("Failed to get location: " . $data['message']);
-      return []; // Return an empty array or handle the error accordingly
-  }
-
-  return $data;
+  return json_decode($response, true);
 }
-
 function containsXSS($input) {
     $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
     return preg_match($xssPattern, $input);
 }
 
-function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
-    $mail = new PHPMailer(true);
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
-        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location = null) {
+  $mail = new PHPMailer(true);
+  try {
+      // Server settings
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = getenv('itinventorymanagement@gmail.com'); // Use environment variable
+      $mail->Password = getenv('okfkncvsjvmysglc'); // Use environment variable
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+      $mail->Port = 587;
 
-        // Recipients
-        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('itinventorymanagement@gmail.com');
+      // Recipients
+      $mail->setFrom(getenv('itinventorymanagement@gmail.com'), 'IT Inventory Management');
+      $mail->addAddress(getenv('itinventorymanagement@gmail.com'));
 
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'XSS Attempt Detected';
-        $mail->Body = "An XSS attempt was detected.<br>"
-                     . "<strong>Field:</strong> {$fieldName}<br>"
-                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
-                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
-                     . "<strong>Location:</strong> " . 
-                     ($location['city'] ?? 'Unknown') . ', ' . 
-                     ($location['country'] ?? 'Unknown') . '<br>'
-                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
+      // Content
+      $mail->isHTML(true);
+      $mail->Subject = 'XSS Attempt Detected';
+      $mail->Body = "An XSS attempt was detected.<br>"
+                   . "<strong>Field:</strong> {$fieldName}<br>"
+                    . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
+                   . "<strong>IP Address:</strong> {$ipAddress}<br>"
+                   . "<strong>Location:</strong> " . 
+                   (($location['city'] ?? 'Unknown') . ', ' . ($location['country'] ?? 'Unknown')) . "<br>"
+                   . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
 
-
-        // Send the email
-        $mail->send();
-    } catch (Exception $e) {
-        logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
-    }
+      // Send the email
+      $mail->send();
+  } catch (Exception $e) {
+      logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+      // Consider sending a notification to admins if needed
+  }
 }
+
 
 function logError($message) {
     // Implement your logging mechanism
