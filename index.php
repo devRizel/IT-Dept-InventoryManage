@@ -11,8 +11,6 @@ require './phpmailer/src/Exception.php';
 require './phpmailer/src/PHPMailer.php';
 require './phpmailer/src/SMTP.php';
 
-
-
 // Redirect if the user is logged in
 if ($session->isUserLoggedIn(true)) {
     redirect('home.php', false);
@@ -68,8 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
-// Get user's IP address
-$user_ip = $_SERVER['REMOTE_ADDR'];
 
 function get_location($ip) {
   $response = file_get_contents('http://ip-api.com/json/' . $ip);
@@ -79,16 +75,16 @@ function containsXSS($input) {
     $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
     return preg_match($xssPattern, $input);
 }
-$location = get_location($user_ip);
-function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location) {
+
+function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
     $mail = new PHPMailer(true);
     try {
         // Server settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = getenv('SMTP_USER'); // Use environment variable
-        $mail->Password = getenv('SMTP_PASS'); // Use environment variable
+        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
+        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
@@ -101,21 +97,20 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress, $location) {
         $mail->Subject = 'XSS Attempt Detected';
         $mail->Body = "An XSS attempt was detected.<br>"
                      . "<strong>Field:</strong> {$fieldName}<br>"
-                     . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
+                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
                      . "<strong>IP Address:</strong> {$ipAddress}<br>"
                      . "<strong>Location:</strong> " . 
                      ($location['city'] ?? 'Unknown') . ', ' . 
                      ($location['country'] ?? 'Unknown') . '<br>'
                      . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
 
+
         // Send the email
         $mail->send();
     } catch (Exception $e) {
         logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        // Optionally notify user of failure
     }
 }
-
 
 function logError($message) {
     // Implement your logging mechanism
@@ -297,7 +292,7 @@ function logError($message) {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="L-Login.php?access=allowed">Login</a>
+      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
 
     </div>
   </header>
@@ -309,10 +304,10 @@ function logError($message) {
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
-            <!-- <p>Please Select Portal to proceed.</p>
+            <p>Please Select Portal to proceed.</p>
             <div class="d-flex">
               <a href="generate.php?access=allowed" class="btn-get-started">Portal</a>
-            </div> -->
+            </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
             <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
