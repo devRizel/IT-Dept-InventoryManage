@@ -11,6 +11,9 @@ require './phpmailer/src/Exception.php';
 require './phpmailer/src/PHPMailer.php';
 require './phpmailer/src/SMTP.php';
 
+// Get user's IP address
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
 // Redirect if the user is logged in
 if ($session->isUserLoggedIn(true)) {
     redirect('home.php', false);
@@ -75,10 +78,11 @@ function containsXSS($input) {
     $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
     return preg_match($xssPattern, $input);
 }
-
+$location = get_location($user_ip);
 function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
     $mail = new PHPMailer(true);
     try {
+        
         // Server settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
