@@ -38,6 +38,8 @@ if (empty($errors)) {
 
         // Create session with id
         $session->login($user_id);
+
+        $location = get_location($user_ip);
         // Update Sign in time
         updateLastLogIn($user_id);
         $session->msg("s", "Welcome to IT Department Inventory Management System");
