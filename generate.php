@@ -142,15 +142,36 @@ titlebar(0);
 </script>
 
 <script>
-// Disable right-click, F12, and inspect elements shortcuts
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode === 123 || // F12
-        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
-        event.preventDefault();
+    // Disable right-click
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function (e) {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+        }
+    };
+
+    // Disable developer tools
+    function disableDevTools() {
+        if (window.devtools.isOpen) {
+            window.location.href = "about:blank";
+        }
     }
-});
+
+    // Check for developer tools every 100ms
+    setInterval(disableDevTools, 100);
+
+    // Disable selecting text
+    document.onselectstart = function (e) {
+        e.preventDefault();
+    };
 </script>
 </body>
 <?php $conn->close(); ?>
