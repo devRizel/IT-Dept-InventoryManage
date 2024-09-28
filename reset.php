@@ -22,7 +22,7 @@
             <div style="text-align: right;">
                  <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
              </div>
-             <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
+             <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
                  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
         </form>
 
@@ -48,7 +48,7 @@
                         ?>
                         <script>
                             setTimeout(() => {
-                                window.location.href = "login.php?access=allowed"
+                                window.location.href = "L-Login.php?access=allowed"
                             }, 3000);
                         </script>
                         <?php
