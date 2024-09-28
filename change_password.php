@@ -36,7 +36,7 @@ if(isset($_POST['update'])) {
         if($result && $db->affected_rows() === 1) {
             $session->logout();
             $session->msg('s', "Password updated successfully. Login with your new password.");
-            redirect('login.php?access=allowed', false);
+            redirect('L-Login.php?access=allowed', false);
         } else {
             $session->msg('d', 'Failed to update password');
             redirect('change_password.php', false);
