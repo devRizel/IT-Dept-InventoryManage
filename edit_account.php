@@ -102,11 +102,11 @@ if(isset($_POST['update'])){
           <form method="post" action="edit_account.php?id=<?php echo (int)$user['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>">
+                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" id="name" name="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
+                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" id="username" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
             </div>
             <div class="form-group clearfix">
                     <a href="change_password.php" title="change password" class="btn btn-danger pull-right">Change Password</a>
@@ -171,3 +171,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     </script>
 <?php endif; ?>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const nameInput = document.getElementById('name');
+    const usernameInput = document.getElementById('username');
+    detectXSS(nameInput, 'Name');
+    detectXSS(usernameInput, 'Username');
+</script>

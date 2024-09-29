@@ -1,6 +1,5 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 
-
 <?php
 date_default_timezone_set('Asia/Manila');
 $page_title = 'Edit Computer';
@@ -233,15 +232,15 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-4">
                      <label for="Device-Photo">Donated By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']) . ' ' . htmlspecialchars($form_data['donate']); ?>">
+                     <input id="q" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']) . ' ' . htmlspecialchars($form_data['donate']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">Received By</label>
-                     <input type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']) . ' ' . htmlspecialchars($form_data['recievedby']); ?>">
+                     <input id="w" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']) . ' ' . htmlspecialchars($form_data['recievedby']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">Monitor</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="monitor" value="<?php echo remove_junk($product['monitor']) . ' ' . htmlspecialchars($form_data['monitor']); ?>">
+                     <input id="e" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="monitor" value="<?php echo remove_junk($product['monitor']) . ' ' . htmlspecialchars($form_data['monitor']); ?>">
                  </div>
                </div>
           </div>
@@ -250,15 +249,15 @@ include_once('layouts/header.php');
                <div class="row">
                <div class="col-md-4">
     <label for="Keyboard">Keyboard</label>
-    <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="Keyboard" value="<?php echo remove_junk($product['Keyboard']) . ' ' . htmlspecialchars($form_data['Keyboard']); ?>">
+    <input id="r" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="Keyboard" value="<?php echo remove_junk($product['Keyboard']) . ' ' . htmlspecialchars($form_data['Keyboard']); ?>">
 </div>
                   <div class="col-md-4">
                      <label for="Device-Photo">Mouse</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mouse"  value="<?php echo remove_junk($product['mouse']) . ' ' . htmlspecialchars($form_data['mouse']); ?>">
+                     <input id="t" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mouse"  value="<?php echo remove_junk($product['mouse']) . ' ' . htmlspecialchars($form_data['mouse']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">VGA|HDMI</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="v1" value="<?php echo remove_junk($product['v1']) . ' ' . htmlspecialchars($form_data['v1']); ?>">
+                     <input id="y" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="v1" value="<?php echo remove_junk($product['v1']) . ' ' . htmlspecialchars($form_data['v1']); ?>">
                   </div>
                </div>
           </div>
@@ -267,15 +266,15 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-4">
                      <label for="Device-Photo">Power Chord 1</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p1" value="<?php echo remove_junk($product['p1']) . ' ' . htmlspecialchars($form_data['p1']); ?>">
+                     <input id="u" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p1" value="<?php echo remove_junk($product['p1']) . ' ' . htmlspecialchars($form_data['p1']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">Power Chord 2</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p2" value="<?php echo remove_junk($product['p2']) . ' ' . htmlspecialchars($form_data['p2']); ?>">
+                     <input id="i" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="p2" value="<?php echo remove_junk($product['p2']) . ' ' . htmlspecialchars($form_data['p2']); ?>">
                   </div>
                   <div class="col-md-4">
                      <label for="Device-Photo">System Unit Model</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="system" value="<?php echo remove_junk($product['system']) . ' ' . htmlspecialchars($form_data['system']); ?>">
+                     <input id="o" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="system" value="<?php echo remove_junk($product['system']) . ' ' . htmlspecialchars($form_data['system']); ?>">
                   </div>
                </div>
           </div>
@@ -284,15 +283,15 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-4">
                      <label for="Device-Photo">Power Supply|AVR</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power1" value="<?php echo remove_junk($product['power1']) . ' ' . htmlspecialchars($form_data['power1']); ?>">
+                     <input id="p" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power1" value="<?php echo remove_junk($product['power1']) . ' ' . htmlspecialchars($form_data['power1']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">Motherboard Model</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mother" value="<?php echo remove_junk($product['mother']) . ' ' . htmlspecialchars($form_data['mother']); ?>">
+                     <input id="a" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="mother" value="<?php echo remove_junk($product['mother']) . ' ' . htmlspecialchars($form_data['mother']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">CPU|Processesor</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="cpu" value="<?php echo remove_junk($product['cpu']) . ' ' . htmlspecialchars($form_data['cpu']); ?>">
+                     <input id="s" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="cpu" value="<?php echo remove_junk($product['cpu']) . ' ' . htmlspecialchars($form_data['cpu']); ?>">
                   </div>
                </div>
           </div>
@@ -302,15 +301,15 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-4">
                      <label for="Device-Photo">RAM Quannty|Model</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="ram" value="<?php echo remove_junk($product['ram']) . ' ' . htmlspecialchars($form_data['ram']); ?>">
+                     <input id="d" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="ram" value="<?php echo remove_junk($product['ram']) . ' ' . htmlspecialchars($form_data['ram']); ?>">
                  </div>
                  <div class="col-md-4">
                      <label for="Device-Photo">Power Supply 2</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power2" value="<?php echo remove_junk($product['power2']) . ' ' . htmlspecialchars($form_data['power2']); ?>">
+                     <input id="f" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="power2" value="<?php echo remove_junk($product['power2']) . ' ' . htmlspecialchars($form_data['power2']); ?>">
                   </div>
                   <div class="col-md-4">
                      <label for="Device-Photo">Video Card|GPU</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="video" value="<?php echo remove_junk($product['video']) . ' ' . htmlspecialchars($form_data['video']); ?>">
+                     <input id="g" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="video" value="<?php echo remove_junk($product['video']) . ' ' . htmlspecialchars($form_data['video']); ?>">
                  </div>
                </div>
           </div>
@@ -319,7 +318,7 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-offset-2 col-md-8">
                      <label for="Device-Photo">HDD|SSD|GB</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']) . ' ' . htmlspecialchars($form_data['h']); ?>">
+                     <input id="h" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="h" value="<?php echo remove_junk($product['h']) . ' ' . htmlspecialchars($form_data['h']); ?>">
                   </div>
                </div>
           </div>
@@ -387,4 +386,75 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     <?php endif; ?>
 });
+</script>
+<script src="sweetalert.min.js"></script>
+<?php if (!empty($js_error_msgs)): ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the first error message from the array
+        var errorMessages = <?php echo json_encode(array_values($js_error_msgs)[0]); ?>;
+        swal({
+            title: "",
+            text: errorMessages,
+            icon: "warning",
+            dangerMode: true
+        });
+    });
+</script>
+<?php endif; ?>
+<?php if (!empty($errors)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            swal({
+                title: "",
+                text: "<?php echo $errors[0]; ?>",
+                icon: "warning",
+                dangerMode: true
+            });
+        });
+    </script>
+<?php endif; ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const qInput = document.getElementById('q');
+    const wInput = document.getElementById('w');
+    const eInput = document.getElementById('e');
+    const rInput = document.getElementById('r');
+    const tInput = document.getElementById('t');
+    const yInput = document.getElementById('y');
+    const uInput = document.getElementById('u');
+    const iInput = document.getElementById('i');
+    const oInput = document.getElementById('o');
+    const pInput = document.getElementById('p');
+    const aInput = document.getElementById('a');
+    const sInput = document.getElementById('s');
+    const dInput = document.getElementById('d');
+    const fInput = document.getElementById('f');
+    const gInput = document.getElementById('g');
+    const hInput = document.getElementById('h');
+    detectXSS(qInput, 'Donated By');
+    detectXSS(wInput, 'Received By');
+    detectXSS(eInput, 'Monitor');
+    detectXSS(rInput, 'Keyboard');
+    detectXSS(tInput, 'Mouse');
+    detectXSS(yInput, 'VGA|HDMI');
+    detectXSS(uInput, 'Power Chord 1');
+    detectXSS(iInput, 'Power Chord 2');
+    detectXSS(oInput, 'Power Supply|AVR');
+    detectXSS(pInput, 'System Unit Model');
+    detectXSS(aInput, 'Motherboard Model');
+    detectXSS(sInput, 'CPU|Processesor');
+    detectXSS(dInput, 'RAM Quannty|Model');
+    detectXSS(fInput, 'Power Supply 2');
+    detectXSS(gInput, 'Video Card|GPU');
+    detectXSS(hInput, 'HDD|SSD|GB');
 </script>

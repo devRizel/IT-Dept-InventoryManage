@@ -7,7 +7,6 @@ require_once('includes/load.php');
 page_require_level(1);
 $groups = find_all('user_groups');
 
-
 if (isset($_POST['add_user'])) {
     $req_fields = array('password', 'username', 'full-name', 'level');
     validate_fields($req_fields);
@@ -77,11 +76,11 @@ function find_by_username($username) {
                 <form method="post" action="add_user.php">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="full-name" placeholder="Full Name">
+                        <input id="name" type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="full-name" placeholder="Full Name">
                     </div>
                     <div class="form-group">
                         <label for="username">Email</label>
-                        <input type="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="username" placeholder="Username">
+                        <input id="username" type="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="username" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -153,4 +152,23 @@ function find_by_username($username) {
     this.classList.toggle('fa-eye');
     this.classList.toggle('fa-eye-slash');
   });
+</script>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const nameInput = document.getElementById('name');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    detectXSS(nameInput, 'Name');
+    detectXSS(usernameInput, 'Username');
+    detectXSS(passwordInput, 'Password');
+
 </script>

@@ -85,7 +85,7 @@ include_once('layouts/header.php');
             <div class="row">
               <div class="col-md-8">
                 <center><label>Barrow By</label></center>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="barrow"  value="<?php echo htmlspecialchars($form_data['barrow']); ?>">
+                <input id="a" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="barrow"  value="<?php echo htmlspecialchars($form_data['barrow']); ?>">
               </div>
             </div>
           </div>
@@ -162,3 +162,18 @@ $(document).ready(function() {
         });
     </script>
 <?php endif; ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const aInput = document.getElementById('a');
+    detectXSS(aInput, 'Barrow By');
+
+</script>

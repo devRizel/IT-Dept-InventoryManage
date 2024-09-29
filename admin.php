@@ -228,7 +228,7 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="product.php" style="color:black;">
+  <a href="computer.php" style="color:black;">
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
@@ -241,7 +241,7 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="product.php" style="color:black;">
+  <a href="otherdevices.php" style="color:black;">
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-red">
@@ -254,7 +254,7 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="product.php" style="color:black;">
+  <a href="barrowedcomputerreturn.php" style="color:black;">
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-blue">
@@ -267,7 +267,7 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="product.php" style="color:black;">
+  <a href="barrowedotherreturn.php" style="color:black;">
     <div class="col-md-3">
       <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">

@@ -8,7 +8,6 @@ require_once('includes/load.php');
 // Checkin What level user has permission to view this page
 page_require_level(1);
 
-
 $all_categories = find_all_desc('categories');
 $all_rooms = find_all_desc('room');
 
@@ -146,7 +145,7 @@ endforeach;
      <div class="panel-body">
        <form method="post" action="categorie.php">
          <div class="form-group">
-             <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" placeholder="Category Name">
+             <input id="cat" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" placeholder="Category Name">
          </div>
          <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_cat" class="btn btn-primary">Add Category</button>
      </form>
@@ -206,7 +205,7 @@ endforeach;
      <div class="panel-body">
        <form method="post" action="categorie.php">
          <div class="form-group">
-             <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="room-name" placeholder="Room Name">
+             <input id="rom" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="room-name" placeholder="Room Name">
          </div>
          <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_room" class="btn btn-primary">Add Room</button>
      </form>
@@ -304,6 +303,22 @@ if (successParam === 'true') {
         });
 }
 </script>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const catInput = document.getElementById('cat');
+    const romnameInput = document.getElementById('rom');
+    detectXSS(catInput, 'Category Name');
+    detectXSS(romnameInput, 'Room Name');
 
+</script>
 
 

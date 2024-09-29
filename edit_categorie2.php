@@ -15,7 +15,6 @@ date_default_timezone_set('Asia/Manila');
   }
 ?>
 
-
 <?php
 if(isset($_POST['edit_cat'])){
   $req_field = array('categorie-name');
@@ -52,7 +51,7 @@ if(isset($_POST['edit_cat'])){
        <div class="panel-body">
          <form method="post" action="edit_categorie2.php?id=<?php echo (int)$categorie['id'];?>">
            <div class="form-group">
-               <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" value="<?php echo remove_junk(ucfirst($categorie['name']));?>">
+               <input id="rom" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="categorie-name" value="<?php echo remove_junk(ucfirst($categorie['name']));?>">
            </div>
            <center><button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="edit_cat" class="btn btn-primary">Update Room</button>
            <a  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="categorie.php" class="btn btn-danger" class="">Cancel</a></center>
@@ -65,3 +64,18 @@ if(isset($_POST['edit_cat'])){
 
 
 <?php include_once('layouts/footer.php'); ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const romnameInput = document.getElementById('rom');
+    detectXSS(romnameInput, 'Room Name');
+
+</script>

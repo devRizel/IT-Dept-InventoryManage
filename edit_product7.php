@@ -11,7 +11,6 @@ $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
 
-
 function find_by_serial_number($serial_number) {
   global $db;
   $serial_number = $db->escape($serial_number);
@@ -128,7 +127,7 @@ include_once('layouts/header.php');
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <label for="Device-Category">Product Category</label>
+                <label for="Device-Category">Device Category</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
                   <option value="">Select a Category</option>
                   <?php foreach ($all_categories as $cat): ?>
@@ -142,7 +141,7 @@ include_once('layouts/header.php');
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="Device-Photo">Product Photo</label>
+                <label for="Device-Photo">Device Photo</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo">
                   <option value="">No image</option>
                   <?php foreach ($all_photo as $photo): ?>
@@ -159,7 +158,7 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-6">
                      <label for="Device-Photo">Donated By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']);?>">
+                     <input id="q" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']);?>">
                  </div>
                  <div class="col-md-6">
                      <label for="Device-Photo">Date Received</label>
@@ -172,11 +171,11 @@ include_once('layouts/header.php');
                <div class="row">
                  <div class="col-md-6">
                      <label for="Device-Photo">Serial Num.</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" value="<?php echo remove_junk($product['serial']);?>">
+                     <input id="w" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" value="<?php echo remove_junk($product['serial']);?>">
                  </div>
                  <div class="col-md-6">
                      <label for="Device-Photo">Recieved By</label>
-                     <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>">
+                     <input id="e" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" value="<?php echo remove_junk($product['recievedby']);?>">
                  </div>
                </div>
           </div>
@@ -240,3 +239,21 @@ $(document).ready(function() {
         });
     </script>
 <?php endif; ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const qInput = document.getElementById('q');
+    const wInput = document.getElementById('w');
+    const eInput = document.getElementById('e');
+    detectXSS(qInput, 'Donated By');
+    detectXSS(wInput, 'Serial Num.');
+    detectXSS(eInput, 'Recieved By');
+</script>

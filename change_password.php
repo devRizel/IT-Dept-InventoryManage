@@ -11,12 +11,12 @@ page_require_level(3);
 <?php
 if(isset($_POST['update'])) {
 
-    $req_fields = array('new-password', 'confirm-password', 'old-password', 'id');
+    $req_fields = array('newpassword', 'confirmpassword', 'oldpassword', 'id');
     validate_fields($req_fields);
 
     if(empty($errors)) {
-        $new_password = remove_junk($db->escape($_POST['new-password']));
-        $confirm_password = remove_junk($db->escape($_POST['confirm-password']));
+        $new_password = remove_junk($db->escape($_POST['newpassword']));
+        $confirm_password = remove_junk($db->escape($_POST['confirmpassword']));
 
         if($new_password !== $confirm_password) {
             $session->msg('d', "New password and confirmation password do not match");
@@ -24,13 +24,13 @@ if(isset($_POST['update'])) {
         }
 
         
-        if(sha1($_POST['old-password']) !== $user['password']) {
+        if(sha1($_POST['oldpassword']) !== $user['password']) {
             $session->msg('d', "Your old password does not match");
             redirect('change_password.php', false);
         }
 
         $id = (int)$_POST['id'];
-        $new = remove_junk($db->escape(sha1($_POST['new-password'])));
+        $new = remove_junk($db->escape(sha1($_POST['newpassword'])));
         $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
         $result = $db->query($sql);
 
@@ -58,15 +58,15 @@ if(isset($_POST['update'])) {
       <form method="post" action="change_password.php" class="clearfix">
         <div class="form-group">
               <label for="oldPassword" class="control-label">Old password</label>
-              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="old-password" placeholder="Old password">
+              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Old password">
         </div>
         <div class="form-group">
               <label for="newPassword" class="control-label">New password</label>
-              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="new-password" id="new-password" placeholder="New password">
+              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New password">
         </div>
         <div class="form-group">
               <label for="confirmPassword" class="control-label">Confirm password</label>
-              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm password">
+              <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm password">
         </div>
         <div class="form-group clearfix">
                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="hidden" name="id" value="<?php echo (int)$user['id'];?>">
@@ -78,8 +78,8 @@ if(isset($_POST['update'])) {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#confirm-password').addEventListener('input', function() {
-        let newPassword = document.querySelector('#new-password').value;
+    document.querySelector('#confirmpassword').addEventListener('input', function() {
+        let newPassword = document.querySelector('#newpassword').value;
         let confirmPassword = this.value;
         if(newPassword !== confirmPassword) {
             this.style.borderColor = 'red';
@@ -88,4 +88,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+</script>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const oldpasswordInput = document.getElementById('oldpassword');
+    const newpasswordInput = document.getElementById('newpassword');
+    const confirmpasswordInput = document.getElementById('confirmpassword');
+    detectXSS(oldpasswordInput, 'Old Password');
+    detectXSS(newpasswordInput, 'New Password');
+    detectXSS(confirmpasswordInput, 'Confirm Password');
 </script>
