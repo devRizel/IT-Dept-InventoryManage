@@ -356,6 +356,7 @@ function logError($message) {
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcAgpgfAAAAAEGsx8P_gd5Ndm-VGpeWv7kQVwjf"></script>
   <button class="chat-button" onclick="toggleChatWindow()">
         <span class="chat-icon">Message with us!</span>💬
     </button>
