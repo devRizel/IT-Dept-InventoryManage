@@ -185,7 +185,7 @@ $all_other_images = filter_options($all_other_images, $saved_image_ids);
             <div class="form-group">
                <div class="row">
                  <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By" value="<?php echo htmlspecialchars($form_data['donate']); ?>">
+                    <input id="q" type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="donate" placeholder="Donated By" value="<?php echo htmlspecialchars($form_data['donate']); ?>">
                  </div>
                  <div class="col-md-6">
                     <input type="text" class="form-control datepicker" name="dreceived" placeholder="Date Received" required readonly value="<?php echo htmlspecialchars($form_data['dreceived']); ?>">
@@ -196,10 +196,10 @@ $all_other_images = filter_options($all_other_images, $saved_image_ids);
             <div class="form-group">
                <div class="row">
                   <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="recievedby" placeholder="Recieved By" value="<?php echo htmlspecialchars($form_data['recievedby']); ?>">
+                    <input id="w" type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="recievedby" placeholder="Recieved By" value="<?php echo htmlspecialchars($form_data['recievedby']); ?>">
                   </div>
                   <div class="col-md-6">
-                    <input type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="serial" placeholder="Serial Number" value="<?php echo htmlspecialchars($form_data['serial']); ?>">
+                    <input id="e" type="text" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="serial" placeholder="Serial Number" value="<?php echo htmlspecialchars($form_data['serial']); ?>">
                   </div>
                 </div>
             </div>
@@ -278,3 +278,21 @@ if (successParam === 'true') {
     });
 </script>
 <?php endif; ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const qInput = document.getElementById('q');
+    const wInput = document.getElementById('w');
+    const eInput = document.getElementById('e');
+    detectXSS(qInput, 'Donated By');
+    detectXSS(wInput, 'Serial Num.');
+    detectXSS(eInput, 'Recieved By');
+</script>
