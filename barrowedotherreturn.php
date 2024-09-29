@@ -82,7 +82,7 @@ include_once('layouts/header.php');
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h1 class="text-center">Return</h1>
+        <h1 class="text-center">Return Other Device</h1>
         <div class="select-wrapper">
           <select id="category-select"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;"  class="form-control" name="Device-Category">
             <option value="">Overall Other Devices</option>
