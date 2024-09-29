@@ -81,11 +81,11 @@ if(isset($_POST['update-pass'])) {
           <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
+                  <input id="q" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
+                  <input id="w" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
@@ -122,7 +122,7 @@ if(isset($_POST['update-pass'])) {
         <form action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" method="post" class="clearfix">
           <div class="form-group">
                 <label for="password" class="control-label">Password</label>
-                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="password" placeholder="Type user new password">
+                <input id="e" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="password" placeholder="Type user new password">
           </div>
           <div class="form-group clearfix">
                   <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="update-pass" class="btn btn-danger pull-right">Change</button>
@@ -134,3 +134,21 @@ if(isset($_POST['update-pass'])) {
 
  </div>
 <?php include_once('layouts/footer.php'); ?>
+<script src="sweetalert.min.js"></script>
+<script>
+    function detectXSS(inputField, fieldName) {
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+        });
+    }
+    const qInput = document.getElementById('q');
+    const wInput = document.getElementById('w');
+    const eInput = document.getElementById('e');
+    detectXSS(qInput, 'Name');
+    detectXSS(wInput, 'Username');
+    detectXSS(eInput, 'Password');
+</script>
