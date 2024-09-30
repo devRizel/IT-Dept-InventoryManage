@@ -7,6 +7,7 @@ $page_title = 'Add Product';
 require_once('includes/load.php');
 
 
+
 // Checking user permission to view page
 page_require_level(2);
 
