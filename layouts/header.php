@@ -195,7 +195,7 @@ $user = current_user();
 
 <div class="page">
   <div class="container-fluid">
-  <!-- <div class="page">
+  <div class="page">
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -229,7 +229,7 @@ $user = current_user();
         echo "<p>No results found.</p>";
     }
     ?>
-</div> -->
+</div>
 
                 </div>
 
