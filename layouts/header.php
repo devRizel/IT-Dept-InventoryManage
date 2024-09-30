@@ -6,29 +6,29 @@ date_default_timezone_set('Asia/Manila');
 $user = current_user();
 
 
-// Database configuration
-$servername = "127.0.0.1";
-$username = "u510162695_inventory";
-$password = "1Inventory_system";
-$dbname = "u510162695_inventory";
+// // Database configuration
+// $servername = "127.0.0.1";
+// $username = "u510162695_inventory";
+// $password = "1Inventory_system";
+// $dbname = "u510162695_inventory";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// // Create connection
+// $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// // Check connection
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
 
-// SQL query to select data from the table, ordered by most recent first
-$sql = "SELECT id, name, email, message, created_at FROM chat ORDER BY created_at DESC";
-$result = $conn->query($sql);
+// // SQL query to select data from the table, ordered by most recent first
+// $sql = "SELECT id, name, email, message, created_at FROM chat ORDER BY created_at DESC";
+// $result = $conn->query($sql);
 
-// Count total messages
-$count_sql = "SELECT COUNT(*) AS total FROM chat";
-$count_result = $conn->query($count_sql);
-$count_row = $count_result->fetch_assoc();
-$message_count = $count_row['total'];
+// // Count total messages
+// $count_sql = "SELECT COUNT(*) AS total FROM chat";
+// $count_result = $conn->query($count_sql);
+// $count_row = $count_result->fetch_assoc();
+// $message_count = $count_row['total'];
 ?>
 
 <!DOCTYPE html>
@@ -137,7 +137,7 @@ $message_count = $count_row['total'];
             </div>
             <div class="pull-right clearfix">
                 <ul class="info-menu list-inline list-unstyled">
-                    <li class="notification-container">
+                    <!-- <li class="notification-container">
                     <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
                         <img src="uploads/users/icon.png" alt="IT Department Logo"
                              style="width: 50px; height: auto; margin-bottom: 0px;" data-toggle="modal" data-target="#myModal">
@@ -145,7 +145,7 @@ $message_count = $count_row['total'];
                             <span class="badge"><?php echo $message_count; ?></span>
                         <?php endif; ?>
                         <?php endif; ?>
-                    </li>
+                    </li> -->
                     <li class="profile">
                         <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
                             <img src="uploads/users/<?php echo $user['image'];?>" alt="user-image" class="img-circle img-inline">
@@ -195,7 +195,7 @@ $message_count = $count_row['total'];
 
 <div class="page">
   <div class="container-fluid">
-  <!-- <div class="page"> -->
+  <!-- <div class="page">
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -229,7 +229,7 @@ $message_count = $count_row['total'];
         echo "<p>No results found.</p>";
     }
     ?>
-</div>
+</div> -->
 
                 </div>
 
