@@ -30,7 +30,7 @@ date_default_timezone_set('Asia/Manila');
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
         <div style="position: relative;">
-          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+          <input id="password"  pattern="^[a-zA-Z0-9]+$" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
           <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
         </div>
       </div>
@@ -135,36 +135,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 <script>
-    function detectXSS(inputField, fieldName) {
+    function detectSymbolsAndXSS(inputField, fieldName) {
+        const symbolPattern = /[^a-zA-Z0-9]/;
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
-            if (xssPattern.test(this.value)) {
+            if (fieldName === 'Password' && symbolPattern.test(this.value)) {
               swal("Fuk u", `Lubton nuon tika`, "error");
                 this.value = "";
             }
-        });
-    }
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    detectXSS(emailInput, 'Email');
-    detectXSS(passwordInput, 'Password');
-</script>
-<!-- <script>
-    function detectXSS(inputField, fieldName) {
-        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
-        inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
-                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
-                this.value = "";
+              swal("Fuk u", `Lubton nuon tika`, "error");
+                this.value = ""; 
             }
         });
     }
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    detectXSS(emailInput, 'Email');
-    detectXSS(passwordInput, 'Password');
-</script> -->
+    detectSymbolsAndXSS(emailInput, 'Email');
+    detectSymbolsAndXSS(passwordInput, 'Password');
+</script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <script>
   document.getElementById('password').addEventListener('input', function() {
