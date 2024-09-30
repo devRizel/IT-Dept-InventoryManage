@@ -156,6 +156,27 @@ document.addEventListener('DOMContentLoaded', function() {
     detectSymbolsAndXSS(emailInput, 'Email');
     detectSymbolsAndXSS(passwordInput, 'Password');
 </script>
+<!-- <script>
+    function detectSymbolsAndXSS(inputField, fieldName) {
+        const symbolPattern = /[^a-zA-Z0-9]/;
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        inputField.addEventListener('input', function() {
+            if (fieldName === 'Password' && symbolPattern.test(this.value)) {
+                swal("Invalid Input", `Please avoid using symbols in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+            if (xssPattern.test(this.value)) {
+                swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = ""; 
+            }
+        });
+    }
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    detectSymbolsAndXSS(emailInput, 'Email');
+    detectSymbolsAndXSS(passwordInput, 'Password');
+</script> -->
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <script>
