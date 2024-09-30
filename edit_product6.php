@@ -172,7 +172,7 @@ include_once('layouts/header.php');
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <label for="Device-Category">DeviceCategory</label>
+                <label for="Device-Category">Device Category</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category">
                   <option value="">Select a Category</option>
                   <?php foreach ($filtered_cat as $cat): ?>
