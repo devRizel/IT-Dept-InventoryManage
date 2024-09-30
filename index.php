@@ -334,7 +334,7 @@ function logError($message) {
 
     <div class="container">
     <div class="copyright text-center ">
-        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">Rizel Mulle Bracero</strong> 
+        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
         <span>All Right Reserved</span></p>
       </div>
       <div class="social-links d-flex justify-content-center">
