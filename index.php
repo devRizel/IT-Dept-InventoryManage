@@ -239,8 +239,7 @@ function logError($message) {
       .hero h1 {
         font-size: 20px; /* Adjust font size for smaller screens */
       }
-    }
-    .marquee-text {
+      .marquee-text {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -272,6 +271,7 @@ function logError($message) {
         transform: translateX(-100%);
     }
 }
+    }
   </style>
 </head>
 
@@ -331,20 +331,19 @@ function logError($message) {
   </main>
 
   <footer id="footer" class="footer">
+
     <div class="container">
-        <div class="copyright text-center">
-            <p class="marquee-text">
-                <span>© </span>Copyright 2024
-                <strong class="px-1 sitename">IT Team</strong>
-                <span>All Right Reserved</span> 
-            </p>
-        </div>
+    <div class="copyright text-center ">
+        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
+        <span>All Right Reserved</span></p>
+      </div>
       <div class="social-links d-flex justify-content-center">
         <a href=""><i class="bi bi-facebook"></i></a>
         <a href=""><i class="bi bi-instagram"></i></a>
       </div>
     </div>
-</footer>
+
+  </footer>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
