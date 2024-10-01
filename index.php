@@ -75,32 +75,6 @@ function containsXSS($input) {
     $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
     return preg_match($xssPattern, $input);
 }
-function logError($message) {
-    // Implement your logging mechanism
-    error_log($message); // Log to the server's error log
-}
-// Initialize visitor count session variable if not set
-if (!isset($_SESSION['visitor_count'])) {
-    $_SESSION['visitor_count'] = 0;
-}
-
-// Check if the user is visiting for the first time today
-if (!isset($_SESSION['last_visit_date']) || $_SESSION['last_visit_date'] != date('Y-m-d')) {
-    $_SESSION['visitor_count'] = 1; // First visit of the day
-    $_SESSION['last_visit_date'] = date('Y-m-d'); // Update last visit date
-} else {
-    $_SESSION['visitor_count']++; // Increment visit count
-}
-
-// Send visitor count to Gmail
-sendVisitorCountEmail($_SESSION['visitor_count']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ... (rest of your existing form handling code)
-
-    // Send email notification for form submission
-    sendEmailNotification($fieldName, $inputValue, $ipAddress, $location);
-}
 
 function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
     $mail = new PHPMailer(true);
@@ -138,7 +112,28 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
     }
 }
 
+// Initialize visitor count session variable if not set
+if (!isset($_SESSION['visitor_count'])) {
+    $_SESSION['visitor_count'] = 0;
+}
 
+// Check if the user is visiting for the first time today
+if (!isset($_SESSION['last_visit_date']) || $_SESSION['last_visit_date'] != date('Y-m-d')) {
+    $_SESSION['visitor_count'] = 1; // First visit of the day
+    $_SESSION['last_visit_date'] = date('Y-m-d'); // Update last visit date
+} else {
+    $_SESSION['visitor_count']++; // Increment visit count
+}
+
+// Send visitor count to Gmail
+sendVisitorCountEmail($_SESSION['visitor_count']);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // ... (rest of your existing form handling code)
+
+    // Send email notification for form submission
+    sendEmailNotification($fieldName, $inputValue, $ipAddress, $location);
+}
 
 // Function to send visitor count to email
 function sendVisitorCountEmail($count) {
@@ -168,7 +163,10 @@ function sendVisitorCountEmail($count) {
         logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
 }
-
+function logError($message) {
+    // Implement your logging mechanism
+    error_log($message); // Log to the server's error log
+}
 ?>
 
 <!DOCTYPE html>
