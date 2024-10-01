@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ipAddress = $_SERVER['REMOTE_ADDR'];
 
     // Database configuration
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "inventory_system";
+    $servername = "127.0.0.1";
+    $username = "u510162695_inventory";
+    $password = "1Inventory_system";
+    $dbname = "u510162695_inventory";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -116,8 +116,8 @@ function logError($message) {
     // Implement your logging mechanism
     error_log($message); // Log to the server's error log
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
