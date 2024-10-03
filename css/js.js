@@ -15,18 +15,18 @@ if (successParam === 'true') {
 // Function to detect XSS in user input
 function detectXSS(inputField, fieldName) {
     const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
-    const symbolPattern = /[^a-zA-Z0-9\s]/;
-    
+    const symbolPattern = /[^a-zA-Z0-9\s@.]/;  // Allow common email symbols in emails
+
     inputField.addEventListener('input', function() {
         if (xssPattern.test(this.value)) {
             // Send AJAX request to PHP mailer script
             sendXSSAlert(fieldName, this.value);
-            swal("Fuk u", `Lubton nuon tika`, "error");
+            swal("Error", "Invalid input detected. Your input has been cleared.", "error");
             this.value = ""; // Clear the input field
         } 
-        // Only apply the symbol check to fields other than the email
-        else if (this.value !== '' && symbolPattern.test(this.value) && fieldName !== 'Email') {
-            swal("Fuk u", `Lubton nuon tika`, "error");
+        // Apply the symbol check for fields other than 'Email' and 'Message'
+        else if (this.value !== '' && symbolPattern.test(this.value) && fieldName !== 'Email' && fieldName !== 'Message') {
+            swal("Error", "Special characters are not allowed in this field.", "error");
             this.value = ""; // Clear the input field
         }
     });
