@@ -83,14 +83,14 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'lonearmy91@gmail.com@gmail.com'; 
-        $mail->Password = 'etpkblhyaxhdfcpf'; 
+        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
+        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('lonearmy91@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('lonearmy91@gmail.com');
+        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('itinventorymanagement@gmail.com');
 
         // Content
         $mail->isHTML(true);
@@ -147,14 +147,14 @@ if (!isset($_SESSION['visitor_count'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'lonearmy91@gmail.com'; // Use environment variable
-        $mail->Password = 'etpkblhyaxhdfcpf'; // Use environment variable
+        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
+        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
   
         // Recipients
-        $mail->setFrom('lonearmy91@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('lonearmy91@gmail.com');
+        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('itinventorymanagement@gmail.com');
   
         // Content
         $mail->isHTML(true);
@@ -334,7 +334,7 @@ if (!isset($_SESSION['visitor_count'])) {
 
       <a href="#" class="logo d-flex align-items-center me-auto">
         <img src="assets/image/download.png" class="img-fluid animated"alt="">
-        <h1 class="sitename">IT DEPARTMENTss</h1>
+        <h1 class="sitename">IT DEPARTMENT</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
