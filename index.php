@@ -83,14 +83,14 @@ function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
-        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
+        $mail->Username = 'inventorym77@gmail.com';
+        $mail->Password = 'ezvo nqde jzsf ouhl';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('itinventorymanagement@gmail.com');
+        $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('inventorym77@gmail.com');
 
         // Content
         $mail->isHTML(true);
@@ -147,14 +147,14 @@ if (!isset($_SESSION['visitor_count'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'itinventorymanagement@gmail.com'; // Use environment variable
-        $mail->Password = 'okfkncvsjvmysglc'; // Use environment variable
+        $mail->Username = 'inventorym77@gmail.com';
+        $mail->Password = 'ezvo nqde jzsf ouhl';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
   
         // Recipients
-        $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('itinventorymanagement@gmail.com');
+        $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
+        $mail->addAddress('inventorym77@gmail.com');
   
         // Content
         $mail->isHTML(true);

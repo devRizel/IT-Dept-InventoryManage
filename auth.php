@@ -51,14 +51,14 @@ if (empty($errors)) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Set mailer to use SMTP
             $mail->SMTPAuth = true;
-            $mail->Username = 'itinventorymanagement@gmail.com'; // Your Gmail address
-            $mail->Password = 'okfkncvsjvmysglc'; // Your Gmail app password
+            $mail->Username = 'inventorym77@gmail.com';
+            $mail->Password = 'ezvo nqde jzsf ouhl';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-            $mail->addAddress('itinventorymanagement@gmail.com'); // Admin email (your email)
+            $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
+            $mail->addAddress('inventorym77@gmail.com'); // Admin email (your email)
 
             $mail->isHTML(true);
             $mail->Subject = 'Successfully Logged.';
@@ -91,14 +91,14 @@ if (empty($errors)) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Set mailer to use SMTP
             $mail->SMTPAuth = true;
-            $mail->Username = 'itinventorymanagement@gmail.com'; // Your Gmail address
-            $mail->Password = 'okfkncvsjvmysglc'; // Your Gmail app password
+            $mail->Username = 'inventorym77@gmail.com';
+            $mail->Password = 'ezvo nqde jzsf ouhl';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('itinventorymanagement@gmail.com', 'IT Inventory Management');
-            $mail->addAddress('itinventorymanagement@gmail.com'); // Admin email (your email)
+            $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
+            $mail->addAddress('inventorym77@gmail.com'); // Admin email (your email)
 
             // Content
             $mail->isHTML(true);
