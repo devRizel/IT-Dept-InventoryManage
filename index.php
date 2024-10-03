@@ -420,11 +420,11 @@ if (!isset($_SESSION['visitor_count'])) {
         <div class="chat-content">
         <form id="chatForm" method="POST">
     <label for="name">Name</label>
-    <input pattern="^[a-zA-Z0-9]+$" type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
+    <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
     <label for="email">Email</label>
     <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
     <label for="message">Message</label>
-    <textarea pattern="^[a-zA-Z0-9]+$" id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
+    <textarea id="message" name="message" class="chat-input" placeholder="Your message" required></textarea>
     <button type="submit" class="chat-submit">Submit</button>
 </form>
         </div>
@@ -432,7 +432,7 @@ if (!isset($_SESSION['visitor_count'])) {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <script src="css/js.js"></script>
+    <script src="css/j.js"></script>
 
     <script>
         function toggleChatWindow() {
