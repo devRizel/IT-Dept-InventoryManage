@@ -176,7 +176,7 @@ if (!isset($_SESSION['visitor_count'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management System</title>
+  <title>Inventory Management Systems</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
