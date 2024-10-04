@@ -23,21 +23,22 @@ if(isset($_POST['update'])) {
             redirect('change_password.php', false);
         }
 
-        
-        if(sha1($_POST['oldpassword']) !== $user['password']) {
+        // Verify the old password using password_verify
+        if(!password_verify($_POST['oldpassword'], $user['password'])) {
             $session->msg('d', "Your old password does not match");
             redirect('change_password.php', false);
         }
 
         $id = (int)$_POST['id'];
-        $new = remove_junk($db->escape(sha1($_POST['newpassword'])));
-        $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
+        // Hash the new password using password_hash
+        $new_hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+        $sql = "UPDATE users SET password ='{$db->escape($new_hashed_password)}' WHERE id='{$db->escape($id)}'";
         $result = $db->query($sql);
 
         if($result && $db->affected_rows() === 1) {
             $session->logout();
             $session->msg('s', "Password updated successfully. Login with your new password.");
-            redirect('L-Login.php?access=allowed', false);
+            redirect('login.php?access=allowed', false);
         } else {
             $session->msg('d', 'Failed to update password');
             redirect('change_password.php', false);

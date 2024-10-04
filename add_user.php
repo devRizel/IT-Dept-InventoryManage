@@ -34,7 +34,7 @@ if (isset($_POST['add_user'])) {
         $username   = remove_junk($db->escape($_POST['username']));
         $password   = remove_junk($db->escape($_POST['password']));
         $user_level = (int)$db->escape($_POST['level']);
-        $password   = sha1($password);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $query  = "INSERT INTO users (name, username, password, user_level, status) ";
         $query .= "VALUES ('{$name}', '{$username}', '{$password}', '{$user_level}', '1')";

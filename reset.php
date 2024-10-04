@@ -22,7 +22,7 @@
             <div style="text-align: right;">
                  <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger">Submit</button>
              </div>
-             <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
+             <a href="login.php?access=allowed" style="font-size: 14px; text-decoration: none;
                  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
         </form>
 
@@ -31,24 +31,25 @@
             $verification = trim($_POST['verification']);
             $new = $_POST['new'];
             $confirm = $_POST['confirm'];
-
-            $q = $db->query("SELECT * FROM users WHERE verification = '$verification' LIMIT 1 ");
+        
+            $q = $db->query("SELECT * FROM users WHERE verification = '$verification' LIMIT 1");
             $count = $q->rowCount();
-
+        
             if ($count > 0) {
                 if (strlen($new) < 8) {
                     $error = 'Password must be equal or greater than 8 characters';
                 } else if ($new !== $confirm) {
-                    $error = 'Password don\'t match';
+                    $error = 'Passwords don\'t match';
                 } else {
-                    $md5 = sha1($new);
-                    $update = $db->query("UPDATE users SET password = '$md5' WHERE verification = '$verification'");
+                    // Use password_hash for bcrypt hashing
+                    $hashedPassword = password_hash($new, PASSWORD_BCRYPT);
+                    $update = $db->query("UPDATE users SET password = '$hashedPassword' WHERE verification = '$verification'");
                     if ($update) {
                         $message = "Password changed successfully, Redirecting in 3 seconds...";
                         ?>
                         <script>
                             setTimeout(() => {
-                                window.location.href = "L-Login.php?access=allowed"
+                                window.location.href = "login.php?access=allowed"
                             }, 3000);
                         </script>
                         <?php
@@ -58,6 +59,7 @@
                 $error = 'Incorrect login details';
             }
         }
+        
 
         if (isset($error)) { ?>
             <br><br>
@@ -137,44 +139,19 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
     exit();
 }
 ?>
-<script>
-    // Disable right-click
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
+  <script>
+      // Disable right-click
+document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, and other developer shortcuts
-    document.addEventListener('keydown', function (e) {
-        if (
-            e.key === 'F12' || // F12 Developer Tools
-            (e.ctrlKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+I
-            (e.ctrlKey && (e.key === 'u' || e.key === 'U')) || // Ctrl+U
-            (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+Shift+J
-            (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+Shift+I
-            (e.ctrlKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+J
-            (e.ctrlKey && (e.key === 's' || e.key === 'S')) || // Ctrl+S
-            (e.ctrlKey && (e.key === 'p' || e.key === 'P')) || // Ctrl+P
-            (e.ctrlKey && (e.key === 'c' || e.key === 'C')) || // Ctrl+C
-            (e.ctrlKey && (e.key === 'r' || e.key === 'R')) || // Ctrl+R
-            (e.ctrlKey && (e.key === 'f' || e.key === 'F'))    // Ctrl+F
-        ) {
-            e.preventDefault();
-        }
-    });
-
-    // Disable developer tools check every 100ms
-    setInterval(function () {
-        if (window.devtools && window.devtools.isOpen) {
-            window.location.href = "about:blank";
-        }
-    }, 100);
-
-    // Disable text selection
-    document.addEventListener('selectstart', function (e) {
-        e.preventDefault();
-    });
-</script>
-
+// Disable F12, Ctrl+Shift+I, and other shortcuts
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 123 || // F12
+        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
+        event.preventDefault();
+    }
+});
+    </script>
     <script src="sweetalert.min.js"></script>
     <script>
     function detectXSS(inputField, fieldName) {
