@@ -21,7 +21,7 @@ date_default_timezone_set('Asia/Manila');
        <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
        <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
     </div>
-    <center></center><?php echo display_msg($msg); ?>
+    <center><?php echo display_msg($msg); ?></center>
     <form method="post" action="auth.php" class="clearfix">
       <div class="form-group">
         <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
