@@ -1,7 +1,6 @@
 <?php
   require_once('includes/load.php');
 
-  
 /*--------------------------------------------------------------*/
 /* Function for find all database table rows by table name
 /*--------------------------------------------------------------*/
@@ -82,21 +81,31 @@ function tableExists($table){
  /* Login with the data provided in $_POST,
  /* coming from the login form.
 /*--------------------------------------------------------------*/
-  function authenticate($username='', $password='') {
-    global $db;
-    $username = $db->escape($username);
-    $password = $db->escape($password);
-    $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
-    $result = $db->query($sql);
-    if($db->num_rows($result)){
+function authenticate($username = '', $password = '') {
+  global $db;
+  // Escape the input values to prevent SQL injection
+  $username = $db->escape($username);
+  $password = $db->escape($password);
+  
+  // Query to fetch the user details by username
+  $sql  = sprintf("SELECT id, username, password, user_level FROM users WHERE username ='%s' LIMIT 1", $username);
+  $result = $db->query($sql);
+
+  // If a user is found, proceed with password verification
+  if($db->num_rows($result)){
       $user = $db->fetch_assoc($result);
-      $password_request = sha1($password);
-      if($password_request === $user['password'] ){
-        return $user['id'];
+
+      // Verify the entered password with the stored hashed password
+      if(password_verify($password, $user['password'])) {
+          // If the password matches, return the user id
+          return $user['id'];
       }
-    }
-   return false;
   }
+ 
+  // Return false if authentication fails
+  return false;
+}
+
   /*--------------------------------------------------------------*/
   /* Login with the data provided in $_POST,
   /* coming from the login_v2.php form.
@@ -193,7 +202,7 @@ function tableExists($table){
 
   
             $session->msg('d','Please login...');
-            redirect('L-Login.php?access=allowed', false);
+            redirect('login.php?access=allowed', false);
           }
     //   //if Group status Deactive
     //  elseif($login_level['group_status'] === '0') {
