@@ -23,6 +23,11 @@ include('admin/db_connect.php');
 ?>
 
 <style>
+    body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
     header.masthead {
         background: url(assets/img/ss.png);
         background-repeat: no-repeat;
