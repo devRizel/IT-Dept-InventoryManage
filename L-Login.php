@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'login.php?access=allowed';
+                window.location.href = 'L-Login.php?access=allowed';
             });
     }
 
