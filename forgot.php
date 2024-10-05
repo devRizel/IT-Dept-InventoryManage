@@ -84,9 +84,11 @@
 </div>
 
 <style>
-  body{
-    background-color: whitesmoke;
-  }
+    body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
   .forgot-password-wrapper {
     display: flex;
     justify-content: center;
