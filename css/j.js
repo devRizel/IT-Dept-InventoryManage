@@ -85,7 +85,7 @@ detectXSS(textarea, 'Message');
 //         if (xssPattern.test(this.value)) {
 //             // Send AJAX request to PHP mailer script
 //             sendXSSAlert(fieldName, this.value);
-//             swal("Error", "XSS attempt detected! Your input has been cleared.", "error");
+//             swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
 //             this.value = ""; // Clear the input field
 //         } 
 //         // Only apply the symbol check to fields other than the email

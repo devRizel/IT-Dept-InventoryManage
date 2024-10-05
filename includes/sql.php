@@ -202,7 +202,7 @@ function authenticate($username = '', $password = '') {
 
   
             $session->msg('d','Please login...');
-            redirect('login.php?access=allowed', false);
+            redirect('L-Login.php?access=allowed', false);
           }
     //   //if Group status Deactive
     //  elseif($login_level['group_status'] === '0') {

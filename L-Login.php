@@ -6,7 +6,7 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
     exit();
 }
 ?>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <?php
 date_default_timezone_set('Asia/Manila');
   ob_start();
@@ -14,44 +14,63 @@ date_default_timezone_set('Asia/Manila');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
-<div class="login-page-wrapper">
+<div class="login-page-wrapper card-primary">
   <div class="login-page">
     <div class="text-center">
-       <img src="uploads\users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
-       <h1 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Welcome to IT Department</h1>
-       <h4 style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);">Inventory Management System</h4>
+       <img src="uploads/users/rizel.png" alt="IT Department Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+       <h1>Welcome to IT Department</h1>
+       <h4>Inventory Management System</h4>
     </div>
+    <br>
     <center><?php echo display_msg($msg); ?></center>
     <form method="post" action="auth.php" class="clearfix">
-      <div class="form-group">
-        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="username" class="control-label">Email</label>
-        <input id="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" class="form-control" name="username" placeholder="Email" required>
+      <div class="wrap-input100 validate-input">
+        <input id="email" class="input100" type="text" name="username" placeholder="Enter Your Email" required>
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+        </span>
       </div>
-      <div class="form-group">
-        <label style="text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);" for="Password" class="control-label">Password</label>
-        <div style="position: relative;">
-          <input id="password"  pattern="^[a-zA-Z0-9]+$" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
-          <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
-        </div>
+
+      <div class="wrap-input100 validate-input">
+        <input id="password"  pattern="^[a-zA-Z0-9]+$" class="input100" type="password" name="password" placeholder="Enter Your Password">
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+        </span>
+        <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
       </div>
-      <div style="text-align: right;">
-         <a href="forgot.php?access=allowed" style="font-size: 14px; text-decoration: 
-         none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Forgot Password</a>
-     </div>
-      <center><div class="form-group">
-        <button  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
-      </div></center>
-      <a href="index.php" style="font-size: 14px; text-decoration: none;
-      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to home</a>
+
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" name="login">
+          Login
+        </button>
+      </div>
+
+      <div class="text-center p-t-12">
+        <a class="txt2" href="index.php">
+          Back To Home
+        </a>
+        <span class="txt1">
+          |
+        </span>
+        <a class="txt2" href="forgot.php?access=allowed">
+          Forgot Password?
+        </a>
+      </div>
+
+      <div class="text-center p-t-136"></div>
     </form>
   </div>
 </div>
 <?php include_once('layouts/footer.php'); ?>
 
 <style>
-  body{
-    background-color: whitesmoke;
-  }
+body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
   .login-page-wrapper {
     display: flex;
     justify-content: center;
@@ -67,29 +86,74 @@ date_default_timezone_set('Asia/Manila');
     padding: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
-    animation: borderAnimation 5s infinite;
     box-sizing: border-box;
+    text-align: center;
   }
 
-  .text-center {
+  .wrap-input100 {
+    position: relative;
+    width: 100%;
     margin-bottom: 20px;
   }
 
-  @media (max-width: 600px) {
-    .login-page {
-      padding: 15px;
-    }
-    .text-center h1, .text-center h4 {
-      font-size: 18px;
-    }
+  .input100 {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 55px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;
+    box-sizing: border-box;
   }
 
-  /* @keyframes borderAnimation {
-    0% { box-shadow: 0 0 30px blue; }
-    33% { box-shadow: 0 0 30px red; }
-    66% { box-shadow: 0 0 30px green; }
-    100% { box-shadow: 0 0 30px pink; }
-  } */
+  .symbol-input100 {
+    position: absolute;
+    font-size: 18px;
+    color: #999999;
+    top: 50%;
+    left: 35px;
+    transform: translateY(-50%);
+    transition: all 0.4s;
+  }
+
+  .container-login100-form-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .login100-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+  .txt1 {
+    font-size: 14px;
+    color: #999999;
+    line-height: 1.5;
+  }
+
+  .txt2 {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+  }
 </style>
 <script src="sweetalert.min.js"></script>
 <script>
