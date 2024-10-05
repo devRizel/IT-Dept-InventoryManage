@@ -1,5 +1,7 @@
 
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
 <?php include 'setting/system.php'; ?>
 <?php include 'theme/head.php'; ?>
 
@@ -8,19 +10,31 @@
     <form method="post" autocomplete="off" class="animated-form">
       <h1 class="text-center">Inventory Management System</h1><br>
       <h5 class="text-center">Forgot Password</h5>
-      <div class="form-group">
-        <label class="control-label">Email Account</label>
-        <input id="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="email" name="email" class="form-control input-sm" placeholder="Email Account" required>
+
+      <div class="wrap-input100 validate-input">
+        <input id="email" class="input100" " type="email" name="email" placeholder="Enter Your Email" required>
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+        </span>
       </div>
-      <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center;">
-        <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;" name="submit" type="submit" class="btn btn-md btn-danger ">Submit</button>
+      
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" name="submit" type="submit"> Submit</button>
       </div>
-      <div style="text-align: right;">
-         <a href="reset.php?access=allowed" style="font-size: 14px; text-decoration: 
-         none; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Reset Password</a>
-     </div>
-      <a href="L-Login.php?access=allowed" style="font-size: 14px; text-decoration: none;
-      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Back to Login</a>
+
+      <div class="text-center p-t-12">
+        <a class="txt2" href="L-Login.php?access=allowed">
+        Back to Login
+        </a>
+        <span class="txt1">
+          |
+        </span>
+        <a class="txt2" href="reset.php?access=allowed">
+        Reset Password?
+        </a>
+      </div>
+
     </form>
 
     <?php
@@ -59,7 +73,7 @@
               )
           );
 
-          $mail->setFrom('inventorym77@gmail.com', 'InventoryManagement');
+          $mail->setFrom('itinventorymanagement@gmail.com', 'InventoryManagement');
 
           $mail->addAddress($username);
           $mail->Subject = "Reset Password Verification Code";
@@ -84,11 +98,94 @@
 </div>
 
 <style>
-    body {
+body {
     background: url('uploads/users/riz.png');
     background-size: cover; 
     background-position: center; 
 }
+  .login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .login-page {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .wrap-input100 {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .input100 {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 55px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;
+    box-sizing: border-box;
+  }
+
+  .symbol-input100 {
+    position: absolute;
+    font-size: 18px;
+    color: #999999;
+    top: 50%;
+    left: 35px;
+    transform: translateY(-50%);
+    transition: all 0.4s;
+  }
+
+  .container-login100-form-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .login100-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+  .txt1 {
+    font-size: 14px;
+    color: #999999;
+    line-height: 1.5;
+  }
+
+  .txt2 {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+  }
   .forgot-password-wrapper {
     display: flex;
     justify-content: center;
@@ -130,44 +227,20 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
     exit();
 }
 ?>
-<script>
-    // Disable right-click
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
+  <script>
+      // Disable right-click
+document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, and other developer shortcuts
-    document.addEventListener('keydown', function (e) {
-        if (
-            e.key === 'F12' || // F12 Developer Tools
-            (e.ctrlKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+I
-            (e.ctrlKey && (e.key === 'u' || e.key === 'U')) || // Ctrl+U
-            (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+Shift+J
-            (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+Shift+I
-            (e.ctrlKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+J
-            (e.ctrlKey && (e.key === 's' || e.key === 'S')) || // Ctrl+S
-            (e.ctrlKey && (e.key === 'p' || e.key === 'P')) || // Ctrl+P
-            (e.ctrlKey && (e.key === 'c' || e.key === 'C')) || // Ctrl+C
-            (e.ctrlKey && (e.key === 'r' || e.key === 'R')) || // Ctrl+R
-            (e.ctrlKey && (e.key === 'f' || e.key === 'F'))    // Ctrl+F
-        ) {
-            e.preventDefault();
-        }
-    });
+// Disable F12, Ctrl+Shift+I, and other shortcuts
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 123 || // F12
+        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
+        event.preventDefault();
+    }
+});
 
-    // Disable developer tools check every 100ms
-    setInterval(function () {
-        if (window.devtools && window.devtools.isOpen) {
-            window.location.href = "about:blank";
-        }
-    }, 100);
-
-    // Disable text selection
-    document.addEventListener('selectstart', function (e) {
-        e.preventDefault();
-    });
-</script>
-
+    </script>
     <script src="sweetalert.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
