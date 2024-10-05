@@ -25,7 +25,7 @@ date_default_timezone_set('Asia/Manila');
     <center><?php echo display_msg($msg); ?></center>
     <form method="post" action="auth.php" class="clearfix">
       <div class="wrap-input100 validate-input">
-        <input id="email" class="input100" type="text" name="username" placeholder="Enter Your Email" required>
+        <input id="email" class="input100" type="email" name="username" placeholder="Enter Your Email" required>
         <span class="focus-input100"></span>
         <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>

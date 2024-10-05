@@ -12,7 +12,7 @@
       <h5 class="text-center">Forgot Password</h5>
 
       <div class="wrap-input100 validate-input">
-        <input id="email" class="input100" " type="email" name="email" placeholder="Enter Your Email" required>
+        <input id="email" class="input100"  type="email" name="email" placeholder="Enter Your Email" required>
         <span class="focus-input100"></span>
         <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>
