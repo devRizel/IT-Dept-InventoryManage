@@ -4,11 +4,11 @@
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
             if (fieldName === 'Password' && symbolPattern.test(this.value)) {
-              swal("Fuk u", `Lubton nuon tika`, "error");
+              swal("Invalid Input", `Please avoid using symbols in your ${fieldName}.`, "error");
                 this.value = "";
             }
             if (xssPattern.test(this.value)) {
-              swal("Fuk u", `Lubton nuon tika`, "error");
+              swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
                 this.value = ""; 
             }
         });

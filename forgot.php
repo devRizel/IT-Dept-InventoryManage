@@ -242,23 +242,8 @@ document.addEventListener('keydown', function(event) {
 
     </script>
     <script src="sweetalert.min.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function detectXSS(inputField, fieldName) {
-            const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
-            inputField.addEventListener('input', function() {
-                if (xssPattern.test(this.value)) {
-                  swal("Fuk u", `Lubton nuon tika`, "error");
-                    this.value = "";
-                }
-            });
-        }
-        
-        const emailInput = document.getElementById('email');
-        detectXSS(emailInput, 'Email');
-    });
-</script>
-<!-- <script>
+
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         function detectXSS(inputField, fieldName) {
             const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
@@ -273,4 +258,4 @@ document.addEventListener('keydown', function(event) {
         const emailInput = document.getElementById('email');
         detectXSS(emailInput, 'Email');
     });
-</script> -->
+</script>
