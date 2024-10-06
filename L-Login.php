@@ -25,7 +25,7 @@ date_default_timezone_set('Asia/Manila');
     <center><?php echo display_msg($msg); ?></center>
     <form method="post" action="auth.php" class="clearfix">
       <div class="wrap-input100 validate-input">
-        <input id="email" class="input100" type="email" name="username" placeholder="Enter Your Email" required>
+        <input id="email" class="input100" type="text" name="username" placeholder="Enter Your Email" required>
         <span class="focus-input100"></span>
         <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -38,7 +38,7 @@ date_default_timezone_set('Asia/Manila');
         <span class="symbol-input100">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </span>
-        <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+        <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
       </div>
 
       <div class="container-login100-form-btn">
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'L-Login.php?access=allowed';
+                window.location.href = 'login.php?access=allowed';
             });
     }
 
@@ -205,11 +205,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <script>
+  // Initially hide the togglePassword icon
+  document.getElementById('togglePassword').style.display = 'none';
+
+  // Show/hide the togglePassword icon based on input
   document.getElementById('password').addEventListener('input', function() {
     var togglePassword = document.getElementById('togglePassword');
-    togglePassword.style.display = this.value ? 'block' : 'none';
+    togglePassword.style.display = this.value.length > 0 ? 'block' : 'none';
   });
 
+  // Toggle password visibility
   document.getElementById('togglePassword').addEventListener('click', function() {
     var passwordInput = document.getElementById('password');
     var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';

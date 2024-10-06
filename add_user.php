@@ -28,6 +28,15 @@ if (isset($_POST['add_user'])) {
         }
     }
 
+    // Only proceed to name check if no other errors so far
+    if (empty($error_msgs)) {
+        // Check if name already exists
+        $existing_name = find_by_name($_POST['full-name']);
+        if ($existing_name) {  // Fix: should check $existing_name instead of $existing_username
+            $error_msgs[] = "Name '{$_POST['full-name']}' already exists.";
+        }
+    }
+
     // If there are still no errors, proceed with inserting the user
     if (empty($error_msgs)) {
         $name       = remove_junk($db->escape($_POST['full-name']));
@@ -61,6 +70,15 @@ function find_by_username($username) {
     $result_set = $db->query($query);
     return $db->fetch_assoc($result_set);
 }
+
+// Function to find name in database
+function find_by_name($name) {
+    global $db;
+    $escaped_name = $db->escape($name);
+    $query = "SELECT id FROM users WHERE name = '{$escaped_name}' LIMIT 1";
+    $result_set = $db->query($query);
+    return $db->fetch_assoc($result_set);
+}
 ?>
 
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
@@ -83,12 +101,12 @@ function find_by_username($username) {
                         <input id="username" type="email" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="username" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <div style="position: relative;">
-                          <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
-                            <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
-                       </div>
-                    </div>
+    <label for="password">Password</label>
+    <div style="position: relative;">
+        <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" type="password" name="password" class="form-control" placeholder="Password">
+        <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
+    </div>
+</div>
                     <div class="form-group">
                         <label for="level">User Role</label>
                         <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);" class="form-control" name="level">
@@ -138,7 +156,15 @@ function find_by_username($username) {
             });
     }
 </script>
-
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        if (password.length < 8) {
+            event.preventDefault(); // Prevent form submission
+            swal("Error", "Password must be at least 8 characters.", "error");
+        }
+    });
+</script>
 <script>
   document.getElementById('password').addEventListener('input', function() {
     var togglePassword = document.getElementById('togglePassword');
@@ -156,10 +182,15 @@ function find_by_username($username) {
 <script src="sweetalert.min.js"></script>
 <script>
     function detectXSS(inputField, fieldName) {
+        const symbolPattern = /[^a-zA-Z0-9]/;
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
                 swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+            }
+            if (fieldName === 'Password' && symbolPattern.test(this.value)) {
+                swal("Invalid Input", `Please avoid using symbols in your ${fieldName}.`, "error");
                 this.value = "";
             }
         });

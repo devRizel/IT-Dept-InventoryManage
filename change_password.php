@@ -93,10 +93,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="sweetalert.min.js"></script>
 <script>
     function detectXSS(inputField, fieldName) {
-        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        const symbolPattern = /[^a-zA-Z0-9]/;
+        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i; 
         inputField.addEventListener('input', function() {
+            // Check for XSS
             if (xssPattern.test(this.value)) {
                 swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
+                this.value = "";
+                return;
+            }
+            if ((fieldName === 'Old Password' || fieldName === 'New Password' || fieldName === 'Confirm Password') && symbolPattern.test(this.value)) {
+                swal("Invalid Input", `Please avoid using symbols in your ${fieldName}.`, "error");
                 this.value = "";
             }
         });

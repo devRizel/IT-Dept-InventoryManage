@@ -21,6 +21,7 @@
         <span class="symbol-input100">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </span>
+        <i id="toggleNewPassword" class="fa fa-eye" style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
       </div>
 
             <div class="wrap-input100 validate-input">
@@ -29,6 +30,7 @@
         <span class="symbol-input100">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </span>
+        <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
       </div>
 
       <div class="container-login100-form-btn">
@@ -38,7 +40,7 @@
       </div>
 
       <div class="text-center p-t-12">
-        <a class="txt2" href="L-Login.php?access=allowed">
+        <a class="txt2" href="login.php?access=allowed">
         Back to Login
         </a>
       </div>
@@ -230,6 +232,47 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
     exit();
 }
 ?>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script>
+  // Initially hide the togglePassword icon
+  document.getElementById('togglePassword').style.display = 'none';
+
+  // Show/hide the togglePassword icon based on input
+  document.getElementById('ConfirmPassword').addEventListener('input', function() {
+    var togglePassword = document.getElementById('togglePassword');
+    togglePassword.style.display = this.value.length > 0 ? 'block' : 'none';
+  });
+
+  // Toggle password visibility
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('ConfirmPassword');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+<script>
+  // Initially hide the toggleNewPassword icon
+  document.getElementById('toggleNewPassword').style.display = 'none';
+
+  // Show/hide the toggleNewPassword icon based on input
+  document.getElementById('NewPassword').addEventListener('input', function() {
+    var togglePassword = document.getElementById('toggleNewPassword');
+    togglePassword.style.display = this.value.length > 0 ? 'block' : 'none';
+  });
+
+  // Toggle password visibility for NewPassword
+  document.getElementById('toggleNewPassword').addEventListener('click', function() {
+    var passwordInput = document.getElementById('NewPassword');
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+
   <script>
       // Disable right-click
 document.addEventListener('contextmenu', event => event.preventDefault());

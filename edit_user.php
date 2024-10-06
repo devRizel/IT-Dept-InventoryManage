@@ -1,6 +1,5 @@
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
 <?php
-
 date_default_timezone_set('Asia/Manila');
   $page_title = 'Edit User';
   require_once('includes/load.php');
@@ -49,8 +48,8 @@ if(isset($_POST['update-pass'])) {
   if(empty($errors)){
            $id = (int)$e_user['id'];
      $password = remove_junk($db->escape($_POST['password']));
-     $h_pass   = sha1($password);
-          $sql = "UPDATE users SET password='{$h_pass}' WHERE id='{$db->escape($id)}'";
+     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+          $sql = "UPDATE users SET password='{$password}' WHERE id='{$db->escape($id)}'";
        $result = $db->query($sql);
         if($result && $db->affected_rows() === 1){
           $session->msg('s',"User password has been updated ");
@@ -81,11 +80,11 @@ if(isset($_POST['update-pass'])) {
           <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input id="q" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
+                  <input id="name" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input id="w" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
+                  <input id="username" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
@@ -95,13 +94,13 @@ if(isset($_POST['update-pass'])) {
                 <?php endforeach;?>
                 </select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="status">Status</label>
                 <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="form-control" name="status">
                   <option <?php if($e_user['status'] === '1') echo 'selected="selected"';?>value="1">Active</option>
                   <option <?php if($e_user['status'] === '0') echo 'selected="selected"';?> value="0">Deactive</option>
                 </select>
-            </div>
+            </div> -->
             <div class="form-group clearfix">
                     <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="update" class="btn btn-info">Update</button>
             </div>
@@ -122,7 +121,7 @@ if(isset($_POST['update-pass'])) {
         <form action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" method="post" class="clearfix">
           <div class="form-group">
                 <label for="password" class="control-label">Password</label>
-                <input id="e" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="password" placeholder="Type user new password">
+                <input id="password" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="password" class="form-control" name="password" placeholder="Type user new password">
           </div>
           <div class="form-group clearfix">
                   <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="update-pass" class="btn btn-danger pull-right">Change</button>
@@ -133,22 +132,28 @@ if(isset($_POST['update-pass'])) {
   </div>
 
  </div>
-<?php include_once('layouts/footer.php'); ?>
-<script src="sweetalert.min.js"></script>
+ <script src="sweetalert.min.js"></script>
 <script>
     function detectXSS(inputField, fieldName) {
+        const symbolPattern = /[^a-zA-Z0-9]/;
         const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
         inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
                 swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");
                 this.value = "";
             }
+            if (fieldName === 'Password' && symbolPattern.test(this.value)) {
+                swal("Invalid Input", `Please avoid using symbols in your ${fieldName}.`, "error");
+                this.value = "";
+            }
         });
     }
-    const qInput = document.getElementById('q');
-    const wInput = document.getElementById('w');
-    const eInput = document.getElementById('e');
-    detectXSS(qInput, 'Name');
-    detectXSS(wInput, 'Username');
-    detectXSS(eInput, 'Password');
+    const nameInput = document.getElementById('name');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    detectXSS(nameInput, 'Name');
+    detectXSS(usernameInput, 'Username');
+    detectXSS(passwordInput, 'Password');
+
 </script>
+<?php include_once('layouts/footer.php'); ?>
