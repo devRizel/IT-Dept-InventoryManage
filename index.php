@@ -432,7 +432,7 @@ if (!isset($_SESSION['visitor_count'])) {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <script src="css/j.js"></script>
+    <script src="css/j1.js"></script>
 
     <script>
         function toggleChatWindow() {
