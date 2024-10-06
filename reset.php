@@ -40,7 +40,7 @@
       </div>
 
       <div class="text-center p-t-12">
-        <a class="txt2" href="login.php?access=allowed">
+        <a class="txt2" href="L-Login.php?access=allowed">
         Back to Login
         </a>
       </div>
