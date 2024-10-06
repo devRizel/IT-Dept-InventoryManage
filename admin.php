@@ -5,7 +5,6 @@ require_once('includes/load.php');
 page_require_level(1);
 $products = fetch_products_from_database(); 
 
-
 if (!empty($products)) {
     $filtered_faculty = array_filter($products, function($product) {
         return $product['name'] === 'Faculty';
@@ -170,11 +169,15 @@ $chartData = [
 .margin-top {
   margin-top: 0; /* Remove top margin */
 }
+.riz{
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 16%, rgba(233,163,79,1) 97%);
+}
 </style>
 <div class="row">
   <a href="users.php" style="color:black;" >
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-user"></i>
         </div>
@@ -188,7 +191,7 @@ $chartData = [
 
   <a href="categorie.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-red">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -202,7 +205,7 @@ $chartData = [
 
   <a href="product7.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-blue">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -217,7 +220,7 @@ $chartData = [
 
   <a href="product.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -228,9 +231,9 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="computer.php" style="color:black;">
+  <a href="product.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -241,9 +244,9 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="otherdevices.php" style="color:black;">
+  <a href="product.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-red">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -254,9 +257,9 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="barrowedcomputerreturn.php" style="color:black;">
+  <a href="product.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);  " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-blue">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
@@ -267,9 +270,9 @@ $chartData = [
       </div>
     </div>
   </a>
-  <a href="barrowedotherreturn.php" style="color:black;">
+  <a href="product.php" style="color:black;">
     <div class="col-md-3">
-      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel panel-box clearfix">
+      <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); " class="panel panel-box clearfix riz">
         <div style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>

@@ -98,8 +98,8 @@
         <span>Maintenance</span>
       </a>
       <ul class="nav submenu">
-        <li><a href="computer.php" id="overall-computer">Computer</a></li>
-        <li><a href="otherdevices.php" id="faculty">Other Devices</a></li>
+        <li><a href="computer.php" id="computer">Computer</a></li>
+        <li><a href="otherdevices.php" id="otherdevices">Other Devices</a></li>
       </ul>
     </li>
     <li>
@@ -113,9 +113,9 @@
                     Barrow Computer
                 </a>
                 <ul class="nav submenu">
-   		     <li><a href="barrowcomputer.php" id="overall-computer">Computer List</a></li>
-     		     <li><a href="barrowedcomputer.php" id="overall-computer">Computer Barrowed</a></li>
-       		     <li><a href="barrowedcomputerreturn.php" id="overall-computer">Computer Return</a></li>
+   		     <li><a href="barrowcomputer.php" id="barrowcomputer">Computer List</a></li>
+     		     <li><a href="barrowedcomputer.php" id="barrowedcomputer">Computer Barrowed</a></li>
+       		     <li><a href="barrowedcomputerreturn.php" id="barrowedcomputerreturn">Computer Return</a></li>
                 </ul>
             </li>
             <li>
@@ -123,9 +123,9 @@
                     Barrow Other Devices
                 </a>
                 <ul class="nav submenu">
-                     <li><a href="barrowother.php" id="faculty">Other Devices List</a></li>
-                     <li><a href="barrowedother.php" id="faculty">Other Devices Barrowed</a></li>
-                     <li><a href="barrowedotherreturn.php" id="faculty">Other Devices Return</a></li>
+                     <li><a href="barrowother.php" id="barrowother">Other Devices List</a></li>
+                     <li><a href="barrowedother.php" id="barrowedother">Other Devices Barrowed</a></li>
+                     <li><a href="barrowedotherreturn.php" id="barrowedotherreturn">Other Devices Return</a></li>
                 </ul>
             </li>
         </ul>
@@ -139,8 +139,16 @@
   </ul>
   <style>
     .active-menu {
-      background-color: blue;
+      background-color: grey;
       color: white;
+    }
+    body{
+      background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 38%, rgba(159,134,134,1) 97%);
+    }
+    .sidebar{
+      background: rgb(11,11,11);
+      background: linear-gradient(90deg, rgba(11,11,11,1) 0%, rgba(39,36,36,1) 43%, rgba(56,52,52,1) 88%);
     }
   </style>
   <script>
@@ -176,7 +184,15 @@
         'bar20.php': 'AddCable',
         'bar21.php': 'AddSwitchHub',
         'bar22.php': 'AddExtension',
+        'barrowedotherreturn.php': 'barrowedotherreturn',
+        'barrowedother.php': 'barrowedother',
+'barrowother.php': 'barrowother',
+'barrowedcomputerreturn.php': 'barrowedcomputerreturn',
+'barrowedcomputer.php': 'barrowedcomputer',
+'barrowcomputer.php': 'barrowcomputer',
         'addproducts.php': 'sample',
+        'computer.php': 'computer',
+'otherdevices.php': 'otherdevices',
         'add1.php': 'add',
         'add2.php': 'addother',
         'add_product7.php': 'add-other-devices',

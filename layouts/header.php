@@ -114,7 +114,10 @@ $user = current_user();
 .delete-btn {
     margin-left: auto;
 }
-
+.rizel{
+    background: rgb(213,155,78);
+    background: radial-gradient(circle, rgba(213,155,78,1) 24%, rgba(245,246,246,1) 88%);
+}
     </style>
     <script>
     function toggleDropdown(id) {
@@ -130,7 +133,7 @@ $user = current_user();
 <body>
 <?php if ($session->isUserLoggedIn(true)): ?>
     <header id="header">
-        <div class="logo pull-left"> IT Department</div>
+        <div class="logo pull-left rizel"> IT Department</div>
         <div class="header-content">
             <div class="header-date pull-left">
                 <strong><?php echo date("F j, Y, g:i a");?></strong>
