@@ -53,3 +53,10 @@ function find_all_desc($table) {
   </div>
 </div>
 <?php include_once('layouts/footer.php'); ?>
+<style>
+      body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
+</style>

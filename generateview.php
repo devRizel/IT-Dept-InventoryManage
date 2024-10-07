@@ -74,6 +74,11 @@ include('admin/db_connect.php');
 <title>Inventory Management System</title>
 
 <style>
+          body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
     .iska {
         background: url(assets/image/fontsize.jpg);
         background-repeat: no-repeat;

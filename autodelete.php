@@ -114,3 +114,10 @@ document.getElementById('select-all').addEventListener('click', function(event) 
   });
 });
 </script>
+<style>
+      body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
+</style>

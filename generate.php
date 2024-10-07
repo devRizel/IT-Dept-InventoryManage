@@ -42,7 +42,11 @@ include('admin/db_connect.php');
     .contact-link {
         color: black !important; /* Use !important to override any other styles */
     }
-
+    body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
 </style>
 
 <body id="page-top">
