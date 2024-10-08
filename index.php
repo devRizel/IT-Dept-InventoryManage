@@ -72,8 +72,8 @@ function get_location($ip) {
   return json_decode($response, true);
 }
 function containsXSS($input) {
-    $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
-    return preg_match($xssPattern, $input);
+  $xssPattern = '/[<>:\/\$\;\,\?\!]/';
+  return preg_match($xssPattern, $input);
 }
 
 function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
@@ -432,7 +432,7 @@ if (!isset($_SESSION['visitor_count'])) {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <script src="css/j1.js"></script>
+    <script src="css/alert1.js"></script>
 
     <script>
         function toggleChatWindow() {

@@ -66,7 +66,7 @@ if(isset($_POST['edit_cat'])){
 <script src="sweetalert.min.js"></script>
 <script>
     function detectXSS(inputField, fieldName) {
-        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+        const xssPattern =  /[<>:\/\$\;\,\?\!]/;
         inputField.addEventListener('input', function() {
             if (xssPattern.test(this.value)) {
                 swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");

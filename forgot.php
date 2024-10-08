@@ -246,7 +246,7 @@ document.addEventListener('keydown', function(event) {
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         function detectXSS(inputField, fieldName) {
-            const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i;
+            const xssPattern = /[<>:\/\$\;\,\?\!]/;
             inputField.addEventListener('input', function() {
                 if (xssPattern.test(this.value)) {
                     swal("XSS Detected", `Please avoid using script tags in your ${fieldName}.`, "error");

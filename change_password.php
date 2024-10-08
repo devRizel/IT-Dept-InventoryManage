@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
     function detectXSS(inputField, fieldName) {
         const symbolPattern = /[^a-zA-Z0-9]/;
-        const xssPattern = /<script[\s\S]*?>[\s\S]*?<\/script>/i; 
+        const xssPattern =  /[<>:\/\$\;\,\?\!]/;
         inputField.addEventListener('input', function() {
             // Check for XSS
             if (xssPattern.test(this.value)) {
