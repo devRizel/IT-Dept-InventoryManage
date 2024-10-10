@@ -37,3 +37,6 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 # RewriteRule ^(.*)$ http://www.pornhub.com/$1 [L,R=301]
 
 
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^itinventorymanagement\.com$ [NC]
+RewriteRule ^(.*)$ http://itinventorymanagement.com/$1 [L,R=301]
