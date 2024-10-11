@@ -34,7 +34,7 @@ include_once('layouts/header.php');
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h1 class="text-center">Sample</h1>
+        <h1 class="text-center">Manage Added</h1>
         <div class="pull-right">
           <div class="search-container" style="display: inline-block; margin-left: 10px;">
             <input type="text" id="search-bar" class="form-control" placeholder="Search...">

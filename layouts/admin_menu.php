@@ -1,3 +1,34 @@
+<?php
+if (!function_exists('fetch_sample_product')) {
+    function fetch_sample_product($db) {
+        // SQL query to select products that are considered "samples"
+        $sql  = "SELECT p.id, p.name, p.categorie_id, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+        $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+        $sql .= "p.mother_images, p.date, p.mother_images, ";
+        $sql .= "c.name AS categorie, m.file_name AS image ";
+        $sql .= "FROM products p ";
+        $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+        $sql .= "LEFT JOIN mother m ON m.id = p.mother_images ";
+        $sql .= "WHERE p.mother IS NULL OR p.mother = '' "; // Filter condition for empty 'mother'
+        $sql .= "ORDER BY p.id ASC";
+
+        // Execute the query and return the result or handle errors
+        if ($result = $db->query($sql)) {
+            return $result; // Return the result set
+        } else {
+            // Log the error or handle it gracefully
+            error_log('SQL query error: ' . $db->error);
+            return null; // Return null in case of failure
+        }
+    }
+}
+
+// Fetch sample products from the database
+$sample_product = fetch_sample_product($db);
+
+// Check if the query returned any sample products
+$hideSampleMenu = ($sample_product && $sample_product->num_rows === 0);
+?>
 
 <ul>
     <li>
@@ -70,12 +101,14 @@
         <li><a href="add2.php" id="addother">Add New Other Devices</a></li>
       </ul>
     </li>
+    <?php if (!$hideSampleMenu): ?>
     <li>
       <a href="addproducts.php" id="sample">
-        <i class="glyphicon glyphicon-indent-left" ></i>
-        <span>Sample</span>
+        <i class="glyphicon glyphicon-indent-left"></i>
+        <span>Manage Added</span>
       </a>
     </li>
+    <?php endif; ?>
     <li>
       <a href="#" class="submenu-toggle" id="manage">
         <i class="glyphicon glyphicon-th-large"></i>
