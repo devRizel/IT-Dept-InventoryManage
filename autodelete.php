@@ -38,6 +38,7 @@ function find_all_desc($table) {
     <table style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
+               <th class="text-center" style="width: 50px;">#</th>
                 <th><input type="checkbox" id="select-all"></th>
                 <th>Name</th>
                 <th>Email</th>
@@ -46,8 +47,12 @@ function find_all_desc($table) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($all_rooms as $room): ?>
-                <tr>
+        <?php
+              $counter = 1; 
+              foreach  ($all_rooms as $room):
+              ?>
+              <tr>
+                <td class="text-center"><?php echo $counter; ?></td>
                     <td class="text-center">
                         <input type="checkbox" class="room-checkbox" name="rooms[]" value="<?php echo (int)$room['id']; ?>">
                     </td>
@@ -62,7 +67,10 @@ function find_all_desc($table) {
                         </div>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+                <?php 
+    $counter++;
+endforeach; 
+?>
         </tbody>
     </table>
 </form>
