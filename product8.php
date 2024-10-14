@@ -6,8 +6,39 @@ require_once('includes/load.php');
 // Checking what level user has permission to view this page
 page_require_level(2);
 
-// Fetch products and other items
-$products = join_product_table();
+function fetch_all_computer_products() {
+    global $db; // Use global variable inside the function
+
+    // Modify SQL query to include a WHERE clause that filters out products with media_id = 0 or NULL
+    $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+    $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+    $sql .= "p.media_id, p.date, ";
+    $sql .= "c.name AS categorie, ";
+    $sql .= "m.file_name AS image, ";
+    $sql .= "p.computer_images, p.monitor_images, p.mouse_images, p.system_images, p.vgahdmi_images, ";
+    $sql .= "p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, p.mother_images, ";
+    $sql .= "p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
+    $sql .= "FROM products p ";
+    $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+    $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
+    $sql .= "WHERE p.media_id IS NOT NULL AND p.media_id != '0' ";
+    $sql .= "AND (p.computer_images NOT LIKE '%Maintenance%' AND p.monitor_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.mouse_images NOT LIKE '%Maintenance%' AND p.system_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.vgahdmi_images NOT LIKE '%Maintenance%' AND p.power1_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.power2_images NOT LIKE '%Maintenance%' AND p.chord1_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.chord2_images NOT LIKE '%Maintenance%' AND p.mother_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.cpu_images NOT LIKE '%Maintenance%' AND p.ram_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.video_images NOT LIKE '%Maintenance%' AND p.hddssdgb_images NOT LIKE '%Maintenance%') ";
+    $sql .= "AND c.name = 'All Computer' "; // Adjust this line based on how you define "All Computer"
+    $sql .= "ORDER BY p.id ASC";
+
+    $result = $db->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
+}
+
+// Fetch all computer products from the database
+$products = fetch_all_computer_products();
+
 $other = join_other_table();
 
 // Define the desired order of names
@@ -37,6 +68,7 @@ usort($products, function($a, $b) {
 usort($other, function($a, $b) {
     return custom_sort_by_name($a) - custom_sort_by_name($b);
 });
+
 
 function fetch_return_computers() {
     global $db; // Use global variable inside the function
@@ -280,7 +312,6 @@ include_once('layouts/header.php');
 
 
 
-
 <!-- Computer Report Section -->
 <div class="row computer-report report-section">
     <div class="col-md-12">
@@ -288,7 +319,8 @@ include_once('layouts/header.php');
             <div class="panel-heading clearfix">
                 <h1 class="text-center">Computer Report</h1>
                 <div class="select-wrapper">
-                    <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                    <select class="form-control" id="room-title" name="Room-Title"  
+                        style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Computer">Overall Computer</option>
                         <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
@@ -299,12 +331,13 @@ include_once('layouts/header.php');
                     </select>
                 </div>
                 <div class="btn-group" style="float: right;">
-                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')"
-                      style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                    <button id="generate-report-btn" class="btn btn-danger" 
+                        onclick="printTable('computer-report-table')"
+                        style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
                 </div>
             </div>
             <div class="panel-body">
-            <center><img src="uploads/users/print.png" class="report-image"></center>
+                <center><img src="uploads/users/print.png" class="report-image"></center>
                 <div class="table-responsive">
                     <table id="computer-report-table" class="table table-bordered">
                         <thead>
@@ -323,6 +356,9 @@ include_once('layouts/header.php');
                         </thead>
                         <tbody>
                             <?php
+                            // Fetch all computer products from the database
+                            $products = fetch_all_computer_products(); // Call your modified function
+                            
                             $counter = 1; // Initialize counter
                             foreach ($products as $product):
                             ?>
@@ -355,6 +391,7 @@ include_once('layouts/header.php');
         </div>
     </div>
 </div>
+
 
 
 
