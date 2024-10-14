@@ -670,7 +670,7 @@ include_once('layouts/header.php');
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <h1 class="text-center">Other Devices</h1>
+                <h1 class="text-center">Other Device Maintenance Report</h1>
                 <div class="select-wrapper">
                     <select class="form-control" name="Room-Title" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Devices">Overall Devices</option>
