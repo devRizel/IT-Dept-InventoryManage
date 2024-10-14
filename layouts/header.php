@@ -5,30 +5,29 @@ date_default_timezone_set('Asia/Manila');
 // Assuming $user and $session are defined elsewhere in your code
 $user = current_user();
 
+// Database configuration
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "inventory_system";
 
-// // Database configuration
-// $servername = "127.0.0.1";
-// $username = "u510162695_inventory";
-// $password = "1Inventory_system";
-// $dbname = "u510162695_inventory";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-// // Check connection
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
+// SQL query to select data from the table, ordered by most recent first
+$sql = "SELECT id, name, email, message, created_at FROM chat ORDER BY created_at DESC";
+$result = $conn->query($sql);
 
-// // SQL query to select data from the table, ordered by most recent first
-// $sql = "SELECT id, name, email, message, created_at FROM chat ORDER BY created_at DESC";
-// $result = $conn->query($sql);
-
-// // Count total messages
-// $count_sql = "SELECT COUNT(*) AS total FROM chat";
-// $count_result = $conn->query($count_sql);
-// $count_row = $count_result->fetch_assoc();
-// $message_count = $count_row['total'];
+// Count total messages
+$count_sql = "SELECT COUNT(*) AS total FROM chat";
+$count_result = $conn->query($count_sql);
+$count_row = $count_result->fetch_assoc();
+$message_count = $count_row['total'];
 ?>
 
 <!DOCTYPE html>
@@ -114,6 +113,7 @@ $user = current_user();
 .delete-btn {
     margin-left: auto;
 }
+
     </style>
     <script>
     function toggleDropdown(id) {
@@ -129,14 +129,14 @@ $user = current_user();
 <body>
 <?php if ($session->isUserLoggedIn(true)): ?>
     <header id="header">
-        <div class="logo pull-left "> IT Department</div>
+        <div class="logo pull-left" > IT Department</div>
         <div class="header-content">
             <div class="header-date pull-left">
                 <strong><?php echo date("F j, Y, g:i a");?></strong>
             </div>
-            <div class="pull-right clearfix">
+            <div class="pull-right clearfix" >
                 <ul class="info-menu list-inline list-unstyled">
-                    <!-- <li class="notification-container">
+                    <li class="notification-container">
                     <?php if (remove_junk(ucfirst($user['name'])) === 'Rizel Bracero'): ?>
                         <img src="uploads/users/icon.png" alt="IT Department Logo"
                              style="width: 50px; height: auto; margin-bottom: 0px;" data-toggle="modal" data-target="#myModal">
@@ -144,7 +144,7 @@ $user = current_user();
                             <span class="badge"><?php echo $message_count; ?></span>
                         <?php endif; ?>
                         <?php endif; ?>
-                    </li> -->
+                    </li>
                     <li class="profile">
                         <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
                             <img src="uploads/users/<?php echo $user['image'];?>" alt="user-image" class="img-circle img-inline">
@@ -194,7 +194,7 @@ $user = current_user();
 
 <div class="page">
   <div class="container-fluid">
-  <div class="page">
+  <!-- <div class="page"> -->
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
