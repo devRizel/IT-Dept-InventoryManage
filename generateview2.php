@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ipAddress = $_SERVER['REMOTE_ADDR'];
 
     // Database configuration
-    $servername = "127.0.0.1";
-    $username = "u510162695_inventory";
-    $password = "1Inventory_system";
-    $dbname = "u510162695_inventory";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "inventory_system";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -72,8 +72,8 @@ function get_location($ip) {
   return json_decode($response, true);
 }
 function containsXSS($input) {
-  $xssPattern = '/[<>:\/\$\;\,\?\!]/';
-  return preg_match($xssPattern, $input);
+    $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
+    return preg_match($xssPattern, $input);
 }
 
 function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
@@ -324,8 +324,7 @@ if (!isset($_SESSION['visitor_count'])) {
     }
 }
     }
-
-    .btn-role {
+        .btn-role {
             border-radius: 30px;
             padding: 10px 25px;
             font-size: 16px;
@@ -373,7 +372,7 @@ if (!isset($_SESSION['visitor_count'])) {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="L-Login.php?access=allowed">Login</a>
+      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
 
     </div>
   </header>
@@ -385,9 +384,8 @@ if (!isset($_SESSION['visitor_count'])) {
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
-            <br><br>
-            <center><p>Please Select Portal to proceed.</p></center>
-            <div class="d-flex justify-content-center">
+            <p>Please Select Portal to proceed.</p>
+            <div class="d-flex">
               <a data-bs-toggle="modal" data-bs-target="#signUpModal" class="btn-get-started">Portal</a>
             </div>
           </div>
@@ -409,50 +407,25 @@ if (!isset($_SESSION['visitor_count'])) {
       </div>
     </section>
   </main>
-  
-<!-- Modal Structure -->
-<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+
+  <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="signUpModalLabel" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif;">Please Select a Portal</h5>
+                 <h5 class="modal-title" id="signUpModalLabel" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif;">Please Select Portal to View</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+          <div class="modal-body">
                 <div class="d-flex justify-content-center gap-4">
-                    <a href="generate.php?access=allowed" class="btn btn-role btn-success">Computer Device View</a>
-                    <a href="generate2.php?access=allowed" class="btn btn-role btn-primary">Other Device View</a>
-                </div>
-                <br>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-role btn-gray" type="button" aria-expanded="false" id="scanDeviceBtn">
-                        Scan Device?
-                    </button>
-                </div>
-                <br>
-                <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
-                    <a href="generate3.php?access=allowed" class="btn btn-role btn-success">Computer Device Scan</a>
-                    <a href="generate4.php?access=allowed" class="btn btn-role btn-primary">Other Device Scan</a>
+                    <a href="generate.php?access=allowed" class="btn btn-role btn-success">Computer Device</a>
+                    <a href="generate2.php?access=allowed" class="btn btn-role btn-primary">Other Device</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('scanDeviceBtn').addEventListener('click', function() {
-            var secondButtonGroup = document.getElementById('secondButtonGroup');
-            secondButtonGroup.classList.toggle('d-none');
-        });
-    });
-</script>
-
-
 
   <footer id="footer" class="footer">
 
@@ -492,11 +465,11 @@ if (!isset($_SESSION['visitor_count'])) {
         <div class="chat-content">
         <form id="chatForm" method="POST">
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" class="chat-input" placeholder="Enter Your Name" required>
+    <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
     <label for="email">Email</label>
-    <input type="email" id="email" name="email" class="chat-input" placeholder="Enter Your Email" required>
+    <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
     <label for="message">Message</label>
-    <textarea id="message" name="message" class="chat-input" placeholder="Enter Your Message" required></textarea>
+    <textarea id="message" name="message" class="focus-input100 chat-input" class="chat-input" placeholder="Your message" required></textarea>
     <button type="submit" class="chat-submit">Submit</button>
 </form>
         </div>
@@ -504,7 +477,7 @@ if (!isset($_SESSION['visitor_count'])) {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <script src="css/alert1.js"></script>
+    <script src="css/j.js"></script>
 
     <script>
         function toggleChatWindow() {

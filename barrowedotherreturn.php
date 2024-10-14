@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'otherdevices.php';
+                window.location.href = 'barrowedotherreturn.php';
             });
     }
 

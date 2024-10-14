@@ -254,7 +254,7 @@ $(document).ready(function() {
 const urlParams = new URLSearchParams(window.location.search);
 const successParam = urlParams.get('success');
 if (successParam === 'true') {
-    swal("", "Computer added successfully", "success")
+    swal("", "Other Device added successfully", "success")
         .then((value) => {
             // Redirect to clear query parameter
             window.location.href = 'add2.php';

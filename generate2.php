@@ -73,39 +73,27 @@ include('admin/db_connect.php');
         <?php
         // Fetch products and their images
         $qry = $conn->query("
-        SELECT p.id, p.name, m.file_name AS computer_images
-        FROM products p
-        LEFT JOIN computer m ON p.computer_images = m.id
-        WHERE (p.computer_images NOT LIKE '%Maintenance%' 
-               AND p.monitor_images NOT LIKE '%Maintenance%' 
-               AND p.mouse_images NOT LIKE '%Maintenance%' 
-               AND p.system_images NOT LIKE '%Maintenance%' 
-               AND p.vgahdmi_images NOT LIKE '%Maintenance%' 
-               AND p.power1_images NOT LIKE '%Maintenance%' 
-               AND p.power2_images NOT LIKE '%Maintenance%' 
-               AND p.chord1_images NOT LIKE '%Maintenance%' 
-               AND p.chord2_images NOT LIKE '%Maintenance%' 
-               AND p.mother_images NOT LIKE '%Maintenance%' 
-               AND p.cpu_images NOT LIKE '%Maintenance%' 
-               AND p.ram_images NOT LIKE '%Maintenance%' 
-               AND p.video_images NOT LIKE '%Maintenance%' 
-               AND p.hddssdgb_images NOT LIKE '%Maintenance%')
+        SELECT p.id, p.name, m.file_name AS other_images
+        FROM other p
+        LEFT JOIN other_images m ON p.other_images = m.id
+        WHERE p.other_images NOT LIKE '%Maintenance%'
         ORDER BY RAND()
     ");
     
+        
         while($row = $qry->fetch_assoc()):
         ?>
         <div class="col-lg-3" style="padding-left: 20px;">
             <div class="card menu-item" style="border-color: gray; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-bottom: 25px; margin-right: 5px;">
-                <?php if ($row['computer_images']): ?>
-                    <img src="uploads/products/<?php echo $row['computer_images']; ?>" class="card-img-top" width="100" height="300" alt="Mother Image">
+                <?php if ($row['other_images']): ?>
+                    <img src="uploads/products/<?php echo $row['other_images']; ?>" class="card-img-top" width="100" height="300" alt="Mother Image">
                 <?php else: ?>
                     <img src="uploads/products/default.jpg" class="card-img-top" width="100" height="300" alt="Default Image">
                 <?php endif; ?>
                 <div class="card-body">
                     <center><h5 class="card-title"><?php echo $row['name']; ?></h5></center>
                     <div class="text-center">
-                        <form action="generateview.php" method="get" style="display:inline;">
+                        <form action="generateview2.php" method="get" style="display:inline;">
                             <input type="hidden" name="id" value="<?php echo (int)$row['id']; ?>">
                             <input type="hidden" name="access" value="allowed">
                             <button type="submit" class="btn btn-sm btn-outline-secondary view_prod btn-block" data-toggle="tooltip">
@@ -117,6 +105,7 @@ include('admin/db_connect.php');
             </div>
         </div>
         <?php endwhile; ?>
+        
     </div>
 </section>
 

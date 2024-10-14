@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'barrowedcomputer.php';
+                window.location.href = 'barrowedcomputerreturn.php';
             });
 
 

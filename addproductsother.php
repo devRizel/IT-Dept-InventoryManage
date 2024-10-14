@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         swal("", successMessage, "success")
             .then((value) => {
-                window.location.href = 'product7.php';
+                window.location.href = 'addproductsother.php';
             });
     }
 

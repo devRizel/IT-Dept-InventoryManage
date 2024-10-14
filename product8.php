@@ -38,8 +38,143 @@ usort($other, function($a, $b) {
     return custom_sort_by_name($a) - custom_sort_by_name($b);
 });
 
+function fetch_return_computers() {
+    global $db; // Use global variable inside the function
+
+    // Modify SQL query to include a WHERE clause that filters out products with media_id = 0 or NULL
+    $sql  = "SELECT p.id, p.name, p.categorie_id, p.barrow, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+    $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+    $sql .= "p.media_id, p.date, ";
+    $sql .= "c.name AS categorie, ";
+    $sql .= "m.file_name AS image, ";
+    $sql .= "p.computer_images, p.monitor_images, p.mouse_images, p.system_images, p.vgahdmi_images, ";
+    $sql .= "p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, p.mother_images, ";
+    $sql .= "p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
+    $sql .= "FROM products p ";
+    $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+    $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
+    $sql .= "WHERE p.media_id IS NOT NULL AND p.media_id != '0' ";
+    $sql .= "AND p.barrow IS NOT NULL AND p.barrow != '' "; // Filter to include only rows with data in "barrow"
+    $sql .= "AND p.barrow LIKE '%Return%' "; // Filter to include only rows where "barrow" contains the word "Return"
+    $sql .= "AND (p.computer_images NOT LIKE '%Maintenance%' AND p.monitor_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.mouse_images NOT LIKE '%Maintenance%' AND p.system_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.vgahdmi_images NOT LIKE '%Maintenance%' AND p.power1_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.power2_images NOT LIKE '%Maintenance%' AND p.chord1_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.chord2_images NOT LIKE '%Maintenance%' AND p.mother_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.cpu_images NOT LIKE '%Maintenance%' AND p.ram_images NOT LIKE '%Maintenance%' AND ";
+    $sql .= "p.video_images NOT LIKE '%Maintenance%' AND p.hddssdgb_images NOT LIKE '%Maintenance%') ";
+    $sql .= "ORDER BY p.id ASC";
+
+    $result = $db->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
+}
+
+// Fetch return computers from the database
+$return_computers = fetch_return_computers();
+
+function fetch_return_other_devices() {
+    global $db;
+  
+    $sql = "SELECT 
+              p.id, 
+              p.name, 
+              p.categorie_id, 
+              p.donate, 
+              p.dreceived, 
+              p.media_id, 
+              p.date,
+              p.serial, 
+              p.barrow,
+              c.name AS categorie, 
+              m.file_name AS image,
+              p.other_images
+            FROM 
+              other p 
+            LEFT JOIN 
+              categories c ON c.id = p.categorie_id 
+            LEFT JOIN 
+              media m ON m.id = p.media_id 
+            WHERE 
+              p.other_images NOT LIKE '%Maintenance%' 
+            AND 
+              p.barrow LIKE '%Return%' 
+            ORDER BY 
+              p.id ASC";
+  
+    return find_by_sql($sql);
+  }
+  // Fetch the products and assign them to $return_other_devices
+  $return_other_devices = fetch_return_other_devices();
 
 
+  function fetch_computer_maintenance_products() {
+    global $db; // Use global variable inside the function
+  
+    $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
+    $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
+    $sql .= "p.media_id, p.date, ";
+    $sql .= "c.name AS categorie, m.file_name AS image, ";
+    $sql .= "p.computer_images, p.monitor_images, p.keyboard_images, p.mouse_images, p.system_images, ";
+    $sql .= "p.vgahdmi_images, p.power1_images, p.power2_images, p.chord1_images, p.chord2_images, ";
+    $sql .= "p.mother_images, p.cpu_images, p.ram_images, p.video_images, p.hddssdgb_images ";
+    $sql .= "FROM products p ";
+    $sql .= "LEFT JOIN categories c ON c.id = p.categorie_id ";
+    $sql .= "LEFT JOIN media m ON m.id = p.media_id ";
+    $sql .= "WHERE p.computer_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.monitor_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.keyboard_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.mouse_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.system_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.vgahdmi_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.power1_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.power2_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.chord1_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.chord2_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.mother_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.cpu_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.ram_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.video_images LIKE '%Maintenance%' OR ";
+    $sql .= "p.hddssdgb_images LIKE '%Maintenance%'";
+  
+    $result = $db->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
+  }
+  
+  // Fetch products from the database for maintenance
+  $products = fetch_computer_maintenance_products();
+  
+  function fetch_other_devices_maintenance() {
+    global $db;
+  
+    $sql = "SELECT 
+              p.id, 
+              p.name, 
+              p.categorie_id, 
+              p.donate, 
+              p.dreceived, 
+              p.media_id, 
+              p.date,
+              p.serial, 
+              c.name AS categorie, 
+              m.file_name AS image,
+              p.other_images
+            FROM 
+              other p 
+            LEFT JOIN 
+              categories c ON c.id = p.categorie_id 
+            LEFT JOIN 
+              media m ON m.id = p.media_id 
+            WHERE 
+              p.other_images LIKE '%Maintenance%' 
+            ORDER BY 
+              p.id ASC";
+  
+    return find_by_sql($sql);
+  }
+  
+  // Fetch the other devices for maintenance and assign them to $products
+  $products = fetch_other_devices_maintenance();
+  
 
 
 include_once('layouts/header.php');
@@ -129,6 +264,10 @@ include_once('layouts/header.php');
             <option value="">Select Option Report</option>
             <option value="computer">Computer Report</option>
             <option value="other_device">Other Device Report</option>
+            <option value="barrow">Barrowed Computer</option>
+            <option value="others">Barrowed Other Device</option>
+            <option value="main">Computer Maintenance Report</option>
+            <option value="ot">Other Device Maintenance Report</option>
         </select>
     </div>
 </div>
@@ -284,6 +423,300 @@ include_once('layouts/header.php');
     </div>
 </div>
 
+
+<!-- barrow Report Section -->
+<div class="row barrow-report report-section">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h1 class="text-center">Computer Barrowed Report</h1>
+                <div class="select-wrapper">
+                <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                        <option value="Overall Devices">Overall Devices</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Server Room">Server Room</option>
+                        <option value="Com lab 1">IT Comlab 1</option>
+                        <option value="Com lab 2">IT Comlab 2</option>
+                        <option value="Com lab 3">IT Comlab 3</option>
+                        <option value="Com lab 4">IT Comlab 4</option>
+                    </select>
+                </div>
+                <div class="btn-group" style="float: right;">
+                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('barrow-report-table')" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <center><img src="uploads/users/print.png" class="report-image"></center>
+                <div class="table-responsive">
+                    <table id="barrow-report-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Photo</th>
+                                <th>Title Room</th>
+                                <th class="text-center" style="width: 10%;">Device Name</th>
+                                <th class="text-center" style="width: 10%;">Donated By</th>
+                                <th class="text-center" style="width: 10%;">Date Received</th>
+                                <th class="text-center" style="width: 10%;">Monitor</th>
+                                <th class="text-center" style="width: 10%;">Keyboard</th>
+                                <th class="text-center" style="width: 10%;">Mouse</th>
+                                <th class="text-center" style="width: 10%;">Motherboard|Serial Num</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $counter = 1; // Initialize counter
+                            foreach ($return_computers as $product): // Use $return_computers instead of $products
+                            ?>
+                                <tr>
+                                    <td class="text-center"><?php echo $counter; ?></td>
+                                    <td>
+                                        <?php if ($product['media_id'] === '0'): ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
+                                        <?php else: ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo remove_junk($product['name']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['donate']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['dreceived']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['keyboard']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['mouse']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
+                                </tr>
+                                <?php
+                                $counter++;
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- others Device Report Section -->
+<div class="row others-report report-section">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h1 class="text-center">Other Device Barrowed Report</h1>
+                <div class="select-wrapper">
+                    <select class="form-control" name="Room-Title" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                        <option value="Overall Devices">Overall Devices</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Server Room">Server Room</option>
+                        <option value="Com lab 1">IT Comlab 1</option>
+                        <option value="Com lab 2">IT Comlab 2</option>
+                        <option value="Com lab 3">IT Comlab 3</option>
+                        <option value="Com lab 4">IT Comlab 4</option>
+                    </select>
+                </div>
+                <div class="btn-group" style="float: right;">
+                    <button class="btn btn-danger" onclick="printTable('other-device-table')" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <center><img src="uploads/users/print.png" class="report-image"></center>
+                <div class="table-responsive">
+                    <table id="others-device-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Photo</th>
+                                <th>Title Room</th>
+                                <th class="text-center" style="width: 10%;">Device Name</th>
+                                <th class="text-center" style="width: 10%;">Donated By</th>
+                                <th class="text-center" style="width: 10%;">Date Received</th>
+                                <!-- Include other columns as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Fetch the products and assign them to $return_other_devices
+                            $return_other_devices = fetch_return_other_devices();
+                            $counter = 1; // Initialize counter
+                            foreach ($return_other_devices as $item):
+                            ?>
+                                <tr class="other-device-item" data-room="<?php echo htmlspecialchars(remove_junk($item['name'])); ?>">
+                                    <td class="text-center"><?php echo $counter; ?></td>
+                                    <td>
+                                        <?php if ($item['media_id'] === '0'): ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
+                                        <?php else: ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/<?php echo $item['image']; ?>" alt="">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo remove_junk($item['name']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['categorie']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['donate']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['dreceived']); ?></td>
+                                    <!-- Include other columns as needed -->
+                                </tr>
+                                <?php
+                                $counter++;
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- main Report Section -->
+<div class="row main-report report-section">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h1 class="text-center">Computer Report</h1>
+                <div class="select-wrapper">
+                    <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                        <option value="Overall Computer">Overall Computer</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Server Room">Server Room</option>
+                        <option value="Com lab 1">IT Comlab 1</option>
+                        <option value="Com lab 2">IT Comlab 2</option>
+                        <option value="Com lab 3">IT Comlab 3</option>
+                        <option value="Com lab 4">IT Comlab 4</option>
+                    </select>
+                </div>
+                <div class="btn-group" style="float: right;">
+                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')"
+                      style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                </div>
+            </div>
+            <div class="panel-body">
+            <center><img src="uploads/users/print.png" class="report-image"></center>
+                <div class="table-responsive">
+                    <table id="main-report-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Photo</th>
+                                <th>Title Room</th>
+                                <th class="text-center" style="width: 10%;">Device Name</th>
+                                <th class="text-center" style="width: 10%;">Donated By</th>
+                                <th class="text-center" style="width: 10%;">Date Received</th>
+                                <th class="text-center" style="width: 10%;">Monitor</th>
+                                <th class="text-center" style="width: 10%;">Keyboard</th>
+                                <th class="text-center" style="width: 10%;">Mouse</th>
+                                <th class="text-center" style="width: 10%;">Motherboard|Serial Num</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $counter = 1; // Initialize counter
+                            foreach ($products as $product):
+                            ?>
+                                <tr>
+                                    <td class="text-center"><?php echo $counter; ?></td>
+                                    <td>
+                                        <?php if ($product['media_id'] === '0'): ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
+                                        <?php else: ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo remove_junk($product['name']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['categorie']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['donate']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['dreceived']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['keyboard']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['mouse']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['ram']); ?></td>
+                                </tr>
+                                <?php
+                                $counter++;
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ot Report Section -->
+<div class="row ot-report report-section">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h1 class="text-center">Other Devices</h1>
+                <div class="select-wrapper">
+                    <select class="form-control" name="Room-Title" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                        <option value="Overall Devices">Overall Devices</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Server Room">Server Room</option>
+                        <option value="Com lab 1">IT Comlab 1</option>
+                        <option value="Com lab 2">IT Comlab 2</option>
+                        <option value="Com lab 3">IT Comlab 3</option>
+                        <option value="Com lab 4">IT Comlab 4</option>
+                    </select>
+                </div>
+                <div class="btn-group" style="float: right;">
+                    <button class="btn btn-danger" onclick="printTable('ot-device-table')" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <center><img src="uploads/users/print.png" class="report-image"></center>
+                <div class="table-responsive">
+                    <table id="ot-device-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">#</th>
+                                <th>Photo</th>
+                                <th>Title Room</th>
+                                <th class="text-center" style="width: 10%;">Device Name</th>
+                                <th class="text-center" style="width: 10%;">Donated By</th>
+                                <th class="text-center" style="width: 10%;">Date Received</th>
+                                <!-- Include other columns as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $counter = 1; // Initialize counter
+                            foreach ($products as $item): // Changed from $other to $products
+                            ?>
+                                <tr class="other-device-item" data-room="<?php echo htmlspecialchars(remove_junk($item['name'])); ?>">
+                                    <td class="text-center"><?php echo $counter; ?></td>
+                                    <td>
+                                        <?php if ($item['media_id'] === '0'): ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
+                                        <?php else: ?>
+                                            <img class="img-avatar img-circle" src="uploads/products/<?php echo $item['image']; ?>" alt="">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo remove_junk($item['name']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['categorie']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['donate']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($item['dreceived']); ?></td>
+                                    <!-- Include other columns as needed -->
+                                </tr>
+                                <?php
+                                $counter++;
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <?php include_once('layouts/footer.php'); ?>
 
 <script>
@@ -301,6 +734,22 @@ include_once('layouts/header.php');
         } else if (selectedOption === 'other_device') {
             showReport('other-device-report');
             resetCounterDisplay('.other-device-report'); // Reset counter for other device report
+            hideMainHeading(true); // Hide the main heading
+        } else if (selectedOption === 'barrow') {
+            showReport('barrow-report');
+            resetCounterDisplay('.barrow-report'); // Reset counter for computer report
+            hideMainHeading(true); // Hide the main heading
+        } else if (selectedOption === 'others') {
+            showReport('others-report');
+            resetCounterDisplay('.others-report'); // Reset counter for other device report
+            hideMainHeading(true); // Hide the main heading
+        } else if (selectedOption === 'main') {
+            showReport('main-report');
+            resetCounterDisplay('.main-report'); // Reset counter for computer report
+            hideMainHeading(true); // Hide the main heading
+        } else if (selectedOption === 'ot') {
+            showReport('ot-report');
+            resetCounterDisplay('.ot-report'); // Reset counter for other device report
             hideMainHeading(true); // Hide the main heading
         } else {
             hideAllReports();
@@ -368,6 +817,50 @@ include_once('layouts/header.php');
         });
     }
 
+   // Change event listener for Room Title dropdown in barrow Report section
+var computerRoomSelector = document.querySelector('.barrow-report select[name="Room-Title"]');
+if (computerRoomSelector) {
+    computerRoomSelector.addEventListener('change', function() {
+        var selectedRoom = this.value.trim(); // Get selected room name
+
+        // Show all rows initially
+        var rows = document.querySelectorAll('.barrow-report tbody tr');
+        rows.forEach(function(row) {
+            row.style.display = ''; // Reset to default display
+        });
+
+        // Filter rows based on selected room
+        if (selectedRoom !== 'Overall Devices') {
+            var counter = 1; // Reset counter to 1 for specific room
+            rows.forEach(function(row) {
+                var roomTitleCell = row.querySelector('td:nth-child(3)'); // Assuming room title is in the third cell
+                if (roomTitleCell.textContent.trim() !== selectedRoom) {
+                    row.style.display = 'none'; // Hide row if it doesn't match
+                } else {
+                    // Update the displayed counter for filtered rows
+                    var counterCell = row.querySelector('td:first-child');
+                    counterCell.textContent = counter++; // Increment counter for displayed rows
+                }
+            });
+        } else {
+            // If "Overall Devices" is selected, reset all counters
+            resetCounterDisplay('.barrow-report');
+        }
+    });
+}
+
+// Function to reset counter display for all rows
+function resetCounterDisplay(containerSelector) {
+    var rows = document.querySelectorAll(containerSelector + ' tbody tr');
+    var counter = 1; // Initialize counter
+    rows.forEach(function(row) {
+        var counterCell = row.querySelector('td:first-child');
+        counterCell.textContent = counter++; // Update counter cell
+    });
+}
+
+
+
     // Change event listener for Room Title dropdown in Other Device Report section
     var otherDeviceRoomSelector = document.querySelector('.other-device-report select[name="Room-Title"]');
     if (otherDeviceRoomSelector) {
@@ -393,7 +886,6 @@ include_once('layouts/header.php');
                         var counterCell = row.querySelector('td:first-child');
                         counterCell.textContent = counter++;
                     }
-                    
                 });
             } else {
                 // If "Overall Devices" is selected, reset all counters
@@ -402,6 +894,109 @@ include_once('layouts/header.php');
         });
     }
 });
+
+
+    // Change event listener for Room Title dropdown in Other Device Report section
+    var otherDeviceRoomSelector = document.querySelector('.ot-report select[name="Room-Title"]');
+    if (otherDeviceRoomSelector) {
+        otherDeviceRoomSelector.addEventListener('change', function() {
+            var selectedRoom = this.value.trim(); // Get selected room name
+
+            // Show all rows initially
+            var rows = document.querySelectorAll('.ot-report tbody tr');
+            rows.forEach(function(row) {
+                row.style.display = ''; // Reset to default display
+            });
+
+            // Filter rows based on selected room
+            if (selectedRoom !== 'Overall Devices') {
+                var filteredRows = document.querySelectorAll('.ot-report tbody tr');
+                counter = 1; // Reset counter to 1 for specific room
+                filteredRows.forEach(function(row, index) {
+                    var roomTitleCell = row.querySelector('td:nth-child(3)'); // Assuming room title is in the third cell
+                    if (roomTitleCell.textContent.trim() !== selectedRoom) {
+                        row.style.display = 'none';
+                    } else {
+                        // Update the displayed counter for filtered rows
+                        var counterCell = row.querySelector('td:first-child');
+                        counterCell.textContent = counter++;
+                    }
+                });
+            } else {
+                // If "Overall Devices" is selected, reset all counters
+                resetCounterDisplay('.ot-report');
+            }
+        });
+    }
+
+
+ // Change event listener for Room Title dropdown in Other Device Report section
+ var otherDeviceRoomSelector = document.querySelector('.others-report select[name="Room-Title"]');
+    if (otherDeviceRoomSelector) {
+        otherDeviceRoomSelector.addEventListener('change', function() {
+            var selectedRoom = this.value.trim(); // Get selected room name
+
+            // Show all rows initially
+            var rows = document.querySelectorAll('.others-report tbody tr');
+            rows.forEach(function(row) {
+                row.style.display = ''; // Reset to default display
+            });
+
+            // Filter rows based on selected room
+            if (selectedRoom !== 'Overall Devices') {
+                var filteredRows = document.querySelectorAll('.others-report tbody tr');
+                counter = 1; // Reset counter to 1 for specific room
+                filteredRows.forEach(function(row, index) {
+                    var roomTitleCell = row.querySelector('td:nth-child(3)'); // Assuming room title is in the third cell
+                    if (roomTitleCell.textContent.trim() !== selectedRoom) {
+                        row.style.display = 'none';
+                    } else {
+                        // Update the displayed counter for filtered rows
+                        var counterCell = row.querySelector('td:first-child');
+                        counterCell.textContent = counter++;
+                    }
+                });
+            } else {
+                // If "Overall Devices" is selected, reset all counters
+                resetCounterDisplay('.others-report');
+            }
+        });
+    }
+
+        // Change event listener for Room Title dropdown in Computer Report section
+        var computerRoomSelector = document.querySelector('.main-report select[name="Room-Title"]');
+    if (computerRoomSelector) {
+        computerRoomSelector.addEventListener('change', function() {
+            var selectedRoom = this.value.trim(); // Get selected room name
+
+            // Show all rows initially
+            var rows = document.querySelectorAll('.main-report tbody tr');
+            rows.forEach(function(row) {
+                row.style.display = ''; // Reset to default display
+            });
+
+            // Filter rows based on selected room
+            if (selectedRoom !== 'Overall Computer') {
+                var filteredRows = document.querySelectorAll('.main-report tbody tr');
+                counter = 1; // Reset counter to 1 for specific room
+                filteredRows.forEach(function(row, index) {
+                    var roomTitleCell = row.querySelector('td:nth-child(3)'); // Assuming room title is in the third cell
+                    if (roomTitleCell.textContent.trim() !== selectedRoom) {
+                        row.style.display = 'none';
+                    } else {
+                        // Update the displayed counter for filtered rows
+                        var counterCell = row.querySelector('td:first-child');
+                        counterCell.textContent = counter++;
+                    }
+                });
+            } else {
+                // If "Overall Computer" is selected, reset all counters
+                resetCounterDisplay('.main-report');
+            }
+        });
+    }
+
+
 function printTable(tableId) {
     var imgTag = document.querySelector('.report-image'); // Get the first image tag
     var imgContents = imgTag ? '<div class="page-header text-center">' + imgTag.outerHTML + '</div>' : '';

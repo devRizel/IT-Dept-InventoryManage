@@ -74,7 +74,7 @@ include('admin/db_connect.php');
 <title>Inventory Management System</title>
 
 <style>
-          body {
+    body {
     background: url('uploads/users/riz.png');
     background-size: cover; 
     background-position: center; 
@@ -121,7 +121,7 @@ include('admin/db_connect.php');
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="L-Login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
+                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
                 </li>
             </ul>
         </div>
@@ -129,7 +129,7 @@ include('admin/db_connect.php');
 </nav>
 <br><br><br><br>
 <div class="panel-body">
-<form method="post" action="generateview.php?id=<?php echo (int)$product['id'] ?>">
+<form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
     <div class="container">
     <div class="row custom-gutter justify-content-center">
     <div class="col-md-3 col-6 mb-3 text-center">
@@ -627,44 +627,6 @@ include('admin/db_connect.php');
 </form>
 
 </div>
-<script>
-    // Disable right-click
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
-
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, and other developer shortcuts
-    document.addEventListener('keydown', function (e) {
-        if (
-            e.key === 'F12' || // F12 Developer Tools
-            (e.ctrlKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+I
-            (e.ctrlKey && (e.key === 'u' || e.key === 'U')) || // Ctrl+U
-            (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+Shift+J
-            (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) || // Ctrl+Shift+I
-            (e.ctrlKey && (e.key === 'j' || e.key === 'J')) || // Ctrl+J
-            (e.ctrlKey && (e.key === 's' || e.key === 'S')) || // Ctrl+S
-            (e.ctrlKey && (e.key === 'p' || e.key === 'P')) || // Ctrl+P
-            (e.ctrlKey && (e.key === 'c' || e.key === 'C')) || // Ctrl+C
-            (e.ctrlKey && (e.key === 'r' || e.key === 'R')) || // Ctrl+R
-            (e.ctrlKey && (e.key === 'f' || e.key === 'F'))    // Ctrl+F
-        ) {
-            e.preventDefault();
-        }
-    });
-
-    // Disable developer tools check every 100ms
-    setInterval(function () {
-        if (window.devtools && window.devtools.isOpen) {
-            window.location.href = "about:blank";
-        }
-    }, 100);
-
-    // Disable text selection
-    document.addEventListener('selectstart', function (e) {
-        e.preventDefault();
-    });
-</script>
-
 </body>
 <?php $conn->close(); ?>
 </html>
