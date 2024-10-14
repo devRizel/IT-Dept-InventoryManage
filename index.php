@@ -353,6 +353,24 @@ if (!isset($_SESSION['visitor_count'])) {
         .btn-primary:hover {
             background-color: #0056b3;
         }
+        .btn-gray {
+    background-color: gray;  /* Adjust the background color */
+    color: white;            /* Set text color for contrast */
+    border: none;            /* Remove default border */
+    padding: 10px 20px;     /* Add padding */
+    border-radius: 30px;
+    cursor: pointer;         /* Change cursor on hover */
+    transition: background-color 0.3s;  /* Smooth transition */
+}
+
+.btn-gray:hover {
+    background-color: darkgray;  /* Darken on hover */
+}
+
+.btn-gray:disabled {
+    background-color: lightgray;  /* Lighter color when disabled */
+    cursor: not-allowed;          /* Change cursor when disabled */
+}
   </style>
 </head>
 
