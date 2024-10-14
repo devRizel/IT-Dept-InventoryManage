@@ -105,11 +105,9 @@ function fetch_return_other_devices() {
   }
   // Fetch the products and assign them to $return_other_devices
   $return_other_devices = fetch_return_other_devices();
-
-
-  function fetch_computer_maintenance_products() {
+  function fetch_computer_maintenance() {
     global $db; // Use global variable inside the function
-  
+
     $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
     $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";
     $sql .= "p.media_id, p.date, ";
@@ -135,14 +133,14 @@ function fetch_return_other_devices() {
     $sql .= "p.ram_images LIKE '%Maintenance%' OR ";
     $sql .= "p.video_images LIKE '%Maintenance%' OR ";
     $sql .= "p.hddssdgb_images LIKE '%Maintenance%'";
-  
+
     $result = $db->query($sql);
     return $result ? $result->fetch_all(MYSQLI_ASSOC) : array(); // Fetch as associative array
-  }
-  
-  // Fetch products from the database for maintenance
-  $products = fetch_computer_maintenance_products();
-  
+}
+
+// Fetch computer maintenance products from the database
+$computer_maintenance_products = fetch_computer_maintenance();
+
   function fetch_other_devices_maintenance() {
     global $db;
   
@@ -279,6 +277,10 @@ include_once('layouts/header.php');
     <?php echo display_msg($msg); ?>
 </div>
 
+
+
+
+
 <!-- Computer Report Section -->
 <div class="row computer-report report-section">
     <div class="col-md-12">
@@ -355,6 +357,9 @@ include_once('layouts/header.php');
 </div>
 
 
+
+
+
 <!-- Other Device Report Section -->
 <div class="row other-device-report report-section">
     <div class="col-md-12">
@@ -424,14 +429,17 @@ include_once('layouts/header.php');
 </div>
 
 
-<!-- barrow Report Section -->
+
+
+
+<!-- Barrow Report Section -->
 <div class="row barrow-report report-section">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <h1 class="text-center">Computer Barrowed Report</h1>
                 <div class="select-wrapper">
-                <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                    <select class="form-control" name="Room-Title" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Devices">Overall Devices</option>
                         <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
@@ -466,7 +474,7 @@ include_once('layouts/header.php');
                         <tbody>
                             <?php
                             $counter = 1; // Initialize counter
-                            foreach ($return_computers as $product): // Use $return_computers instead of $products
+                            foreach ($return_computers as $product): // Use $return_computers to loop through data
                             ?>
                                 <tr>
                                     <td class="text-center"><?php echo $counter; ?></td>
@@ -497,6 +505,10 @@ include_once('layouts/header.php');
         </div>
     </div>
 </div>
+
+
+
+
 
 <!-- others Device Report Section -->
 <div class="row others-report report-section">
@@ -568,14 +580,18 @@ include_once('layouts/header.php');
     </div>
 </div>
 
+
+
+
+
 <!-- main Report Section -->
 <div class="row main-report report-section">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <h1 class="text-center">Computer Report</h1>
+                <h1 class="text-center">Computer Maintenance Report</h1>
                 <div class="select-wrapper">
-                    <select class="form-control" name="Room-Title"  style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
+                    <select class="form-control" name="Room-Title" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">
                         <option value="Overall Computer">Overall Computer</option>
                         <option value="Faculty">Faculty</option>
                         <option value="Server Room">Server Room</option>
@@ -586,12 +602,11 @@ include_once('layouts/header.php');
                     </select>
                 </div>
                 <div class="btn-group" style="float: right;">
-                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('computer-report-table')"
-                      style=" border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
+                    <button id="generate-report-btn" class="btn btn-danger" onclick="printTable('main-report-table')" style="border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;">Print</button>
                 </div>
             </div>
             <div class="panel-body">
-            <center><img src="uploads/users/print.png" class="report-image"></center>
+                <center><img src="uploads/users/print.png" class="report-image"></center>
                 <div class="table-responsive">
                     <table id="main-report-table" class="table table-bordered">
                         <thead>
@@ -611,7 +626,8 @@ include_once('layouts/header.php');
                         <tbody>
                             <?php
                             $counter = 1; // Initialize counter
-                            foreach ($products as $product):
+                            $computer_maintenance_products = fetch_computer_maintenance(); // Fetch the computer maintenance products
+                            foreach ($computer_maintenance_products as $product):
                             ?>
                                 <tr>
                                     <td class="text-center"><?php echo $counter; ?></td>
@@ -629,7 +645,7 @@ include_once('layouts/header.php');
                                     <td class="text-center"><?php echo remove_junk($product['monitor']); ?></td>
                                     <td class="text-center"><?php echo remove_junk($product['keyboard']); ?></td>
                                     <td class="text-center"><?php echo remove_junk($product['mouse']); ?></td>
-                                    <td class="text-center"><?php echo remove_junk($product['ram']); ?></td>
+                                    <td class="text-center"><?php echo remove_junk($product['mother']); ?></td>
                                 </tr>
                                 <?php
                                 $counter++;
@@ -642,6 +658,8 @@ include_once('layouts/header.php');
         </div>
     </div>
 </div>
+
+
 
 
 
@@ -718,6 +736,7 @@ include_once('layouts/header.php');
 
 
 <?php include_once('layouts/footer.php'); ?>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
