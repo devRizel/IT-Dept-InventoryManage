@@ -164,7 +164,7 @@ $hideSampleMenu = ($sample_product && $sample_product->num_rows === 0);
         </ul>
     </li>
     <li>
-      <a href="product8.php" id="print-report">
+      <a href="product88.php" id="print-report">
         <i class="glyphicon glyphicon-th-large"></i>
         <span>Print Report</span>
       </a>
@@ -237,7 +237,7 @@ background: radial-gradient(circle, rgba(255,255,255,1) 38%, rgba(159,134,134,1)
         'product5.php': 'it-comlab3',
         'product6.php': 'it-comlab4',
         'product7.php': 'other-devices',
-        'product8.php': 'print-report'
+        'product88.php': 'print-report'
       };
 
       // Get the corresponding element ID for the current URL
