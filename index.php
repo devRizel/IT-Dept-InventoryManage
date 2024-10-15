@@ -404,10 +404,10 @@ if (!isset($_SESSION['visitor_count'])) {
             <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
             <br><br>
-            <!-- <center><p>Please Select Portal to proceed.</p></center>
+            <center><p>Please Select Portal to proceed.</p></center>
             <div class="d-flex justify-content-center">
               <a data-bs-toggle="modal" data-bs-target="#signUpModal" class="btn-get-started">Portal</a>
-            </div> -->
+            </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
             <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
