@@ -15,18 +15,9 @@ if($session->isUserLoggedIn(true)) {
     redirect('home.php', false); 
 }
 
-
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');
-
-// Filter categories to include only "Computer"
-$filtered_cat = array_filter($all_categories, function($cat) {
-    return $cat['name'] == 'Computer';
-});
-
-
-$product = find_by_id('products', (int)$_GET['id']);
 $all_computer = find_all('computer');
 $all_monitor = find_all('monitor');
 $all_keyboard = find_all('keyboard');
@@ -43,25 +34,48 @@ $all_ram = find_all('ram');
 $all_video = find_all('video');
 $all_hddssdgb = find_all('hddssdgb');
 
-// Get IDs of images already saved in the database for this product
+// Initialize an empty product array
+$product = null;
+
+// Handle the search for serial
+if (isset($_POST['scan'])) {
+    $serial = trim($_POST['scan']);  // Sanitize input
+    if (!empty($serial)) {
+        $product = find_by_serial('products', $serial);  // Fetch product by serial
+    }
+}
+
+// Initialize saved images to handle null products gracefully
 $saved_images = [
-    'computer_images' => $product['computer_images'],
-    'monitor_images' => $product['monitor_images'],
-    'keyboard_images' => $product['keyboard_images'],
-    'mouse_images' => $product['mouse_images'],
-    'system_images' => $product['system_images'],
-    'vgahdmi_images' => $product['vgahdmi_images'],
-    'power1_images' => $product['power1_images'],
-    'power2_images' => $product['power2_images'],
-    'chord1_images' => $product['chord1_images'],
-    'chord2_images' => $product['chord2_images'],
-    'mother_images' => $product['mother_images'],
-    'cpu_images' => $product['cpu_images'],
-    'ram_images' => $product['ram_images'],
-    'video_images' => $product['video_images'],
-    'hddssdgb_images' => $product['hddssdgb_images'],
+    'computer_images' => $product['computer_images'] ?? null,
+    'monitor_images' => $product['monitor_images'] ?? null,
+    'keyboard_images' => $product['keyboard_images'] ?? null,
+    'mouse_images' => $product['mouse_images'] ?? null,
+    'system_images' => $product['system_images'] ?? null,
+    'vgahdmi_images' => $product['vgahdmi_images'] ?? null,
+    'power1_images' => $product['power1_images'] ?? null,
+    'power2_images' => $product['power2_images'] ?? null,
+    'chord1_images' => $product['chord1_images'] ?? null,
+    'chord2_images' => $product['chord2_images'] ?? null,
+    'mother_images' => $product['mother_images'] ?? null,
+    'cpu_images' => $product['cpu_images'] ?? null,
+    'ram_images' => $product['ram_images'] ?? null,
+    'video_images' => $product['video_images'] ?? null,
+    'hddssdgb_images' => $product['hddssdgb_images'] ?? null,
     // Add other image fields as needed
 ];
+
+// Function to fetch product by serial number
+function find_by_serial($table, $serial) {
+    global $db;
+    $sql = "SELECT * FROM {$db->escape($table)} WHERE mother = '{$db->escape($serial)}' LIMIT 1";
+    $result = $db->query($sql);
+    if ($result && $db->num_rows($result) > 0) {
+        return $db->fetch_assoc($result);
+    }
+    return null;  // Return null if no product found
+}
+
 
 // Include header
 include('header.php');
@@ -75,10 +89,10 @@ include('admin/db_connect.php');
 
 <style>
     body {
-    background: url('uploads/users/riz.png');
-    background-size: cover; 
-    background-position: center; 
-}
+        background: url('uploads/users/riz.png');
+        background-size: cover; 
+        background-position: center; 
+    }
     .iska {
         background: url(assets/image/fontsize.jpg);
         background-repeat: no-repeat;
@@ -89,32 +103,35 @@ include('admin/db_connect.php');
         float: left;
         display: flex;
     }
-    .contact-link {
-        color: black !important;
-    }
     .img-container {
-    width: 100%;
-    height: 150px; /* Adjust the height as needed */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ddd; /* Optional border */
-    overflow: hidden;
-    background-color: #f9f9f9; /* Optional background color */
+        width: 100%;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        background-color: #f9f9f9;
+    }
+    .img-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+    #serialInput {
+    text-align: center;
+    width: 80px; 
+    margin: 0 auto; 
 }
 
-.img-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover; /* Ensures the image covers the container without distortion */
-}
 </style>
 
 <body id="page-top">
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">
     <div class="container">
         <a class="iska"></a>
-        <a class="navbar-brand js-scroll-trigger" href="generate.php?access=allowed" style="color: black;">INVENTORY MANAGEMENT SYSTEM</a>
+        <a class="navbar-brand js-scroll-trigger" href="index.php" style="color: black;">INVENTORY MANAGEMENT SYSTEM</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -128,12 +145,18 @@ include('admin/db_connect.php');
     </div>
 </nav>
 <br><br><br><br>
+<center>
+    <form method="post" action="" id="serialForm">
+        <input type="text" maxlength="5" class="form-control" name="scan" placeholder="Serial" value="<?php echo isset($serial) ? $serial : ''; ?>" required id="serialInput">
+    </form>
+</center>
 <div class="panel-body">
-<form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
-    <div class="container">
-    <div class="row custom-gutter justify-content-center">
-    <div class="col-md-3 col-6 mb-3 text-center">
-        <label for="computer_images">Computer Barcode</label>
+    <?php if ($product): ?>
+    <form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
+        <div class="container">
+            <div class="row custom-gutter justify-content-center">
+                <div class="col-md-3 col-6 mb-3 text-center">
+                <label for="computer_images">Computer Barcode</label>
         <div class="img-container d-flex justify-content-center align-items-center" style="height: 200px;">
             <?php
             if (isset($saved_images['computer_images'])) {
@@ -154,52 +177,9 @@ include('admin/db_connect.php');
         </div>
         <input type="hidden" id="computer_images" name="computer_images" value="<?php echo (int)$saved_images['computer_images']; ?>">
     </div>
-</div>
-<br><br><br>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <center><label for="Room-Title">Room Title</label></center>
-                    <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title" disabled>
-                        <option value="">Select a Room</option>
-                        <?php foreach ($all_room as $room): ?>
-                            <option value="<?php echo htmlspecialchars(remove_junk($room['name'])); ?>" <?php if (remove_junk($room['name']) === remove_junk($product['name'])) echo 'selected="selected"'; ?>>
-                                <?php echo htmlspecialchars(remove_junk($room['name'])); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                <center><label for="Device-Category">Device Category</label></center>
-                    <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category" disabled>
-                        <option value="">Select a Category</option>
-                        <?php foreach ($filtered_cat as $cat): ?>
-                            <option value="<?php echo (int)$cat['id']; ?>" <?php if ($product['categorie_id'] == $cat['id']) echo "selected"; ?>>
-                                <?php echo htmlspecialchars($cat['name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                <center><label for="Device-Photo">Device Photo</label></center>
-                    <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo" disabled>
-                        <option value="">No image</option>
-                        <?php foreach ($all_photo as $photo): ?>
-                            <option value="<?php echo (int)$photo['id']; ?>" <?php if ($product['media_id'] == $photo['id']) echo "selected"; ?>>
-                                <?php echo $photo['file_name']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                <center> <label for="Device-Photo">Donated By</label></center>
-                    <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']); ?>" readonly>
-                </div>
             </div>
-        </div>
 
-        <div class="form-group">
+            <div class="form-group">
             <div class="row">
                 <div class="col-md-3">
                 <center><label for="Device-Photo">Monitor</label></center>
@@ -261,7 +241,7 @@ include('admin/db_connect.php');
                  </div>
                </div>
           </div>
-
+            
           <div class="form-group">
                <div class="row">
                <div class="col-md-3 ">
@@ -283,9 +263,7 @@ include('admin/db_connect.php');
                </div>
           </div>
 
-          <br><br><br>
-
-        <div class="form-group">
+          <div class="form-group">
                <div class="row">
                <div class="col-md-3">
                <center>  <label for="monitor_images" class="d-block">Monitor Barcode</label></center>
@@ -625,7 +603,32 @@ include('admin/db_connect.php');
 
     </div>
 </form>
+    <?php elseif(isset($_POST['scan'])): ?>
+    <center><p id="noProductMessage">No found with that Barcode Number.</p></center>
+    <?php endif; ?>
 </div>
+<script>
+    document.getElementById('serialInput').addEventListener('input', function() {
+        // Automatically submit the form when 5 characters are entered
+        if (this.value.length === 5) {
+            document.getElementById('serialForm').submit();
+        }
+
+        // If the input is cleared, reload the page to reset it
+        if (this.value === '') {
+            window.location.href = 'generateview3.php?access=allowed';  // Adjust this to your original page if necessary
+        }
+
+        // Hide the "No product found" message when the input is cleared
+        var noProductMessage = document.getElementById('noProductMessage');
+        if (this.value === '' && noProductMessage) {
+            noProductMessage.style.display = 'none';
+        } else if (this.value !== '' && noProductMessage) {
+            noProductMessage.style.display = 'block';
+        }
+    });
+</script>
+
 <script type="text/javascript">
 var rev = "silent";
 function titlebar(val)

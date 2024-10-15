@@ -111,50 +111,75 @@ include('admin/db_connect.php');
 
 <script type="text/javascript">
 var rev = "silent";
-function titlebar(val) {
+function titlebar(val)
+{
     var msg  = "Inventory Management System";
     var res = " ";
-    var speed = 70;
+    var speed = 70
     var pos = val;
 
-    msg = "" + msg + "";
+    msg = ""+msg+"";
     var le = msg.length;
-    if(rev === "silent"){
+    if(rev == "silent"){
         if(pos < le){
-            pos = pos + 1;
-            scroll = msg.substr(0, pos);
-            document.title = scroll;
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
-        } else {
-            rev = "silents";
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
+        pos = pos+1;
+        scroll = msg.substr(0,pos);
+        document.title = scroll;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
         }
-    } else {
+        else{
+        rev = "silents";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+    }
+    else{
         if(pos > 0){
-            pos = pos - 1;
-            var ale = le - pos;
-            scrol = msg.substr(ale, le);
-            document.title = scrol;
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
-        } else {
-            rev = "silent";
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
+        pos = pos-1;
+        var ale = le-pos;
+        scrol = msg.substr(ale,le);
+        document.title = scrol;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+        else{
+        rev = "silent";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
         }   
     }
 }
+
 titlebar(0);
 </script>
-
 <script>
-// Disable right-click, F12, and inspect elements shortcuts
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode === 123 || // F12
-        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
-        event.preventDefault();
+    // Disable right-click
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function (e) {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+        }
+    };
+
+    // Disable developer tools
+    function disableDevTools() {
+        if (window.devtools.isOpen) {
+            window.location.href = "about:blank";
+        }
     }
-});
+
+    // Check for developer tools every 100ms
+    setInterval(disableDevTools, 100);
+
+    // Disable selecting text
+    document.onselectstart = function (e) {
+        e.preventDefault();
+    };
 </script>
 </body>
 <?php $conn->close(); ?>

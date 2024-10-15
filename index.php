@@ -451,8 +451,8 @@ if (!isset($_SESSION['visitor_count'])) {
                 </div>
                 <br>
                 <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
-                    <a href="generate3.php?access=allowed" class="btn btn-role btn-success">Computer Device Scan</a>
-                    <a href="generate4.php?access=allowed" class="btn btn-role btn-primary">Other Device Scan</a>
+                    <a href="generateview3.php?access=allowed" class="btn btn-role btn-success">Computer Device Scan</a>
+                    <a href="generateview4.php?access=allowed" class="btn btn-role btn-primary">Other Device Scan</a>
                 </div>
             </div>
         </div>

@@ -1,497 +1,207 @@
 <?php
+// Check access permission
+if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
+    header("Location: index.php");
+    exit();
+}
+
+// Set timezone and start output buffering
 date_default_timezone_set('Asia/Manila');
 ob_start();
 require_once('includes/load.php');
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require './phpmailer/src/Exception.php';
-require './phpmailer/src/PHPMailer.php';
-require './phpmailer/src/SMTP.php';
-
-// Redirect if the user is logged in
-if ($session->isUserLoggedIn(true)) {
-    redirect('home.php', false);
+// Redirect if the user is already logged in
+if($session->isUserLoggedIn(true)) { 
+    redirect('home.php', false); 
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fieldName = $_POST['fieldName'] ?? 'Successfully Sent!';
-    $inputValue = $_POST['inputValue'] ?? 'Successfully Sent!';
-    $ipAddress = $_SERVER['REMOTE_ADDR'];
 
-    // Database configuration
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "inventory_system";
+$all_categories = find_all('categories');
+$all_room = find_all('room');
+$all_photo = find_all('media');
+$product = find_by_id('other', (int)$_GET['id']);
+$all_computer = find_all('computer');
+$all_monitor = find_all('monitor');
+$all_keyboard = find_all('keyboard');
+$all_mouse = find_all('mouse');
+$all_system = find_all('system');
+$all_vgahdmi = find_all('vgahdmi');
+$all_power1 = find_all('power1');
+$all_power2 = find_all('power2');
+$all_chord1 = find_all('chord1');
+$all_chord2 = find_all('chord2');
+$all_mother = find_all('mother');
+$all_cpu = find_all('cpu');
+$all_ram = find_all('ram');
+$all_video = find_all('video');
+$all_hddssdgb = find_all('hddssdgb');
+$all_other_images = find_all('other_images');
+// Get IDs of images already saved in the database for this product
+$saved_images = [
+    'other_images' => $product['other_images'],
+    // Add other image fields as needed
+];
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        logError("Connection failed: " . $conn->connect_error);
-    }
-
-    // Sanitize and validate input
-    $name = $conn->real_escape_string($_POST['name']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $message = $conn->real_escape_string($_POST['message']);
-
-    $location = get_location($ipAddress);
-
-    // Check for XSS attempt
-    if (containsXSS($name) || containsXSS($email) || containsXSS($message)) {
-        sendEmailNotification('XSS Attempt', 'Detected in form submission', $ipAddress);
-        logError("XSS attempt detected from IP: $ipAddress");
-        header("Location: ".$_SERVER['PHP_SELF']."?success=false");
-        exit;
-    }
-
-    // SQL query using prepared statement
-    $stmt = $conn->prepare("INSERT INTO chat (name, email, message) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $message);
-
-    if ($stmt->execute()) {
-      // Proceed to send email
-      sendEmailNotification($fieldName, $inputValue, $ipAddress, $location);
-      header("Location: ".$_SERVER['PHP_SELF']."?success=true");
-      exit;
-  } else {
-      logError("Error: " . $stmt->error);
-  }
-
-
-    // Close connection
-    $stmt->close();
-    $conn->close();
-}
-
-function get_location($ip) {
-  $response = file_get_contents('http://ip-api.com/json/' . $ip);
-  return json_decode($response, true);
-}
-function containsXSS($input) {
-    $xssPattern = '/<script\b[^>]*>(.*?)<\/script>/is';
-    return preg_match($xssPattern, $input);
-}
-
-function sendEmailNotification($fieldName, $inputValue, $ipAddress) {
-    $mail = new PHPMailer(true);
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'inventorym77@gmail.com';
-        $mail->Password = 'ezvo nqde jzsf ouhl';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-
-        // Recipients
-        $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('inventorym77@gmail.com');
-
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'XSS Attempt Detected';
-        $mail->Body = "An XSS attempt was detected.<br>"
-                     . "<strong>Field:</strong> {$fieldName}<br>"
-                      . "<strong>Input:</strong> " . htmlspecialchars($inputValue, ENT_QUOTES, 'UTF-8') . "<br>"
-                     . "<strong>IP Address:</strong> {$ipAddress}<br>"
-                     . "<strong>Location:</strong> " . 
-                     ($location['city'] ?? 'Unknown') . ', ' . 
-                     ($location['country'] ?? 'Unknown') . '<br>'
-                     . "<strong>Login Time:</strong> " . date("Y-m-d H:i:s");
-
-
-        // Send the email
-        $mail->send();
-    } catch (Exception $e) {
-        logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
-    }
-}
-
-function logError($message) {
-    // Implement your logging mechanism
-    error_log($message); // Log to the server's error log
-}
-// Initialize visitor count session variable if not set
-if (!isset($_SESSION['visitor_count'])) {
-    $_SESSION['visitor_count'] = 0;
-  }
-  
-  // Check if the user is visiting for the first time today
-  if (!isset($_SESSION['last_visit_date']) || $_SESSION['last_visit_date'] != date('Y-m-d')) {
-    $_SESSION['visitor_count'] = 1; // First visit of the day
-    $_SESSION['last_visit_date'] = date('Y-m-d'); // Update last visit date
-  } else {
-    $_SESSION['visitor_count']++; // Increment visit count
-  }
-  
-  // Send visitor count to Gmail
-  sendVisitorCountEmail($_SESSION['visitor_count']);
-  
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ... (rest of your existing form handling code)
-  
-    // Send email notification for form submission
-    sendEmailNotification($fieldName, $inputValue, $ipAddress, $location);
-  }
-  
-  // Function to send visitor count to email
-  function sendVisitorCountEmail($count) {
-    $mail = new PHPMailer(true);
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'inventorym77@gmail.com';
-        $mail->Password = 'ezvo nqde jzsf ouhl';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-  
-        // Recipients
-        $mail->setFrom('inventorym77@gmail.com', 'IT Inventory Management');
-        $mail->addAddress('inventorym77@gmail.com');
-  
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'Visitor Count Update';
-        $mail->Body = "Visitor Count today is: {$count}";
-  
-        // Send the email
-        $mail->send();
-    } catch (Exception $e) {
-        logError("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
-    }
-  }
-  
+// Include header
+include('header.php');
+include('admin/db_connect.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
+<title>Inventory Management System</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management System</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <style>
-            body {
-            font-family: Arial, sans-serif;
-        }
-
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 30px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .chat-button:hover {
-          background-color: var(--accent-color);
-        }
-
-        .chat-icon {
-            margin-right: 8px;
-        }
-
-        .chat-window {
-            display: none;
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            width: 300px;
-            max-width: 100%;
-            border: 1px solid #ccc;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            background-color: white;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .chat-header {
-          background-color: var(--accent-color);
-            color: white;
-            padding: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            box-sizing: border-box;
-        }
-
-        .chat-content {
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .chat-submit {
-          background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 600px) {
-            .chat-button {
-                bottom: 10px;
-                right: 10px;
-                padding: 10px 15px;
-                border-radius: 20px;
-            }
-
-            .chat-window {
-                bottom: 60px;
-                right: 10px;
-                width: calc(100% - 20px);
-            }
-        }
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 20px; /* Adjust font size for smaller screens */
-      }
-      .marquee-text {
-    display: inline-block;
-    white-space: nowrap;
+<style>
+    body {
+    background: url('uploads/users/riz.png');
+    background-size: cover; 
+    background-position: center; 
+}
+    .iska {
+        background: url(assets/image/fontsize.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 5px;
+        padding: 25px 25px;
+        border-radius: 50%;
+        float: left;
+        display: flex;
+    }
+    .contact-link {
+        color: black !important;
+    }
+    .img-container {
+    width: 100%;
+    height: 150px; /* Adjust the height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd; /* Optional border */
     overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
+    background-color: #f9f9f9; /* Optional background color */
 }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
 }
-.marquee-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: marquee 10s linear infinite;
-}
+</style>
 
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-    }
-        .btn-role {
-            border-radius: 30px;
-            padding: 10px 25px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-    
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-        }
-    
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-    
-        .btn-role:hover {
-            background-color: #0069d9;
-        }
-    
-        .btn-success:hover {
-            background-color: #218838;
-        }
-    
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-  </style>
-</head>
-
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="#" class="logo d-flex align-items-center me-auto">
-        <img src="assets/image/download.png" class="img-fluid animated"alt="">
-        <h1 class="sitename">IT DEPARTMENT</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home<br></a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-      <a class="btn-getstarted" href="login.php?access=allowed">Login</a>
-
-    </div>
-  </header>
-
-  <main class="main">
-    <section id="hero" class="hero section">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <center><h1>INVENTORY MANAGEMENT</h1></center>
-            <center><h1>SYSTEM</h1></center>
-            <p>Please Select Portal to proceed.</p>
-            <div class="d-flex">
-              <a data-bs-toggle="modal" data-bs-target="#signUpModal" class="btn-get-started">Portal</a>
-            </div>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="assets/image/fontsize.jpg" class="img-fluid animated" alt="">
-          </div>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">
+    <div class="container">
+        <a class="iska"></a>
+        <a class="navbar-brand js-scroll-trigger" href="generate2.php?access=allowed" style="color: black;">INVENTORY MANAGEMENT SYSTEM</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
+                </li>
+            </ul>
         </div>
-      </div>
+    </div>
+</nav>
+<br><br><br><br>
+<div class="panel-body">
+<form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
+    <div class="container">
+    <div class="row custom-gutter justify-content-center">
+    <div class="col-md-3 col-6 mb-3 text-center">
+        <label for="other_images">Other Device Barcode</label>
+        <div class="img-container d-flex justify-content-center align-items-center" style="height: 200px;">
+            <?php
+            if (isset($saved_images['other_images'])) {
+                $saved_image_id = $saved_images['other_images'];
+                foreach ($all_other_images as $photo) {
+                    if ($photo['id'] == $saved_image_id) {
+                        echo '<img class="card-img-top" 
+                              src="uploads/products/' . $photo['file_name'] . '" 
+                              alt="' . $photo['file_name'] . '" 
+                              onclick="selectImage(\'' . $photo['id'] . '\', \'other_images\')">';
+                    }
+                }
+            }
+            if (empty($saved_images['other_images']) || $saved_images['other_images'] === '0') {
+                echo '<img class="img-thumbnail" src="uploads/products/no_image.png" alt="No Image Available">';
+            }
+            ?>
+        </div>
+        <input type="hidden" id="other_images" name="other_images" value="<?php echo (int)$saved_images['other_images']; ?>">
+    </div>
+</div>
+<br><br><br>
 
-    </section>
-    <section id="about" class="about section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>About Us</h2>
-        <p>This system development is driven by the goal of enhancing the operational 
-          efficiency of the IT Department, ensuring that all inventory is accounted for 
-          and managed effectively. It will replace the time-consuming manual process with 
-          an automated, reliable, 
-          and scalable solution, leading to cost savings and improved resource management.</p>
-      </div>
-    </section>
-  </main>
-
-  <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                 <h5 class="modal-title" id="signUpModalLabel" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif;">Please Select Portal to View</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="form-group">
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <center><label for="Room-Title">Room Title</label></center>
+                    <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Room-Title" disabled>
+              <option value="">Select a Room</option>
+              <?php foreach ($all_room as $room): ?>
+                <option value="<?php echo htmlspecialchars(remove_junk($room['name'])); ?>" <?php if (remove_junk($room['name']) === remove_junk($product['name'])) echo 'selected="selected"'; ?>>
+                  <?php echo htmlspecialchars(remove_junk($room['name'])); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+                </div>
+                <div class="col-md-3">
+                <center><label for="Device-Category">Device Category</label></center>
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Category" disabled>
+                  <option value="">Select a Category</option>
+                  <?php foreach ($all_categories as $cat): ?>
+                    <?php if ($cat['name'] != 'Computer'): ?>
+                    <option value="<?php echo (int)$cat['id']; ?>" <?php 
+                      if($product['categorie_id'] == $cat['id']) echo "selected"; ?>>
+                      <?php echo remove_junk($cat['name']); ?>
+                    </option>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
+                </select>
+                </div>
+                <div class="col-md-3">
+                <center><label for="Device-Photo">Device Photo</label></center>
+                <select style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" class="form-control" name="Device-Photo" disabled>
+                  <option value="">No image</option>
+                  <?php foreach ($all_photo as $photo): ?>
+                    <option value="<?php echo (int)$photo['id']; ?>" <?php if($product['media_id'] == $photo['id']) echo "selected"; ?>>
+                      <?php echo $photo['file_name']; ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+                </div>
+                <div class="col-md-3">
+                <center> <label for="Device-Photo">Donated By</label></center>
+                    <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="donate" value="<?php echo remove_junk($product['donate']); ?>" readonly>
+                </div>
             </div>
+        </div>
 
-          <div class="modal-body">
-                <div class="d-flex justify-content-center gap-4">
-                    <a href="generate.php?access=allowed" class="btn btn-role btn-success">Computer Device</a>
-                    <a href="generate2.php?access=allowed" class="btn btn-role btn-primary">Other Device</a>
+        <div class="form-group ">
+            <div class="row ">
+                <div class="col-md-4">
+                <center><label for="Device-Photo">Date Received</label></center>
+                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); pointer-events: none;" type="text" class="form-control datepicker" name="dreceived" required readonly value="<?php echo remove_junk($product['dreceived']);?>">
+                </div>
+                <div class="col-md-4">
+                <center><label for="Device-Photo">Serial Num.</label></center>
+                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="serial" readonly value="<?php echo remove_junk($product['serial']);?>">
+                </div>
+                <div class="col-md-4">
+                <center><label for="Device-Photo">Recieved By</label></center>
+                <input style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);" type="text" class="form-control" name="recievedby" readonly value="<?php echo remove_junk($product['recievedby']);?>">
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-  <footer id="footer" class="footer">
-
-    <div class="container">
-    <div class="copyright text-center ">
-        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
-        <span>All Right Reserved</span></p>
-      </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-      </div>
-    </div>
-
-  </footer>
-
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <div id="preloader"></div>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/js/main.js"></script>
-  <button class="chat-button" onclick="toggleChatWindow()">
-        <span class="chat-icon">Message with us!</span>💬
-    </button>
-
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            Message with us!
-            <button onclick="toggleChatWindow()" style="float:right; background: none; border: none; color: white;">&times;</button>
-        </div>
-        <div class="chat-content">
-        <form id="chatForm" method="POST">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" class="chat-input" placeholder="Your name" required>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" class="chat-input" placeholder="Your email" required>
-    <label for="message">Message</label>
-    <textarea id="message" name="message" class="focus-input100 chat-input" class="chat-input" placeholder="Your message" required></textarea>
-    <button type="submit" class="chat-submit">Submit</button>
 </form>
-        </div>
-    </div>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
-    <script src="css/j.js"></script>
-
-    <script>
-        function toggleChatWindow() {
-            var chatWindow = document.getElementById('chatWindow');
-            var chatForm = document.getElementById('chatForm');
-            if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
-                chatWindow.style.display = 'block';
-            } else {
-                chatWindow.style.display = 'none';
-                chatForm.reset(); // Clear the form fields
-            }
-        }
-    </script>
-    <script type="text/javascript">
+</div>
+<script type="text/javascript">
 var rev = "silent";
 function titlebar(val)
 {
@@ -564,5 +274,5 @@ titlebar(0);
     };
 </script>
 </body>
-
+<?php $conn->close(); ?>
 </html>

@@ -73,10 +73,10 @@ include('admin/db_connect.php');
         <?php
         // Fetch products and their images
         $qry = $conn->query("
-        SELECT p.id, p.name, m.file_name AS computer_images
+        SELECT p.id, p.name, m.file_name AS mother_images
         FROM products p
-        LEFT JOIN computer m ON p.computer_images = m.id
-        WHERE (p.computer_images NOT LIKE '%Maintenance%' 
+        LEFT JOIN mother m ON p.mother_images = m.id
+        WHERE (p.mother_images NOT LIKE '%Maintenance%' 
                AND p.monitor_images NOT LIKE '%Maintenance%' 
                AND p.mouse_images NOT LIKE '%Maintenance%' 
                AND p.system_images NOT LIKE '%Maintenance%' 
@@ -97,8 +97,8 @@ include('admin/db_connect.php');
         ?>
         <div class="col-lg-3" style="padding-left: 20px;">
             <div class="card menu-item" style="border-color: gray; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-bottom: 25px; margin-right: 5px;">
-                <?php if ($row['computer_images']): ?>
-                    <img src="uploads/products/<?php echo $row['computer_images']; ?>" class="card-img-top" width="100" height="300" alt="Mother Image">
+                <?php if ($row['mother_images']): ?>
+                    <img src="uploads/products/<?php echo $row['mother_images']; ?>" class="card-img-top" width="100" height="300" alt="Mother Image">
                 <?php else: ?>
                     <img src="uploads/products/default.jpg" class="card-img-top" width="100" height="300" alt="Default Image">
                 <?php endif; ?>
@@ -122,50 +122,75 @@ include('admin/db_connect.php');
 
 <script type="text/javascript">
 var rev = "silent";
-function titlebar(val) {
+function titlebar(val)
+{
     var msg  = "Inventory Management System";
     var res = " ";
-    var speed = 70;
+    var speed = 70
     var pos = val;
 
-    msg = "" + msg + "";
+    msg = ""+msg+"";
     var le = msg.length;
-    if(rev === "silent"){
+    if(rev == "silent"){
         if(pos < le){
-            pos = pos + 1;
-            scroll = msg.substr(0, pos);
-            document.title = scroll;
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
-        } else {
-            rev = "silents";
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
+        pos = pos+1;
+        scroll = msg.substr(0,pos);
+        document.title = scroll;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
         }
-    } else {
+        else{
+        rev = "silents";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+    }
+    else{
         if(pos > 0){
-            pos = pos - 1;
-            var ale = le - pos;
-            scrol = msg.substr(ale, le);
-            document.title = scrol;
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
-        } else {
-            rev = "silent";
-            timer = window.setTimeout("titlebar(" + pos + ")", speed);
+        pos = pos-1;
+        var ale = le-pos;
+        scrol = msg.substr(ale,le);
+        document.title = scrol;
+        timer = window.setTimeout("titlebar("+pos+")",speed);
+        }
+        else{
+        rev = "silent";
+        timer = window.setTimeout("titlebar("+pos+")",speed);
         }   
     }
 }
+
 titlebar(0);
 </script>
-
 <script>
-// Disable right-click, F12, and inspect elements shortcuts
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode === 123 || // F12
-        (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-        (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U
-        event.preventDefault();
+    // Disable right-click
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function (e) {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+        }
+    };
+
+    // Disable developer tools
+    function disableDevTools() {
+        if (window.devtools.isOpen) {
+            window.location.href = "about:blank";
+        }
     }
-});
+
+    // Check for developer tools every 100ms
+    setInterval(disableDevTools, 100);
+
+    // Disable selecting text
+    document.onselectstart = function (e) {
+        e.preventDefault();
+    };
 </script>
 </body>
 <?php $conn->close(); ?>
