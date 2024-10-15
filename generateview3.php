@@ -120,7 +120,7 @@ include('admin/db_connect.php');
     }
     #serialInput {
     text-align: center;
-    width: 80px; 
+    width: 100px; 
     margin: 0 auto; 
 }
 
