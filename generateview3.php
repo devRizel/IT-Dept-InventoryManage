@@ -147,7 +147,7 @@ include('admin/db_connect.php');
 <br><br><br><br>
 <center>
     <form method="post" action="" id="serialForm">
-        <input type="text" maxlength="5" class="form-control" name="scan" placeholder="Serial" value="<?php echo isset($serial) ? $serial : ''; ?>" required id="serialInput">
+        <input type="text" maxlength="5" class="form-control" name="scan" placeholder="Barcode" value="<?php echo isset($serial) ? $serial : ''; ?>" required id="serialInput">
     </form>
 </center>
 <div class="panel-body">
