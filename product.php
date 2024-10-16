@@ -9,12 +9,12 @@ page_require_level(2);
 
 // Define an array with desired order of names
 $desired_order = array(
-  "Faculty",
   "Server Room",
-  "Com lab 1",
   "Com lab 2",
-  "Com lab 3",
-  "Com lab 4"
+  "Com lab 1",
+  "Com lab 4",
+  "Faculty",
+  "Com lab 3"
 );
 
 function fetch_products() {

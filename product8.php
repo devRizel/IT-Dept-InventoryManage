@@ -12,12 +12,12 @@ $other = join_other_table();
 
 // Define the desired order of names
 $desired_order = array(
-    "Faculty",
     "Server Room",
-    "Com lab 1",
     "Com lab 2",
-    "Com lab 3",
-    "Com lab 4"
+    "Com lab 1",
+    "Com lab 4",
+    "Faculty",
+    "Com lab 3"
 );
 
 // Function to determine position in desired order array
