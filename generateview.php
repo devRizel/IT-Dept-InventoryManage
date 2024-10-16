@@ -114,14 +114,14 @@ include('admin/db_connect.php');
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">
     <div class="container">
         <a class="iska"></a>
-        <a class="navbar-brand js-scroll-trigger" href="generate.php?access=allowed" style="color: black;">INVENTORY MANAGEMENT SYSTEM</a>
+        <a class="navbar-brand js-scroll-trigger" href="generate.php?access=allowed">INVENTORY MANAGEMENT SYSTEM</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; color: black;">Login Now</a>
+                    <a class="nav-link js-scroll-trigger" href="L-Login.php?access=allowed" style="font-size: 20px; ">Login Now</a>
                 </li>
             </ul>
         </div>

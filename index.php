@@ -325,36 +325,19 @@ if (!isset($_SESSION['visitor_count'])) {
 }
     }
 
-    .btn-role {
+        .btn-role {
             border-radius: 30px;
             padding: 10px 25px;
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
     
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-        }
-    
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-    
         .btn-role:hover {
             background-color: #0069d9;
         }
-    
-        .btn-success:hover {
-            background-color: #218838;
-        }
-    
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
         .btn-gray {
-    background-color: gray;  /* Adjust the background color */
+            background: rgb(163,162,161);
+            background: linear-gradient(90deg, rgba(163,162,161,1) 22%, rgba(23,23,22,1) 73%);
     color: white;            /* Set text color for contrast */
     border: none;            /* Remove default border */
     padding: 10px 20px;     /* Add padding */
@@ -364,13 +347,62 @@ if (!isset($_SESSION['visitor_count'])) {
 }
 
 .btn-gray:hover {
-    background-color: darkgray;  /* Darken on hover */
+    background: rgb(240,238,235);
+    background: linear-gradient(90deg, rgba(240,238,235,1) 43%, rgba(56,54,52,1) 88%);
 }
 
 .btn-gray:disabled {
-    background-color: lightgray;  /* Lighter color when disabled */
-    cursor: not-allowed;          /* Change cursor when disabled */
+    background: rgb(240,238,235);
+    background: linear-gradient(90deg, rgba(240,238,235,1) 43%, rgba(56,54,52,1) 88%);
+    cursor: not-allowed;
 }
+.btn-suc {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(92,149,70,1) 42%);
+    color: white;            /* Set text color for contrast */
+    border: none;            /* Remove default border */
+    padding: 10px 20px;     /* Add padding */
+    border-radius: 30px;
+    cursor: pointer;         /* Change cursor on hover */
+    transition: background-color 0.3s;  /* Smooth transition */
+}
+
+.btn-suc:hover {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 49%, rgba(92,149,70,1) 100%);
+}
+
+.btn-suc:disabled {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 49%, rgba(92,149,70,1) 100%);
+    cursor: not-allowed;
+}
+.btn-pri {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 42%);
+    color: white;            /* Set text color for contrast */
+    border: none;            /* Remove default border */
+    padding: 10px 20px;     /* Add padding */
+    border-radius: 30px;
+    cursor: pointer;         /* Change cursor on hover */
+    transition: background-color 0.3s;  /* Smooth transition */
+}
+
+.btn-pri:hover {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 93%);
+}
+
+.btn-pri:disabled {
+    background: rgb(241,244,242);
+    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 93%);
+    cursor: not-allowed;
+}
+.modal-content{
+    background: rgb(203,204,203);
+background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 99%);
+}
+
   </style>
 </head>
 
@@ -428,7 +460,8 @@ if (!isset($_SESSION['visitor_count'])) {
     </section>
   </main>
   
-<!-- Modal Structure -->
+
+  <!-- Modal Structure -->
 <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -439,9 +472,10 @@ if (!isset($_SESSION['visitor_count'])) {
             </div>
 
             <div class="modal-body">
-                <div class="d-flex justify-content-center gap-4">
-                    <a href="generate.php?access=allowed" class="btn btn-role btn-success">Computer Device View</a>
-                    <a href="generate2.php?access=allowed" class="btn btn-role btn-primary">Other Device View</a>
+                <!-- First Button Group -->
+                <div class="d-flex justify-content-center gap-4" id="firstButtonGroup">
+                    <a href="generate.php?access=allowed" class="btn btn-role btn-suc">Computer Device View</a>
+                    <a href="generate2.php?access=allowed" class="btn btn-role btn-pri">Other Device View</a>
                 </div>
                 <br>
                 <div class="d-flex justify-content-center">
@@ -450,25 +484,41 @@ if (!isset($_SESSION['visitor_count'])) {
                     </button>
                 </div>
                 <br>
+                <!-- Second Button Group -->
                 <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
-                    <a href="generateview3.php?access=allowed" class="btn btn-role btn-success">Computer Device Scan</a>
-                    <a href="generateview4.php?access=allowed" class="btn btn-role btn-primary">Other Device Scan</a>
+                    <a href="generateview3.php?access=allowed" class="btn btn-role btn-suc">Computer Device Scan</a>
+                    <a href="generateview4.php?access=allowed" class="btn btn-role btn-pri">Other Device Scan</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('scanDeviceBtn').addEventListener('click', function() {
+            var firstButtonGroup = document.getElementById('firstButtonGroup');
             var secondButtonGroup = document.getElementById('secondButtonGroup');
-            secondButtonGroup.classList.toggle('d-none');
+
+            // Toggle visibility
+            if (firstButtonGroup.classList.contains('d-none')) {
+                // If second group is visible, show the first group
+                firstButtonGroup.classList.remove('d-none');
+                secondButtonGroup.classList.add('d-none');
+            } else {
+                // If first group is visible, show the second group
+                firstButtonGroup.classList.add('d-none');
+                secondButtonGroup.classList.remove('d-none');
+            }
         });
     });
 </script>
+
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 
 
 
