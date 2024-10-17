@@ -101,7 +101,7 @@ if (successParam === 'true') {
     
     swal("", successMessage, "success")
         .then((value) => {
-            window.location.href = 'autodelete.php'; 
+            window.location.href = 'generatedelete.php?access=allowed'; 
         });
 }
 

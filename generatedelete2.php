@@ -9,7 +9,7 @@ if (isset($_POST['delete_selected'])) {
             delete_by_id('chat', $room_id);
         }
         $session->msg("s", "Selected chats deleted successfully.");
-        redirect('generatedelete.php?access=allowed?success=true&delete_room=true'); // Add success parameter
+        redirect('generatedelete.php?access=allowed&success=true&delete_room=true'); // Corrected URL
     } else {
         $session->msg("d", "No rooms selected for deletion.");
         redirect('generatedelete.php?access=allowed');
@@ -25,7 +25,7 @@ if (isset($_POST['delete_selected'])) {
         $delete_id = delete_by_id('chat', (int)$product['id']);
         if ($delete_id) {
             $session->msg("s", "Chat deleted successfully.");
-            redirect('generatedelete.php?access=allowed?success=true&delete_room=true');
+            redirect('generatedelete.php?access=allowed&success=true&delete_room=true'); // Corrected URL
         } else {
             $session->msg("d", "Chat deletion failed.");
             redirect('generatedelete.php?access=allowed');
