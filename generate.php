@@ -61,7 +61,7 @@ include('admin/db_connect.php');
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; color: white;">Login Now</a>
+                    <a class="nav-link js-scroll-trigger" href="L-Login.php?access=allowed" style="font-size: 20px; color: white;">Login Now</a>
                 </li>
             </ul>
         </div>
