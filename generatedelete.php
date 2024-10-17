@@ -30,7 +30,7 @@ function find_all_desc($table) {
         <center><strong>Mga Bugo chat</strong></center>
       </div>
       <div class="panel-body">
-      <form method="POST" action="autodelete2.php">
+      <form method="POST" action="generatedelete.php?access=allowed">
       <button type="submit" class="btn btn-danger" name="delete_selected" style="float: right;">
   <span class="glyphicon glyphicon-trash"></span> Delete
 </button>
