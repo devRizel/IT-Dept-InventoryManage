@@ -96,7 +96,7 @@ const successParam = urlParams.get('success');
 if (successParam === 'true') {
     let successMessage = "";
     if (urlParams.get('delete_room')) {
-        successMessage = "Rooms Deleted Successfully.";
+        successMessage = "Chat Deleted Successfully.";
     }
     
     swal("", successMessage, "success")
