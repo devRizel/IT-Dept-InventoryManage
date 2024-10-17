@@ -61,7 +61,7 @@ function find_all_desc($table) {
                     <td><?php echo remove_junk(ucfirst($room['message'])); ?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <a href="autodelete2.php?id=<?php echo (int)$room['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                            <a href="generatedelete2.php?id=<?php echo (int)$room['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </div>
@@ -110,7 +110,7 @@ if (successParam === 'true') {
     
     swal("", successMessage, "success")
         .then((value) => {
-            window.location.href = 'autodelete.php'; 
+            window.location.href = 'generatedelete.php?access=allowed'; 
         });
 }
 

@@ -9,10 +9,10 @@ if (isset($_POST['delete_selected'])) {
             delete_by_id('chat', $room_id);
         }
         $session->msg("s", "Selected chats deleted successfully.");
-        redirect('autodelete.php?success=true&delete_room=true'); // Add success parameter
+        redirect('generatedelete.php?access=allowed?success=true&delete_room=true'); // Add success parameter
     } else {
         $session->msg("d", "No rooms selected for deletion.");
-        redirect('autodelete.php');
+        redirect('generatedelete.php?access=allowed');
     }
 } else {
     // Handle individual deletion via GET
@@ -20,15 +20,15 @@ if (isset($_POST['delete_selected'])) {
         $product = find_by_id('chat', (int)$_GET['id']);
         if (!$product) {
             $session->msg("d", "Missing chat id.");
-            redirect('autodelete.php');
+            redirect('generatedelete.php?access=allowed');
         }
         $delete_id = delete_by_id('chat', (int)$product['id']);
         if ($delete_id) {
             $session->msg("s", "Chat deleted successfully.");
-            redirect('autodelete.php?success=true&delete_room=true');
+            redirect('generatedelete.php?access=allowed?success=true&delete_room=true');
         } else {
             $session->msg("d", "Chat deletion failed.");
-            redirect('autodelete.php');
+            redirect('generatedelete.php?access=allowed');
         }
     }
 }
