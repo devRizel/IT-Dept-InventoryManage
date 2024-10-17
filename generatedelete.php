@@ -1,11 +1,3 @@
-<link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
-<?php
-if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
-    // Redirect to index.php if the access parameter is not set correctly
-    header("Location: index.php");
-    exit();
-}
-?>
 <?php
 date_default_timezone_set('Asia/Manila');
 $page_title_room = 'Delete Chat';
@@ -19,7 +11,6 @@ function find_all_desc($table) {
   $sql = "SELECT * FROM {$table} ORDER BY id DESC";
   return find_by_sql($sql);
 }
-
 ?>
 
 <?php include_once('layouts/header.php'); ?>
@@ -30,7 +21,7 @@ function find_all_desc($table) {
         <center><strong>Mga Bugo chat</strong></center>
       </div>
       <div class="panel-body">
-      <form method="POST" action="generatedelete.php?access=allowed">
+      <form method="POST" action="generatedelete2.php">
       <button type="submit" class="btn btn-danger" name="delete_selected" style="float: right;">
   <span class="glyphicon glyphicon-trash"></span> Delete
 </button>
@@ -110,7 +101,7 @@ if (successParam === 'true') {
     
     swal("", successMessage, "success")
         .then((value) => {
-            window.location.href = 'generatedelete.php?access=allowed'; 
+            window.location.href = 'autodelete.php'; 
         });
 }
 
