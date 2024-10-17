@@ -478,13 +478,13 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
                     <a href="generate2.php?access=allowed" class="btn btn-role btn-pri">Other Device View</a>
                 </div>
                 <br>
-                <!-- <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
                     <button class="btn btn-role btn-gray" type="button" aria-expanded="false" id="scanDeviceBtn">
                         Scan Device?
                     </button>
                 </div>
                 <br>
-                <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
+                <!-- <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
                     <a href="generateview3.php?access=allowed" class="btn btn-role btn-suc">Computer Device Scan</a>
                     <a href="generateview4.php?access=allowed" class="btn btn-role btn-pri">Other Device Scan</a>
                 </div> -->
