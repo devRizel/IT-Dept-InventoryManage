@@ -484,13 +484,14 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
   </main>
   
 
-  <!-- Modal Structure -->
+<!-- Modal Structure -->
 <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="signUpModalLabel" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif;">Please Select a Portal</h5>
+                <h5 class="modal-title" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif; display: block;">Please Select a Portal</h5>
+                <h5 class="modal-title" style="width: 100%; text-align: center; font-family: 'Arial', sans-serif; display: none;">Please Select a Portal to Scan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -507,23 +508,33 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
                     </button>
                 </div>
                 <br>
-                <!-- <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
+                <!-- Second Button Group -->
+                <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
                     <a href="generateview3.php?access=allowed" class="btn btn-role btn-suc">Computer Device Scan</a>
                     <a href="generateview4.php?access=allowed" class="btn btn-role btn-pri">Other Device Scan</a>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('scanDeviceBtn').addEventListener('click', function() {
-            var firstButtonGroup = document.getElementById('firstButtonGroup');
-            var secondButtonGroup = document.getElementById('secondButtonGroup');
+    document.getElementById('scanDeviceBtn').addEventListener('click', function() {
+        var firstButtonGroup = document.getElementById('firstButtonGroup');
+        var secondButtonGroup = document.getElementById('secondButtonGroup');
+        var firstTitle = document.querySelector('.modal-header h5:nth-child(1)');
+        var secondTitle = document.querySelector('.modal-header h5:nth-child(2)');
 
-            // Toggle visibility
-            if (firstButtonGroup.classList.contains('d-none')) {
+        if (secondButtonGroup.classList.contains('d-none')) {
+            // Show the second button group and toggle titles
+            firstTitle.style.display = 'none';
+            secondTitle.style.display = 'block';
+        } else {
+            // Hide the second button group and toggle titles back
+            secondTitle.style.display = 'none';
+            firstTitle.style.display = 'block';
+        }
+        if (firstButtonGroup.classList.contains('d-none')) {
                 // If second group is visible, show the first group
                 firstButtonGroup.classList.remove('d-none');
                 secondButtonGroup.classList.add('d-none');
@@ -532,9 +543,10 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
                 firstButtonGroup.classList.add('d-none');
                 secondButtonGroup.classList.remove('d-none');
             }
-        });
     });
 </script>
+
+
 
 
 
