@@ -403,6 +403,29 @@ if (!isset($_SESSION['visitor_count'])) {
 background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 99%);
 }
 
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 10s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
   </style>
 </head>
 
@@ -521,20 +544,26 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
 
 
 
-  <footer id="footer" class="footer">
+<footer id="footer" class="footer">
 
-    <div class="container">
-    <div class="copyright text-center ">
-        <p>© <span>Copyright 2024</span> <strong class="px-1 sitename">IT Team</strong> 
-        <span>All Right Reserved</span></p>
-      </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-      </div>
+  <div class="container">
+    <div class="copyright text-center">
+      <marquee>
+        <p>©  
+          <strong class="px-1 sitename">IT Team</strong>
+          <span>All Right Reserved.</span> 
+          <strong class="px-1 sitename">Design By Rizel Mulle Bracero</strong>
+        </p>
+      </marquee>
     </div>
+    <div class="social-links d-flex justify-content-center">
+      <a href=""><i class="bi bi-facebook"></i></a>
+      <a href=""><i class="bi bi-instagram"></i></a>
+    </div>
+  </div>
 
-  </footer>
+</footer>
+
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
