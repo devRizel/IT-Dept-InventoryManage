@@ -71,27 +71,50 @@ include('admin/db_connect.php');
 <section class="page-section" id="menu">
     <div id="menu-field" class="card-deck">
         <?php
-        // Fetch products and their images
-        $qry = $conn->query("
-        SELECT p.id, p.name, m.file_name AS mother_images
-        FROM products p
-        LEFT JOIN mother m ON p.mother_images = m.id
-        WHERE (p.mother_images NOT LIKE '%Maintenance%' 
-               AND p.monitor_images NOT LIKE '%Maintenance%' 
-               AND p.mouse_images NOT LIKE '%Maintenance%' 
-               AND p.system_images NOT LIKE '%Maintenance%' 
-               AND p.vgahdmi_images NOT LIKE '%Maintenance%' 
-               AND p.power1_images NOT LIKE '%Maintenance%' 
-               AND p.power2_images NOT LIKE '%Maintenance%' 
-               AND p.chord1_images NOT LIKE '%Maintenance%' 
-               AND p.chord2_images NOT LIKE '%Maintenance%' 
-               AND p.mother_images NOT LIKE '%Maintenance%' 
-               AND p.cpu_images NOT LIKE '%Maintenance%' 
-               AND p.ram_images NOT LIKE '%Maintenance%' 
-               AND p.video_images NOT LIKE '%Maintenance%' 
-               AND p.hddssdgb_images NOT LIKE '%Maintenance%')
-        ORDER BY RAND()
-    ");
+ // Fetch products and their images
+ $qry = $conn->query("
+ SELECT p.id, p.name, m.file_name AS mother_images, 
+        p.categorie_id, p.recievedby, p.donate, p.dreceived, 
+        p.monitor, p.keyboard, p.mouse, p.v1, p.p1, p.p2, 
+        p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, 
+        p.video, p.h
+ FROM products p
+ LEFT JOIN mother m ON p.mother_images = m.id
+ WHERE (p.mother_images NOT LIKE '%Maintenance%' 
+        AND p.monitor_images NOT LIKE '%Maintenance%' 
+        AND p.mouse_images NOT LIKE '%Maintenance%' 
+        AND p.system_images NOT LIKE '%Maintenance%' 
+        AND p.vgahdmi_images NOT LIKE '%Maintenance%' 
+        AND p.power1_images NOT LIKE '%Maintenance%' 
+        AND p.power2_images NOT LIKE '%Maintenance%' 
+        AND p.chord1_images NOT LIKE '%Maintenance%' 
+        AND p.chord2_images NOT LIKE '%Maintenance%' 
+        AND p.mother_images NOT LIKE '%Maintenance%' 
+        AND p.cpu_images NOT LIKE '%Maintenance%' 
+        AND p.ram_images NOT LIKE '%Maintenance%' 
+        AND p.video_images NOT LIKE '%Maintenance%' 
+        AND p.hddssdgb_images NOT LIKE '%Maintenance%'
+        AND (p.name IS NOT NULL AND p.name != '')
+        AND (p.categorie_id IS NOT NULL AND p.categorie_id != '')
+        AND (p.recievedby IS NOT NULL AND p.recievedby != '')
+        AND (p.donate IS NOT NULL AND p.donate != '')
+        AND (p.dreceived IS NOT NULL AND p.dreceived != '')
+        AND (p.monitor IS NOT NULL AND p.monitor != '')
+        AND (p.keyboard IS NOT NULL AND p.keyboard != '')
+        AND (p.mouse IS NOT NULL AND p.mouse != '')
+        AND (p.v1 IS NOT NULL AND p.v1 != '')
+        AND (p.p1 IS NOT NULL AND p.p1 != '')
+        AND (p.p2 IS NOT NULL AND p.p2 != '')
+        AND (p.power1 IS NOT NULL AND p.power1 != '')
+        AND (p.system IS NOT NULL AND p.system != '')
+        AND (p.mother IS NOT NULL AND p.mother != '')
+        AND (p.cpu IS NOT NULL AND p.cpu != '')
+        AND (p.ram IS NOT NULL AND p.ram != '')
+        AND (p.power2 IS NOT NULL AND p.power2 != '')
+        AND (p.video IS NOT NULL AND p.video != '')
+        AND (p.h IS NOT NULL AND p.h != ''))
+ ORDER BY RAND()
+");
     
         while($row = $qry->fetch_assoc()):
         ?>
