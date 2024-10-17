@@ -380,26 +380,27 @@ if (!isset($_SESSION['visitor_count'])) {
 .btn-pri {
   background: rgb(177,176,176);
   background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 41%);
-    color: white;            /* Set text color for contrast */
-    border: none;            /* Remove default border */
-    padding: 10px 20px;     /* Add padding */
-    border-radius: 30px;
-    cursor: pointer;         /* Change cursor on hover */
-    transition: background-color 0.3s;  /* Smooth transition */
+  color: white;            /* Set text color for contrast */
+  border: none;            /* Remove default border */
+  padding: 10px 20px;      /* Add padding */
+  border-radius: 30px;
+  cursor: pointer;         /* Change cursor on hover */
+  transition: background-color 0.3s;  /* Smooth transition */
 }
 
 .btn-pri:hover {
   background: rgb(177,176,176);
   background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
-  cursor: not-allowed;
+  color: white;            /* Ensure text stays white on hover */
 }
 
 .btn-pri:disabled {
   background: rgb(177,176,176);
   background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
   cursor: not-allowed;
-    
+  color: white;            /* Keep text white for disabled button */
 }
+
 .modal-content{
     background: rgb(203,204,203);
 background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 99%);
