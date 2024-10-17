@@ -336,8 +336,8 @@ if (!isset($_SESSION['visitor_count'])) {
             background-color: #0069d9;
         }
         .btn-gray {
-            background: rgb(163,162,161);
-            background: linear-gradient(90deg, rgba(163,162,161,1) 22%, rgba(23,23,22,1) 73%);
+          background: rgb(177,176,176);
+          background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(18,18,18,1) 41%);
     color: white;            /* Set text color for contrast */
     border: none;            /* Remove default border */
     padding: 10px 20px;     /* Add padding */
@@ -347,18 +347,18 @@ if (!isset($_SESSION['visitor_count'])) {
 }
 
 .btn-gray:hover {
-    background: rgb(240,238,235);
-    background: linear-gradient(90deg, rgba(240,238,235,1) 43%, rgba(56,54,52,1) 88%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(18,18,18,1) 91%);
 }
 
 .btn-gray:disabled {
-    background: rgb(240,238,235);
-    background: linear-gradient(90deg, rgba(240,238,235,1) 43%, rgba(56,54,52,1) 88%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(18,18,18,1) 91%);
     cursor: not-allowed;
 }
 .btn-suc {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(92,149,70,1) 42%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(0,79,12,1) 41%);
     color: white;            /* Set text color for contrast */
     border: none;            /* Remove default border */
     padding: 10px 20px;     /* Add padding */
@@ -368,18 +368,18 @@ if (!isset($_SESSION['visitor_count'])) {
 }
 
 .btn-suc:hover {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 49%, rgba(92,149,70,1) 100%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(0,79,12,1) 94%);
 }
 
 .btn-suc:disabled {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 49%, rgba(92,149,70,1) 100%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(0,79,12,1) 94%);
     cursor: not-allowed;
 }
 .btn-pri {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 42%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 41%);
     color: white;            /* Set text color for contrast */
     border: none;            /* Remove default border */
     padding: 10px 20px;     /* Add padding */
@@ -389,13 +389,13 @@ if (!isset($_SESSION['visitor_count'])) {
 }
 
 .btn-pri:hover {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 93%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
 }
 
 .btn-pri:disabled {
-    background: rgb(241,244,242);
-    background: linear-gradient(90deg, rgba(241,244,242,1) 5%, rgba(70,118,149,1) 93%);
+  background: rgb(177,176,176);
+  background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
     cursor: not-allowed;
 }
 .modal-content{
