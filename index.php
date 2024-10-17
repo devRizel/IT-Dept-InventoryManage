@@ -391,12 +391,14 @@ if (!isset($_SESSION['visitor_count'])) {
 .btn-pri:hover {
   background: rgb(177,176,176);
   background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
+  cursor: not-allowed;
 }
 
 .btn-pri:disabled {
   background: rgb(177,176,176);
   background: linear-gradient(90deg, rgba(177,176,176,1) 0%, rgba(3,45,88,1) 94%);
-    cursor: not-allowed;
+  cursor: not-allowed;
+    
 }
 .modal-content{
     background: rgb(203,204,203);
