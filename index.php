@@ -496,7 +496,6 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
             </div>
 
             <div class="modal-body">
-                <!-- First Button Group -->
                 <div class="d-flex justify-content-center gap-4" id="firstButtonGroup">
                     <a href="generate.php?access=allowed" class="btn btn-role btn-suc">Computer Device View</a>
                     <a href="generate2.php?access=allowed" class="btn btn-role btn-pri">Other Device View</a>
@@ -508,10 +507,10 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
                     </button>
                 </div>
                 <br>
-                <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
+                <!-- <div class="d-flex justify-content-center gap-1 d-none" id="secondButtonGroup">
                     <a href="generateview3.php?access=allowed" class="btn btn-role btn-suc">Computer Device Scan</a>
                     <a href="generateview4.php?access=allowed" class="btn btn-role btn-pri">Other Device Scan</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
