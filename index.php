@@ -436,7 +436,7 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
 
       <a href="#" class="logo d-flex align-items-center me-auto">
         <img src="assets/image/download.png" class="img-fluid animated"alt="">
-        <h1 class="sitename">IT DEPARTMENTsss</h1>
+        <h1 class="sitename">IT DEPARTMENT</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -456,7 +456,7 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <center><h1>INVENTORY MANAGEMENTsss</h1></center>
+            <center><h1>INVENTORY MANAGEMENT</h1></center>
             <center><h1>SYSTEM</h1></center>
             <br><br>
             <center><p>Please Select Portal to proceed.</p></center>
