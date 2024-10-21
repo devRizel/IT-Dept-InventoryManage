@@ -86,7 +86,6 @@ include('admin/db_connect.php');
     width: 100px; 
     margin: 0 auto; 
 }
-
 </style>
 <body id="page-top">
 

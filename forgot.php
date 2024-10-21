@@ -18,7 +18,6 @@
             <i class="fa fa-envelope" aria-hidden="true"></i>
         </span>
       </div>
-      
       <div class="container-login100-form-btn">
         <button class="login100-form-btn" name="submit" type="submit"> Submit</button>
       </div>

@@ -87,6 +87,7 @@ include('admin/db_connect.php');
     max-height: 100%;
     object-fit: cover; /* Ensures the image covers the container without distortion */
 }
+
 </style>
 <body id="page-top">
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">

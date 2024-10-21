@@ -8,7 +8,6 @@ require_once('includes/load.php');
 if($session->isUserLoggedIn(true)) { 
     redirect('home.php', false); 
 }
-
 $all_categories = find_all('categories');
 $all_room = find_all('room');
 $all_photo = find_all('media');

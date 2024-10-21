@@ -90,7 +90,6 @@ include('admin/db_connect.php');
 </style>
 
 <body id="page-top">
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">
     <div class="container">
         <a class="iska"></a>

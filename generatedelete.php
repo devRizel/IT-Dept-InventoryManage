@@ -105,6 +105,7 @@ if (successParam === 'true') {
         });
 }
 
+
 // Select All Checkbox Functionality
 document.getElementById('select-all').addEventListener('click', function(event) {
   var checkboxes = document.querySelectorAll('.room-checkbox');
