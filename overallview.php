@@ -568,6 +568,7 @@ $saved_images = [
                </div>
           </div>
 
+          
           <center><div class="form-group">
             <a style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" href="product.php" class="btn btn-danger">Back</a>
           </div></center>

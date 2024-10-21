@@ -6,6 +6,7 @@ $results = '';
    page_require_level(3);
 ?>
 
+
 <?php
   if(isset($_POST['submit'])){
     $req_dates = array('start-date','end-date');

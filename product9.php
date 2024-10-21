@@ -10,6 +10,7 @@ page_require_level(2);
 $products = join_product_table();
 $other = join_other_table();
 
+
 // Define the desired order of names
 $desired_order = array(
     "Faculty",

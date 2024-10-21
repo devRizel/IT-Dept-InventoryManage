@@ -277,6 +277,7 @@ if (!isset($_GET['access']) || $_GET['access'] !== 'allowed') {
       // Disable right-click
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+
 // Disable F12, Ctrl+Shift+I, and other shortcuts
 document.addEventListener('keydown', function(event) {
     if (event.keyCode === 123 || // F12

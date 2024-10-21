@@ -8,6 +8,7 @@ $filtered_products = []; // Initialize an empty array for filtered products
 function fetch_products() {
   global $db; // Use global variable inside the function
 
+  
   // Modify SQL query to include a WHERE clause that filters out products with media_id = 0 or NULL
   $sql  = "SELECT p.id, p.name, p.categorie_id, p.recievedby, p.donate, p.dreceived, p.monitor, p.keyboard, p.mouse, p.v1, ";
   $sql .= "p.p1, p.p2, p.power1, p.system, p.mother, p.cpu, p.ram, p.power2, p.video, p.h, ";

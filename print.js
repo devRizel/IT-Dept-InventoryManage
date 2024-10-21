@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selector = document.getElementById('reportSelector');
     var counter = 1; // Initialize counter
 
+    
     selector.addEventListener('change', function() {
         var selectedOption = this.value;
 

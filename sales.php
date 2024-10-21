@@ -5,6 +5,7 @@
    page_require_level(3);
 ?>
 
+
 <?php
 $sales = find_all_sale();
 ?>

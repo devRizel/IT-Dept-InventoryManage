@@ -242,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
   box-shadow: 0 4px #999; /* Shadow effect */
 }
 
+
 .btn-light-green:hover {
   background-color: #76c7c0; /* Slightly darker green on hover */
 }

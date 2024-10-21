@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
    page_require_level(3);
 ?>
 
+
 <link rel="icon" type="image/x-icon" href="uploads/users/rizel.png">
   <?php
   $user_id = (int)$_GET['id'];

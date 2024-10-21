@@ -4,3 +4,4 @@ date_default_timezone_set('Asia/Manila');
   if(!$session->logout()) {redirect("L-Login.php?access=allowed");}
 ?>
 
+

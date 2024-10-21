@@ -9,6 +9,7 @@ page_require_level(2);
 $filtered_other = [];
 
 
+
 function fetch_other() {
   global $db;
 

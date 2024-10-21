@@ -83,6 +83,7 @@ include_once('layouts/header.php');
                   <?php endforeach; ?>
                 </select>
           </div>
+          
 
           <center><div class="form-group">
             <button style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);" type="submit" name="add_product" class="btn btn-primary">Update Computer</button>

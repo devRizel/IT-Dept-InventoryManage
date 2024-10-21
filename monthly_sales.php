@@ -5,6 +5,7 @@
    page_require_level(3);
 ?>
 
+
 <?php
  $year = date('Y');
  $sales = monthlySales($year);

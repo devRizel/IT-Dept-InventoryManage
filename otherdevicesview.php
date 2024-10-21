@@ -121,6 +121,7 @@ include_once('layouts/header.php');
 </form>
 </form>
 
+
         <form method="post" action="otherdevicesview.php?id=<?php echo (int)$product['id'] ?>">
           <div class="form-group col-md-8 col-md-offset-2">
             <label for="Room-Title">Room Title</label>

@@ -438,7 +438,6 @@ background: linear-gradient(90deg, rgba(203,204,203,1) 0%, rgba(147,149,150,1) 9
         <img src="assets/image/download.png" class="img-fluid animated"alt="">
         <h1 class="sitename">IT DEPARTMENT</h1>
       </a>
-
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home<br></a></li>

@@ -7,6 +7,7 @@ require_once('includes/load.php');
 page_require_level(2);
 
 
+
 // Fetch products and other items
 $products = join_product_table();
 $other = join_other_table();

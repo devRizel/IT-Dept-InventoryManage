@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     togglePassword.style.display = this.value.length > 0 ? 'block' : 'none';
   });
 
+  
   // Toggle password visibility
   document.getElementById('togglePassword').addEventListener('click', function() {
     var passwordInput = document.getElementById('password');

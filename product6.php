@@ -7,6 +7,7 @@ page_require_level(2);
 $filtered_products = []; // Initialize an empty array for filtered products
 
 
+
 function fetch_products() {
   global $db; // Use global variable inside the function
 
