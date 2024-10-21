@@ -5,6 +5,7 @@
  * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
  */
 /*!
+
  * Chart.js v4.4.3
  * https://www.chartjs.org
  * (c) 2024 Chart.js Contributors

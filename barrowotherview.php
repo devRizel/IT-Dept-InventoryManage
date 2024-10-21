@@ -7,6 +7,7 @@ require_once('includes/load.php');
 page_require_level(2);
 
 
+
 $product = find_by_id('other', (int)$_GET['id']);
 $all_categories = find_all('categories');
 $all_room = find_all('room');
