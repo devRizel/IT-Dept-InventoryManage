@@ -15,3 +15,4 @@ if ($photo->vgahdmi_destroy($find_vgahdmi['id'], $find_vgahdmi['file_name'])) {
     redirect('bar6.php');
 }
 ?>
+

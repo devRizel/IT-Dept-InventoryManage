@@ -15,3 +15,4 @@ if ($photo->mouse_destroy($find_mouse['id'], $find_mouse['file_name'])) {
     redirect('bar4.php');
 }
 ?>
+

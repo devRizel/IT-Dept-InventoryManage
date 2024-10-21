@@ -15,3 +15,4 @@ if ($photo->keyboard_destroy($find_keyboard['id'], $find_keyboard['file_name']))
     redirect('bar3.php');
 }
 ?>
+

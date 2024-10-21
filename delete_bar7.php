@@ -15,3 +15,4 @@ if ($photo->power1_destroy($find_power1['id'], $find_power1['file_name'])) {
     redirect('bar7.php');
 }
 ?>
+

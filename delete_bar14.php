@@ -15,3 +15,4 @@ if ($photo->video_destroy($find_video['id'], $find_video['file_name'])) {
     redirect('bar14.php');
 }
 ?>
+

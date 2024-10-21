@@ -15,3 +15,4 @@ if ($photo->system_destroy($find_system['id'], $find_system['file_name'])) {
     redirect('bar5.php');
 }
 ?>
+

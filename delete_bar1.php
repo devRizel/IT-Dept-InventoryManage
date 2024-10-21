@@ -15,3 +15,4 @@ if ($photo->computer_destroy($find_computer['id'], $find_computer['file_name']))
     redirect('bar1.php');
 }
 ?>
+

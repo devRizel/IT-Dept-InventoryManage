@@ -15,3 +15,4 @@ if ($photo->media_destroy($find_media['id'], $find_media['file_name'])) {
     redirect('media.php');
 }
 ?>
+

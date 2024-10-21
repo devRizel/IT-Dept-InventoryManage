@@ -15,3 +15,4 @@ if ($photo->mother_destroy($find_mother['id'], $find_mother['file_name'])) {
     redirect('bar11.php');
 }
 ?>
+

@@ -15,3 +15,4 @@ if ($photo->ram_destroy($find_ram['id'], $find_ram['file_name'])) {
     redirect('bar13.php');
 }
 ?>
+

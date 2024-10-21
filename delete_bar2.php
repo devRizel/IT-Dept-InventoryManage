@@ -15,3 +15,4 @@ if ($photo->monitor_destroy($find_monitor['id'], $find_monitor['file_name'])) {
     redirect('bar2.php');
 }
 ?>
+

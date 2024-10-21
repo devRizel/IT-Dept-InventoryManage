@@ -15,3 +15,4 @@ if ($photo->other_images_destroy($find_other_images['id'], $find_other_images['f
     redirect('bar16.php');
 }
 ?>
+

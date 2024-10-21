@@ -15,3 +15,4 @@ if ($photo->hddssdgb_destroy($find_hddssdgb['id'], $find_hddssdgb['file_name']))
     redirect('bar15.php');
 }
 ?>
+

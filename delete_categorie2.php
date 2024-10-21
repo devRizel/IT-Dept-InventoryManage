@@ -18,3 +18,4 @@ if ($delete_id) {
     redirect('categorie.php');
 }
 ?>
+

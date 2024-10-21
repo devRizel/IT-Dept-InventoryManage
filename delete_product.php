@@ -16,4 +16,5 @@
       $session->msg("d","Computer deletion failed.");
       redirect('product.php');
   }
+  
 ?>

@@ -15,3 +15,4 @@ if ($photo->cpu_destroy($find_cpu['id'], $find_cpu['file_name'])) {
     redirect('bar12.php');
 }
 ?>
+

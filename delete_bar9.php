@@ -15,3 +15,4 @@ if ($photo->chord1_destroy($find_chord1['id'], $find_chord1['file_name'])) {
     redirect('bar9.php');
 }
 ?>
+

@@ -17,3 +17,4 @@
       redirect('product2.php');
   }
 ?>
+
