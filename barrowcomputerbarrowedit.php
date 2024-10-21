@@ -18,6 +18,7 @@ if (!$product) {
 }
 
 
+
 $errors = array();
 $js_error_msgs = array();
 if (isset($_POST['add_product'])) {

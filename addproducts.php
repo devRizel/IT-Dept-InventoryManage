@@ -7,6 +7,8 @@ require_once('includes/load.php');
 page_require_level(2);
 
 
+
+
 function fetch_products() {
   global $db; // Use global variable inside the function
 

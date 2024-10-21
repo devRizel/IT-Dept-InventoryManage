@@ -21,6 +21,8 @@ if (isset($_POST['submit'])) {
 }
 
 
+
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <center><h1>Add Barcode|POWER CHORD2</h1></center>

@@ -16,6 +16,7 @@
   WHERE id = " . (int)$product['id'];
 
 
+
   if ($db->query($sql)) {
       $session->msg("s", "Device status and dates updated successfully.");
       redirect('barrowedotherreturn.php?success=true&delete_photo=true'); // Add success parameter

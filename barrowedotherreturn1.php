@@ -18,6 +18,7 @@ $saved_images = [
 ];
 
 
+
 $errors = array();
 if (isset($_POST['add_product'])) {
     $field_messages = array(
