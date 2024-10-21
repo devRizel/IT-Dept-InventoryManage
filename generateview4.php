@@ -81,36 +81,39 @@ include('admin/db_connect.php');
         max-height: 100%;
         object-fit: cover;
     }
-    #serialInput {
+    #last-barcode {
     text-align: center;
     width: 100px; 
     margin: 0 auto; 
 }
 </style>
+
 <body id="page-top">
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: var(--accent-color);">
     <div class="container">
         <a class="iska"></a>
-        <a class="navbar-brand js-scroll-trigger" href="index.php" style="color: white;">INVENTORY MANAGEMENT SYSTEM</a>
+        <a class="navbar-brand js-scroll-trigger" href="index.php" >INVENTORY MANAGEMENT SYSTEM</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="L-Login.php?access=allowed" style="font-size: 20px; color: white;">Login Now</a>
+                    <a class="nav-link js-scroll-trigger" href="login.php?access=allowed" style="font-size: 20px; ">Login Now</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <br><br><br><br>
+
 <center>
     <form method="post" action="" id="serialForm">
-        <input type="text" maxlength="5" class="form-control" name="scan" placeholder="Barcode" value="<?php echo isset($serial) ? $serial : ''; ?>" required id="serialInput">
+        <input autofocus readonly id="last-barcode" type="text"  class="form-control" name="scan" placeholder="Barcode" value="<?php echo isset($serial) ? $serial : ''; ?>" required>
     </form>
 </center>
+
 <div class="panel-body">
     <?php if ($product): ?>
     <form method="post" action="product1view.php?id=<?php echo (int)$product['id'] ?>">
@@ -205,8 +208,13 @@ include('admin/db_connect.php');
     <center><p id="noProductMessage">No found with that Barcode Number.</p></center>
     <?php endif; ?>
 </div>
+
 <script>
-    document.getElementById('serialInput').addEventListener('input', function() {
+    var barcode = '';
+    var interval;
+
+    // Input event listener for the "last-barcode" input field
+    document.getElementById('last-barcode').addEventListener('input', function() {
         // Automatically submit the form when 5 characters are entered
         if (this.value.length === 5) {
             document.getElementById('serialForm').submit();
@@ -214,7 +222,7 @@ include('admin/db_connect.php');
 
         // If the input is cleared, reload the page to reset it
         if (this.value === '') {
-            window.location.href = 'generateview4.php?access=allowed';  // Adjust this to your original page if necessary
+            window.location.href = 'generatescannbarcode3.php?access=allowed';  // Adjust this to your original page if necessary
         }
 
         // Hide the "No product found" message when the input is cleared
@@ -225,6 +233,34 @@ include('admin/db_connect.php');
             noProductMessage.style.display = 'block';
         }
     });
+
+    // Keydown event listener to capture barcode scanning
+    document.addEventListener('keydown', function(evt) {
+        if (interval) {
+            clearInterval(interval);
+        }
+
+        // Check for Enter key to process the barcode
+        if (evt.code == 'Enter') {
+            if (barcode) {
+                handleBarcode(barcode);
+                barcode = ''; // Clear barcode after processing
+            }
+            return;
+        }
+
+        // Capture other keys except Shift for barcode
+        if (evt.key != 'Shift') {
+            barcode += evt.key;
+            interval = setInterval(() => barcode = '', 20);
+        }
+    });
+
+    // Function to handle the barcode and display it in the input field
+    function handleBarcode(scannedBarcode) {
+        // Set the scanned barcode into the input field with id "last-barcode"
+        document.getElementById('last-barcode').value = scannedBarcode;
+    }
 </script>
 
 <script type="text/javascript">
