@@ -5,7 +5,6 @@ $username = "u510162695_inventory";
 $password = "1Inventory_system";
 $dbname = "u510162695_inventory";
 
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 

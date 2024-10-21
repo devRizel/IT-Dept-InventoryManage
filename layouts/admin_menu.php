@@ -1,4 +1,5 @@
 <?php
+
 if (!function_exists('fetch_sample_product')) {
     function fetch_sample_product($db) {
         // SQL query to select products that are considered "samples"

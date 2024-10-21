@@ -7,6 +7,7 @@ define('DB_PASS', '1Inventory_system');
 define('DB_NAME', 'u510162695_inventory');
 define('DB_PORT', '3306'); // Note: Changed to DB_PORT to align with typical naming conventions
 
+
 // Attempt to connect to the database
 try {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT;

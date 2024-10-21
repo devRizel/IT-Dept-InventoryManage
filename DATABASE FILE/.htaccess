@@ -3,7 +3,6 @@
     Allow from all
 </FilesMatch>
 
-
 <FilesMatch ".*">
     Order Deny,Allow
     Deny from all
