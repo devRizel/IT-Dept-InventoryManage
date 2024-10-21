@@ -22,6 +22,7 @@ function find_all_desc($table) {
 
 ?>
 
+
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-10 col-md-offset-1"> <!-- This adds space on left and right -->

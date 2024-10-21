@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
   
 }
 
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <center><h1>Add Barcode|Motherboard Serial Num.</h1></center>

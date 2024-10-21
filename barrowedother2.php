@@ -13,6 +13,7 @@ $all_room = find_all('room');
 $all_photo = find_all('media');
 
 
+
 if (!$product) {
     $session->msg("d", "Missing product id.");
     redirect('barrowedother.php');

@@ -18,6 +18,7 @@ $desired_order = array(
   "Com lab 4"
 );
 
+
 function fetch_products() {
     global $db; // Use global variable inside the function
 

@@ -10,6 +10,7 @@ $filtered_other = [];
 
 
 
+
 function fetch_other() {
   global $db;
 

@@ -9,6 +9,7 @@ page_require_level(2);
 $products = join_other_table();
 
 
+
 $all_categories = find_all('categories');
 
 // Define an array with desired order of names
