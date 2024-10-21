@@ -157,7 +157,7 @@ include('admin/db_connect.php');
 
         // If the input is cleared, reload the page to reset it
         if (this.value === '') {
-            window.location.href = 'generatescannbarcode3.php?access=allowed';  // Adjust this to your original page if necessary
+            window.location.href = 'generatescannbarcode11.php';  // Adjust this to your original page if necessary
         }
 
         // Hide the "No product found" message when the input is cleared
