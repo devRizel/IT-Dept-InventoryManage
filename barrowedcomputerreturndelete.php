@@ -9,6 +9,7 @@
     redirect('barrowedcomputerreturn.php');
   }
 
+  
   $sql = "UPDATE products
   SET barrow = '', 
       datebarrowed = NULL, 
