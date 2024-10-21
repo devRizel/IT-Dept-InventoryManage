@@ -9,6 +9,7 @@
     redirect('barrowedotherreturn.php');
   }
 
+  
   $sql = "UPDATE other 
   SET barrow = '', 
       datebarrowed = NULL, 
