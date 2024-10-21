@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
   page_require_level(1);
 ?>
+
 <?php
   //Display all catgories.
   $categorie = find_by_id('room',(int)$_GET['id']);

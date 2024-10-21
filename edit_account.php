@@ -5,6 +5,7 @@ $page_title = 'Edit Account';
 require_once('includes/load.php');
 page_require_level(3);
 
+
 if(isset($_POST['submit'])) {
   if(empty($_FILES['file_upload']['name'])) {
       $js_error_msgs[] = "No file was uploaded";

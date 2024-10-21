@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
   // Checkin What level user has permission to view this page
    page_require_level(1);
 ?>
+
 <?php
   $e_user = find_by_id('users',(int)$_GET['id']);
   $groups  = find_all('user_groups');
